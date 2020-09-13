@@ -1,11 +1,11 @@
 module.exports = {
   title: 'Fireser',
-  tagline: 'Privacy and security for your personal accounts and devices.',
+  tagline: 'Security and privacy for your personal accounts and devices.',
   url: 'https://www.fireser.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'img/fireser.svg',
-  organizationName: 'Seknox', // Usually your GitHub org/user name.
+  organizationName: 'seknox', // Usually your GitHub org/user name.
   projectName: 'fireser', // Usually your repo name.
   themeConfig: {
     colorMode: {
@@ -15,6 +15,9 @@ module.exports = {
       trackingID: 'G-93ED8VGXBY',
       // Optional fields.
       anonymizeIP: false, // Should IPs be anonymized?
+    },
+    gtag: {
+      trackingID: 'G-93ED8VGXBY',
     },
     navbar: {
       title: 'Fireser',
