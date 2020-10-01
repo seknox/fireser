@@ -1,5 +1,5 @@
 {
-  "name": "mobileapp",
+  "name": "fireser",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -12,9 +12,10 @@
   "dependencies": {
     "@eva-design/eva": "^2.0.0",
     "@ui-kitten/components": "^5.0.0",
+    "@ui-kitten/eva-icons": "^5.0.0",
     "react": "16.13.1",
     "react-native": "0.63.2",
-    "react-native-svg": "^12.1.0"
+    "react-native-svg": "^9.13.6"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",

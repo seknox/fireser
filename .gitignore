@@ -2,3 +2,6 @@
 node_modules
 
 .docusaurus
+
+package-lock.json
+yarn.lock

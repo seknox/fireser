@@ -1,4 +1,4 @@
-package com.mobileapp;
+package com.fireser;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "mobileapp";
+    return "fireser";
   }
 }
