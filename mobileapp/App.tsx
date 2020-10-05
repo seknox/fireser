@@ -18,14 +18,18 @@
 import * as eva from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import React from 'react';
-import HomeScreen from './src/pages/Home';
+import RootNavigator from './src/pages';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import 'react-native-gesture-handler';
+import {NavigationContainer} from '@react-navigation/native';
 
 export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={eva.light}>
-      <HomeScreen />
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
     </ApplicationProvider>
   </>
 );
