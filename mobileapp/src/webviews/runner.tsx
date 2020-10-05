@@ -2,13 +2,9 @@ import React from 'react';
 
 import {WebView} from 'react-native-webview';
 import {Dimensions, View} from 'react-native';
-import {
-  extractFunc as googleExtractFunc,
-  pageURL as googlePageURL,
-} from '../pages/google/GoogleActivityHistory';
-import {err} from 'react-native-svg/lib/typescript/xml';
-import {Text} from '@ui-kitten/components';
+
 import {Job, Task} from '../types/types';
+import {Button, Popover} from '@ui-kitten/components';
 
 const getCodeToInject = (pageURL) =>
   `
@@ -51,7 +47,7 @@ extractFunc:
 */
 export const Runner = (props: {jobs: Job[]; setData: any}) => {
   // const webViewref = React.useRef(null);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isVisible, setIsVisible] = React.useState(true);
   const [pageURL, setPageURL] = React.useState('');
   const {setData} = props;
   const index = React.useRef(0);
@@ -99,7 +95,7 @@ export const Runner = (props: {jobs: Job[]; setData: any}) => {
     console.log(msg.type);
 
     if (msg.type === 'HTML' && msg.content) {
-      setIsLoggedIn(true);
+      setIsVisible(false);
       let res;
       try {
         res = await runTasks(jobs.current[index.current], msg.content);
@@ -112,15 +108,20 @@ export const Runner = (props: {jobs: Job[]; setData: any}) => {
       // results.current = results.current.concat({res});
       loadNext();
     } else if (msg.type === 'LOGIN') {
-      setIsLoggedIn(false);
+      setIsVisible(true);
     } else {
       //DEBUG
       // console.log("debug",msg.content);
     }
   };
 
+  const renderToggleButton = () => (
+    <Button style={{hidden:isVisible}} onPress={() => setIsVisible(false)}>Close</Button>
+  );
+
   return (
-    <View style={{display: isLoggedIn ? 'none' : 'flex'}}>
+      <View style={{display: props.isVisible ? 'flex' : 'none'}}>
+    {/*<Popover visible={isVisible} anchor={renderToggleButton}>*/}
       {/*<Text category={"h1"}>{pageURL}</Text>*/}
       <WebView
         // accessibilityTraits={'adjustable'}
@@ -143,6 +144,7 @@ export const Runner = (props: {jobs: Job[]; setData: any}) => {
         injectedJavaScript={getCodeToInject(pageURL)}
         // injectedJavaScriptBeforeContentLoaded={runFirst}
       />
-    </View>
+    {/*</Popover>*/}
+      </View>
   );
 };

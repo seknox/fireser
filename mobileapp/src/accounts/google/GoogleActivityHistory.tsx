@@ -110,20 +110,20 @@ export default {
       extractFunc: extractWebAppActivityHistory,
       name: 'Web Activity History',
       expectedValue: 'Off',
-      fixURL: 'https://myactivity.google.com/myactivity/activitycontrols?settings=location',
+      fixURL: 'https://myactivity.google.com/activitycontrols?settings=location',
     },
     {
       extractFunc: extractLocationHistory,
       name: 'Location History',
       expectedValue: 'Off',
-      fixURL: 'https://myactivity.google.com/myactivity/activitycontrols?settings=location&utm_source=my-activity',
+      fixURL: 'https://myactivity.google.com/activitycontrols?settings=location&utm_source=my-activity',
     },
 
     {
       extractFunc: extractYotubeHistory,
       name: 'YouTube Activity History',
       expectedValue: 'Off',
-      fixURL: 'https://myactivity.google.com/myactivity/activitycontrols/youtube?utm_source=myactivity&facs=1',
+      fixURL: 'https://myactivity.google.com/activitycontrols/youtube?utm_source=myactivity&facs=1',
     },
   ],
 };

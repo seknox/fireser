@@ -49,13 +49,21 @@ extractFunc:
 
 }
 */
-export const Fixer = (props: {pageURL: string; isVisible:boolean; onDone: any}) => {
+export const Fixer = (props: {
+  pageURL: string;
+  isVisible: boolean;
+  onDone: any;
+}) => {
   // const webViewref = React.useRef(null);
 
   const onMessage = async (event) => {
     var msg;
     try {
       msg = JSON.parse(event.nativeEvent.data);
+
+      if (msg.type === 'DEBUG') {
+        console.log('debug', msg.content);
+      }
     } catch (e) {
       console.error(e);
     }
@@ -64,7 +72,7 @@ export const Fixer = (props: {pageURL: string; isVisible:boolean; onDone: any}) 
   };
 
   return (
-    <View style={{display: props.isVisible ? 'none' : 'flex'}}>
+    <View style={{display: props.isVisible ? 'flex' : 'none'}}>
       {/*<Text category={"h1"}>{pageURL}</Text>*/}
       <WebView
         // accessibilityTraits={'adjustable'}

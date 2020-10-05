@@ -61,7 +61,7 @@ export default () => {
         <Fixer
             pageURL={fixURL}
             onDone={null}
-            visible={visible}
+            isVisible={visible}
         />
 
       </View>
