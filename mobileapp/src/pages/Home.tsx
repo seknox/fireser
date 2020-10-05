@@ -33,7 +33,7 @@ export default (): React.ReactElement => {
       <List
         style={styles.list}
         contentContainerStyle={styles.listContent}
-        data={[1]}
+        data={['google']}
         renderItem={renderCardItem}
       />
     </React.Fragment>

@@ -13,9 +13,11 @@
     "@eva-design/eva": "^2.0.0",
     "@ui-kitten/components": "^5.0.0",
     "@ui-kitten/eva-icons": "^5.0.0",
+    "cheerio-without-node-native": "^1.0.0-rc.2",
     "react": "16.13.1",
     "react-native": "0.63.2",
-    "react-native-svg": "^9.13.6"
+    "react-native-svg": "^9.13.6",
+    "react-native-webview": "^10.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
