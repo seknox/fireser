@@ -15,34 +15,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
 
 export default (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
-  const renderCardItem = (): React.ReactElement => (
-    <View style={styles.cardItem}>
-      <View style={styles.cardLogoContainer}></View>
-    </View>
-  );
 
   return (
-    <React.Fragment>
-    <View style={styles.headerContainer}>
 
-      </View>
+    <View style={styles.headerContainer} />
 
-      {props.children}
-    </React.Fragment>
   );
 };
 
 const themedStyles = StyleService.create({
-  container: {
-    flex: 1,
-  },
+
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
