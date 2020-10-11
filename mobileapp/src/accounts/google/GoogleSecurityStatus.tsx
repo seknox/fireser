@@ -1,4 +1,3 @@
-
 /*
  *
  *   Copyright (C) 2020 Seknox Pte Ltd.
@@ -20,7 +19,6 @@
 
 import React from 'react';
 
-
 import cio from 'cheerio-without-node-native';
 
 const extractLastPassordChange = (htmlContent) => {
@@ -35,20 +33,17 @@ const extractLastPassordChange = (htmlContent) => {
 
     let arr = selected.toArray();
 
-
     arr.forEach((elem, i) => {
       const innerText = $(elem).text();
       //console.log(111,i,innerText)
       if (innerText.includes('Last changed')) {
         //console.log('found ', innerText);
         resolve(innerText);
-      }else if(i==arr.length-1){
+      } else if (i == arr.length - 1) {
         ////console.log(i,arr.length)
         reject('Last Changed not found');
-
       }
     });
-
   });
 };
 
@@ -64,7 +59,6 @@ const extractTfaStatus = (htmlContent) => {
 
     let arr = selected.toArray();
 
-
     arr.forEach((elem, i) => {
       const innerText = $(elem).text();
       if (innerText.includes('2-Step Verification')) {
@@ -78,10 +72,25 @@ const extractTfaStatus = (htmlContent) => {
       } else {
         reject('2-Step Verification not found');
       }
-
     });
+  });
+};
 
+const extractLessSecureApps = (htmlContent: string) => {
+  //:nth-child(2
 
+  return new Promise((resolve, reject) => {
+    if (!htmlContent) {
+      reject('HTML content empty');
+    }
+
+    const $ = cio.load(htmlContent);
+
+    const selected = $(
+      'c-wiz > div > div:nth-child(2) > c-wiz > c-wiz > div > div:nth-child(3) > div > div > c-wiz > section > div:nth-child(7) > article > div > div > div.ugt2L.iDdZmf > div > div > div > div > div > div > div > div:nth-child(2)',
+    );
+
+    resolve(selected.text());
   });
 };
 
@@ -99,7 +108,14 @@ export default {
       extractFunc: extractTfaStatus,
       name: 'Two factor authentication',
       expectedValue: 'On',
-      fixURL: 'https://myaccount.google.com/security/signinoptions/two-step-verification',
+      fixURL:
+        'https://myaccount.google.com/security/signinoptions/two-step-verification',
+    },
+    {
+      extractFunc: extractLessSecureApps,
+      name: 'Less secure app access',
+      expectedValue: 'Off',
+      fixURL: 'https://myaccount.google.com/lesssecureapps',
     },
   ],
 };

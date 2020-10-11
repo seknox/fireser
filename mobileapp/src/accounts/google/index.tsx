@@ -33,6 +33,7 @@ import GoogleActivityHistory from './GoogleActivityHistory';
 import GoogleSecurityStatus from './GoogleSecurityStatus';
 import {Job, Task} from '../../types/types';
 import {Fixer} from "../../webviews/fixer";
+import SecurityCheckup from "./SecurityCheckup";
 
 export default () => {
   const [data, setData] = React.useState<Job[]>([]);
@@ -73,7 +74,8 @@ export default () => {
       {/*<View style={{display: isLoggedIn ? 'none' : 'flex'}}>*/}
       <View>
         <Runner
-          jobs={[GoogleActivityHistory, GoogleSecurityStatus]}
+          jobs={[GoogleActivityHistory, GoogleSecurityStatus, SecurityCheckup]}
+          // jobs={[ SecurityCheckup]}
           setData={setData}
         />
 
