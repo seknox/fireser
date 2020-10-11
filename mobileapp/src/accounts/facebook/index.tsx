@@ -29,11 +29,9 @@ import {
 import {Runner} from '../../webviews/runner';
 import {StyleSheet, View} from 'react-native';
 
-import GoogleActivityHistory from './GoogleActivityHistory';
-import GoogleSecurityStatus from './GoogleSecurityStatus';
 import {Job, Task} from '../../types/types';
 import {Fixer} from '../../webviews/fixer';
-import SecurityCheckup from './SecurityCheckup';
+import AdPreferences from './AdPreferences';
 
 export default () => {
   const [data, setData] = React.useState<Job[]>([]);
@@ -57,6 +55,7 @@ export default () => {
                   {task.name}:{task.gotValue}
                 </Text>
                 <Text>Expected:{task.expectedValue}</Text>
+
                 <Button
                   disabled={task.expectedValue == task.gotValue}
                   onPress={() => {
@@ -64,6 +63,7 @@ export default () => {
                   }}>
                   Fix
                 </Button>
+
                 <Divider />
                 <Divider />
                 <Divider />
@@ -77,7 +77,7 @@ export default () => {
       {/*<View style={{display: isLoggedIn ? 'none' : 'flex'}}>*/}
       <View>
         <Runner
-          jobs={[GoogleActivityHistory, GoogleSecurityStatus, SecurityCheckup]}
+          jobs={[AdPreferences]}
           // jobs={[ SecurityCheckup]}
           setData={setData}
         />

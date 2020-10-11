@@ -23,7 +23,7 @@ import {WebView} from 'react-native-webview';
 import {Dimensions, View} from 'react-native';
 
 import {Job, Task} from '../types/types';
-import {Button, Popover} from '@ui-kitten/components';
+import {Button, Popover, Text} from '@ui-kitten/components';
 
 const getCodeToInject = (pageURL) =>
   `
@@ -130,7 +130,7 @@ export const Runner = (props: {jobs: Job[]; setData: any}) => {
       setIsVisible(true);
     } else {
       //DEBUG
-      // console.log("debug",msg.content);
+       console.log("debug",msg.content);
     }
   };
 
@@ -139,7 +139,7 @@ export const Runner = (props: {jobs: Job[]; setData: any}) => {
   );
 
   return (
-      <View style={{display: props.isVisible ? 'flex' : 'none'}}>
+      <View style={{display: isVisible ? 'flex' : 'none'}}>
     {/*<Popover visible={isVisible} anchor={renderToggleButton}>*/}
       {/*<Text category={"h1"}>{pageURL}</Text>*/}
       <WebView
