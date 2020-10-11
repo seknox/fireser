@@ -15,23 +15,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet } from '@ui-kitten/components';
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import Layout from '../components/layout';
-import SummaryCard from '../components/SummaryCard';
+import { View } from 'react-native';
 
-
-export default (): React.ReactElement => {
+export default (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
+  const renderCardItem = (): React.ReactElement => (
+    <View style={styles.cardItem}>
+      <View style={styles.cardLogoContainer}></View>
+    </View>
+  );
 
   return (
+    <React.Fragment>
+    <View style={styles.headerContainer}>
 
-      <Layout>
+      </View>
 
-      <SummaryCard />
-      </Layout>
-
+      {props.children}
+    </React.Fragment>
   );
 };
 
@@ -39,6 +43,11 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-
+  headerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 216,
+    backgroundColor: 'color-primary-600',
+  },
 
 });

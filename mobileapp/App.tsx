@@ -20,11 +20,12 @@ import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import React from 'react';
 import HomeScreen from './src/pages/Home';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import { default as theme } from './src/assets/custom-theme.json';
 
 export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={eva.light}>
+    <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
       <HomeScreen />
     </ApplicationProvider>
   </>
