@@ -15,10 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet } from '@ui-kitten/components';
+import { StyleService, useStyleSheet, Card } from '@ui-kitten/components';
 import React from 'react';
 import Layout from '../components/Layout';
 import SummaryCard from '../components/SummaryCard';
+import { View } from 'react-native';
 
 
 export default (): React.ReactElement => {
@@ -29,7 +30,13 @@ export default (): React.ReactElement => {
 
       <Layout>
 
+      <View style={styles.margin}>
       <SummaryCard />
+      <Card style={styles.card} />
+      <Card style={styles.card} />
+      <Card style={styles.card} />
+      </View>
+      
       </Layout>
 
   );
@@ -39,6 +46,13 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-
+  margin: {
+    marginVertical: -150,
+  },
+  card: {
+    marginVertical: 20,
+    marginHorizontal: 20,
+    boxShadow: '0 4px 20px 0 rgba(0,0,0,0.12)',
+  }
 
 });

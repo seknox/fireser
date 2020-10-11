@@ -41,7 +41,7 @@ const themedStyles = StyleService.create({
 
   summaryCard: {
 
-    marginVertical: -150,
+    // marginVertical: -150,
     marginHorizontal: 20,
     height: 210,
     padding: 24,

@@ -60,7 +60,7 @@ const themedStyles = StyleService.create({
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 216,
+    minHeight: 100,
     backgroundColor: 'color-primary-600',
   },
 
