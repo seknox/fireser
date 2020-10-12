@@ -15,19 +15,57 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Card, StyleService, useStyleSheet } from '@ui-kitten/components';
+import { Layout, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
+import AccountSec from '../../assets/icons/account-security';
+import DeviceSec from '../../assets/icons/device-security';
+import MsgSec from '../../assets/icons/messaging-security';
+
+// onPress={() => console.log('clickked')}
+{
+  /* <Card style={styles.card} />
+      <Card style={styles.card} /> */
+}
 
 export default (): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
-    <View>
-      <Card style={styles.card} />
-      <Card style={styles.card} />
-      <Card style={styles.card} />
-    </View>
+    <Layout style={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.desc}>
+          <Text category="h5">Accounts</Text>
+          <Text category="s1">Protect your online accounts</Text>
+        </View>
+
+        <View style={styles.imageContainer}>
+          <AccountSec style={styles.image} />
+        </View>
+      </View>
+
+      <View style={styles.card}>
+        <View style={styles.desc}>
+          <Text category="h5">Devices</Text>
+          <Text category="s1">Protect your mobile and pc</Text>
+        </View>
+
+        <View style={styles.imageContainer}>
+          <DeviceSec style={styles.image} />
+        </View>
+      </View>
+
+      <View style={styles.card}>
+        <View style={styles.desc}>
+          <Text category="h5">Email and Messages</Text>
+          <Text category="s1">Protect your email and chats</Text>
+        </View>
+
+        <View style={styles.imageContainer}>
+          <MsgSec style={styles.image} />
+        </View>
+      </View>
+    </Layout>
   );
 };
 
@@ -37,8 +75,40 @@ const themedStyles = StyleService.create({
   },
 
   card: {
-    marginVertical: 20,
+    flex: 1,
+    minHeight: 100,
+    marginVertical: 10,
     marginHorizontal: 20,
-    boxShadow: '0 4px 20px 0 rgba(0,0,0,0.12)',
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    // borderColor: 'white',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ebebeb',
+    // borderRadius: 16,
+
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 1,
+  },
+
+  desc: {
+    flex: 4,
+    padding: 24,
+  },
+
+  imageContainer: {
+    flex: 2,
+  },
+  image: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    // resizeMode: 'contain',
   },
 });

@@ -15,19 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {StyleService, Text, Layout, useStyleSheet} from '@ui-kitten/components';
+import { Layout, StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import {View} from 'react-native';
-import Header from './Header';
+import { View } from 'react-native';
 import Footer from './Footer';
+import Header from './Header';
 
 export default (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
     <Layout style={styles.container}>
+      {/* <ScrollView style={styles.scrollView}> */}
       <Header style={styles.header} />
       <View style={styles.content}>{props.children}</View>
+      {/* </ScrollView> */}
 
       <Footer style={styles.footer} />
     </Layout>
@@ -35,6 +37,11 @@ export default (props): React.ReactElement => {
 };
 
 const themedStyles = StyleService.create({
+  scrollView: {
+    height: '80%',
+    width: '100%',
+    alignSelf: 'center',
+  },
   container: {
     flex: 1,
     flexDirection: 'column',

@@ -40,6 +40,6 @@ const themedStyles = StyleService.create({
     flex: 1,
   },
   margin: {
-    marginVertical: -120,
+    marginVertical: -100,
   },
 });
