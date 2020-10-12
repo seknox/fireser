@@ -15,37 +15,39 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, Text,Layout,  useStyleSheet } from '@ui-kitten/components';
+import { Layout, StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
-import Header from './Header'
-import Footer from './Footer'
+import Footer from './Footer';
+import Header from './Header';
 
 export default (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
-
   return (
-    <Layout style={styles.container} >
+    <Layout style={styles.container}>
+      {/* <ScrollView style={styles.scrollView}> */}
+      <Header style={styles.header} />
+      <View style={styles.content}>{props.children}</View>
+      {/* </ScrollView> */}
 
-    <Header style={styles.header} />
-    <View style={styles.content}>
-    {props.children}
-    </View>
-      
       <Footer style={styles.footer} />
     </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
+  scrollView: {
+    height: '80%',
+    width: '100%',
+    alignSelf: 'center',
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
-    
   },
   header: {
-      flex: 1,
+    flex: 1,
   },
   content: {
     flex: 5,
@@ -55,13 +57,6 @@ const themedStyles = StyleService.create({
   footer: {
     flex: 1,
     marginHorizontal: 16,
-     alignSelf: 'flex-end',
+    alignSelf: 'flex-end',
   },
-  headerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 100,
-    backgroundColor: 'color-primary-600',
-  },
-
 });

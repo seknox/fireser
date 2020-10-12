@@ -15,11 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    Button, Icon,
-    Input, StyleService,
-    useStyleSheet
-} from '@ui-kitten/components';
+import { Button, Icon, Input, StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Firebot from '../../assets/icons/firebot';
@@ -72,12 +68,7 @@ export default (): React.ReactElement => {
         accessoryLeft={SettingIcon}
       />
 
-      <Button
-        style={styles.settingIcon}
-        appearance="ghost"
-        size="giant"
-        accessoryLeft={HomeIcon}
-      />
+      <Button style={styles.settingIcon} appearance="ghost" size="giant" accessoryLeft={HomeIcon} />
 
       <Input
         style={styles.searchBox}
@@ -103,9 +94,8 @@ const themedStyles = StyleService.create({
   },
 
   settingIcon: {
-
     alignSelf: 'flex-end',
-     bottom: 0,
+    bottom: 0,
   },
   searchBox: {
     flex: 1,
@@ -113,13 +103,13 @@ const themedStyles = StyleService.create({
     marginHorizontal: 8,
     backgroundColor: 'background-basic-color-1',
     alignSelf: 'flex-end',
-     bottom: 0,
+    bottom: 0,
   },
   firebot: {
     // flex: 1,
     height: 80,
     width: 70,
-     alignSelf: 'flex-end',
-     bottom: 0,
+    alignSelf: 'flex-end',
+    bottom: 0,
   },
 });

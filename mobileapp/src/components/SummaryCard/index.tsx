@@ -20,17 +20,13 @@ import React from 'react';
 import { View } from 'react-native';
 import FirebotSpider from '../../assets/icons/firebot-spider';
 
-
 export default (): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
-
   return (
-
-       <View style={styles.summaryCard}>
+    <View style={styles.summaryCard}>
       <FirebotSpider style={styles.firebot} />
-      </View>
-
+    </View>
   );
 };
 
@@ -40,10 +36,9 @@ const themedStyles = StyleService.create({
   },
 
   summaryCard: {
-
     // marginVertical: -150,
     marginHorizontal: 20,
-    height: 210,
+    height: 160,
     padding: 24,
     borderRadius: 24,
     backgroundColor: 'color-primary-default',
@@ -54,7 +49,7 @@ const themedStyles = StyleService.create({
     width: 70,
     marginVertical: -12,
     //  marginHorizontal: -100,
-     position: 'absolute',
+    position: 'absolute',
     alignSelf: 'flex-end',
     bottom: 0,
   },

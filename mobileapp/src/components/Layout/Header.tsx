@@ -22,21 +22,14 @@ import { View } from 'react-native';
 export default (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
-
-  return (
-
-    <View style={styles.headerContainer} />
-
-  );
+  return <View style={styles.headerContainer} />;
 };
 
 const themedStyles = StyleService.create({
-
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 216,
+    minHeight: 120,
     backgroundColor: 'color-primary-600',
   },
-
 });
