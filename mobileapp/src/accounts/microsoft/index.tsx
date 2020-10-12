@@ -31,8 +31,8 @@ import {StyleSheet, View} from 'react-native';
 
 import {Job, Task} from '../../types/types';
 import {Fixer} from '../../webviews/fixer';
-import AdPreferences from './AdPreferences';
-import AdPreferencesSettings from "./AdPreferencesSettings";
+import AdPreferences from './AdPreference';
+import MyActivity from "./MyActivity";
 
 export default () => {
   const [data, setData] = React.useState<Job[]>([]);
@@ -78,7 +78,7 @@ export default () => {
       {/*<View style={{display: isLoggedIn ? 'none' : 'flex'}}>*/}
       <View>
         <Runner
-          jobs={[AdPreferencesSettings]}
+          jobs={[AdPreferences,MyActivity]}
           // jobs={[ SecurityCheckup]}
           setData={setData}
         />

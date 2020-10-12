@@ -37,9 +37,9 @@ const getCodeToInject = (pageURL) =>
         
     
     
-        if(document.URL.startsWith('` +
+        if((location.protocol + '//' + location.host + location.pathname)=='` +
   pageURL +
-  `')){
+  `'){
         const msg = {"type":"HTML","content":document.body.innerHTML}
         clearInterval(refreshId);
         window.ReactNativeWebView.postMessage(JSON.stringify(msg));

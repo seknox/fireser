@@ -21,16 +21,18 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from './Home';
 import Google from '../accounts/google';
 import Facebook from '../accounts/facebook';
+import Microsoft from '../accounts/microsoft';
 import React from "react";
 
 const Stack = createStackNavigator();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator initialRouteName="Facebook">
+    <Stack.Navigator initialRouteName="Microsoft">
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Google" component={Google} />
       <Stack.Screen name="Facebook" component={Facebook} />
+      <Stack.Screen name="Microsoft" component={Microsoft} />
     </Stack.Navigator>
   );
 }
