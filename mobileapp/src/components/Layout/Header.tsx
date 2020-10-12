@@ -15,18 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import * as eva from '@eva-design/eva';
-import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
+import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import HomeScreen from './src/pages/Home';
-import {EvaIconsPack} from '@ui-kitten/eva-icons';
-import { default as theme } from './src/assets/custom-theme.json';
+import { View } from 'react-native';
 
-export default () => (
-  <>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-      <HomeScreen />
-    </ApplicationProvider>
-  </>
-);
+export default (props): React.ReactElement => {
+  const styles = useStyleSheet(themedStyles);
+
+
+  return (
+
+    <View style={styles.headerContainer} />
+
+  );
+};
+
+const themedStyles = StyleService.create({
+
+  headerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 216,
+    backgroundColor: 'color-primary-600',
+  },
+
+});

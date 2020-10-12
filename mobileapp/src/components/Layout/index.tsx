@@ -15,44 +15,53 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet, Card } from '@ui-kitten/components';
+import { StyleService, Text,Layout,  useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import Layout from '../components/Layout';
-import SummaryCard from '../components/SummaryCard';
 import { View } from 'react-native';
+import Header from './Header'
+import Footer from './Footer'
 
-
-export default (): React.ReactElement => {
+export default (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
 
   return (
+    <Layout style={styles.container} >
 
-      <Layout>
-
-      <View style={styles.margin}>
-      <SummaryCard />
-      <Card style={styles.card} />
-      <Card style={styles.card} />
-      <Card style={styles.card} />
-      </View>
+    <Header style={styles.header} />
+    <View style={styles.content}>
+    {props.children}
+    </View>
       
-      </Layout>
-
+      <Footer style={styles.footer} />
+    </Layout>
   );
 };
 
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    
   },
-  margin: {
-    marginVertical: -150,
+  header: {
+      flex: 1,
   },
-  card: {
-    marginVertical: 20,
-    marginHorizontal: 20,
-    boxShadow: '0 4px 20px 0 rgba(0,0,0,0.12)',
-  }
+  content: {
+    flex: 5,
+    // paddingTop: 32,
+    // paddingHorizontal: 16,
+  },
+  footer: {
+    flex: 1,
+    marginHorizontal: 16,
+     alignSelf: 'flex-end',
+  },
+  headerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: 100,
+    backgroundColor: 'color-primary-600',
+  },
 
 });

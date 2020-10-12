@@ -15,11 +15,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet, Card } from '@ui-kitten/components';
+import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import Layout from '../components/Layout';
-import SummaryCard from '../components/SummaryCard';
 import { View } from 'react-native';
+import FirebotSpider from '../../assets/icons/firebot-spider';
 
 
 export default (): React.ReactElement => {
@@ -28,16 +27,9 @@ export default (): React.ReactElement => {
 
   return (
 
-      <Layout>
-
-      <View style={styles.margin}>
-      <SummaryCard />
-      <Card style={styles.card} />
-      <Card style={styles.card} />
-      <Card style={styles.card} />
+       <View style={styles.summaryCard}>
+      <FirebotSpider style={styles.firebot} />
       </View>
-      
-      </Layout>
 
   );
 };
@@ -46,13 +38,24 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-  margin: {
-    marginVertical: -150,
-  },
-  card: {
-    marginVertical: 20,
-    marginHorizontal: 20,
-    boxShadow: '0 4px 20px 0 rgba(0,0,0,0.12)',
-  }
 
+  summaryCard: {
+
+    // marginVertical: -150,
+    marginHorizontal: 20,
+    height: 210,
+    padding: 24,
+    borderRadius: 24,
+    backgroundColor: 'color-primary-default',
+    boxShadow: '0 4px 20px 0 rgba(0,0,0,0.12)',
+  },
+  firebot: {
+    height: 70,
+    width: 70,
+    marginVertical: -12,
+    //  marginHorizontal: -100,
+     position: 'absolute',
+    alignSelf: 'flex-end',
+    bottom: 0,
+  },
 });
