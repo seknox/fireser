@@ -55,9 +55,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default (): React.ReactElement => {
+export default (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
   const [searchQuery, setSearchQuery] = React.useState<string>();
+
+  const navigateHome = () => {
+    props.navigation.navigate('Home');
+  };
 
   return (
     <View style={styles.container}>
@@ -66,9 +70,16 @@ export default (): React.ReactElement => {
         appearance="ghost"
         size="giant"
         accessoryLeft={SettingIcon}
+        onPress={() => console.log('footer clickkkkkkkked')}
       />
 
-      <Button style={styles.settingIcon} appearance="ghost" size="giant" accessoryLeft={HomeIcon} />
+      <Button
+        style={styles.settingIcon}
+        appearance="ghost"
+        size="giant"
+        onPress={navigateHome}
+        accessoryLeft={HomeIcon}
+      />
 
       <Input
         style={styles.searchBox}

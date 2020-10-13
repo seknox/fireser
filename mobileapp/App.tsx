@@ -16,17 +16,18 @@
  */
 
 import * as eva from '@eva-design/eva';
-import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import React from 'react';
-import HomeScreen from './src/pages/Home';
-import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import 'react-native-gesture-handler';
+import { AppNavigator } from './Navigator';
 import { default as theme } from './src/assets/custom-theme.json';
 
 export default () => (
   <>
     <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
-      <HomeScreen />
+    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+      <AppNavigator />
     </ApplicationProvider>
   </>
 );
