@@ -15,33 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Layout, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import AccountSec from '../../assets/icons/account-security';
 import DeviceSec from '../../assets/icons/device-security';
 import MsgSec from '../../assets/icons/messaging-security';
 
-// onPress={() => console.log('clickked')}
-{
-  /* <Card style={styles.card} />
-      <Card style={styles.card} /> */
-}
-
-export default (): React.ReactElement => {
+export default (props: any): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
-    <Layout style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.card}>
-        <View style={styles.desc}>
-          <Text category="h5">Accounts</Text>
-          <Text category="s1">Protect your online accounts</Text>
-        </View>
+        <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
+          <View style={styles.desc}>
+            <Text category="h5">Accounts</Text>
+            <Text category="s1">Protect your online accounts</Text>
+          </View>
 
-        <View style={styles.imageContainer}>
-          <AccountSec style={styles.image} />
-        </View>
+          <View style={styles.imageContainer}>
+            <AccountSec style={styles.image} />
+          </View>
+        </Pressable>
       </View>
 
       <View style={styles.card}>
@@ -65,7 +61,7 @@ export default (): React.ReactElement => {
           <MsgSec style={styles.image} />
         </View>
       </View>
-    </Layout>
+    </View>
   );
 };
 
@@ -73,7 +69,10 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-
+  touch: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   card: {
     flex: 1,
     minHeight: 100,

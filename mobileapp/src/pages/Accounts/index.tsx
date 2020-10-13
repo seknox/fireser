@@ -17,21 +17,21 @@
 
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { View } from 'react-native';
-import Layout from '../components/Layout';
-import SummaryCard from '../components/SummaryCard';
-import HomeMenu from '../components/Home';
+import { View, SafeAreaView } from 'react-native';
+import Layout from '../../components/Layout';
+import SummaryCard from '../../components/SummaryCard';
 
-export default (): React.ReactElement => {
+export default ({ navigation }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
-    <Layout>
-      <View style={styles.margin}>
-        <SummaryCard />
-        <HomeMenu />
-      </View>
-    </Layout>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Layout navigation={navigation}>
+        <View style={styles.margin}>
+          <SummaryCard />
+        </View>
+      </Layout>
+    </SafeAreaView>
   );
 };
 
