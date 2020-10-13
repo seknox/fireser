@@ -34,14 +34,17 @@ import GoogleSecurityStatus from './GoogleSecurityStatus';
 import {Job, Task} from '../../types/types';
 import {Fixer} from '../../webviews/fixer';
 import SecurityCheckup from './SecurityCheckup';
+import RecentActivity from "./RecentActivity";
 
 export default () => {
   const [data, setData] = React.useState<Job[]>([]);
   const [visible, setVisible] = React.useState<boolean>(false);
   const [fixURL, setFixURL] = React.useState<string | null>(null);
+  const [fixFunc, setFixFunc] = React.useState<string | null>(null);
 
-  const fixIssue = (pageURL: string) => {
+  const fixIssue = (pageURL: string,fixFunc: string) => {
     setFixURL(pageURL);
+    setFixFunc(fixFunc);
     setVisible(true);
   };
 
@@ -60,7 +63,7 @@ export default () => {
                 <Button
                   disabled={task.expectedValue == task.gotValue}
                   onPress={() => {
-                    fixIssue(task.fixURL);
+                    fixIssue(task.fixURL,task.fixFunc);
                   }}>
                   Fix
                 </Button>
@@ -82,7 +85,7 @@ export default () => {
           setData={setData}
         />
 
-        <Fixer pageURL={fixURL} onDone={null} isVisible={visible} />
+        <Fixer pageURL={fixURL} fixFunc={fixFunc} isVisible={visible} onDone={console.info}/>
       </View>
     </Layout>
   );

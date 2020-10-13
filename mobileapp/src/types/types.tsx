@@ -30,4 +30,6 @@ export type Task = {
   expectedValue: string;
   gotValue: string;
   fixURL: string;
+  fixFunc: string;
+  onFixed: () => {};
 };

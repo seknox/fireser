@@ -43,10 +43,10 @@ const extractWebAppActivityHistory = (htmlContent: string) => {
     //   a.jslcw:nth-child(1)
     // /html/body/c-wiz/div/div[2]/c-wiz[3]/div/a[1]
 
-   // console.log(999, selected.text());
+    // console.log(999, selected.text());
 
     selected.toArray().forEach((elem, i) => {
-      const innerText=$(elem).text()
+      const innerText = $(elem).text();
       if (innerText.includes('activity')) {
         if (innerText.includes('On')) {
           resolve('On');
@@ -74,7 +74,7 @@ const extractYotubeHistory = (htmlContent) => {
     const selected = $("a[href^='activitycontrols?settings=youtube']");
 
     selected.toArray().forEach((elem, i) => {
-      const innerText=$(elem).text()
+      const innerText = $(elem).text();
 
       if (innerText.includes('YouTube')) {
         if (innerText.includes('On')) {
@@ -87,7 +87,6 @@ const extractYotubeHistory = (htmlContent) => {
       } else {
         reject('Youtube history not found');
       }
-
     });
   });
 };
@@ -104,7 +103,7 @@ const extractLocationHistory = (htmlContent) => {
     const selected = $("a[href^='activitycontrols?settings=location']");
 
     selected.toArray().forEach((elem, i) => {
-      const innerText=$(elem).text()
+      const innerText = $(elem).text();
 
       if (innerText.includes('Location')) {
         if (innerText.includes('On')) {
@@ -129,20 +128,36 @@ export default {
       extractFunc: extractWebAppActivityHistory,
       name: 'Web Activity History',
       expectedValue: 'Off',
-      fixURL: 'https://myactivity.google.com/activitycontrols?settings=location',
+      fixURL: 'https://myactivity.google.com/activitycontrols?settings=search',
+      // fixFunc: `
+      // sendDebugLog("");
+      //
+      //
+      // sendDebugLog("fix btn->>>>>"+document.querySelector("body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > input"));
+      //
+      //   document.querySelector("body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > input").click();
+      //  // await new Promise(function(resolve) {setTimeout(resolve, 1000)});
+      //  document.querySelector("button:nth-last-child(1)").click();
+      // sendDebugLog("confirm btn->>>>>"+document.querySelector("button:nth-last-child(1)"));
+      //
+      // content="OKKKKKK";
+      // `,
     },
+    //document.querySelector("body > div.llhEMd.iWO5td > div > div.g3VIld.HbiE4d.Up8vH.Whe8ub.hFEqNb.J9Nfi.iWO5td > span > div.Df8Did > div > c-wiz > div > div.F3FQK > div > div > div:nth-child(2) > button")
     {
       extractFunc: extractLocationHistory,
       name: 'Location History',
       expectedValue: 'Off',
-      fixURL: 'https://myactivity.google.com/activitycontrols?settings=location&utm_source=my-activity',
+      fixURL:
+        'https://myactivity.google.com/activitycontrols?settings=location&utm_source=my-activity',
     },
 
     {
       extractFunc: extractYotubeHistory,
       name: 'YouTube Activity History',
       expectedValue: 'Off',
-      fixURL: 'https://myactivity.google.com/activitycontrols/youtube?utm_source=myactivity&facs=1',
+      fixURL:
+        'https://myactivity.google.com/activitycontrols/youtube?utm_source=myactivity&facs=1',
     },
   ],
 };

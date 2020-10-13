@@ -29,22 +29,41 @@ import {err} from 'react-native-svg/lib/typescript/xml';
 import {Text} from '@ui-kitten/components';
 import {Job, Task} from '../utils/types';
 
-const getCodeToInject = (pageURL) =>
-  `
+//TODO find a better way of injecting fix function
+const getCodeToInject = (pageURL: string, fixFunc: string) => {
+  if (fixFunc) {
+    console.log(111);
+
+    const injectCode=(
+        `
+    function sendDebugLog(m){
+      const msgDebug = {"type":"DEBUG","content":m};
+        window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
+
+    };
     
+     // const msgDebug = {"type":"DEBUG","content":"Yooooooooooo"};
+     //    window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
+     //
    
     var refreshId = setInterval(function(){
     
-    
-     const msgDebug = {"type":"DEBUG","content":document.URL};
-        window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
-        
+    // sendDebugLog("document.URL");
+   
     
     
         if(document.URL.startsWith('` +
-  pageURL +
-  `')){
-        const msg = {"type":"HTML","content":document.body.innerHTML}
+        pageURL +
+        `')){
+  let content;
+  
+  
+  
+    ` +
+        fixFunc +
+        `
+    
+        const msg = {"type":"DONE","content":content}
         clearInterval(refreshId);
         window.ReactNativeWebView.postMessage(JSON.stringify(msg));
         }
@@ -59,7 +78,14 @@ const getCodeToInject = (pageURL) =>
     
     
     true;
-    `;
+    `
+    );
+   // console.log(injectCode);
+    return injectCode;
+  } else {
+    return 'true;';
+  }
+};
 
 /*
 {
@@ -70,6 +96,7 @@ extractFunc:
 */
 export const Fixer = (props: {
   pageURL: string;
+  fixFunc: string;
   isVisible: boolean;
   onDone: any;
 }) => {
@@ -82,6 +109,8 @@ export const Fixer = (props: {
 
       if (msg.type === 'DEBUG') {
         console.log('debug', msg.content);
+      } else if (msg.type === 'DONE') {
+        props.onDone(msg.content);
       }
     } catch (e) {
       console.error(e);
@@ -91,7 +120,7 @@ export const Fixer = (props: {
   };
 
   return (
-    <View style={{display: props.isVisible ? 'flex' : 'none'}}>
+    <View style={{display: props.isVisible  ? 'flex' : 'none'}}>
       {/*<Text category={"h1"}>{pageURL}</Text>*/}
       <WebView
         // accessibilityTraits={'adjustable'}
@@ -111,7 +140,7 @@ export const Fixer = (props: {
         // incognito={true}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
-        injectedJavaScript={getCodeToInject(props.pageURL)}
+        injectedJavaScript={getCodeToInject(props.pageURL, props.fixFunc)}
         // injectedJavaScriptBeforeContentLoaded={runFirst}
       />
     </View>
