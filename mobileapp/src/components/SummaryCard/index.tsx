@@ -15,16 +15,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet } from '@ui-kitten/components';
+import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
 import FirebotSpider from '../../assets/icons/firebot-spider';
 
-export default (): React.ReactElement => {
+type accountSummary = {
+  title: string;
+  subtitle: string;
+};
+
+export default (props: accountSummary): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
     <View style={styles.summaryCard}>
+      <Text style={styles.title} category="h4">
+        {props.title}
+      </Text>
+      <Text style={styles.subtitle} category="s1">
+        {props.subtitle}
+      </Text>
       <FirebotSpider style={styles.firebot} />
     </View>
   );
@@ -35,6 +46,12 @@ const themedStyles = StyleService.create({
     flex: 1,
   },
 
+  title: {
+    color: 'white',
+  },
+  subtitle: {
+    color: 'white',
+  },
   summaryCard: {
     // marginVertical: -150,
     marginHorizontal: 20,
