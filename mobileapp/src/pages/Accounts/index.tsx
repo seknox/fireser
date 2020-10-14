@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet, Button } from '@ui-kitten/components';
+import {StyleService, useStyleSheet, Button} from '@ui-kitten/components';
 import React from 'react';
-import { View, SafeAreaView } from 'react-native';
+import {View, SafeAreaView, Pressable} from 'react-native';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
 
@@ -27,15 +27,15 @@ import Youtube from '../../assets/brands/youtube';
 import Linkdin from '../../assets/brands/linkdin';
 import Facebook from '../../assets/brands/facebook';
 
-export default ({ navigation }): React.ReactElement => {
+export default ({navigation}): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <Layout navigation={navigation}>
         <View style={styles.margin}>
           <SummaryCard title="Protect Accounts" subtitle="Protect Accounts" />
-          <AccountIcons />
+          <AccountIcons navigation={navigation}/>
         </View>
       </Layout>
     </SafeAreaView>
@@ -88,19 +88,28 @@ const themedStyles = StyleService.create({
     height: 40,
     width: 40,
   },
+  touch: {
+    flex: 1,
+    flexDirection: 'row',
+  },
 });
 
-export const AccountIcons = (): React.ReactElement => {
+export const AccountIcons = (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
+  const {navigation} = props;
 
   function getIcon(name: string) {
     return name;
   }
   return (
     <View style={styles.brandgroup}>
-      <View style={styles.iconButton}>
-        <Google style={styles.icon} />
-      </View>
+      <Pressable
+        onPress={() => navigation.navigate('Google')}
+        style={styles.touch}>
+        <View style={styles.iconButton}>
+          <Google style={styles.icon} />
+        </View>
+      </Pressable>
 
       <View style={styles.iconButton}>
         <Gmail style={styles.icon} />
@@ -110,13 +119,21 @@ export const AccountIcons = (): React.ReactElement => {
         <Youtube style={styles.icon} />
       </View>
 
-      <View style={styles.iconButton}>
-        <Linkdin style={styles.icon} />
-      </View>
+      <Pressable
+        onPress={() => navigation.navigate('Microsoft')}
+        style={styles.touch}>
+        <View style={styles.iconButton}>
+          <Linkdin style={styles.icon} />
+        </View>
+      </Pressable>
 
-      <View style={styles.iconButton}>
-        <Facebook style={styles.icon} />
-      </View>
+      <Pressable
+        onPress={() => navigation.navigate('Facebook')}
+        style={styles.touch}>
+        <View style={styles.iconButton}>
+          <Facebook style={styles.icon} />
+        </View>
+      </Pressable>
     </View>
   );
 };
