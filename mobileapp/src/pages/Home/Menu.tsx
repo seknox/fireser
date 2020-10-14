@@ -81,9 +81,9 @@ const themedStyles = StyleService.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     // borderColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ebebeb',
-    // borderRadius: 16,
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#ebebeb',
+    borderRadius: 8,
 
     shadowColor: '#000',
     shadowOffset: {
@@ -93,7 +93,7 @@ const themedStyles = StyleService.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
 
-    elevation: 1,
+    elevation: 3,
   },
 
   desc: {
