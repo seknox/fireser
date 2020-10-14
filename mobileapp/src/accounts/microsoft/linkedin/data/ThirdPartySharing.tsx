@@ -20,7 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
-import {extractChecked} from "../ExtractFunc";
+import {extractChecked} from "../ExtractChecked";
 
 export default {
   name: 'Data sharing with 3rd party ',

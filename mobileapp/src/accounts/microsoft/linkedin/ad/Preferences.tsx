@@ -17,7 +17,7 @@
  *
  */
 
-import {extractChecked} from '../ExtractFunc';
+import {extractChecked} from '../ExtractChecked';
 
 export const IntrestCategories = {
   name: 'Personalised ads',

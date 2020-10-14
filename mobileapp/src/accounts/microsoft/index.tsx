@@ -32,13 +32,13 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {Job, Task} from '../../types/types';
 import {Fixer} from '../../webviews/fixer';
 import AdPreferences from './AdPreference';
-import MyActivity from "./MyActivity";
-import ProfileVisibility from "./linkedin/visibility/profile";
-import StoryVisibility from "./linkedin/visibility/StoryVisibility";
-import DataSharing from "./linkedin/DataSharing";
-import ThirdPartySharing from "./linkedin/data/ThirdPartySharing";
-import ProfileData from "./linkedin/ad/ProfileData";
-import IntrestCategories from "./linkedin/ad/IntrestCategories";
+import MyActivity from './MyActivity';
+import ProfileVisibility from './linkedin/visibility/profile';
+import StoryVisibility from './linkedin/visibility/StoryVisibility';
+import DataSharing from './linkedin/DataSharing';
+import ThirdPartySharing from './linkedin/data/ThirdPartySharing';
+import {Connections, Location, ProfileData} from './linkedin/ad/Preferences';
+import {IntrestCategories} from './linkedin/ad/Preferences';
 
 export default () => {
   const [data, setData] = React.useState<Job[]>([]);
@@ -51,7 +51,7 @@ export default () => {
   };
 
   return (
-    <Layout >
+    <Layout>
       <ScrollView>
         {data.map((job: Job) => (
           <Card style={styles.card} key={job.name}>
@@ -84,7 +84,16 @@ export default () => {
       {/*<View style={{display: isLoggedIn ? 'none' : 'flex'}}>*/}
       <View>
         <Runner
-          jobs={[IntrestCategories,ProfileData,DataSharing,ThirdPartySharing,ProfileVisibility,StoryVisibility]}
+          jobs={[
+            IntrestCategories,
+            ProfileData,
+            Location,
+            Connections,
+            DataSharing,
+            ThirdPartySharing,
+            ProfileVisibility,
+            StoryVisibility,
+          ]}
           // jobs={[ SecurityCheckup]}
           setData={setData}
         />
