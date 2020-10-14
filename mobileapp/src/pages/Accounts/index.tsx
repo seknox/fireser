@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {StyleService, useStyleSheet, Button} from '@ui-kitten/components';
+import {StyleService, useStyleSheet, Button, Text} from '@ui-kitten/components';
 import React from 'react';
 import {View, SafeAreaView, Pressable} from 'react-native';
 import Layout from '../../components/Layout';
@@ -35,7 +35,7 @@ export default ({navigation}): React.ReactElement => {
       <Layout navigation={navigation}>
         <View style={styles.margin}>
           <SummaryCard title="Protect Accounts" subtitle="Protect Accounts" />
-          <AccountIcons navigation={navigation}/>
+          <AccountIcons navigation={navigation} />
         </View>
       </Layout>
     </SafeAreaView>
@@ -120,10 +120,19 @@ export const AccountIcons = (props): React.ReactElement => {
       </View>
 
       <Pressable
-        onPress={() => navigation.navigate('Microsoft')}
+        onPress={() => navigation.navigate('LinkedIn')}
         style={styles.touch}>
         <View style={styles.iconButton}>
           <Linkdin style={styles.icon} />
+        </View>
+      </Pressable>
+
+      <Pressable
+        onPress={() => navigation.navigate('Microsoft')}
+        style={styles.touch}>
+        <View style={styles.iconButton}>
+          <Text>M</Text>
+          {/*<Linkdin style={styles.icon} />*/}
         </View>
       </Pressable>
 

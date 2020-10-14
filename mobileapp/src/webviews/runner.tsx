@@ -130,18 +130,14 @@ export const Runner = (props: {jobs: Job[]; setData: any}) => {
       setIsVisible(true);
     } else {
       //DEBUG
-       console.log("debug",msg.content);
+      console.log('debug', msg.content);
     }
   };
 
-  const renderToggleButton = () => (
-    <Button style={{hidden:isVisible}} onPress={() => setIsVisible(false)}>Close</Button>
-  );
+
 
   return (
-      <View style={{display: isVisible ? 'flex' : 'none'}}>
-    {/*<Popover visible={isVisible} anchor={renderToggleButton}>*/}
-      {/*<Text category={"h1"}>{pageURL}</Text>*/}
+    <View style={{display: isVisible ? 'flex' : 'none'}}>
       <WebView
         // accessibilityTraits={'adjustable'}
         style={{
@@ -153,17 +149,13 @@ export const Runner = (props: {jobs: Job[]; setData: any}) => {
         source={{
           uri: pageURL,
         }}
-        // originWhitelist={['*']}
-        // source={{html: '<h1>This is a static HTML source!</h1>'}}
         onMessage={onMessage}
-        // domStorageEnabled={false}
         // incognito={true}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
         injectedJavaScript={getCodeToInject(pageURL)}
         // injectedJavaScriptBeforeContentLoaded={runFirst}
       />
-    {/*</Popover>*/}
-      </View>
+    </View>
   );
 };

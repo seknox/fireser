@@ -6,6 +6,7 @@ import Accounts from './src/pages/Accounts';
 import Google from './src/pages/Accounts/google';
 import Facebook from './src/pages/Accounts/facebook';
 import Microsoft from './src/pages/Accounts/microsoft';
+import LinkedIn from './src/pages/Accounts/linkedin';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -16,6 +17,7 @@ const HomeNavigator = () => (
     <Screen name="Google" component={Google} />
     <Screen name="Facebook" component={Facebook} />
     <Screen name="Microsoft" component={Microsoft} />
+    <Screen name="LinkedIn" component={LinkedIn} />
   </Navigator>
 );
 
