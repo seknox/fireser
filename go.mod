@@ -7,4 +7,5 @@ require (
 	github.com/jaypipes/ghw v0.6.1
 	github.com/shirou/gopsutil v2.20.8+incompatible
 	github.com/sirupsen/logrus v1.6.0
+	golang.org/x/mobile v0.0.0-20200801112145-973feb4309de // indirect
 )
