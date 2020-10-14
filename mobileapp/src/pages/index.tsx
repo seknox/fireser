@@ -28,7 +28,7 @@ const Stack = createStackNavigator();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator initialRouteName="Google">
+    <Stack.Navigator initialRouteName="Microsoft">
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Google" component={Google} />
       <Stack.Screen name="Facebook" component={Facebook} />

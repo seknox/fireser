@@ -17,20 +17,20 @@
  *
  */
 
-//
-export type Job = {
-  name: string;
-  pageURL: string;
-  tasks: Task[];
-};
+import React from 'react';
 
-export type Task = {
-  extractFunc: (htmlContent: string) => Promise;
-  name: string;
-  description: string;
-  expectedValue: string;
-  gotValue: string;
-  fixURL: string;
-  fixFunc: string;
-  onFixed: () => {};
+import cio from 'cheerio-without-node-native';
+import {extractChecked} from "../ExtractFunc";
+
+export default {
+  name: 'Data sharing with 3rd party ',
+  pageURL: 'https://www.linkedin.com/psettings/data-research',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      name: 'Data sharing with 3rd party',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/data-research',
+    },
+  ],
 };

@@ -17,20 +17,5 @@
  *
  */
 
-//
-export type Job = {
-  name: string;
-  pageURL: string;
-  tasks: Task[];
-};
+//https://account.microsoft.com/privacy/cortana
 
-export type Task = {
-  extractFunc: (htmlContent: string) => Promise;
-  name: string;
-  description: string;
-  expectedValue: string;
-  gotValue: string;
-  fixURL: string;
-  fixFunc: string;
-  onFixed: () => {};
-};

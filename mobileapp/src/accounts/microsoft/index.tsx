@@ -27,12 +27,18 @@ import {
   ListItem,
 } from '@ui-kitten/components';
 import {Runner} from '../../webviews/runner';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 
 import {Job, Task} from '../../types/types';
 import {Fixer} from '../../webviews/fixer';
 import AdPreferences from './AdPreference';
 import MyActivity from "./MyActivity";
+import ProfileVisibility from "./linkedin/visibility/profile";
+import StoryVisibility from "./linkedin/visibility/StoryVisibility";
+import DataSharing from "./linkedin/DataSharing";
+import ThirdPartySharing from "./linkedin/data/ThirdPartySharing";
+import ProfileData from "./linkedin/ad/ProfileData";
+import IntrestCategories from "./linkedin/ad/IntrestCategories";
 
 export default () => {
   const [data, setData] = React.useState<Job[]>([]);
@@ -45,8 +51,8 @@ export default () => {
   };
 
   return (
-    <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <View>
+    <Layout >
+      <ScrollView>
         {data.map((job: Job) => (
           <Card style={styles.card} key={job.name}>
             <Text category="h1">{job.name}</Text>
@@ -73,12 +79,12 @@ export default () => {
             ))}
           </Card>
         ))}
-      </View>
+      </ScrollView>
 
       {/*<View style={{display: isLoggedIn ? 'none' : 'flex'}}>*/}
       <View>
         <Runner
-          jobs={[AdPreferences,MyActivity]}
+          jobs={[IntrestCategories,ProfileData,DataSharing,ThirdPartySharing,ProfileVisibility,StoryVisibility]}
           // jobs={[ SecurityCheckup]}
           setData={setData}
         />

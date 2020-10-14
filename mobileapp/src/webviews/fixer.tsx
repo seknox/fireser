@@ -34,8 +34,8 @@ const getCodeToInject = (pageURL: string, fixFunc: string) => {
   if (fixFunc) {
     console.log(111);
 
-    const injectCode=(
-        `
+    const injectCode = (
+      `
     function sendDebugLog(m){
       const msgDebug = {"type":"DEBUG","content":m};
         window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
@@ -53,15 +53,15 @@ const getCodeToInject = (pageURL: string, fixFunc: string) => {
     
     
         if(document.URL.startsWith('` +
-        pageURL +
-        `')){
+      pageURL +
+      `')){
   let content;
   
   
   
     ` +
-        fixFunc +
-        `
+      fixFunc +
+      `
     
         const msg = {"type":"DONE","content":content}
         clearInterval(refreshId);
@@ -120,7 +120,7 @@ export const Fixer = (props: {
   };
 
   return (
-    <View style={{display: props.isVisible  ? 'flex' : 'none'}}>
+    <View style={{display: props.isVisible ? 'flex' : 'none'}}>
       {/*<Text category={"h1"}>{pageURL}</Text>*/}
       <WebView
         // accessibilityTraits={'adjustable'}

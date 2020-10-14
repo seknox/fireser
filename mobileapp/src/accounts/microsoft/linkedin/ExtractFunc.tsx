@@ -17,20 +17,28 @@
  *
  */
 
-//
-export type Job = {
-  name: string;
-  pageURL: string;
-  tasks: Task[];
-};
+import React from 'react';
 
-export type Task = {
-  extractFunc: (htmlContent: string) => Promise;
-  name: string;
-  description: string;
-  expectedValue: string;
-  gotValue: string;
-  fixURL: string;
-  fixFunc: string;
-  onFixed: () => {};
+import cio from 'cheerio-without-node-native';
+
+export const extractChecked = (htmlContent: string) => {
+  //:nth-child(2
+
+  return new Promise((resolve, reject) => {
+    if (!htmlContent) {
+      reject('HTML content empty');
+    }
+
+    const $ = cio.load(htmlContent);
+
+    const selected = $(':checked');
+
+    if (selected.length == 0) {
+      resolve('FALSE');
+    } else if (selected.length == 1) {
+      resolve('TRUE');
+    } else {
+      reject('invalid ');
+    }
+  });
 };
