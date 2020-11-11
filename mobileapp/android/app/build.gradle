@@ -164,7 +164,9 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            resValue "string", "CodePushDeploymentKey", CODEPUSH_DEPLOYMENT_KEY
+            if (project.hasProperty('CODEPUSH_DEPLOYMENT_KEY')) {
+                resValue "string", "CodePushDeploymentKey", CODEPUSH_DEPLOYMENT_KEY
+                }
 
         }
     }
