@@ -1,25 +1,22 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from './src/pages/Home';
-import Accounts from './src/pages/Accounts';
-import Google from './src/pages/Accounts/google';
-import Facebook from './src/pages/Accounts/facebook';
-import Microsoft from './src/pages/Accounts/microsoft';
-import LinkedIn from './src/pages/Accounts/linkedin';
+import AccountsSelect, { Account } from './src/pages/Accounts';
+import FirebotChatroom from './src/pages/Firebot';
 
-const {Navigator, Screen} = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator();
 
-const HomeNavigator = () => (
-  <Navigator headerMode="none">
-    <Screen name="Home" component={Home} />
-    <Screen name="Accounts" component={Accounts} />
-    <Screen name="Google" component={Google} />
-    <Screen name="Facebook" component={Facebook} />
-    <Screen name="Microsoft" component={Microsoft} />
-    <Screen name="LinkedIn" component={LinkedIn} />
-  </Navigator>
-);
+const HomeNavigator = () => {
+  return (
+    <Navigator headerMode="none" initialRouteName={'Home'}>
+      <Screen name="Home" component={Home} />
+      <Screen name="AccountsPage" component={AccountsSelect} />
+      <Screen name="Account" component={Account} />
+      <Screen name="FirebotChatroom" component={FirebotChatroom} />
+    </Navigator>
+  );
+};
 
 export const AppNavigator = () => (
   <NavigationContainer>

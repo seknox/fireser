@@ -17,20 +17,8 @@
  *
  */
 
-//
-export type Job = {
-  name: string;
-  pageURL: string;
-  tasks: Task[];
-};
-
-export type Task = {
-  extractFunc: (htmlContent: string) => Promise; // function to extract certain data from a html content
-  name: string;
-  description: string;
-  expectedValue: string;
-  gotValue: string;
-  fixURL: string;  // url to fix the setting if expectedValue!=gotvalue
-  fixFunc: string; // function to automatically fix the setting
-  onFixed: () => {};
-};
+import React from 'react';
+import AdPreferences from './AdPreference';
+import MyActivity from './MyActivity';
+const MicrosoftSelectors = [AdPreferences, MyActivity];
+export default MicrosoftSelectors;

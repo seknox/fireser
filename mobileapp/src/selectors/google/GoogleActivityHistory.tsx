@@ -31,19 +31,6 @@ const extractWebAppActivityHistory = (htmlContent: string) => {
     // console.log(htmlContent);
     const $ = cio.load(htmlContent);
     const selected = $("a[href^='activitycontrols?settings=search']");
-    // const selected = $('a').filter(function(i, el) {
-    //   // this === el
-    //   let hrefu=$(this).attr('href')
-    //   console.log(hrefu,hrefu?.startsWith('activitycontrols/webandapp'))
-    //   return hrefu?.startsWith('activitycontrols/webandapp');
-    // });
-    // const selected = $("a");
-
-    //html body#yDmH0d.tQj5Y.ghyPEc.IqBfM.ecJEib.b30Rkd.EIlDfe.cjGgHb.d8Etdd.LcUz9d c-wiz.zQTmif.SSPGKf.qiI0tc.qplYRc div.T4LgNb div.jkOv3d c-wiz div.VfPpkd-WsjYwc.KC1dQ.BKdRne.bBjtqf a.jslcw
-    //   a.jslcw:nth-child(1)
-    // /html/body/c-wiz/div/div[2]/c-wiz[3]/div/a[1]
-
-    // console.log(999, selected.text());
 
     selected.toArray().forEach((elem, i) => {
       const innerText = $(elem).text();

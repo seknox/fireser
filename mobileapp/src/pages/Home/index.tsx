@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet, TopNavigation, Divider } from '@ui-kitten/components';
+import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { View, SafeAreaView } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
 import HomeMenu from './Menu';
@@ -26,7 +26,7 @@ export default ({ navigation }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   const navigateToAccounts = () => {
-    navigation.navigate('Accounts');
+    navigation.navigate('AccountsPage');
   };
 
   return (
@@ -34,7 +34,10 @@ export default ({ navigation }): React.ReactElement => {
       {/* <Divider /> */}
       <Layout navigation={navigation}>
         <View style={styles.margin}>
-          <SummaryCard />
+          <SummaryCard
+            title="Hi Sakshyam,"
+            subtitle="Enhance security and privacy of your account and devices. "
+          />
           <HomeMenu navigateToAccounts={navigateToAccounts} />
         </View>
       </Layout>

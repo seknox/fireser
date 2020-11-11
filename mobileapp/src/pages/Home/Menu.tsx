@@ -15,12 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
+import { StyleService, Text, useStyleSheet, Button, Icon } from '@ui-kitten/components';
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import AccountSec from '../../assets/icons/account-security';
 import DeviceSec from '../../assets/icons/device-security';
 import MsgSec from '../../assets/icons/messaging-security';
+
+const RightIcon = (props) => <Icon {...props} name="arrow-forward-outline" />;
 
 export default (props: any): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
@@ -30,8 +32,17 @@ export default (props: any): React.ReactElement => {
       <View style={styles.card}>
         <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
           <View style={styles.desc}>
-            <Text category="h5">Accounts</Text>
-            <Text category="s1">Protect your online accounts</Text>
+            <Text category="h5">Account Protection</Text>
+            <Text category="s1">Enhance security and privacy</Text>
+            <Button
+              style={styles.button}
+              appearance="ghost"
+              status="primary"
+              accessoryRight={RightIcon}
+              onPress={props.navigateToAccounts}
+            >
+              Start now
+            </Button>
           </View>
 
           <View style={styles.imageContainer}>
@@ -42,8 +53,16 @@ export default (props: any): React.ReactElement => {
 
       <View style={styles.card}>
         <View style={styles.desc}>
-          <Text category="h5">Devices</Text>
-          <Text category="s1">Protect your mobile and pc</Text>
+          <Text category="h5">Device Protection</Text>
+          <Text category="s1">Enhance security and privacy</Text>
+          <Button
+            style={styles.button}
+            appearance="ghost"
+            status="primary"
+            accessoryRight={RightIcon}
+          >
+            Start now
+          </Button>
         </View>
 
         <View style={styles.imageContainer}>
@@ -53,8 +72,16 @@ export default (props: any): React.ReactElement => {
 
       <View style={styles.card}>
         <View style={styles.desc}>
-          <Text category="h5">Email and Messages</Text>
-          <Text category="s1">Protect your email and chats</Text>
+          <Text category="h5">Messaging Security</Text>
+          <Text category="s1">Scam and threat protection</Text>
+          <Button
+            style={styles.button}
+            appearance="ghost"
+            status="primary"
+            accessoryRight={RightIcon}
+          >
+            Start now
+          </Button>
         </View>
 
         <View style={styles.imageContainer}>
@@ -75,14 +102,11 @@ const themedStyles = StyleService.create({
   },
   card: {
     flex: 1,
-    minHeight: 100,
+    minHeight: 120,
     marginVertical: 10,
     marginHorizontal: 20,
     flexDirection: 'row',
     backgroundColor: 'white',
-    // borderColor: 'white',
-    // borderBottomWidth: 1,
-    // borderBottomColor: '#ebebeb',
     borderRadius: 8,
 
     shadowColor: '#000',
@@ -99,6 +123,8 @@ const themedStyles = StyleService.create({
   desc: {
     flex: 4,
     padding: 24,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
   },
 
   imageContainer: {
@@ -109,5 +135,10 @@ const themedStyles = StyleService.create({
     height: '100%',
     width: '100%',
     // resizeMode: 'contain',
+  },
+  button: {
+    // margin: 2,
+    padding: 0,
+    alignSelf: 'flex-start',
   },
 });

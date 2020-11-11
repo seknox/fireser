@@ -17,20 +17,23 @@
  *
  */
 
-//
-export type Job = {
-  name: string;
-  pageURL: string;
-  tasks: Task[];
-};
+import React from 'react';
 
-export type Task = {
-  extractFunc: (htmlContent: string) => Promise; // function to extract certain data from a html content
-  name: string;
-  description: string;
-  expectedValue: string;
-  gotValue: string;
-  fixURL: string;  // url to fix the setting if expectedValue!=gotvalue
-  fixFunc: string; // function to automatically fix the setting
-  onFixed: () => {};
-};
+import ProfileVisibility from './visibility/profile';
+import StoryVisibility from './visibility/StoryVisibility';
+import DataSharing from './DataSharing';
+import ThirdPartySharing from './data/ThirdPartySharing';
+import { Connections, Location, ProfileData } from './ad/Preferences';
+import { IntrestCategories } from './ad/Preferences';
+const LinkedInSelectors = [
+  IntrestCategories,
+  ProfileData,
+  Location,
+  Connections,
+  DataSharing,
+  ThirdPartySharing,
+  ProfileVisibility,
+  StoryVisibility,
+];
+
+export default LinkedInSelectors;

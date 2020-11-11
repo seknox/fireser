@@ -18,16 +18,40 @@
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'react-native-gesture-handler';
-import { AppNavigator } from './Navigator';
+import {AppNavigator} from './Navigator';
 import { default as theme } from './src/assets/custom-theme.json';
+import codePush from 'react-native-code-push';
 
-export default () => (
-  <>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-      <AppNavigator />
-    </ApplicationProvider>
-  </>
-);
+export default () => {
+  useEffect(() => {
+    codePush.sync(
+      { updateDialog: true },
+      (status) => {
+        switch (status) {
+          case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+            // Show "downloading" modal
+            console.log('DOWNLOADING.....');
+            break;
+          case codePush.SyncStatus.INSTALLING_UPDATE:
+            // Hide "downloading" modal
+            console.log('UPDATING......');
+            break;
+        }
+      },
+      ({ receivedBytes, totalBytes }) => {
+        /* Update download modal progress */
+        console.log(receivedBytes / totalBytes);
+      },
+    );
+  }, []);
+  return (
+    <>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+        <AppNavigator />
+      </ApplicationProvider>
+    </>
+  );
+};

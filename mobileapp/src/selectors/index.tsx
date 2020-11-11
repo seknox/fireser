@@ -17,20 +17,24 @@
  *
  */
 
-//
-export type Job = {
-  name: string;
-  pageURL: string;
-  tasks: Task[];
+import LinkedInSelectors from './linkedin';
+import FacebookSelectors from './facebook';
+import GoogleSelectors from './google';
+import MicrosoftSelectors from './microsoft';
+import codePush from 'react-native-code-push';
+import { useEffect } from 'react';
+
+const Selectors = {
+  LinkedIn: LinkedInSelectors,
+  Facebook: FacebookSelectors,
+  Google: GoogleSelectors,
+  Microsoft: MicrosoftSelectors,
 };
 
-export type Task = {
-  extractFunc: (htmlContent: string) => Promise; // function to extract certain data from a html content
-  name: string;
-  description: string;
-  expectedValue: string;
-  gotValue: string;
-  fixURL: string;  // url to fix the setting if expectedValue!=gotvalue
-  fixFunc: string; // function to automatically fix the setting
-  onFixed: () => {};
+
+const codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  updateDialog: { appendReleaseDescription: true },
 };
+
+export default codePush(codePushOptions)(Selectors);

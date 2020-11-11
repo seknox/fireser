@@ -15,23 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {StyleService, useStyleSheet, Button, Text} from '@ui-kitten/components';
+import { StyleService, useStyleSheet, Button, Text, Card, Divider } from '@ui-kitten/components';
 import React from 'react';
-import {View, SafeAreaView, Pressable} from 'react-native';
+import { View, SafeAreaView, Pressable, StyleSheet } from 'react-native';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
 
-import Google from '../../assets/brands/google';
-import Gmail from '../../assets/brands/gmail';
-import Youtube from '../../assets/brands/youtube';
-import Linkdin from '../../assets/brands/linkdin';
-import Facebook from '../../assets/brands/facebook';
+import Selectors from '../../selectors';
 
-export default ({navigation}): React.ReactElement => {
+import GoogleIcon from '../../assets/brands/google';
+import GmailIcon from '../../assets/brands/gmail';
+import YoutubeIcon from '../../assets/brands/youtube';
+import LinkedinIcon from '../../assets/brands/linkdin';
+import FacebookIcon from '../../assets/brands/facebook';
+import { Job, Task } from '../../types/types';
+import { Runner } from '../../webviews/runner';
+import { Fixer } from '../../webviews/fixer';
+
+const AccountsSelect = ({ navigation }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Layout navigation={navigation}>
         <View style={styles.margin}>
           <SummaryCard title="Protect Accounts" subtitle="Protect Accounts" />
@@ -39,6 +44,141 @@ export default ({navigation}): React.ReactElement => {
         </View>
       </Layout>
     </SafeAreaView>
+  );
+};
+
+
+export default AccountsSelect;
+
+
+const AccountIcons = (props): React.ReactElement => {
+  const styles = useStyleSheet(themedStyles);
+  const { navigation } = props;
+
+  function getIcon(name: string) {
+    return name;
+  }
+  return (
+    <View style={styles.brandgroup}>
+      <Pressable
+        onPress={() => navigation.navigate('Account', { name: 'Google' })}
+        style={styles.touch}
+      >
+        <View style={styles.iconButton}>
+          <GoogleIcon style={styles.icon} />
+        </View>
+      </Pressable>
+
+      <View style={styles.iconButton}>
+        <GmailIcon style={styles.icon} />
+      </View>
+
+      <View style={styles.iconButton}>
+        <YoutubeIcon style={styles.icon} />
+      </View>
+
+      <Pressable
+        onPress={() => navigation.navigate('Account', { name: 'LinkedIn' })}
+        style={styles.touch}
+      >
+        <View style={styles.iconButton}>
+          <LinkedinIcon style={styles.icon} />
+        </View>
+      </Pressable>
+
+      <Pressable
+        onPress={() => navigation.navigate('Account', { name: 'Microsoft' })}
+        style={styles.touch}
+      >
+        <View style={styles.iconButton}>
+          <Text>M</Text>
+          {/*<Linkdin style={styles.icon} />*/}
+        </View>
+      </Pressable>
+
+      <Pressable
+        onPress={() => navigation.navigate('Account', { name: 'Facebook' })}
+        style={styles.touch}
+      >
+        <View style={styles.iconButton}>
+          <FacebookIcon style={styles.icon} />
+        </View>
+      </Pressable>
+    </View>
+  );
+};
+
+const supportedAccounts = [
+  'google',
+  'gmail',
+  'youtube',
+  'maps',
+  'chrome',
+  'hotmail',
+  'linkdin',
+  'twitter',
+  'facebook',
+  'messenger',
+  'instagram',
+  'suggest',
+];
+
+type accountProps = {
+  navigation: any;
+};
+
+export const Account = (props: any) => {
+  const [data, setData] = React.useState<Job[]>([]);
+  const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
+  const [fixURL, setFixURL] = React.useState<string | null>(null);
+  const [fixFunc, setFixFunc] = React.useState<string | null>(null);
+  const account = props.route.params.name;
+  const jobs = Selectors[account];
+
+  const fixIssue = (pageURL: string, fixFunc: string) => {
+    setFixURL(pageURL);
+    setFixFunc(fixFunc);
+    setFixerVisible(true);
+  };
+
+  return (
+    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <View>
+        {data.map((job: Job) => (
+          <Card /*style={themedStyles.card}*/ key={job.name}>
+            <Text category="h1">{job.name}</Text>
+            {job?.tasks?.map((task: Task) => (
+              <View key={task.name}>
+                <Text category="h5">
+                  {task.name}:{task.gotValue}
+                </Text>
+                <Text>Expected:{task.expectedValue}</Text>
+                <Button
+                  disabled={task.expectedValue === task.gotValue}
+                  onPress={() => {
+                    fixIssue(task.fixURL, task.fixFunc);
+                  }}
+                >
+                  Fix
+                </Button>
+                <Divider />
+                <Divider />
+                <Divider />
+                <Divider />
+              </View>
+            ))}
+          </Card>
+        ))}
+      </View>
+
+      {/*<View>*/}
+        <Runner
+          jobs={jobs}
+          setData={setData}
+        />
+
+        <Fixer pageURL={fixURL} fixFunc={fixFunc} isVisible={isFixerVisible} onDone={console.info} />
+    </Layout>
   );
 };
 
@@ -92,72 +232,20 @@ const themedStyles = StyleService.create({
     flex: 1,
     flexDirection: 'row',
   },
+
+  topContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  card: {
+    flex: 1,
+    margin: 2,
+  },
+  footerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  footerControl: {
+    marginHorizontal: 2,
+  },
 });
-
-export const AccountIcons = (props): React.ReactElement => {
-  const styles = useStyleSheet(themedStyles);
-  const {navigation} = props;
-
-  function getIcon(name: string) {
-    return name;
-  }
-  return (
-    <View style={styles.brandgroup}>
-      <Pressable
-        onPress={() => navigation.navigate('Google')}
-        style={styles.touch}>
-        <View style={styles.iconButton}>
-          <Google style={styles.icon} />
-        </View>
-      </Pressable>
-
-      <View style={styles.iconButton}>
-        <Gmail style={styles.icon} />
-      </View>
-
-      <View style={styles.iconButton}>
-        <Youtube style={styles.icon} />
-      </View>
-
-      <Pressable
-        onPress={() => navigation.navigate('LinkedIn')}
-        style={styles.touch}>
-        <View style={styles.iconButton}>
-          <Linkdin style={styles.icon} />
-        </View>
-      </Pressable>
-
-      <Pressable
-        onPress={() => navigation.navigate('Microsoft')}
-        style={styles.touch}>
-        <View style={styles.iconButton}>
-          <Text>M</Text>
-          {/*<Linkdin style={styles.icon} />*/}
-        </View>
-      </Pressable>
-
-      <Pressable
-        onPress={() => navigation.navigate('Facebook')}
-        style={styles.touch}>
-        <View style={styles.iconButton}>
-          <Facebook style={styles.icon} />
-        </View>
-      </Pressable>
-    </View>
-  );
-};
-
-const supportedAccounts = [
-  'google',
-  'gmail',
-  'youtube',
-  'maps',
-  'chrome',
-  'hotmail',
-  'linkdin',
-  'twitter',
-  'facebook',
-  'messenger',
-  'instagram',
-  'suggest',
-];
