@@ -133,6 +133,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
         res = await runTasks(jobs.current[index.current], msg.content);
       } catch (e) {
         console.error(e);
+        console.info("error in ",jobs.current[index.current].name)
       }
 
       jobs.current[index.current] = res;

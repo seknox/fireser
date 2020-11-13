@@ -17,19 +17,17 @@
  *
  */
 
-import {extractChecked} from '../ExtractChecked';
+import { extractChecked } from '../ExtractChecked';
 
 export const IntrestCategories = {
   name: 'Personalised ads',
-  pageURL:
-    'https://www.linkedin.com/psettings/advertising/li-enterprise-product',
+  pageURL: 'https://www.linkedin.com/psettings/advertising/li-enterprise-product',
   tasks: [
     {
       extractFunc: extractChecked,
       name: 'Interest Categories',
-      expectedValue: 'FALSE',
-      fixURL:
-        'https://www.linkedin.com/psettings/advertising/li-enterprise-product',
+      expectedValue: 'No',
+      fixURL: 'https://www.linkedin.com/psettings/advertising/li-enterprise-product',
     },
   ],
 };
@@ -60,8 +58,6 @@ export const Connections = {
   ],
 };
 
-
-
 export const Location = {
   name: 'Personalised ads',
   pageURL: 'https://www.linkedin.com/psettings/advertising/location',
@@ -74,5 +70,3 @@ export const Location = {
     },
   ],
 };
-
-

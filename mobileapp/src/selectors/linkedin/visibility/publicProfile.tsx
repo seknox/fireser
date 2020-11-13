@@ -21,7 +21,7 @@ import React from 'react';
 
 import cio from 'cheerio-without-node-native';
 
-export const extractChecked = (htmlContent: string) => {
+const extractProfileVisibility = (htmlContent: string) => {
   //:nth-child(2
 
   return new Promise((resolve, reject) => {
@@ -31,15 +31,29 @@ export const extractChecked = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $(':checked');
+    const selected = $(
+      ':checked',
+    );
 
-    if (selected.length == 0) {
-      resolve('FALSE');
-    } else if (selected.length == 1) {
-      resolve('TRUE');
-    } else {
-      reject('invalid length '+selected.length);
-    }
+    //input[type=radio]+label:before, input[type=radio]+label:after, input[type=checkbox]+label:before, input[type=checkbox]+label:after
+
+    console.log(selected.prop('value'))
+
+
+    // resolve('ok');
+    resolve(selected.prop('value'));
   });
 };
 
+export default {
+  name: 'Public Profile Visibility',
+  pageURL: 'https://www.linkedin.com/public-profile/settings',
+  tasks: [
+    {
+      extractFunc: extractProfileVisibility,
+      name: 'Public Profile visibility',
+      expectedValue: 'Off',
+      fixURL: 'https://www.linkedin.com/public-profile/settings',
+    },
+  ],
+};

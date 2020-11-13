@@ -20,7 +20,9 @@
 import React from 'react';
 
 import ProfileVisibility from './visibility/profile';
+import PublicProfileVisibility from './visibility/publicProfile';
 import StoryVisibility from './visibility/StoryVisibility';
+import EmailVisibility from './visibility/emails';
 import DataSharing from './DataSharing';
 import ThirdPartySharing from './data/ThirdPartySharing';
 import { Connections, Location, ProfileData } from './ad/Preferences';
@@ -33,7 +35,9 @@ const LinkedInSelectors = [
   DataSharing,
   ThirdPartySharing,
   ProfileVisibility,
+  PublicProfileVisibility,
   StoryVisibility,
+  EmailVisibility,
 ];
 
 export default LinkedInSelectors;
