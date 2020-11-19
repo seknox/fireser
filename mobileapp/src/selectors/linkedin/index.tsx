@@ -22,10 +22,11 @@ import React from 'react';
 import ProfileVisibility from './visibility/profile';
 import PublicProfileVisibility from './visibility/publicProfile';
 import StoryVisibility from './visibility/StoryVisibility';
+import ProfileInfoOnOtherContent from './visibility/ProfileInfoOnOtherContent';
 import EmailVisibility from './visibility/emails';
 import DataSharing from './DataSharing';
 import ThirdPartySharing from './data/ThirdPartySharing';
-import { Connections, Location, ProfileData } from './ad/Preferences';
+import {Connections, Demographics, Location, ProfileData} from './ad/Preferences';
 import { IntrestCategories } from './ad/Preferences';
 const LinkedInSelectors = [
   IntrestCategories,
@@ -38,6 +39,8 @@ const LinkedInSelectors = [
   PublicProfileVisibility,
   StoryVisibility,
   EmailVisibility,
+  ProfileInfoOnOtherContent,
+    Demographics
 ];
 
 export default LinkedInSelectors;

@@ -70,3 +70,15 @@ export const Location = {
     },
   ],
 };
+export const Demographics = {
+  name: 'Personalised ads',
+  pageURL: 'https://www.linkedin.com/psettings/advertising/demographics',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      name: 'Ads based on demographics',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/advertising/demographics',
+    },
+  ],
+};
