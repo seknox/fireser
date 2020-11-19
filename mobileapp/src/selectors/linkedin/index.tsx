@@ -40,7 +40,7 @@ const LinkedInSelectors = [
   StoryVisibility,
   EmailVisibility,
   ProfileInfoOnOtherContent,
-    Demographics
+    Demographics,
 ];
 
 export default LinkedInSelectors;

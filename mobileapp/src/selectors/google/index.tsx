@@ -21,5 +21,10 @@ import React from 'react';
 import GoogleActivityHistory from './GoogleActivityHistory';
 import GoogleSecurityStatus from './GoogleSecurityStatus';
 import SecurityCheckup from './SecurityCheckup';
-const GoogleSelectors = [GoogleActivityHistory, GoogleSecurityStatus, SecurityCheckup];
+import AdPersonalization from "./AdPersonalization";
+const GoogleSelectors = [
+    GoogleActivityHistory,
+    GoogleSecurityStatus,
+    SecurityCheckup,
+    AdPersonalization];
 export default GoogleSelectors;
