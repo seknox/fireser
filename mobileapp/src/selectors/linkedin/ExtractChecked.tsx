@@ -35,11 +35,13 @@ export const extractChecked = (htmlContent: string) => {
 
     if (selected.length == 0) {
       resolve('FALSE');
-    } else if (selected.length == 1) {
-      resolve('TRUE');
     } else {
-      reject('invalid length '+selected.length);
+      resolve('TRUE');
     }
+    // else {
+    //   reject('invalid length '+selected.length);
+    // }
   });
 };
 
+export const clickChecked = 'document.querySelector(":checked").click()';

@@ -20,7 +20,7 @@
 import React from 'react';
 
 import { WebView } from 'react-native-webview';
-import { Dimensions, View } from 'react-native';
+import { ActivityIndicator, Dimensions, View } from 'react-native';
 
 import { Job, Task } from '../types/types';
 import { Button, Popover, Text } from '@ui-kitten/components';
@@ -44,7 +44,8 @@ const getCodeToInject = (pageURL) =>
         if((location.protocol + '//' + location.host + location.pathname)=='` +
   pageURL +
   `'){
-        const msg = {"type":"HTML","content":document.body.innerHTML}
+ // console.log(document.body.parentNode.innerHTML.length)
+        const msg = {"type":"HTML","content":document.body.parentNode.innerHTML}
         clearInterval(refreshId);
         window.ReactNativeWebView.postMessage(JSON.stringify(msg));
         }
@@ -133,7 +134,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
         res = await runTasks(jobs.current[index.current], msg.content);
       } catch (e) {
         console.error(e);
-        console.info("error in ",jobs.current[index.current].name)
+        console.info('error in ', jobs.current[index.current].name);
       }
 
       jobs.current[index.current] = res;
@@ -178,6 +179,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
         injectedJavaScript={getCodeToInject(pageURL)}
+        // renderLoading={<ActivityIndicator />}
         // injectedJavaScriptBeforeContentLoaded={runFirst}
       />
     </View>

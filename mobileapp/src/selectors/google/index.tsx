@@ -23,8 +23,8 @@ import GoogleSecurityStatus from './GoogleSecurityStatus';
 import SecurityCheckup from './SecurityCheckup';
 import AdPersonalization from "./AdPersonalization";
 const GoogleSelectors = [
-    GoogleActivityHistory,
-    GoogleSecurityStatus,
-    SecurityCheckup,
+    // GoogleActivityHistory,
+    // GoogleSecurityStatus,
+    // SecurityCheckup,
     AdPersonalization];
 export default GoogleSelectors;

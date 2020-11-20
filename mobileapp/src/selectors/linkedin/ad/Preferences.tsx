@@ -17,7 +17,7 @@
  *
  */
 
-import { extractChecked } from '../ExtractChecked';
+import {clickChecked, extractChecked} from '../ExtractChecked';
 
 export const IntrestCategories = {
   name: 'Personalised ads',
@@ -25,6 +25,7 @@ export const IntrestCategories = {
   tasks: [
     {
       extractFunc: extractChecked,
+      fixFunc: clickChecked,
       name: 'Interest Categories',
       expectedValue: 'No',
       fixURL: 'https://www.linkedin.com/psettings/advertising/li-enterprise-product',
@@ -38,6 +39,7 @@ export const ProfileData = {
   tasks: [
     {
       extractFunc: extractChecked,
+      fixFunc: clickChecked,
       name: 'Use your profile data',
       expectedValue: 'FALSE',
       fixURL: 'https://www.linkedin.com/psettings/advertising/profile-data',
@@ -51,6 +53,7 @@ export const Connections = {
   tasks: [
     {
       extractFunc: extractChecked,
+      fixFunc: clickChecked,
       name: 'Ads based on connections',
       expectedValue: 'FALSE',
       fixURL: 'https://www.linkedin.com/psettings/advertising/connections',
@@ -64,6 +67,7 @@ export const Location = {
   tasks: [
     {
       extractFunc: extractChecked,
+      fixFunc: clickChecked,
       name: 'Ads based on locations',
       expectedValue: 'FALSE',
       fixURL: 'https://www.linkedin.com/psettings/advertising/location',
@@ -76,6 +80,7 @@ export const Demographics = {
   tasks: [
     {
       extractFunc: extractChecked,
+      fixFunc: clickChecked,
       name: 'Ads based on demographics',
       expectedValue: 'FALSE',
       fixURL: 'https://www.linkedin.com/psettings/advertising/demographics',

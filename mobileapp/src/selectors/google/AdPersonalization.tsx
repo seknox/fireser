@@ -29,24 +29,23 @@ const extracAdPersonalization = (htmlContent) => {
 
     const $ = cio.load(htmlContent);
 
+    // console.warn(htmlContent.length)
+    // const selected = $('body');
     const selected = $(
       'body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(4) > div:nth-child(2) > span > div ',
     );
 
-    // console.info(selected.html());
-    resolve(selected.prop('data-toggles'));
-
+    // console.info(selected.html(), 'prop');
+    resolve(selected.prop('aria-checked'));
   });
 };
 
-//   document.querySelector("body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(4) > div:nth-child(2) > span > div")
+//   document.querySelector("body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(4) > div:nth-child(2) > span > div ")
 
 //    body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(5) > div:nth-child(3) > span > div
 
-
-// /html/body/div[4]/c-wiz/c-wiz/div/div/div/c-wiz/div/span/div/div[4]/div[2]/span/div
 export default {
-  name: 'Ads',
+  name: 'Personalised Ads',
   pageURL: 'https://adssettings.google.com/authenticated',
   tasks: [
     {
