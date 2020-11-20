@@ -50,10 +50,6 @@ const extracAutoDelete = (htmlContent) => {
   });
 };
 
-//   document.querySelector("body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(4) > div > div > :nth-child(2)")
-
-//    body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(5) > div:nth-child(3) > span > div
-//https://myactivity.google.com/activitycontrols?settings=search&utm_source=my-activity&facs=1&authuser=1
 export default {
   name: 'Auto delete ',
   pageURL: 'https://myactivity.google.com/activitycontrols?settings=youtube',
@@ -67,4 +63,3 @@ export default {
   ],
 };
 
-//   /html/body/c-wiz/div/div[2]/div[2]/c-wiz/div[4]/div/div/div[2]

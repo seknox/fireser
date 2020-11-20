@@ -39,9 +39,6 @@ const extract = (htmlContent: string) => {
   });
 };
 
-//     /html/body/div[1]/div[2]/div/div[1]/div[1]/div[2]/div/section[1]/div[2]/div/div/div/div[2]/div[2]
-
-// document.querySelector("#TwoStepVerification > div.ms-Grid > div > div > div > div:nth-child(2) > div:nth-child(2)")
 export default {
   name: 'Two factor verification',
   pageURL: 'https://account.live.com/proofs/Manage/additional',

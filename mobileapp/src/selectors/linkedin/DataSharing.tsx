@@ -33,7 +33,6 @@ const extractDataSharing = (htmlContent: string) => {
 
     const selected = $(':checked');
 
-    //input[type=radio]+label:before, input[type=radio]+label:after, input[type=checkbox]+label:before, input[type=checkbox]+label:after
 
 
     if(selected.length==0){

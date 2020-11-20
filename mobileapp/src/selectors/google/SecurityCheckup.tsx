@@ -34,9 +34,7 @@ const extractSecurityCheckupStatus = (htmlContent) => {
       'c-wiz > div > c-wiz > div > div > div > div > div:nth-child(1) > div > div.eqiJQ > div',
     );
 
-    //document.querySelector("#yDmH0d > c-wiz > div > c-wiz > div > div > div > div > div:nth-child(1) > div > div.eqiJQ > div")
 
-    // console.log(selected.html());
     resolve(selected.text())
   });
 };

@@ -29,8 +29,6 @@ const extracAdPersonalization = (htmlContent) => {
 
     const $ = cio.load(htmlContent);
 
-    // console.warn(htmlContent.length)
-    // const selected = $('body');
     const selected = $(
       'body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(4) > div:nth-child(2) > span > div ',
     );
@@ -39,10 +37,6 @@ const extracAdPersonalization = (htmlContent) => {
     resolve(selected.prop('aria-checked'));
   });
 };
-
-//   document.querySelector("body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(4) > div:nth-child(2) > span > div ")
-
-//    body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(5) > div:nth-child(3) > span > div
 
 export default {
   name: 'Personalised Ads',

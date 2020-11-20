@@ -36,7 +36,6 @@ const extracAutoDelete = (htmlContent) => {
     );
 
     const text = selected.text();
-    console.log(text)
     const splotted = text.split('older than');
 
     if (splotted.length == 2) {
@@ -50,10 +49,6 @@ const extracAutoDelete = (htmlContent) => {
   });
 };
 
-//   document.querySelector("body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(4) > div > div > :nth-child(2)")
-
-//    body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(5) > div:nth-child(3) > span > div
-//https://myactivity.google.com/activitycontrols?settings=search&utm_source=my-activity&facs=1&authuser=1
 export default {
   name: 'Auto delete ',
   pageURL: 'https://myactivity.google.com/activitycontrols?settings=location',

@@ -23,9 +23,9 @@ import MyActivity from './MyActivity';
 import TwoFA from "./security/TwoFA";
 import PasswordLastChanged from "./security/PasswordLastChanged";
 const MicrosoftSelectors = [
-    // AdPreferences,
-    // MyActivity,
-    // TwoFA,
+    AdPreferences,
+    MyActivity,
+    TwoFA,
     PasswordLastChanged
 ];
 export default MicrosoftSelectors;

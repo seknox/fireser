@@ -45,10 +45,6 @@ const extract = (htmlContent: string) => {
   });
 };
 
-//     /html/body/div[1]/div[2]/div/div[1]/div[1]/div[1]/div/div/div/div/div[1]/div[2]/div[2]
-
-// document.querySelector("#banner > div > div > div > div > div.ms-Grid-col.ms-lg6.ms-sm12.banner-section > div.ms-Grid-col.ms-sm10 > div.ms-fontWeight-light.banner-extra-info.x-hidden-focus")
-// document.querySelector("#banner > div > div > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)")
 export default {
   name: 'Password last changed',
   pageURL: 'https://account.live.com/proofs/Manage/additional',

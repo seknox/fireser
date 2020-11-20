@@ -67,7 +67,6 @@ const extractConnectedDevices =  (htmlContent) => {
 
 
 };
-//#yDmH0d > c-wiz:nth-child(9) > div > div:nth-child(3) > c-wiz > div > div > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div > div > div.GXPO6c > div.FVYsnd
 
 
   export default {

@@ -33,8 +33,7 @@ const extractMyActivity = (htmlContent: string) => {
 
     const selected = $('base-card > div ');
 
-    //console.log(selected.html());
-    // console.log(selected.prop('aria-label'));
+
     let activity = [];
 
     selected.toArray().forEach((e) => {

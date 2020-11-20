@@ -22,7 +22,6 @@ import React from 'react';
 import cio from 'cheerio-without-node-native';
 
 const extractProfileVisibility = (htmlContent: string) => {
-  //:nth-child(2
 
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
@@ -33,7 +32,6 @@ const extractProfileVisibility = (htmlContent: string) => {
 
     const selected = $(':checked');
 
-    //input[type=radio]+label:before, input[type=radio]+label:after, input[type=checkbox]+label:before, input[type=checkbox]+label:after
 
     console.log(selected.prop('value'));
 
