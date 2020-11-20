@@ -1,0 +1,62 @@
+name: Build
+
+on :
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs:
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-20.04
+    steps:
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      - name: Install npm packages
+        working-directory: ./mobileapp
+        run: yarn install
+
+      - name: Build App
+        #TODO treat warning as errors
+        env:
+          CI: false
+        working-directory: ./mobileapp/android
+        run: ./gradlew assembleRelease
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.apk
+          path: mobileapp/android/app/build/outputs/apk/release/
+
+
+#TODO set up for iOS
+#  build-ios:
+#    name: Build iOS
+#    runs-on: macOS-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Install npm dependencies
+#        working-directory: ./mobileapp
+#        run: |
+#          npm install
+#      - name: Install pod dependencies
+#        working-directory: ./mobileapp
+#        run: |
+#          cd ios && pod install
+#      - name: Build app
+#        working-directory: ./mobileapp/ios
+#        run: |
+#          xcodebuild -workspace fireser.xcworkspace -scheme fireser archive -archivePath fireser.xcarchive -allowProvisioningUpdates
+#          xcodebuild -exportArchive -archivePath ./fireser.xcarchive -exportPath . -exportOptionsPlist fireser/Info.plist
+#          mv fireser.ipa ../fireser.ipa
+#
+#      - name: Upload Artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: fireser.ipa
+#          path: mobileapp/ios/build/
