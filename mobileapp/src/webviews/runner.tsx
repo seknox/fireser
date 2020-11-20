@@ -36,19 +36,23 @@ const getCodeToInject = (pageURL) =>
     var refreshId = setInterval(function(){
     
     
-     const msgDebug = {"type":"DEBUG","content":document.URL};
+     const msgDebug = {"type":"DEBUG","content":document.URL };
         window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
         
     
     
-        if((location.protocol + '//' + location.host + location.pathname)=='` +
-  pageURL +
-  `'){
+        if((location.protocol + '//' + location.host + location.pathname)=='`+pageURL+`'){
  // console.log(document.body.parentNode.innerHTML.length)
         const msg = {"type":"HTML","content":document.body.parentNode.innerHTML}
         clearInterval(refreshId);
         window.ReactNativeWebView.postMessage(JSON.stringify(msg));
         }
+        else if('`+pageURL+`'.includes("?") && location.href=='`+pageURL+`'){
+        const msg = {"type":"HTML","content":document.body.parentNode.innerHTML}
+        clearInterval(refreshId);
+        window.ReactNativeWebView.postMessage(JSON.stringify(msg));
+        }
+        
         else{
         
         const msg = {"type":"LOGIN"};

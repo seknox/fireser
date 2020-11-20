@@ -22,9 +22,17 @@ import GoogleActivityHistory from './GoogleActivityHistory';
 import GoogleSecurityStatus from './GoogleSecurityStatus';
 import SecurityCheckup from './SecurityCheckup';
 import AdPersonalization from "./AdPersonalization";
+import AutoDeleteActivityHistory from "./autodelete/ActivityHistory";
+import AutoDeleteLocationHistory from "./autodelete/Location";
+import AutoDeleteYoutubeHistory from "./autodelete/YoutubeHistory";
 const GoogleSelectors = [
     // GoogleActivityHistory,
+    // AutoDeleteActivityHistory,
+    AutoDeleteLocationHistory,
+    AutoDeleteYoutubeHistory,
     // GoogleSecurityStatus,
     // SecurityCheckup,
-    AdPersonalization];
+    // AdPersonalization,
+
+];
 export default GoogleSelectors;
