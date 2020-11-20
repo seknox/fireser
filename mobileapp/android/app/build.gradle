@@ -121,6 +121,7 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+    ndkVersion "21.3.6528147"
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -164,10 +165,12 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
             if (project.hasProperty('CODEPUSH_DEPLOYMENT_KEY')) {
                 resValue "string", "CodePushDeploymentKey", CODEPUSH_DEPLOYMENT_KEY
-                }
-
+            }else {
+                resValue "string", "CodePushDeploymentKey", ""
+            }
         }
     }
 
