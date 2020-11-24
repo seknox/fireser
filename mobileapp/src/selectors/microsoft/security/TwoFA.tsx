@@ -33,7 +33,7 @@ const extract = (htmlContent: string) => {
 
     const selected = $('#TwoStepVerification > div.ms-Grid > div > div > div > div:nth-child(2) > div:nth-child(2)');
 
-    console.log(selected.text());
+    //console.log(selected.text());
 
     resolve(selected.text().trim());
   });

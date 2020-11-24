@@ -54,11 +54,11 @@ const extractConnectedDevices =  (htmlContent) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $("a[href^='activitycontrols?settings=']");
+    const selected = $("div[role=listitem] > div > div > div:nth-child(3) > div ");
 
     //  console.log( selected.html())
     //return
-    console.log('____________________________________');
+    //console.log('____________________________________');
 
     selected.each(function (i, el) {
       const elem = $(el);

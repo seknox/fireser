@@ -36,7 +36,7 @@ const extracAutoDelete = (htmlContent) => {
     );
 
     const text = selected.text();
-    console.log(text)
+    //console.log(text)
     const splotted = text.split('older than');
 
     if (splotted.length == 2) {

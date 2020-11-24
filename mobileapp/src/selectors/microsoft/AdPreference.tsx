@@ -33,7 +33,7 @@ const extractPersonalisedAds = (htmlContent: string) => {
 
     const selected = $('#MsaAds-toggle-button-state-label');
 
-    console.log(selected.text());
+    //console.log(selected.text());
 
     resolve(selected.text());
   });
@@ -50,7 +50,7 @@ const extractPersonalisedAdsOnBrowser = (htmlContent: string) => {
 
     const selected = $('#BrowserAds-toggle-button-state-label');
 
-    console.log('brse ads->',selected.text());
+    //console.log('brse ads->',selected.text());
 
     resolve(selected.text());
   });

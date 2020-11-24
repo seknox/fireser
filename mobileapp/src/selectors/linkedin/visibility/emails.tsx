@@ -33,7 +33,7 @@ const extractProfileVisibility = (htmlContent: string) => {
     const selected = $(':checked');
 
 
-    console.log(selected.prop('value'));
+    //console.log(selected.prop('value'));
 
     // resolve('ok');
     resolve(selected.prop('value'));

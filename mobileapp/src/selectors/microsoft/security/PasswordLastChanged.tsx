@@ -33,7 +33,7 @@ const extract = (htmlContent: string) => {
 
     const selected = $('#banner > div > div > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)');
 
-    console.log(selected.text());
+    //console.log(selected.text());
 
     const splitted = selected.text().split(":")
     if(splitted.length==2){
