@@ -15,10 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Icon, Input, StyleService, useStyleSheet, Text } from '@ui-kitten/components';
+import { Icon, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { StyleSheet, View, Pressable } from 'react-native';
-import Firebot from '../../assets/icons/firebot';
+import { Pressable, StyleSheet, View } from 'react-native';
 
 // const SettingIcon = (style: ImageStyle): IconElement => (
 //   <Icon {...style} name="settings-2-outline" />
@@ -73,14 +72,9 @@ const iconstyles = StyleSheet.create({
 
 export default (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
-  const [searchQuery, setSearchQuery] = React.useState<string>();
 
   const navigateHome = () => {
     props.navigation.navigate('Home');
-  };
-
-  const navigateFirebotChatroom = () => {
-    props.navigation.navigate('FirebotChatroom');
   };
 
   return (
@@ -121,19 +115,6 @@ export default (props): React.ReactElement => {
           </Text>
         </View>
       </Pressable>
-
-      {/* <Input
-        style={styles.searchBox}
-        placeholder="Search..."
-        value={searchQuery}
-        icon={SearchIcon}
-      /> */}
-
-      <Pressable style={styles.touch} onPress={navigateFirebotChatroom}>
-        <View style={styles.firebotWrap}>
-          <Firebot style={styles.firebot} />
-        </View>
-      </Pressable>
     </View>
   );
 };
@@ -167,14 +148,5 @@ const themedStyles = StyleService.create({
     backgroundColor: 'background-basic-color-1',
     alignSelf: 'flex-end',
     bottom: 0,
-  },
-  firebotWrap: { marginHorizontal: 0, flex: 2, flexDirection: 'column' },
-  firebot: {
-    flex: 1,
-    width: 55,
-    height: 55,
-    // alignSelf: 'flex-end',
-    // bottom: 0,
-    // marginHorizontal: 5,
   },
 });

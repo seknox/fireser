@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './src/pages/Home';
 import AccountsSelect, { Account } from './src/pages/Accounts';
-import FirebotChatroom from './src/pages/Firebot';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -13,7 +12,6 @@ const HomeNavigator = () => {
       <Screen name="Home" component={Home} />
       <Screen name="AccountsPage" component={AccountsSelect} />
       <Screen name="Account" component={Account} />
-      <Screen name="FirebotChatroom" component={FirebotChatroom} />
     </Navigator>
   );
 };
