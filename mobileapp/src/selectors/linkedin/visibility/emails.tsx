@@ -21,8 +21,7 @@ import React from 'react';
 
 import cio from 'cheerio-without-node-native';
 
-const extractStoryVisibility = (htmlContent: string) => {
-  //:nth-child(2
+const extractProfileVisibility = (htmlContent: string) => {
 
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
@@ -33,19 +32,23 @@ const extractStoryVisibility = (htmlContent: string) => {
 
     const selected = $(':checked');
 
+
+    //console.log(selected.prop('value'));
+
+    // resolve('ok');
     resolve(selected.prop('value'));
   });
 };
 
 export default {
-  name: 'Story Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/story-visibility',
+  name: 'Email Visibility',
+  pageURL: 'https://www.linkedin.com/psettings/privacy/email',
   tasks: [
     {
-      extractFunc: extractStoryVisibility,
-      name: 'Story visibility',
-      expectedValue: 'HIDE',
-      fixURL: 'https://www.linkedin.com/psettings/story-visibility',
+      extractFunc: extractProfileVisibility,
+      name: 'Who can see or download your email address',
+      expectedValue: 'JUST_ME',
+      fixURL: 'https://www.linkedin.com/psettings/privacy/email',
     },
   ],
 };

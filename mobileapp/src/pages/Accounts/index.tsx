@@ -144,8 +144,8 @@ export const Account = (props: any) => {
   return (
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <View>
-        {data.map((job: Job) => (
-          <Card /*style={themedStyles.card}*/ key={job.name}>
+        {data.map((job: Job,index:number) => (
+          <Card /*style={themedStyles.card}*/ key={index}>
             <Text category="h1">{job.name}</Text>
             {job?.tasks?.map((task: Task) => (
               <View key={task.name}>

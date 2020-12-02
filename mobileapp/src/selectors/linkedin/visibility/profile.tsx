@@ -35,12 +35,6 @@ const extractProfileVisibility = (htmlContent: string) => {
       ':checked',
     );
 
-    //input[type=radio]+label:before, input[type=radio]+label:after, input[type=checkbox]+label:before, input[type=checkbox]+label:after
-
-    console.log(selected.prop('value'))
-
-
-    // resolve('ok');
     resolve(selected.prop('value'));
   });
 };

@@ -20,5 +20,12 @@
 import React from 'react';
 import AdPreferences from './AdPreference';
 import MyActivity from './MyActivity';
-const MicrosoftSelectors = [AdPreferences, MyActivity];
+import TwoFA from "./security/TwoFA";
+import PasswordLastChanged from "./security/PasswordLastChanged";
+const MicrosoftSelectors = [
+    AdPreferences,
+    MyActivity,
+    TwoFA,
+    PasswordLastChanged
+];
 export default MicrosoftSelectors;

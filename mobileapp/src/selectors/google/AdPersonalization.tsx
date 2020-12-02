@@ -21,9 +21,7 @@ import React from 'react';
 
 import cio from 'cheerio-without-node-native';
 
-const extractStoryVisibility = (htmlContent: string) => {
-  //:nth-child(2
-
+const extracAdPersonalization = (htmlContent) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -31,21 +29,24 @@ const extractStoryVisibility = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $(':checked');
+    const selected = $(
+      'body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(4) > div:nth-child(2) > span > div ',
+    );
 
-    resolve(selected.prop('value'));
+    // console.info(selected.html(), 'prop');
+    resolve(selected.prop('aria-checked'));
   });
 };
 
 export default {
-  name: 'Story Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/story-visibility',
+  name: 'Personalised Ads',
+  pageURL: 'https://adssettings.google.com/authenticated',
   tasks: [
     {
-      extractFunc: extractStoryVisibility,
-      name: 'Story visibility',
-      expectedValue: 'HIDE',
-      fixURL: 'https://www.linkedin.com/psettings/story-visibility',
+      extractFunc: extracAdPersonalization,
+      name: 'Personalised Ads',
+      expectedValue: 'false',
+      fixURL: 'https://adssettings.google.com/authenticated',
     },
   ],
 };

@@ -32,7 +32,7 @@ import {Job, Task} from '../utils/types';
 //TODO find a better way of injecting fix function
 const getCodeToInject = (pageURL: string, fixFunc: string) => {
   if (fixFunc) {
-    console.log(111);
+    //console.log(111);
 
     const injectCode = (
       `
@@ -116,7 +116,7 @@ export const Fixer = (props: {
       console.error(e);
     }
 
-    console.log(msg.type);
+    //console.log(msg.type);
   };
 
   return (

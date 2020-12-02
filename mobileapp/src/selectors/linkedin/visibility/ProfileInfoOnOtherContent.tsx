@@ -20,6 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import {extractChecked} from "../ExtractChecked";
 
 const extractStoryVisibility = (htmlContent: string) => {
   //:nth-child(2
@@ -38,14 +39,14 @@ const extractStoryVisibility = (htmlContent: string) => {
 };
 
 export default {
-  name: 'Story Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/story-visibility',
+  name: 'Profile info on other content shown on LinkedIn',
+  pageURL: 'https://www.linkedin.com/psettings/meet-the-team',
   tasks: [
     {
-      extractFunc: extractStoryVisibility,
-      name: 'Story visibility',
-      expectedValue: 'HIDE',
-      fixURL: 'https://www.linkedin.com/psettings/story-visibility',
+      extractFunc: extractChecked,
+      name: 'profile info on other content shown on LinkedIn',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/meet-the-team',
     },
   ],
 };

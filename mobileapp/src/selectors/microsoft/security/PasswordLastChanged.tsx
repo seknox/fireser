@@ -21,7 +21,7 @@ import React from 'react';
 
 import cio from 'cheerio-without-node-native';
 
-const extractStoryVisibility = (htmlContent: string) => {
+const extract = (htmlContent: string) => {
   //:nth-child(2
 
   return new Promise((resolve, reject) => {
@@ -31,21 +31,30 @@ const extractStoryVisibility = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $(':checked');
+    const selected = $('#banner > div > div > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)');
 
-    resolve(selected.prop('value'));
+    //console.log(selected.text());
+
+    const splitted = selected.text().split(":")
+    if(splitted.length==2){
+      resolve(splitted[1].trim());
+      return;
+    }
+
+    resolve(selected.text().trim());
   });
 };
 
 export default {
-  name: 'Story Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/story-visibility',
+  name: 'Password last changed',
+  pageURL: 'https://account.live.com/proofs/Manage/additional',
   tasks: [
     {
-      extractFunc: extractStoryVisibility,
-      name: 'Story visibility',
-      expectedValue: 'HIDE',
-      fixURL: 'https://www.linkedin.com/psettings/story-visibility',
+      extractFunc: extract,
+      name: 'Password last changed',
+      expectedValue: '',
+      fixURL: 'https://account.live.com/proofs/Manage/additional',
     },
+
   ],
 };

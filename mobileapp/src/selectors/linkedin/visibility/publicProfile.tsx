@@ -21,7 +21,7 @@ import React from 'react';
 
 import cio from 'cheerio-without-node-native';
 
-const extractStoryVisibility = (htmlContent: string) => {
+const extractProfileVisibility = (htmlContent: string) => {
   //:nth-child(2
 
   return new Promise((resolve, reject) => {
@@ -38,14 +38,14 @@ const extractStoryVisibility = (htmlContent: string) => {
 };
 
 export default {
-  name: 'Story Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/story-visibility',
+  name: 'Public Profile Visibility',
+  pageURL: 'https://www.linkedin.com/public-profile/settings',
   tasks: [
     {
-      extractFunc: extractStoryVisibility,
-      name: 'Story visibility',
-      expectedValue: 'HIDE',
-      fixURL: 'https://www.linkedin.com/psettings/story-visibility',
+      extractFunc: extractProfileVisibility,
+      name: 'Public Profile visibility',
+      expectedValue: 'Off',
+      fixURL: 'https://www.linkedin.com/public-profile/settings',
     },
   ],
 };

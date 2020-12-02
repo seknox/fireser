@@ -21,9 +21,7 @@ import React from 'react';
 
 import cio from 'cheerio-without-node-native';
 
-const extractStoryVisibility = (htmlContent: string) => {
-  //:nth-child(2
-
+const extracAutoDelete = (htmlContent) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -31,21 +29,38 @@ const extractStoryVisibility = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $(':checked');
+    // console.warn(htmlContent.length)
+    // const selected = $('body');
+    const selected = $(
+      'body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(4) > div > div > :nth-child(2)',
+    );
 
-    resolve(selected.prop('value'));
+    const text = selected.text();
+    //console.log(text)
+    const splotted = text.split('older than');
+
+    if (splotted.length == 2) {
+      resolve(splotted[1]);
+    } else {
+      resolve("off");
+      // reject('Could not find auto delete duration');
+    }
+    // console.info(selected.html(), 'prop');
+    // resolve(selected.prop('aria-checked'));
   });
 };
 
 export default {
-  name: 'Story Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/story-visibility',
+  name: 'Auto delete ',
+  pageURL: 'https://myactivity.google.com/activitycontrols?settings=search',
   tasks: [
     {
-      extractFunc: extractStoryVisibility,
-      name: 'Story visibility',
-      expectedValue: 'HIDE',
-      fixURL: 'https://www.linkedin.com/psettings/story-visibility',
+      extractFunc: extracAutoDelete,
+      name: 'Auto delete activity history',
+      expectedValue: '3 months',
+      fixURL: 'https://myactivity.google.com/activitycontrols?settings=search',
     },
   ],
 };
+
+//   /html/body/c-wiz/div/div[2]/div[2]/c-wiz/div[4]/div/div/div[2]
