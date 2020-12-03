@@ -30,22 +30,18 @@ const extractWebAppActivityHistory = (htmlContent: string) => {
 
     // console.log(htmlContent);
     const $ = cio.load(htmlContent);
-    const selected = $("a[href^='activitycontrols?settings=search']");
+    const selected = $("a[href^='activitycontrols?settings=search'] > div:nth-child(2) > div ");
 
-    selected.toArray().forEach((elem, i) => {
-      const innerText = $(elem).text();
-      if (innerText.includes('activity')) {
-        if (innerText.includes('On')) {
-          resolve('On');
-        } else if (innerText.includes('Off')) {
-          resolve(innerText.includes('Off'));
-        } else {
-          reject('Web Activity history status not found');
-        }
-      } else {
-        reject('Web Activity history not found');
-      }
-    });
+    const innerText = selected.text();
+
+    if (innerText.includes('On')) {
+      resolve('On');
+    } else if (innerText.includes('Off')) {
+      resolve('Off');
+    } else {
+      reject('Web Activity history status not found');
+    }
+
   });
 };
 
@@ -58,24 +54,19 @@ const extractYotubeHistory = (htmlContent) => {
     }
 
     const $ = cio.load(htmlContent);
-    const selected = $("a[href^='activitycontrols?settings=youtube']");
+    const selected = $("a[href^='activitycontrols?settings=youtube'] > div:nth-child(2) > div ");
 
-    selected.toArray().forEach((elem, i) => {
-      const innerText = $(elem).text();
+    const innerText = selected.text();
 
-      if (innerText.includes('YouTube')) {
-        if (innerText.includes('On')) {
-          resolve('On');
-        } else if (innerText.includes('Off')) {
-          resolve(innerText.includes('Off'));
-        } else {
-          reject('YouTube history status not found');
-        }
-      } else {
-        reject('Youtube history not found');
-      }
+    if (innerText.includes('On')) {
+      resolve('On');
+    } else if (innerText.includes('Off')) {
+      resolve('Off');
+    } else {
+      reject('Youtube Activity history status not found');
+    }
     });
-  });
+
 };
 
 const extractLocationHistory = (htmlContent) => {
@@ -87,25 +78,41 @@ const extractLocationHistory = (htmlContent) => {
     }
 
     const $ = cio.load(htmlContent);
-    const selected = $("a[href^='activitycontrols?settings=location']");
+    const selected = $("a[href^='activitycontrols?settings=location'] > div:nth-child(2) > div ");
 
-    selected.toArray().forEach((elem, i) => {
-      const innerText = $(elem).text();
 
-      if (innerText.includes('Location')) {
-        if (innerText.includes('On')) {
-          resolve('On');
-        } else if (innerText.includes('Off')) {
-          resolve(innerText.includes('Off'));
-        } else {
-          reject('Location Activity history status not found');
-        }
-      } else {
-        reject('Location history not found');
-      }
-    });
+    const innerText = selected.text();
+
+    if (innerText.includes('On')) {
+      resolve('On');
+    } else if (innerText.includes('Off')) {
+      resolve('Off');
+    } else {
+      reject('Location Activity history status not found');
+    }
   });
 };
+
+const fixFunc = `
+
+      sendDebugLog("fix btn->>>>>"+document.querySelector("input[role=switch]"));
+
+        document.querySelector("input[role=switch]").click();
+               console.log( 1);
+        
+        setTimeout(function(){
+
+       var allButtons=document.querySelectorAll("button");
+       var confirmBtn = allButtons[allButtons.length-1];
+       confirmBtn.disabled = false;
+       confirmBtn.click();
+      sendDebugLog("confirm btn->>>>>"+ allButtons[allButtons.length-1].innerText);
+
+      content="OKKKKKK";
+        
+        }, 1000)
+            
+      `;
 
 export default {
   name: 'Privacy',
@@ -116,25 +123,14 @@ export default {
       name: 'Web Activity History',
       expectedValue: 'Off',
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=search',
-      // fixFunc: `
-      // sendDebugLog("");
-      //
-      //
-      // sendDebugLog("fix btn->>>>>"+document.querySelector("body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > input"));
-      //
-      //   document.querySelector("body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(2) > div > div > div:nth-child(2) > div > div:nth-child(2) > input").click();
-      //  // await new Promise(function(resolve) {setTimeout(resolve, 1000)});
-      //  document.querySelector("button:nth-last-child(1)").click();
-      // sendDebugLog("confirm btn->>>>>"+document.querySelector("button:nth-last-child(1)"));
-      //
-      // content="OKKKKKK";
-      // `,
+      fixFunc: fixFunc,
     },
     //document.querySelector("body > div.llhEMd.iWO5td > div > div.g3VIld.HbiE4d.Up8vH.Whe8ub.hFEqNb.J9Nfi.iWO5td > span > div.Df8Did > div > c-wiz > div > div.F3FQK > div > div > div:nth-child(2) > button")
     {
       extractFunc: extractLocationHistory,
       name: 'Location History',
       expectedValue: 'Off',
+      fixFunc: fixFunc,
       fixURL:
         'https://myactivity.google.com/activitycontrols?settings=location&utm_source=my-activity',
     },
@@ -143,8 +139,9 @@ export default {
       extractFunc: extractYotubeHistory,
       name: 'YouTube Activity History',
       expectedValue: 'Off',
+      fixFunc: fixFunc,
       fixURL:
-        'https://myactivity.google.com/activitycontrols/youtube?utm_source=myactivity&facs=1',
+        'https://myactivity.google.com/activitycontrols?settings=youtube&utm_source=my-activity&facs=1',
     },
   ],
 };
