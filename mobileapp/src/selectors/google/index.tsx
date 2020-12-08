@@ -26,13 +26,13 @@ import AutoDeleteActivityHistory from "./autodelete/ActivityHistory";
 import AutoDeleteLocationHistory from "./autodelete/Location";
 import AutoDeleteYoutubeHistory from "./autodelete/YoutubeHistory";
 const GoogleSelectors = [
-    // GoogleActivityHistory,
+    GoogleActivityHistory,
     AutoDeleteActivityHistory,
-    // AutoDeleteLocationHistory,
-    // AutoDeleteYoutubeHistory,
-    // GoogleSecurityStatus,
-    // SecurityCheckup,
-    // AdPersonalization,
+    AutoDeleteLocationHistory,
+    AutoDeleteYoutubeHistory,
+    GoogleSecurityStatus,
+    SecurityCheckup,
+    AdPersonalization,
 
 ];
 export default GoogleSelectors;
