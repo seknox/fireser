@@ -29,6 +29,8 @@ import ThirdPartySharing from './data/ThirdPartySharing';
 import { Connections, Demographics, Location, ProfileData } from './ad/Preferences';
 import { IntrestCategories } from './ad/Preferences';
 import SearchHistory from "./data/SearchHistory";
+import JobAlertsSharedWithRecruiters from "./data/JobAlertsSharedWithRecruiters";
+import ProfileSharedWithJobPoster from "./data/ProfileSharedWithJobPoster";
 const LinkedInSelectors = [
   // IntrestCategories,
   // ProfileData,
@@ -42,7 +44,9 @@ const LinkedInSelectors = [
   // EmailVisibility,
   // ProfileInfoOnOtherContent,
   // Demographics,
-    SearchHistory
+  //   SearchHistory,
+    JobAlertsSharedWithRecruiters,
+    ProfileSharedWithJobPoster
 ];
 
 export default LinkedInSelectors;

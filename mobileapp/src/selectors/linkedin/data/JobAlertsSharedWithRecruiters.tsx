@@ -17,20 +17,22 @@
  *
  */
 
+
 import React from 'react';
 
 import {clickChecked, extractChecked} from "../ExtractChecked";
 
 export default {
-  name: 'Data sharing with 3rd party ',
-  pageURL: 'https://www.linkedin.com/psettings/data-research',
-  tasks: [
-    {
-      extractFunc: extractChecked,
-      name: 'Data sharing with 3rd party',
-      expectedValue: 'FALSE',
-      fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/data-research',
-    },
-  ],
+    name: 'Job Alerts Shared with recruters',
+    pageURL: 'https://www.linkedin.com/psettings/jobs/job-alerts-shared-with-recruiters',
+    tasks: [
+        {
+            extractFunc: extractChecked,
+            name: 'Job Alerts Shared with recruters',
+            description:'Signal your interest to recruiters at companies you have created job alerts for',
+            expectedValue: 'FALSE',
+            fixFunc: clickChecked,
+            fixURL: 'https://www.linkedin.com/psettings/jobs/job-alerts-shared-with-recruiters',
+        },
+    ],
 };
