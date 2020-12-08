@@ -110,7 +110,7 @@ const fixFunc = `
 
       content="OKKKKKK";
         
-        }, 1000)
+        }, 1000);
             
       `;
 
