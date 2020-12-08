@@ -26,13 +26,34 @@ import ProfileInfoOnOtherContent from './visibility/ProfileInfoOnOtherContent';
 import EmailVisibility from './visibility/emails';
 import DataSharing from './DataSharing';
 import ThirdPartySharing from './data/ThirdPartySharing';
-import { Connections, Demographics, Location, ProfileData } from './ad/Preferences';
-import { IntrestCategories } from './ad/Preferences';
+import {
+  AdsBasedOnActionsYouTookInResponseToAds,
+  AdsBasedOnCompanies,
+  AdsBasedOnConnections,
+  AdsBasedOnDemographics,
+  AdsBasedOnGroups,
+  AdsBasedOnInformationYouSharedWithBusinesses,
+  AdsBasedOnLocation,
+  AdsBasedOnProfileData,
+  AdsBeyondLinkedIn,
+  InfoAboutVisitsToOtherWebsites,
+} from './ad/Preferences';
+import { AdsBasedOnIntrestCategories } from './ad/Preferences';
+import SearchHistory from './data/SearchHistory';
+import JobAlertsSharedWithRecruiters from './data/JobAlertsSharedWithRecruiters';
+import ProfileSharedWithJobPoster from './data/ProfileSharedWithJobPoster';
 const LinkedInSelectors = [
-  IntrestCategories,
-  ProfileData,
-  Location,
-  Connections,
+  AdsBasedOnIntrestCategories,
+  AdsBasedOnProfileData,
+  AdsBasedOnLocation,
+  AdsBasedOnConnections,
+  AdsBasedOnDemographics,
+  AdsBasedOnGroups,
+  AdsBasedOnCompanies,
+  InfoAboutVisitsToOtherWebsites,
+  AdsBeyondLinkedIn,
+  AdsBasedOnInformationYouSharedWithBusinesses,
+  AdsBasedOnActionsYouTookInResponseToAds,
   DataSharing,
   ThirdPartySharing,
   ProfileVisibility,
@@ -40,7 +61,9 @@ const LinkedInSelectors = [
   StoryVisibility,
   EmailVisibility,
   ProfileInfoOnOtherContent,
-  Demographics,
+  SearchHistory,
+  JobAlertsSharedWithRecruiters,
+  ProfileSharedWithJobPoster,
 ];
 
 export default LinkedInSelectors;

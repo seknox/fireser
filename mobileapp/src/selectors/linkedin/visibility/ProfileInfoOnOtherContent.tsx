@@ -20,7 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
-import {extractChecked} from "../ExtractChecked";
+import {clickChecked, extractChecked} from "../ExtractChecked";
 
 const extractStoryVisibility = (htmlContent: string) => {
   //:nth-child(2
@@ -46,6 +46,7 @@ export default {
       extractFunc: extractChecked,
       name: 'profile info on other content shown on LinkedIn',
       expectedValue: 'FALSE',
+      fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/meet-the-team',
     },
   ],

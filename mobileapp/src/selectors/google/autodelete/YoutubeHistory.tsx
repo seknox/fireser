@@ -50,6 +50,29 @@ const extracAutoDelete = (htmlContent) => {
   });
 };
 
+const fixFunc = `
+document.querySelector('body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(4) > div').click();
+   setTimeout(function(){
+document.querySelector('html > body > div:nth-last-child(1) > div > div:nth-child(2) > span > div:nth-child(2) >div > c-wiz > div > div:nth-child(3) > c-wiz > div:nth-child(2) > div >div:nth-child(1)').click();
+setTimeout(function(){
+var allButtons = document.querySelectorAll('button');
+var lastButton = allButtons[allButtons.length-1];
+lastButton.click() ;
+
+setTimeout(function(){
+var confirmBtn = document.querySelector('html > body > div:nth-last-child(1) > div  > div:nth-child(2) > span > div:nth-child(2) > div:nth-child(1) > c-wiz > div > div:nth-last-child(1) > div > div:nth-child(2) > button')
+confirmBtn.disabled=false;
+confirmBtn.click();
+    
+},1000)
+    
+},200)
+
+        }, 500);
+            
+
+`;
+
 export default {
   name: 'Auto delete ',
   pageURL: 'https://myactivity.google.com/activitycontrols?settings=youtube',
@@ -58,6 +81,7 @@ export default {
       extractFunc: extracAutoDelete,
       name: 'Auto delete youtube history',
       expectedValue: '3 months',
+      fixFunc:fixFunc,
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=youtube',
     },
   ],

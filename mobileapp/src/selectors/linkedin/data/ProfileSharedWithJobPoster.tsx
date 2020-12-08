@@ -19,18 +19,18 @@
 
 import React from 'react';
 
-import {clickChecked, extractChecked} from "../ExtractChecked";
+import { clickChecked, extractChecked } from '../ExtractChecked';
 
 export default {
-  name: 'Data sharing with 3rd party ',
-  pageURL: 'https://www.linkedin.com/psettings/data-research',
+  name: 'Profile shared with job poster',
+  pageURL: 'https://www.linkedin.com/psettings/jobs/profile-shared-with-job-poster',
   tasks: [
     {
       extractFunc: extractChecked,
-      name: 'Data sharing with 3rd party',
+      name: 'Profile shared with job poster',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/data-research',
+      fixURL: 'https://www.linkedin.com/psettings/jobs/profile-shared-with-job-poster',
     },
   ],
 };

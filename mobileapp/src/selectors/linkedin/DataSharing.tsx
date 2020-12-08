@@ -20,6 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import {clickChecked} from "./ExtractChecked";
 
 const extractDataSharing = (htmlContent: string) => {
   //:nth-child(2
@@ -52,6 +53,7 @@ export default {
       extractFunc: extractDataSharing,
       name: 'Data sharing',
       expectedValue: 'FALSE',
+      fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/data-sharing',
     },
   ],

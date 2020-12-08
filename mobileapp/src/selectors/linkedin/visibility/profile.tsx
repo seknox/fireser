@@ -20,6 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import {clickChecked} from "../ExtractChecked";
 
 const extractProfileVisibility = (htmlContent: string) => {
   //:nth-child(2
@@ -47,6 +48,7 @@ export default {
       extractFunc: extractProfileVisibility,
       name: 'Profile visibility',
       expectedValue: 'HIDE',
+      fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/profile-visibility',
     },
   ],

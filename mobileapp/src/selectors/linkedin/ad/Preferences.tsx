@@ -19,7 +19,7 @@
 
 import {clickChecked, extractChecked} from '../ExtractChecked';
 
-export const IntrestCategories = {
+export const AdsBasedOnIntrestCategories = {
   name: 'Personalised ads',
   pageURL: 'https://www.linkedin.com/psettings/advertising/li-enterprise-product',
   tasks: [
@@ -33,7 +33,7 @@ export const IntrestCategories = {
   ],
 };
 
-export const ProfileData = {
+export const AdsBasedOnProfileData = {
   name: 'Personalised ads',
   pageURL: 'https://www.linkedin.com/psettings/advertising/profile-data',
   tasks: [
@@ -47,7 +47,7 @@ export const ProfileData = {
   ],
 };
 
-export const Connections = {
+export const AdsBasedOnConnections = {
   name: 'Personalised ads',
   pageURL: 'https://www.linkedin.com/psettings/advertising/connections',
   tasks: [
@@ -61,7 +61,7 @@ export const Connections = {
   ],
 };
 
-export const Location = {
+export const AdsBasedOnLocation = {
   name: 'Personalised ads',
   pageURL: 'https://www.linkedin.com/psettings/advertising/location',
   tasks: [
@@ -74,7 +74,7 @@ export const Location = {
     },
   ],
 };
-export const Demographics = {
+export const AdsBasedOnDemographics = {
   name: 'Personalised ads',
   pageURL: 'https://www.linkedin.com/psettings/advertising/demographics',
   tasks: [
@@ -87,3 +87,88 @@ export const Demographics = {
     },
   ],
 };
+
+export const AdsBasedOnCompanies = {
+  name: 'Personalised ads',
+  pageURL: 'https://www.linkedin.com/psettings/advertising/companies-followed',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      fixFunc: clickChecked,
+      name: 'Ads based on companies you follow',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/advertising/companies-followed',
+    },
+  ],
+};
+
+export const AdsBasedOnGroups = {
+  name: 'Personalised ads',
+  pageURL: 'https://www.linkedin.com/psettings/advertising/groups-joined',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      fixFunc: clickChecked,
+      name: 'Ads based on groups you joined',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/advertising/groups-joined',
+    },
+  ],
+};
+
+export const InfoAboutVisitsToOtherWebsites = {
+  name: 'Personalised ads',
+  pageURL: 'https://www.linkedin.com/psettings/advertising/websites-visited',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      fixFunc: clickChecked,
+      name: 'Ads based on info about your visit to other sites',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/advertising/websites-visited',
+    },
+  ],
+};
+
+export const AdsBeyondLinkedIn = {
+  name: 'Personalised ads',
+  pageURL: 'https://www.linkedin.com/psettings/advertising/ads-beyond-linkedin',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      fixFunc: clickChecked,
+      name: 'Ads beyond LinkedIn',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/advertising/ads-beyond-linkedin',
+    },
+  ],
+};
+
+export const AdsBasedOnInformationYouSharedWithBusinesses = {
+  name: 'Personalised ads',
+  pageURL: 'https://www.linkedin.com/psettings/advertising/actions-that-showed-interest',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      fixFunc: clickChecked,
+      name: 'Ads Based On Information You Shared With Businesses',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/advertising/actions-that-showed-interest',
+    },
+  ],
+};
+
+export const AdsBasedOnActionsYouTookInResponseToAds = {
+  name: 'Personalised ads',
+  pageURL: 'https://www.linkedin.com/psettings/advertising/actions-after-viewing-ads',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      fixFunc: clickChecked,
+      name: 'Ads Based On Actions You Took In Response To Ads',
+      expectedValue: 'FALSE',
+      fixURL: 'https://www.linkedin.com/psettings/advertising/actions-after-viewing-ads',
+    },
+  ],
+};
+

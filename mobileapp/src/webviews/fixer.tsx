@@ -120,13 +120,21 @@ export const Fixer = (props: {
   };
 
   return (
-    <View style={{display: props.isVisible ? 'flex' : 'none'}}>
+    <View style={{
+      display: props.isVisible ? 'flex' : 'none',
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    }}>
       {/*<Text category={"h1"}>{pageURL}</Text>*/}
       <WebView
         // accessibilityTraits={'adjustable'}
         style={{
           width: Dimensions.get('window').width - 20,
           height: Dimensions.get('window').height - 20,
+          marginTop: 20,
+          maxHeight: 200,
+          flex: 1,
         }}
         autoManageStatusBarEnabled={true}
         contentInset={{top: 5, left: 5, bottom: 5, right: 5}}

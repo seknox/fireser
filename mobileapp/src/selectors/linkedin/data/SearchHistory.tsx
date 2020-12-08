@@ -17,14 +17,9 @@
  *
  */
 
-import React from 'react';
-
 import cio from 'cheerio-without-node-native';
-import {clickChecked} from "../ExtractChecked";
 
-const extractStoryVisibility = (htmlContent: string) => {
-  //:nth-child(2
-
+function extractDisabled(htmlContent: string) {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -32,22 +27,29 @@ const extractStoryVisibility = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $(':checked');
+    const selected = $('button.clear-search-history-button');
 
-    resolve(selected.prop('value'));
+    // console.log('selected.prop("disabled")', selected.prop('disabled'));
+    resolve(selected.prop('disabled') ? 'TRUE' : 'FALSE');
   });
-};
+}
+
+const fixFunction = `
+document.querySelector("button.clear-search-history-button").click();
+document.querySelector("button.clear-button").click();
+
+`;
 
 export default {
-  name: 'Story Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/story-visibility',
+  name: 'Search History',
+  pageURL: 'https://www.linkedin.com/psettings/clear-search-history',
   tasks: [
     {
-      extractFunc: extractStoryVisibility,
-      name: 'Story visibility',
-      expectedValue: 'HIDE',
-      fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/story-visibility',
+      extractFunc: extractDisabled,
+      name: 'Clean search history',
+      expectedValue: 'TRUE',
+      fixFunc: fixFunction,
+      fixURL: 'https://www.linkedin.com/psettings/clear-search-history',
     },
   ],
 };
