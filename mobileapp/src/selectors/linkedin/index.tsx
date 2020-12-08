@@ -28,19 +28,21 @@ import DataSharing from './DataSharing';
 import ThirdPartySharing from './data/ThirdPartySharing';
 import { Connections, Demographics, Location, ProfileData } from './ad/Preferences';
 import { IntrestCategories } from './ad/Preferences';
+import SearchHistory from "./data/SearchHistory";
 const LinkedInSelectors = [
-  IntrestCategories,
-  ProfileData,
-  Location,
-  Connections,
-  DataSharing,
-  ThirdPartySharing,
-  ProfileVisibility,
-  PublicProfileVisibility,
-  StoryVisibility,
-  EmailVisibility,
-  ProfileInfoOnOtherContent,
-  Demographics,
+  // IntrestCategories,
+  // ProfileData,
+  // Location,
+  // Connections,
+  // DataSharing,
+  // ThirdPartySharing,
+  // ProfileVisibility,
+  // PublicProfileVisibility,
+  // StoryVisibility,
+  // EmailVisibility,
+  // ProfileInfoOnOtherContent,
+  // Demographics,
+    SearchHistory
 ];
 
 export default LinkedInSelectors;
