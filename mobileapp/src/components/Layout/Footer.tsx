@@ -23,50 +23,30 @@ import { Pressable, StyleSheet, View } from 'react-native';
 //   <Icon {...style} name="settings-2-outline" />
 // );
 
+const iconColor = '#0000FF';
+
 export const SettingIcon = () => (
-  <Icon
-    style={iconstyles.icon}
-    //   fill='#8F9BB3'
-    name="settings-2-outline"
-  />
+  <Icon style={iconstyles.icon} fill={iconColor} name="settings-2" />
 );
 
-export const HomeIcon = () => (
-  <Icon
-    style={iconstyles.icon}
-    //   fill='#8F9BB3'
-    name="home-outline"
-  />
-);
+export const HomeIcon = () => <Icon style={iconstyles.icon} fill={iconColor} name="home" />;
 
 export const SearchIcon = () => (
-  <Icon
-    style={iconstyles.icon}
-    //   fill='#8F9BB3'
-    name="search-outline"
-  />
+  <Icon style={iconstyles.icon} fill={iconColor} name="search-outline" />
 );
 
-export const StatusIcon = () => (
-  <Icon
-    style={iconstyles.icon}
-    //   fill='#8F9BB3'
-    name="flash-outline"
-  />
-);
+export const StatusIcon = () => <Icon style={iconstyles.icon} fill={iconColor} name="shield" />;
 
-export const LockIcon = () => (
-  <Icon
-    style={iconstyles.icon}
-    //   fill='#8F9BB3'
-    name="lock-outline"
-  />
-);
+export const LockIcon = () => <Icon style={iconstyles.icon} fill={iconColor} name="lock" />;
+
+export const Utilities = () => <Icon style={iconstyles.icon} fill={iconColor} name="cube" />;
 
 const iconstyles = StyleSheet.create({
   icon: {
     width: 32,
     height: 32,
+    color: 'blue',
+    alignSelf: 'center',
   },
 });
 
@@ -89,11 +69,20 @@ export default (props): React.ReactElement => {
         </View>
       </Pressable>
 
-      <Pressable style={styles.touch} onPress={navigateHome}>
+      {/* <Pressable style={styles.touch}>
         <View styles={styles.nav}>
-          <HomeIcon />
+          <Utilities />
           <Text styles={styles.navText} status="basic">
-            Home
+            Utilities
+          </Text>
+        </View>
+      </Pressable> */}
+
+      <Pressable style={styles.touch}>
+        <View styles={styles.nav}>
+          <LockIcon />
+          <Text styles={styles.navText} status="basic">
+            Vault
           </Text>
         </View>
       </Pressable>
@@ -102,16 +91,16 @@ export default (props): React.ReactElement => {
         <View styles={styles.nav}>
           <StatusIcon />
           <Text styles={styles.navText} status="basic">
-            Status
+            Alerts
           </Text>
         </View>
       </Pressable>
 
-      <Pressable style={styles.touch}>
+      <Pressable style={styles.touch} onPress={navigateHome}>
         <View styles={styles.nav}>
-          <LockIcon />
+          <HomeIcon />
           <Text styles={styles.navText} status="basic">
-            Auth
+            Home
           </Text>
         </View>
       </Pressable>
@@ -131,16 +120,22 @@ const themedStyles = StyleService.create({
   },
 
   touch: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
+    flex: 1,
+    // flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   nav: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     // marginHorizontal: 10,
   },
   settingIcon: {},
-  navText: {},
+  navText: { alignSelf: 'center' },
   searchBox: {
     flex: 1,
     marginVertical: 8,
