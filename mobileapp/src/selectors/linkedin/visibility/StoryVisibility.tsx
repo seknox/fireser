@@ -20,6 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import {clickChecked} from "../ExtractChecked";
 
 const extractStoryVisibility = (htmlContent: string) => {
   //:nth-child(2
@@ -45,6 +46,7 @@ export default {
       extractFunc: extractStoryVisibility,
       name: 'Story visibility',
       expectedValue: 'HIDE',
+      fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/story-visibility',
     },
   ],

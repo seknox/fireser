@@ -30,16 +30,15 @@ function extractDisabled(htmlContent: string) {
     const selected = $('button.clear-search-history-button');
 
     // console.log('selected.prop("disabled")', selected.prop('disabled'));
-    resolve(selected.prop('disabled')?'TRUE':'FALSE');
-
+    resolve(selected.prop('disabled') ? 'TRUE' : 'FALSE');
   });
 }
 
-const fixFunction=`
+const fixFunction = `
 document.querySelector("button.clear-search-history-button").click();
 document.querySelector("button.clear-button").click();
 
-`
+`;
 
 export default {
   name: 'Search History',
@@ -48,8 +47,8 @@ export default {
     {
       extractFunc: extractDisabled,
       name: 'Clean search history',
-      expectedValue: "TRUE",
-        fixFunc:fixFunction,
+      expectedValue: 'TRUE',
+      fixFunc: fixFunction,
       fixURL: 'https://www.linkedin.com/psettings/clear-search-history',
     },
   ],
