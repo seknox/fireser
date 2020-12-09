@@ -19,13 +19,17 @@
 
 import React from 'react';
 import AdPreferences from './AdPreference';
-import MyActivity from './MyActivity';
-import TwoFA from "./security/TwoFA";
-import PasswordLastChanged from "./security/PasswordLastChanged";
+import MyActivity, { ActivityHistory, BrowserHistory, SearchHistory } from './MyActivity';
+import TwoFA from './security/TwoFA';
+import PasswordLastChanged from './security/PasswordLastChanged';
 const MicrosoftSelectors = [
-    AdPreferences,
-    MyActivity,
-    TwoFA,
-    PasswordLastChanged
+  // AdPreferences,
+  // TwoFA,
+  // PasswordLastChanged,
+  //
+  // MyActivity,
+  ActivityHistory,
+  SearchHistory,
+  BrowserHistory,
 ];
 export default MicrosoftSelectors;

@@ -33,25 +33,53 @@ const extractMyActivity = (htmlContent: string) => {
 
     const selected = $('base-card > div ');
 
-
     let activity = [];
 
     selected.toArray().forEach((e) => {
       activity = activity.concat(e.attribs['aria-label']);
     });
-    resolve(activity.join(","));
+    resolve(activity.join(','));
   });
 };
 
-export default {
+export const ActivityHistory = {
   name: 'My Activity',
   pageURL: 'https://account.microsoft.com/privacy/activity-history',
   tasks: [
     {
       extractFunc: extractMyActivity,
       name: 'My Activity',
-      expectedValue: '',
+      expectedValue: ' ',
+      fixFunc: "document.querySelectorAll('button.delete-button').forEach(b=>b.click());",
       fixURL: 'https://account.microsoft.com/privacy/activity-history',
+    },
+  ],
+};
+
+export const SearchHistory = {
+  name: 'My Activity',
+  pageURL: 'https://account.microsoft.com/privacy/activity-history?view=search',
+  tasks: [
+    {
+      extractFunc: extractMyActivity,
+      name: 'My Activity',
+      expectedValue: ' ',
+      fixFunc: "document.querySelectorAll('button.delete-button').forEach(b=>b.click());",
+      fixURL: 'https://account.microsoft.com/privacy/activity-history?view=search',
+    },
+  ],
+};
+
+export const BrowserHistory = {
+  name: 'My Activity',
+  pageURL: 'https://account.microsoft.com/privacy/activity-history?view=search',
+  tasks: [
+    {
+      extractFunc: extractMyActivity,
+      name: 'Browser History',
+      expectedValue: ' ',
+      fixFunc: "document.querySelectorAll('button.delete-button').forEach(b=>b.click());",
+      fixURL: 'https://account.microsoft.com/privacy/activity-history?view=search',
     },
   ],
 };
