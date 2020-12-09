@@ -19,8 +19,7 @@
 
 import React from 'react';
 
-import cio from 'cheerio-without-node-native';
-import {clickChecked, extractChecked} from "../ExtractChecked";
+import { extractVisibility} from "../ExtractChecked";
 
 
 export default {
@@ -28,10 +27,10 @@ export default {
   pageURL: 'https://www.linkedin.com/psettings/connections-visibility',
   tasks: [
     {
-      extractFunc: extractChecked,
+      extractFunc: extractVisibility,
       name: 'Who can see your connections',
-      expectedValue: 'FALSE',
-      fixFunc: clickChecked,
+      expectedValue: 'ONLY_ME',
+      fixFunc: `document.querySelector('input[value=false]').click();`,
       fixURL: 'https://www.linkedin.com/psettings/connections-visibility',
     },
   ],

@@ -22,21 +22,6 @@ import React from 'react';
 import cio from 'cheerio-without-node-native';
 import {clickChecked, extractChecked} from "../ExtractChecked";
 
-const extractStoryVisibility = (htmlContent: string) => {
-  //:nth-child(2
-
-  return new Promise((resolve, reject) => {
-    if (!htmlContent) {
-      reject('HTML content empty');
-    }
-
-    const $ = cio.load(htmlContent);
-
-    const selected = $(':checked');
-
-    resolve(selected.prop('value'));
-  });
-};
 
 export default {
   name: 'Profile info on other content shown on LinkedIn',

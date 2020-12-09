@@ -23,7 +23,7 @@ import ProfileVisibility from './visibility/profile';
 import PublicProfileVisibility from './visibility/publicProfile';
 import StoryVisibility from './visibility/StoryVisibility';
 import ProfileInfoOnOtherContent from './visibility/ProfileInfoOnOtherContent';
-import EmailVisibility, {DiscoverUsingEmail, DiscoverUsingPhone} from './visibility/emails';
+import EmailVisibility, { DiscoverUsingEmail, DiscoverUsingPhone } from './visibility/emails';
 import DataSharing from './DataSharing';
 import ThirdPartySharing from './data/ThirdPartySharing';
 import {
@@ -44,6 +44,13 @@ import JobAlertsSharedWithRecruiters from './data/JobAlertsSharedWithRecruiters'
 import ProfileSharedWithJobPoster from './data/ProfileSharedWithJobPoster';
 import ConnectionsVisibility from './visibility/ConnectionsVisibility';
 import InterestVisibility from './visibility/InterestVisibility';
+import {
+  ActiveStatusVisibility,
+  NewsMentionsVisibility,
+  WorkAnniversariesVisibility,
+} from './visibility/ActivityVisibility';
+
+
 const LinkedInSelectors = [
   AdsBasedOnIntrestCategories,
   AdsBasedOnProfileData,
@@ -70,6 +77,10 @@ const LinkedInSelectors = [
   EmailVisibility,
   ConnectionsVisibility,
   InterestVisibility,
+  ConnectionsVisibility,
+  ActiveStatusVisibility,
+  WorkAnniversariesVisibility,
+  NewsMentionsVisibility,
 
   DiscoverUsingEmail,
   DiscoverUsingPhone,

@@ -19,24 +19,7 @@
 
 import React from 'react';
 
-import cio from 'cheerio-without-node-native';
-
-const extractVisibility = (htmlContent: string) => {
-  return new Promise((resolve, reject) => {
-    if (!htmlContent) {
-      reject('HTML content empty');
-    }
-
-    const $ = cio.load(htmlContent);
-
-    const selected = $(':checked');
-
-    //console.log(selected.prop('value'));
-
-    // resolve('ok');
-    resolve(selected.prop('value'));
-  });
-};
+import { extractVisibility } from '../ExtractChecked';
 
 export default {
   name: 'Email Visibility',
@@ -46,6 +29,7 @@ export default {
       extractFunc: extractVisibility,
       name: 'Who can see or download your email address',
       expectedValue: 'JUST_ME',
+      fixFunc: "document.querySelector('input[id=just-me]').click();",
       fixURL: 'https://www.linkedin.com/psettings/privacy/email',
     },
   ],
@@ -59,6 +43,7 @@ export const DiscoverUsingEmail = {
       extractFunc: extractVisibility,
       name: 'Who can discover your profile with your email address',
       expectedValue: 'JUST_ME',
+      fixFunc: "document.querySelector('input[id=first]').click()",
       fixURL: 'https://www.linkedin.com/psettings/visibility/email',
     },
   ],
@@ -72,6 +57,7 @@ export const DiscoverUsingPhone = {
       extractFunc: extractVisibility,
       name: 'Who can discover your profile with your phone',
       expectedValue: 'JUST_ME',
+      fixFunc: "document.querySelector('input[id=first]').click()",
       fixURL: 'https://www.linkedin.com/psettings/visibility/phone',
     },
   ],
