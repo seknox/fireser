@@ -21,8 +21,7 @@ import React from 'react';
 
 import cio from 'cheerio-without-node-native';
 
-const extractProfileVisibility = (htmlContent: string) => {
-
+const extractVisibility = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -31,7 +30,6 @@ const extractProfileVisibility = (htmlContent: string) => {
     const $ = cio.load(htmlContent);
 
     const selected = $(':checked');
-
 
     //console.log(selected.prop('value'));
 
@@ -45,10 +43,36 @@ export default {
   pageURL: 'https://www.linkedin.com/psettings/privacy/email',
   tasks: [
     {
-      extractFunc: extractProfileVisibility,
+      extractFunc: extractVisibility,
       name: 'Who can see or download your email address',
       expectedValue: 'JUST_ME',
       fixURL: 'https://www.linkedin.com/psettings/privacy/email',
+    },
+  ],
+};
+
+export const DiscoverUsingEmail = {
+  name: 'Email Visibility',
+  pageURL: 'https://www.linkedin.com/psettings/visibility/email',
+  tasks: [
+    {
+      extractFunc: extractVisibility,
+      name: 'Who can discover your profile with your email address',
+      expectedValue: 'JUST_ME',
+      fixURL: 'https://www.linkedin.com/psettings/visibility/email',
+    },
+  ],
+};
+
+export const DiscoverUsingPhone = {
+  name: 'Email Visibility',
+  pageURL: 'https://www.linkedin.com/psettings/visibility/phone',
+  tasks: [
+    {
+      extractFunc: extractVisibility,
+      name: 'Who can discover your profile with your phone',
+      expectedValue: 'JUST_ME',
+      fixURL: 'https://www.linkedin.com/psettings/visibility/phone',
     },
   ],
 };
