@@ -19,18 +19,8 @@
 
 import React from 'react';
 import AdPreferences from './AdPreference';
-import { ActivityHistory, BrowserHistory, SearchHistory } from './MyActivity';
-import TwoFA from './security/TwoFA';
-import PasswordLastChanged from './security/PasswordLastChanged';
+import { BrowserHistory, SearchHistory } from './MyActivity';
 import { CortanaData } from './cortona/CortonasNotebook';
-import {Security} from "./security/Security";
-const MicrosoftSelectors = [
-  AdPreferences,
-  Security,
-
-  SearchHistory,
-   BrowserHistory,
-
-  CortanaData,
-];
+import { Security } from './security/Security';
+const MicrosoftSelectors = [AdPreferences, Security, SearchHistory, BrowserHistory, CortanaData];
 export default MicrosoftSelectors;

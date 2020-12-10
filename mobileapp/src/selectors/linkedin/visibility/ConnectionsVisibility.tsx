@@ -17,10 +17,7 @@
  *
  */
 
-import React from 'react';
-
-import { extractVisibility} from "../ExtractChecked";
-
+import { extractVisibility } from '../ExtractChecked';
 
 export default {
   name: 'Connection Visibility',
@@ -30,7 +27,7 @@ export default {
       extractFunc: extractVisibility,
       name: 'Who can see your connections',
       expectedValue: 'ONLY_ME',
-      fixFunc: `document.querySelector('input[value=false]').click();`,
+      fixFunc: "document.querySelector('input[value=false]').click();",
       fixURL: 'https://www.linkedin.com/psettings/connections-visibility',
     },
   ],

@@ -17,8 +17,6 @@
  *
  */
 
-import React from 'react';
-
 import cio from 'cheerio-without-node-native';
 
 const extractMyActivity = (htmlContent: string) => {
@@ -34,7 +32,7 @@ const extractMyActivity = (htmlContent: string) => {
 
     const selected = $('base-card > div ');
 
-    let activity = [];
+    let activity: string[] = [];
 
     selected.toArray().forEach((e) => {
       activity = activity.concat(e.attribs['aria-label']);

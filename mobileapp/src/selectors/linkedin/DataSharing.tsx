@@ -17,8 +17,6 @@
  *
  */
 
-import React from 'react';
-
 import cio from 'cheerio-without-node-native';
 import { clickChecked } from './ExtractChecked';
 
