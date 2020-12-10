@@ -22,12 +22,15 @@ import AdPreferences from './AdPreference';
 import { ActivityHistory, BrowserHistory, SearchHistory } from './MyActivity';
 import TwoFA from './security/TwoFA';
 import PasswordLastChanged from './security/PasswordLastChanged';
+import { CortanaData } from './cortona/CortonasNotebook';
+import {Security} from "./security/Security";
 const MicrosoftSelectors = [
   AdPreferences,
-  TwoFA,
-  PasswordLastChanged,
-  ActivityHistory,
+  Security,
+
   SearchHistory,
-  BrowserHistory,
+   BrowserHistory,
+
+  CortanaData,
 ];
 export default MicrosoftSelectors;

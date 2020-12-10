@@ -20,32 +20,17 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
-import {clickChecked} from "../ExtractChecked";
+import {clickChecked, extractChecked} from "../ExtractChecked";
 
-const extractInterestVisibility = (htmlContent: string) => {
-  //:nth-child(2
-
-  return new Promise((resolve, reject) => {
-    if (!htmlContent) {
-      reject('HTML content empty');
-    }
-
-    const $ = cio.load(htmlContent);
-
-    const selected = $(':checked');
-
-    resolve(selected.prop('value'));
-  });
-};
 
 export default {
   name: 'Interest Visibility',
   pageURL: 'https://www.linkedin.com/psettings/meet-the-team',
   tasks: [
     {
-      extractFunc: extractInterestVisibility,
+      extractFunc: extractChecked,
       name: 'Interest visibility',
-      expectedValue: 'Off',
+      expectedValue: 'FALSE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/meet-the-team',
     },
