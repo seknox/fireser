@@ -20,7 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
-import {clickChecked} from "./ExtractChecked";
+import { clickChecked } from './ExtractChecked';
 
 const extractDataSharing = (htmlContent: string) => {
   //:nth-child(2
@@ -34,14 +34,13 @@ const extractDataSharing = (htmlContent: string) => {
 
     const selected = $(':checked');
 
-
-
-    if(selected.length==0){
-      resolve("FALSE")
-    }else if(selected.length==1){
-      resolve("TRUE")
-    }else reject("invalid ")
-
+    if (selected.length == 0) {
+      resolve('FALSE');
+    } else if (selected.length == 1) {
+      resolve('TRUE');
+    } else {
+      reject('invalid ');
+    }
   });
 };
 

@@ -49,7 +49,7 @@ import {
   NewsMentionsVisibility,
   WorkAnniversariesVisibility,
 } from './visibility/ActivityVisibility';
-
+import TFA from './security/TFA';
 
 const LinkedInSelectors = [
   AdsBasedOnIntrestCategories,
@@ -84,6 +84,8 @@ const LinkedInSelectors = [
 
   DiscoverUsingEmail,
   DiscoverUsingPhone,
+
+  TFA,
 ];
 
 export default LinkedInSelectors;
