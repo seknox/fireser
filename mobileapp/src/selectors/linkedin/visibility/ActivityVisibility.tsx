@@ -17,8 +17,6 @@
  *
  */
 
-import React from 'react';
-
 import { clickChecked, extractChecked, extractVisibility } from '../ExtractChecked';
 
 export const ActiveStatusVisibility = {
@@ -51,7 +49,7 @@ export const WorkAnniversariesVisibility = {
 
 export const NewsMentionsVisibility = {
   name: 'LinkedIn Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/activity-broadcast',
+  pageURL: 'https://www.linkedin.com/psettings/news-mention-broadcast',
   tasks: [
     {
       extractFunc: extractChecked,
@@ -60,7 +58,23 @@ export const NewsMentionsVisibility = {
         'whether linkedin notify people in your network that you’ve been mentioned in an article or blog post',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/activity-broadcast',
+      fixURL: 'https://www.linkedin.com/psettings/news-mention-broadcast',
+    },
+  ],
+};
+
+export const MentionsVisibility = {
+  name: 'LinkedIn Visibility',
+  pageURL: 'https://www.linkedin.com/psettings/mentions',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      name: 'Mentions Visibility',
+      description:
+        'Allow others to mention or tag you in content? e.g. mentions in posts and comments, tags in photos, etc.',
+      expectedValue: 'FALSE',
+      fixFunc: clickChecked,
+      fixURL: 'https://www.linkedin.com/psettings/mentions',
     },
   ],
 };

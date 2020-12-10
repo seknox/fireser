@@ -46,6 +46,7 @@ import ConnectionsVisibility from './visibility/ConnectionsVisibility';
 import InterestVisibility from './visibility/InterestVisibility';
 import {
   ActiveStatusVisibility,
+  MentionsVisibility,
   NewsMentionsVisibility,
   WorkAnniversariesVisibility,
 } from './visibility/ActivityVisibility';
@@ -81,6 +82,7 @@ const LinkedInSelectors = [
   ActiveStatusVisibility,
   WorkAnniversariesVisibility,
   NewsMentionsVisibility,
+  MentionsVisibility,
 
   DiscoverUsingEmail,
   DiscoverUsingPhone,
