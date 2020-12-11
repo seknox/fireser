@@ -44,4 +44,22 @@ export const extractChecked = (htmlContent: string) => {
   });
 };
 
+export const extractVisibility = (htmlContent: string) => {
+  return new Promise((resolve, reject) => {
+    if (!htmlContent) {
+      reject('HTML content empty');
+    }
+
+    const $ = cio.load(htmlContent);
+
+    const selected = $(':checked');
+
+    //console.log(selected.prop('value'));
+
+    // resolve('ok');
+    resolve(selected.prop('value'));
+  });
+};
+
+
 export const clickChecked = 'document.querySelector(":checked").click()';

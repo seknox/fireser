@@ -17,12 +17,11 @@
  *
  */
 
-import React from 'react';
-
 import cio from 'cheerio-without-node-native';
 
-const extract = (htmlContent: string) => {
+const extractLastPassChange = (htmlContent: string) => {
   //:nth-child(2
+  console.log('selected.text()');
 
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
@@ -31,12 +30,14 @@ const extract = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $('#banner > div > div > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)');
+    const selected = $(
+      '#banner > div > div > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)',
+    );
 
-    //console.log(selected.text());
+    console.log(selected.text());
 
-    const splitted = selected.text().split(":")
-    if(splitted.length==2){
+    const splitted = selected.text().split(':');
+    if (splitted.length == 2) {
       resolve(splitted[1].trim());
       return;
     }
@@ -45,16 +46,48 @@ const extract = (htmlContent: string) => {
   });
 };
 
-export default {
-  name: 'Password last changed',
+const extractTFAStatus = (htmlContent: string) => {
+  //:nth-child(2
+  console.log('selected.text()');
+
+  return new Promise((resolve, reject) => {
+    if (!htmlContent) {
+      reject('HTML content empty');
+    }
+
+    const $ = cio.load(htmlContent);
+
+    const selected = $(
+      '#banner > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)',
+    );
+
+    console.log(selected.text());
+
+    const splitted = selected.text().split(':');
+    if (splitted.length == 2) {
+      resolve(splitted[1].trim());
+      return;
+    }
+
+    resolve(selected.text().trim());
+  });
+};
+
+export const Security = {
+  name: 'Security',
   pageURL: 'https://account.live.com/proofs/Manage/additional',
   tasks: [
     {
-      extractFunc: extract,
+      extractFunc: extractLastPassChange,
       name: 'Password last changed',
       expectedValue: '',
       fixURL: 'https://account.live.com/proofs/Manage/additional',
     },
-
+    {
+      extractFunc: extractTFAStatus,
+      name: 'TFA Status',
+      expectedValue: '',
+      fixURL: 'https://account.live.com/proofs/EnableTfa',
+    },
   ],
 };

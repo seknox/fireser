@@ -23,13 +23,12 @@ import { WebView } from 'react-native-webview';
 import { ActivityIndicator, Dimensions, View } from 'react-native';
 
 import { Job, Task } from '../types/types';
-import { Button, Popover, Text } from '@ui-kitten/components';
 
 //This piece of js code will be injected into webview.
 //It will check if the page is redirected. If the page is redirected, it means login is needed. It sends "LOGIN" type message.
 // If page does not gets redirected, it will send "HTML" type message with whole html content.
 
-const getCodeToInject = (pageURL) =>
+const getCodeToInject = (pageURL: string) =>
   `
     
    
@@ -41,13 +40,19 @@ const getCodeToInject = (pageURL) =>
         
     
     
-        if((location.protocol + '//' + location.host + location.pathname)=='`+pageURL+`'){
+        if((location.protocol + '//' + location.host + location.pathname)=='` +
+  pageURL +
+  `'){
  // console.log(document.body.parentNode.innerHTML.length)
         const msg = {"type":"HTML","content":document.body.parentNode.innerHTML}
         clearInterval(refreshId);
         window.ReactNativeWebView.postMessage(JSON.stringify(msg));
         }
-        else if('`+pageURL+`'.includes("?") && location.href=='`+pageURL+`'){
+        else if('` +
+  pageURL +
+  '\'.includes("?") && location.href==\'' +
+  pageURL +
+  `'){
         const msg = {"type":"HTML","content":document.body.parentNode.innerHTML}
         clearInterval(refreshId);
         window.ReactNativeWebView.postMessage(JSON.stringify(msg));

@@ -17,19 +17,15 @@
  *
  */
 
-import React from 'react';
-
-import cio from 'cheerio-without-node-native';
-import {clickChecked, extractChecked} from "../ExtractChecked";
-
+import { clickChecked, extractChecked } from '../ExtractChecked';
 
 export default {
-  name: 'Profile info on other content shown on LinkedIn',
+  name: 'Interest Visibility',
   pageURL: 'https://www.linkedin.com/psettings/meet-the-team',
   tasks: [
     {
       extractFunc: extractChecked,
-      name: 'profile info on other content shown on LinkedIn',
+      name: 'Interest visibility',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/meet-the-team',

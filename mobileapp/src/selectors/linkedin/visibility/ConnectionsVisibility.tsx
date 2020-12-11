@@ -17,38 +17,18 @@
  *
  */
 
-import React from 'react';
-
-import cio from 'cheerio-without-node-native';
-
-const extract = (htmlContent: string) => {
-  //:nth-child(2
-
-  return new Promise((resolve, reject) => {
-    if (!htmlContent) {
-      reject('HTML content empty');
-    }
-
-    const $ = cio.load(htmlContent);
-
-    const selected = $('#TwoStepVerification > div.ms-Grid > div > div > div > div:nth-child(2) > div:nth-child(2)');
-
-    //console.log(selected.text());
-
-    resolve(selected.text().trim());
-  });
-};
+import { extractVisibility } from '../ExtractChecked';
 
 export default {
-  name: 'Two factor verification',
-  pageURL: 'https://account.live.com/proofs/Manage/additional',
+  name: 'Connection Visibility',
+  pageURL: 'https://www.linkedin.com/psettings/connections-visibility',
   tasks: [
     {
-      extractFunc: extract,
-      name: 'Two factor verification',
-      expectedValue: '',
-      fixURL: 'https://account.live.com/proofs/Manage/additional',
+      extractFunc: extractVisibility,
+      name: 'Who can see your connections',
+      expectedValue: 'ONLY_ME',
+      fixFunc: "document.querySelector('input[value=false]').click();",
+      fixURL: 'https://www.linkedin.com/psettings/connections-visibility',
     },
-
   ],
 };

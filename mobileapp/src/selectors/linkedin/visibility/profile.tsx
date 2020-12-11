@@ -19,33 +19,14 @@
 
 import React from 'react';
 
-import cio from 'cheerio-without-node-native';
-import {clickChecked} from "../ExtractChecked";
-
-const extractProfileVisibility = (htmlContent: string) => {
-  //:nth-child(2
-
-  return new Promise((resolve, reject) => {
-    if (!htmlContent) {
-      reject('HTML content empty');
-    }
-
-    const $ = cio.load(htmlContent);
-
-    const selected = $(
-      ':checked',
-    );
-
-    resolve(selected.prop('value'));
-  });
-};
+import {clickChecked, extractVisibility} from "../ExtractChecked";
 
 export default {
   name: 'LinkedIn Visibility',
   pageURL: 'https://www.linkedin.com/psettings/profile-visibility',
   tasks: [
     {
-      extractFunc: extractProfileVisibility,
+      extractFunc: extractVisibility,
       name: 'Profile visibility',
       expectedValue: 'HIDE',
       fixFunc: clickChecked,
