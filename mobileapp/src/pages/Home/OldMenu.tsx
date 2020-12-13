@@ -53,27 +53,9 @@ export default (props: any): React.ReactElement => {
 
       <View style={styles.card}>
         <View style={styles.desc}>
-          <Text category="h5">Device Protection</Text>
-          <Text category="s1">Enhance security and privacy</Text>
-          <Button
-            style={styles.button}
-            appearance="ghost"
-            status="primary"
-            accessoryRight={RightIcon}
-          >
-            Start now
-          </Button>
-        </View>
-
-        <View style={styles.imageContainer}>
-          <DeviceSec style={styles.image} />
-        </View>
-      </View>
-
-      <View style={styles.card}>
-        <View style={styles.desc}>
-          <Text category="h5">Messaging Security</Text>
-          <Text category="s1">Scam and threat protection</Text>
+          <Text category="h5">Data Protection</Text>
+          <Text category="s1">Check who owns your data</Text>
+          <Text category="s1">FInd out who have exposed your data</Text>
           <Button
             style={styles.button}
             appearance="ghost"
@@ -102,7 +84,7 @@ const themedStyles = StyleService.create({
   },
   card: {
     flex: 1,
-    minHeight: 120,
+    minHeight: 130,
     marginVertical: 10,
     marginHorizontal: 20,
     flexDirection: 'row',
