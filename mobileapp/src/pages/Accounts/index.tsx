@@ -23,20 +23,20 @@ import GmailIcon from '../../assets/brands/gmail';
 import GoogleIcon from '../../assets/brands/google';
 import LinkedinIcon from '../../assets/brands/linkdin';
 import YoutubeIcon from '../../assets/brands/youtube';
+import { useNavigation } from '@react-navigation/native';
 
-const AccountsSelect = ({ navigation }): React.ReactElement => {
-  const styles = useStyleSheet(themedStyles);
-
+const AccountsSelect = (): React.ReactElement => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <AccountIcons navigation={navigation} />
+      <Accounts navigation={navigation} />
     </SafeAreaView>
   );
 };
 
 export default AccountsSelect;
 
-const AccountIcons = (props): React.ReactElement => {
+const Accounts = (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
   const { navigation } = props;
 
@@ -45,65 +45,63 @@ const AccountIcons = (props): React.ReactElement => {
   }
   return (
     <View style={styles.brandgroup}>
-      <Pressable
-        onPress={() => navigation.navigate('Account', { name: 'Google' })}
-        style={styles.touch}
-      >
-        <View style={styles.iconButton}>
+      <View style={styles.iconButton}>
+        <Pressable
+          onPress={() => navigation.navigate('ScanAndProtect', { name: 'Google' })}
+          style={styles.touch}
+        >
+          <Text style={styles.text}>Google</Text>
           <GoogleIcon style={styles.icon} />
-        </View>
-      </Pressable>
+        </Pressable>
+      </View>
 
       <View style={styles.iconButton}>
+        <Pressable
+          onPress={() => navigation.navigate('ScanAndProtect', { name: 'LinkedIn' })}
+          style={styles.touch}
+        >
+          <Text style={styles.text}>Linkdin</Text>
+          <LinkedinIcon style={styles.icon} />
+        </Pressable>
+      </View>
+
+      <View style={styles.iconButton}>
+        <Text style={styles.text}>Gmail</Text>
         <GmailIcon style={styles.icon} />
       </View>
 
       <View style={styles.iconButton}>
+        <Text style={styles.text}>Youtube</Text>
         <YoutubeIcon style={styles.icon} />
       </View>
 
-      <Pressable
-        onPress={() => navigation.navigate('Account', { name: 'LinkedIn' })}
-        style={styles.touch}
-      >
-        <View style={styles.iconButton}>
-          <LinkedinIcon style={styles.icon} />
-        </View>
-      </Pressable>
+      <View style={styles.iconButton}>
+        <Pressable
+          onPress={() => navigation.navigate('ScanAndProtect', { name: 'Microsoft' })}
+          style={styles.touch}
+        >
+          <Text style={styles.text}>Google</Text>
+          <GoogleIcon style={styles.icon} />
+        </Pressable>
+      </View>
 
-      <Pressable
-        onPress={() => navigation.navigate('Account', { name: 'Microsoft' })}
-        style={styles.touch}
-      >
-        <View style={styles.iconButton}>
-          <Text>M</Text>
-          {/*<Linkdin style={styles.icon} />*/}
-        </View>
-      </Pressable>
-
-      <Pressable
-        onPress={() => navigation.navigate('Account', { name: 'Facebook' })}
-        style={styles.touch}
-      >
-        <View style={styles.iconButton}>
+      <View style={styles.iconButton}>
+        <Pressable
+          onPress={() => navigation.navigate('ScanAndProtect', { name: 'Facebook' })}
+          style={styles.touch}
+        >
+          <Text style={styles.text}>Facebook</Text>
           <FacebookIcon style={styles.icon} />
-        </View>
-      </Pressable>
+        </Pressable>
+      </View>
     </View>
   );
 };
 
 const themedStyles = StyleService.create({
-  container: {
-    flex: 1,
-  },
-  margin: {
-    marginVertical: -100,
-    flex: 1,
-  },
   brandgroup: {
     marginVertical: 50,
-    marginHorizontal: 40,
+    marginHorizontal: 30,
     flex: 1,
 
     flexDirection: 'row',
@@ -112,12 +110,12 @@ const themedStyles = StyleService.create({
     flexWrap: 'wrap',
   },
   iconButton: {
-    flex: 1,
+    flex: 2,
     padding: 1,
-    minHeight: 50,
-    minWidth: 50,
-    maxHeight: 50,
-    maxWidth: 50,
+    minHeight: 120,
+    minWidth: 100,
+    maxHeight: 120,
+    maxWidth: 100,
     marginHorizontal: 5,
     marginVertical: 10,
     backgroundColor: 'white',
@@ -134,29 +132,19 @@ const themedStyles = StyleService.create({
     elevation: 3,
   },
   icon: {
-    marginHorizontal: 4,
-    marginVertical: 4,
-    height: 40,
-    width: 40,
+    // marginHorizontal: 4,
+    // marginVertical: 4,
+    alignSelf: 'center',
+    height: 55,
+    width: 55,
   },
   touch: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
-
-  topContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  card: {
-    flex: 1,
-    margin: 2,
-  },
-  footerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
-  footerControl: {
-    marginHorizontal: 2,
+  text: {
+    alignSelf: 'center',
+    marginVertical: 10,
+    marginBottom: 15,
   },
 });
