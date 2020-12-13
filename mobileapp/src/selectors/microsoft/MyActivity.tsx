@@ -17,12 +17,11 @@
  *
  */
 
-import React from 'react';
-
 import cio from 'cheerio-without-node-native';
 
 const extractMyActivity = (htmlContent: string) => {
   //:nth-child(2
+  console.log('mu-activity');
 
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
@@ -33,25 +32,54 @@ const extractMyActivity = (htmlContent: string) => {
 
     const selected = $('base-card > div ');
 
-
-    let activity = [];
+    let activity: string[] = [];
 
     selected.toArray().forEach((e) => {
       activity = activity.concat(e.attribs['aria-label']);
     });
-    resolve(activity.join(","));
+    resolve(activity.join(','));
   });
 };
 
-export default {
+export const ActivityHistory = {
   name: 'My Activity',
   pageURL: 'https://account.microsoft.com/privacy/activity-history',
   tasks: [
     {
       extractFunc: extractMyActivity,
       name: 'My Activity',
-      expectedValue: '',
+      expectedValue: ' ',
+      fixFunc: "document.querySelectorAll('button.delete-button').forEach(b=>b.click());",
       fixURL: 'https://account.microsoft.com/privacy/activity-history',
+    },
+  ],
+};
+
+export const SearchHistory = {
+  name: 'My Activity',
+  pageURL: 'https://account.microsoft.com/privacy/activity-history?view=search',
+  tasks: [
+    {
+      extractFunc: extractMyActivity,
+      name: 'Search History',
+      expectedValue: ' ',
+      fixFunc: "document.querySelectorAll('button.delete-button').forEach(b=>b.click());",
+      fixURL: 'https://account.microsoft.com/privacy/activity-history?view=search',
+    },
+  ],
+};
+
+export const BrowserHistory = {
+  name: 'My Activity',
+  pageURL: 'https://account.microsoft.com/privacy/activity-history?view=browse',
+  tasks: [
+    {
+      extractFunc: extractMyActivity,
+      name: 'Browser History',
+      expectedValue: ' ',
+      fixFunc:
+        "setTimeout(function(document.querySelectorAll('button.delete-button').forEach(b=>b.click());){},500);",
+      fixURL: 'https://account.microsoft.com/privacy/activity-history?view=browse',
     },
   ],
 };

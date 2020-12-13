@@ -19,3 +19,39 @@
 
 //https://account.microsoft.com/privacy/cortana
 
+function extractCortanaData(htmlContent: string) {
+    console.log("&&&&&&&&777777")
+  return new Promise((resolve, reject) => {
+    resolve('');
+  });
+}
+
+const fixFunc = `
+  document.querySelector("p[mee-paragraph=para3] > button").click();
+  setTimeout(function(){
+      document.querySelectorAll("button[mee-button=flex]").forEach(function(btn){
+    if(btn.innerText==="Clear"){
+        console.info(btn);
+
+        btn.click();
+        }
+    })
+
+  
+  })
+
+    `;
+
+export const CortanaData = {
+  name: 'Cortana Data',
+  pageURL: 'https://account.microsoft.com/privacy/cortana',
+  tasks: [
+    {
+      extractFunc: extractCortanaData,
+      name: 'Cortana Data',
+      expectedValue: ' ',
+      fixFunc: fixFunc,
+      fixURL: 'https://account.microsoft.com/privacy/cortana',
+    },
+  ],
+};

@@ -17,3 +17,18 @@
  *
  */
 
+import { clickChecked, extractChecked } from '../ExtractChecked';
+
+export default {
+  name: 'Second Factor Authentication',
+  pageURL: 'https://www.linkedin.com/psettings/two-step-verification',
+  tasks: [
+    {
+      extractFunc: extractChecked,
+      name: 'Second Factor Authentication',
+      expectedValue: 'TRUE',
+      fixFunc: clickChecked,
+      fixURL: 'https://www.linkedin.com/psettings/two-step-verification',
+    },
+  ],
+};
