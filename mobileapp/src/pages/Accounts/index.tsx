@@ -15,41 +15,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet, Button, Text, Card, Divider } from '@ui-kitten/components';
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { View, SafeAreaView, Pressable, StyleSheet } from 'react-native';
-import Layout from '../../components/Layout';
-import SummaryCard from '../../components/SummaryCard';
-
-import Selectors from '../../selectors';
-
-import GoogleIcon from '../../assets/brands/google';
-import GmailIcon from '../../assets/brands/gmail';
-import YoutubeIcon from '../../assets/brands/youtube';
-import LinkedinIcon from '../../assets/brands/linkdin';
+import { Pressable, SafeAreaView, View } from 'react-native';
 import FacebookIcon from '../../assets/brands/facebook';
-import { Job, Task } from '../../types/types';
-import { Runner } from '../../webviews/runner';
-import { Fixer } from '../../webviews/fixer';
+import GmailIcon from '../../assets/brands/gmail';
+import GoogleIcon from '../../assets/brands/google';
+import LinkedinIcon from '../../assets/brands/linkdin';
+import YoutubeIcon from '../../assets/brands/youtube';
 
 const AccountsSelect = ({ navigation }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Layout navigation={navigation}>
-        <View style={styles.margin}>
-          <SummaryCard title="Protect Accounts" subtitle="Protect Accounts" />
-          <AccountIcons navigation={navigation} />
-        </View>
-      </Layout>
+      <AccountIcons navigation={navigation} />
     </SafeAreaView>
   );
 };
 
-
 export default AccountsSelect;
-
 
 const AccountIcons = (props): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
@@ -105,80 +90,6 @@ const AccountIcons = (props): React.ReactElement => {
         </View>
       </Pressable>
     </View>
-  );
-};
-
-const supportedAccounts = [
-  'google',
-  'gmail',
-  'youtube',
-  'maps',
-  'chrome',
-  'hotmail',
-  'linkdin',
-  'twitter',
-  'facebook',
-  'messenger',
-  'instagram',
-  'suggest',
-];
-
-type accountProps = {
-  navigation: any;
-};
-
-export const Account = (props: any) => {
-  const [data, setData] = React.useState<Job[]>([]);
-  const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
-  const [fixURL, setFixURL] = React.useState<string | null>(null);
-  const [fixFunc, setFixFunc] = React.useState<string | null>(null);
-  const account = props.route.params.name;
-  const jobs = Selectors[account];
-
-  const fixIssue = (pageURL: string, fixFunc: string) => {
-    setFixURL(pageURL);
-    setFixFunc(fixFunc);
-    setFixerVisible(true);
-  };
-
-  return (
-    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <View>
-        {data.map((job: Job,index:number) => (
-          <Card /*style={themedStyles.card}*/ key={index}>
-            <Text category="h1">{job.name}</Text>
-            {job?.tasks?.map((task: Task) => (
-              <View key={task.name}>
-                <Text category="h5">
-                  {task.name}:{task.gotValue}
-                </Text>
-                <Text>Expected:{task.expectedValue}</Text>
-                <Button
-                  disabled={task.expectedValue === task.gotValue}
-                  onPress={() => {
-                    fixIssue(task.fixURL, task.fixFunc);
-                  }}
-                >
-                  Fix
-                </Button>
-                <Divider />
-                <Divider />
-                <Divider />
-                <Divider />
-              </View>
-            ))}
-          </Card>
-        ))}
-      </View>
-
-      {/*<View>*/}
-        <Runner
-          jobs={jobs}
-          setData={setData}
-        />
-
-        <Fixer pageURL={fixURL} fixFunc={fixFunc} isVisible={isFixerVisible} onDone={console.info} />
-    </Layout>
   );
 };
 

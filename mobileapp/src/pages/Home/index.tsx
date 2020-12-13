@@ -20,7 +20,8 @@ import React from 'react';
 import { SafeAreaView, View } from 'react-native';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
-import HomeMenu from './Menu';
+import HomeMenu from './OldMenu';
+import Accounts from '../Accounts';
 
 export default ({ navigation }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
@@ -38,7 +39,7 @@ export default ({ navigation }): React.ReactElement => {
             title="Hi Sakshyam,"
             subtitle="Enhance security and privacy of your account and devices. "
           />
-          <HomeMenu navigateToAccounts={navigateToAccounts} />
+          <Accounts />
         </View>
       </Layout>
     </SafeAreaView>
