@@ -72,6 +72,7 @@ const extractConnectedDevices =  (htmlContent) => {
   export default {
     name: 'Security ',
     pageURL: 'https://myaccount.google.com/security-checkup',
+    isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
     tasks: [
       {
         extractFunc: extractConnectedDevices,

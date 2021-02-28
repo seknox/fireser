@@ -41,6 +41,7 @@ const extracAdPersonalization = (htmlContent) => {
 export default {
   name: 'Personalised Ads',
   pageURL: 'https://adssettings.google.com/authenticated',
+  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
   tasks: [
     {
       extractFunc: extracAdPersonalization,

@@ -117,6 +117,7 @@ const fixFunc = `
 export default {
   name: 'Privacy',
   pageURL: 'https://myactivity.google.com/myactivity',
+  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
   tasks: [
     {
       extractFunc: extractWebAppActivityHistory,

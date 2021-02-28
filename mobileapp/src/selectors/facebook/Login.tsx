@@ -16,12 +16,10 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-
-import React from 'react';
-
 import cio from 'cheerio-without-node-native';
+import React from "react";
 
-const extractSecurityCheckupStatus = (htmlContent) => {
+export default function checkLoggedIn(htmlContent: string) {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -29,26 +27,24 @@ const extractSecurityCheckupStatus = (htmlContent) => {
 
     const $ = cio.load(htmlContent);
 
-    //const selected = $.root();
-    const selected = $(
-      'c-wiz > div > c-wiz > div > div > div > div > div:nth-child(1) > div > div.eqiJQ > div',
-    );
+    const selected = $('button[name="login"]');
 
-
-    resolve(selected.text())
+    if (selected.length===0) {
+      resolve(true);
+    } else {
+      resolve(false);
+    }
   });
-};
-
-export default {
-  name: 'Security Checkup',
-  pageURL: 'https://myaccount.google.com/security-checkup',
-  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
-  tasks: [
-    {
-      extractFunc: extractSecurityCheckupStatus,
-      name: 'Security Checkup Status',
-      expectedValue: 'No issues found',
-      fixURL: 'https://myaccount.google.com/security-checkup',
-    },
-  ],
-};
+}
+// export default {
+//   name: 'Login Ckeck',
+//   pageURL: 'https://m.facebook.com/',
+//   tasks: [
+//     {
+//       extractFunc: checkLoggedIn,
+//       name: 'Login Check',
+//       expectedValue: 'TRUE',
+//       fixURL: 'https://m.facebook.com/',
+//     },
+//   ],
+// };

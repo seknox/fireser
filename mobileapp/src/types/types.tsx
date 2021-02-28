@@ -18,6 +18,12 @@
  */
 
 //
+export type AccountType = {
+  loginURL: string;
+  checkLogin: string;
+  jobList: Job[];
+};
+
 export type Job = {
   name: string;
   pageURL: string;
@@ -30,7 +36,7 @@ export type Task = {
   description: string;
   expectedValue: string;
   gotValue: string;
-  fixURL: string;  // url to fix the setting if expectedValue!=gotvalue
+  fixURL: string; // url to fix the setting if expectedValue!=gotvalue
   fixFunc: string; // function to automatically fix the setting
   onFixed: () => {};
 };

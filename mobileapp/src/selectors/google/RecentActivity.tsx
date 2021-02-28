@@ -43,6 +43,7 @@ const extractRecentActivity = (htmlContent) => {
 export default {
   name: 'Security',
   pageURL: 'https://myaccount.google.com/notifications',
+  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
   tasks: [
     {
       extractFunc: extractRecentActivity,

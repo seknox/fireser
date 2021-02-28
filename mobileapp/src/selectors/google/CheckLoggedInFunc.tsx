@@ -17,24 +17,5 @@
  *
  */
 
-import LinkedInSelectors from './linkedin';
-import FacebookSelectors from './facebook';
-import GoogleSelectors from './google';
-import MicrosoftSelectors from './microsoft';
-import codePush from 'react-native-code-push';
-import { useEffect } from 'react';
+export const isLoggedIn=`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`;
 
-const AccountConfigs = {
-  LinkedIn: LinkedInSelectors,
-  Facebook: FacebookSelectors,
-  Google: GoogleSelectors,
-  Microsoft: MicrosoftSelectors,
-};
-
-
-const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-  updateDialog: { appendReleaseDescription: true },
-};
-
-export default codePush(codePushOptions)(AccountConfigs);

@@ -17,7 +17,7 @@
  *
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {WebView} from 'react-native-webview';
 import {Dimensions, View} from 'react-native';

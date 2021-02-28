@@ -20,6 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import {isLoggedIn} from "../CheckLoggedInFunc";
 
 const extracAutoDelete = (htmlContent) => {
   return new Promise((resolve, reject) => {
@@ -79,6 +80,7 @@ confirmBtn.click();
 export default {
   name: 'Auto delete ',
   pageURL: 'https://myactivity.google.com/activitycontrols?settings=search',
+  isLoggedIn:isLoggedIn,
   tasks: [
     {
       extractFunc: extracAutoDelete,

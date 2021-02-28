@@ -97,6 +97,7 @@ const extractLessSecureApps = (htmlContent: string) => {
 export default {
   name: 'Security',
   pageURL: 'https://myaccount.google.com/security',
+  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
   tasks: [
     {
       extractFunc: extractLastPassordChange,
