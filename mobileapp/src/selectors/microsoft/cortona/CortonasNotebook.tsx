@@ -20,7 +20,7 @@
 //https://account.microsoft.com/privacy/cortana
 
 function extractCortanaData(htmlContent: string) {
-    console.log("&&&&&&&&777777")
+    //console.log("&&&&&&&&777777")
   return new Promise((resolve, reject) => {
     resolve('');
   });
@@ -31,7 +31,7 @@ const fixFunc = `
   setTimeout(function(){
       document.querySelectorAll("button[mee-button=flex]").forEach(function(btn){
     if(btn.innerText==="Clear"){
-        console.info(btn);
+        //console.info(btn);
 
         btn.click();
         }

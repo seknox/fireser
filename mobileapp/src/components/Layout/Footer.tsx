@@ -59,7 +59,7 @@ export default (props): React.ReactElement => {
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.touch} onPress={() => console.log('footer clickkkkkkkked')}>
+      <Pressable style={styles.touch} >
         <View styles={styles.nav}>
           <SettingIcon style={styles.settingIcon} />
 

@@ -33,7 +33,7 @@ const getCodeToInject = (pageURL, isLoggedIn: string) => {
     isLoggedIn = `var isLoggedIn=window.location.href.startsWith("${pageURL}");`;
   }
 
-  console.log(isLoggedIn);
+  //console.log(isLoggedIn);
 
   return (
     isLoggedIn +
@@ -94,7 +94,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
   React.useEffect(() => {
     const injectCode = getCodeToInject(jobs.current[0].pageURL, jobs.current[0].isLoggedIn);
     setRunnable({ injectCode, pageURL: jobs.current[0].pageURL });
-     console.debug(injectCode);
+     //console.debug(injectCode);
     // console.debug(getCodeToInject(pageURL,isLoggedInFunc));
 
     //Load the first job

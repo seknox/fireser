@@ -56,7 +56,7 @@ export const ScanAndProtect = (props: any) => {
   const loginURL = Selectors[account].loginURL;
 
   const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
-    console.log(pageURL);
+    //console.log(pageURL);
     // setFixURL(pageURL);
     // setFixFunc(fixFunc);
     setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
@@ -74,7 +74,7 @@ export const ScanAndProtect = (props: any) => {
       });
       return a;
     });
-    console.debug(jobtemp)
+    //console.debug(jobtemp)
     setData(jobtemp);
     setFixerVisible(false);
   };
