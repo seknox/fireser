@@ -21,14 +21,14 @@ import { clickChecked, extractChecked } from '../ExtractChecked';
 
 export default {
   name: 'Interest Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/meet-the-team',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/organization-and-interests',
   tasks: [
     {
       extractFunc: extractChecked,
       name: 'Interest visibility',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/meet-the-team',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/organization-and-interests',
     },
   ],
 };

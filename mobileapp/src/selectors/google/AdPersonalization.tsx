@@ -20,8 +20,9 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import { isLoggedIn } from './CheckLoggedInFunc';
 
-const extracAdPersonalization = (htmlContent) => {
+const extracAdPersonalization = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -41,6 +42,7 @@ const extracAdPersonalization = (htmlContent) => {
 export default {
   name: 'Personalised Ads',
   pageURL: 'https://adssettings.google.com/authenticated',
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extracAdPersonalization,

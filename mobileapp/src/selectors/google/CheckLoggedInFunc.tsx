@@ -17,18 +17,5 @@
  *
  */
 
-import React from 'react';
-import AdPreferences from './AdPreferences';
-import AdPreferencesSettings from './AdPreferencesSettings';
-import Login from './Login';
-// const FacebookSelectors = [AdPreferences];
-const FacebookSelectors = [
-  Login,
-   AdPreferences,
-   AdPreferencesSettings,
-];
-export default {
-  loginURL: 'https://m.facebook.com',
-  jobList: FacebookSelectors,
-  isLoggedIn: Login,
-};
+export const isLoggedIn =
+  'var isLoggedIn=document.querySelectorAll(\'a[href^="https://accounts.google.com/ServiceLogin"]\').length===0;';

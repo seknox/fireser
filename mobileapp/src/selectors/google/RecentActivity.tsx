@@ -18,10 +18,9 @@
  */
 
 import cio from 'cheerio-without-node-native';
+import { isLoggedIn } from './CheckLoggedInFunc';
 
-const extractRecentActivity = (htmlContent) => {
-  // console.log("HTML content ",htmlContent)
-
+const extractRecentActivity = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -30,7 +29,7 @@ const extractRecentActivity = (htmlContent) => {
     const $ = cio.load(htmlContent);
     const selected = $("a[href^='notifications/eid']");
 
-    let activity = [];
+    let activity: string[] = [];
     selected.toArray().forEach((elem, i) => {
       const innerText = $(elem).text();
       activity = activity.concat(innerText);
@@ -43,6 +42,7 @@ const extractRecentActivity = (htmlContent) => {
 export default {
   name: 'Security',
   pageURL: 'https://myaccount.google.com/notifications',
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extractRecentActivity,

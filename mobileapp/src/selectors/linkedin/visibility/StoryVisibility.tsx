@@ -20,7 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
-import {clickChecked} from "../ExtractChecked";
+import { clickChecked } from '../ExtractChecked';
 
 const extractStoryVisibility = (htmlContent: string) => {
   //:nth-child(2

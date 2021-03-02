@@ -23,14 +23,14 @@ import {clickChecked, extractChecked} from "../ExtractChecked";
 
 export default {
   name: 'Data sharing with 3rd party ',
-  pageURL: 'https://www.linkedin.com/psettings/data-research',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/policy-and-academic-research',
   tasks: [
     {
       extractFunc: extractChecked,
       name: 'Data sharing with 3rd party',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/data-research',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/policy-and-academic-research',
     },
   ],
 };

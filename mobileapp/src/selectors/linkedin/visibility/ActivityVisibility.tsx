@@ -21,35 +21,35 @@ import { clickChecked, extractChecked, extractVisibility } from '../ExtractCheck
 
 export const ActiveStatusVisibility = {
   name: 'LinkedIn Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/presence',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/manage-my-active-status',
   tasks: [
     {
       extractFunc: extractVisibility,
       name: 'Active Status Visibility',
       expectedValue: 'HIDDEN',
       fixFunc: "document.querySelectorAll('input#option-hidden').click();",
-      fixURL: 'https://www.linkedin.com/psettings/presence',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/manage-my-active-status',
     },
   ],
 };
 
 export const WorkAnniversariesVisibility = {
   name: 'LinkedIn Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/activity-broadcast',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/notify-network-for-updates',
   tasks: [
     {
       extractFunc: extractChecked,
       name: 'Work Anniversaries Visibility',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/activity-broadcast',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/notify-network-for-updates',
     },
   ],
 };
 
 export const NewsMentionsVisibility = {
   name: 'LinkedIn Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/news-mention-broadcast',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/notify-network-about-my-mentions',
   tasks: [
     {
       extractFunc: extractChecked,
@@ -58,14 +58,14 @@ export const NewsMentionsVisibility = {
         'whether linkedin notify people in your network that you’ve been mentioned in an article or blog post',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/news-mention-broadcast',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/notify-network-about-my-mentions',
     },
   ],
 };
 
 export const MentionsVisibility = {
   name: 'LinkedIn Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/mentions',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/notify-me-when-mentioned',
   tasks: [
     {
       extractFunc: extractChecked,
@@ -74,7 +74,7 @@ export const MentionsVisibility = {
         'Allow others to mention or tag you in content? e.g. mentions in posts and comments, tags in photos, etc.',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/mentions',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/notify-me-when-mentioned',
     },
   ],
 };

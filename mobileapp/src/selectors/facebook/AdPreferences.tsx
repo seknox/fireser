@@ -17,7 +17,6 @@
  *
  */
 
-import React from 'react';
 
 import cio from 'cheerio-without-node-native';
 
@@ -31,12 +30,14 @@ const extractAdsBasedonRelationshipStatus = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $(
-      '#root > div:nth-child(1) > div > article > div:nth-child(2) > div:nth-child(1) > div > div > div:nth-child(2) > div > div',
-    );
+    const selected = $('input[id="u_0_3l"]');
 
-    // resolve('ok');
-    resolve(selected.prop('aria-checked'));
+    const checked = selected.prop('checked');
+    if (checked == '1') {
+      resolve('TRUE');
+    } else {
+      resolve('FALSE');
+    }
   });
 };
 const extractAdsBasedonEmployer = (htmlContent: string) => {
@@ -103,24 +104,28 @@ export default {
       extractFunc: extractAdsBasedonRelationshipStatus,
       name: 'Ads based on  relationship status',
       expectedValue: 'False',
+      fixFunc: 'document.querySelector(\'input[id="u_0_3l"]\').click();',
       fixURL: 'https://m.facebook.com/ads/preferences/demographics',
     },
     {
       extractFunc: extractAdsBasedonEmployer,
       name: 'Ads based on  employer',
       expectedValue: 'False',
+      fixFunc: 'document.querySelector(\'input[id="u_0_1a"]\').click();',
       fixURL: 'https://m.facebook.com/ads/preferences/demographics',
     },
     {
       extractFunc: extractAdsBasedonJobTitle,
       name: 'Ads based on  job title',
       expectedValue: 'False',
+      fixFunc: 'document.querySelector(\'input[id="u_0_23"]\').click();',
       fixURL: 'https://m.facebook.com/ads/preferences/demographics',
     },
     {
       extractFunc: extractAdsBasedonEducation,
       name: 'Ads based on  education',
       expectedValue: 'False',
+      fixFunc: 'document.querySelector(\'input[id="u_0_2s"]\').click();',
       fixURL: 'https://m.facebook.com/ads/preferences/demographics',
     },
   ],

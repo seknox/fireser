@@ -28,49 +28,44 @@ import { Job, Task } from '../types/types';
 //It will check if the page is redirected. If the page is redirected, it means login is needed. It sends "LOGIN" type message.
 // If page does not gets redirected, it will send "HTML" type message with whole html content.
 
-const getCodeToInject = (pageURL: string) =>
-  `
-    
+const getCodeToInject = (pageURL, isLoggedIn: string) => {
+  if (!isLoggedIn) {
+    isLoggedIn = `var isLoggedIn=window.location.href.startsWith("${pageURL}");`;
+  }
+
+  //console.log(isLoggedIn);
+
+  return (
+    isLoggedIn +
+    `
+   
+   
    
     var refreshId = setInterval(function(){
+    console.log(document.URL)
+    
+    const msgDebug = {"type":"DEBUG","content":document.URL+"${pageURL}" };
+   window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
+    
+    if(!isLoggedIn){
+     const msg = {"type":"LOGIN","content":""}
+        window.ReactNativeWebView.postMessage(JSON.stringify(msg));
+       return
+    }
     
     
-     const msgDebug = {"type":"DEBUG","content":document.URL };
-        window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
-        
-    
-    
-        if((location.protocol + '//' + location.host + location.pathname)=='` +
-  pageURL +
-  `'){
- // console.log(document.body.parentNode.innerHTML.length)
         const msg = {"type":"HTML","content":document.body.parentNode.innerHTML}
         clearInterval(refreshId);
         window.ReactNativeWebView.postMessage(JSON.stringify(msg));
-        }
-        else if('` +
-  pageURL +
-  '\'.includes("?") && location.href==\'' +
-  pageURL +
-  `'){
-        const msg = {"type":"HTML","content":document.body.parentNode.innerHTML}
-        clearInterval(refreshId);
-        window.ReactNativeWebView.postMessage(JSON.stringify(msg));
-        }
-        
-        else{
-        
-        const msg = {"type":"LOGIN"};
-        window.ReactNativeWebView.postMessage(JSON.stringify(msg));
-        }
-        
+       
          
     },1000);
     
     
     true;
-    `;
-
+    `
+  );
+};
 /*
 {
 url:
@@ -78,18 +73,33 @@ extractFunc:
 
 }
 */
+
+type runnerProps = {
+  jobs: Job[];
+  setData: () => {};
+  loginURL: string;
+  checkLoginFunc: string;
+  jobList: Job[];
+};
+
 export const Runner = (props: { jobs: Job[]; setData: any }) => {
   // const webViewref = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(true);
-  const [pageURL, setPageURL] = React.useState('');
+  const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
   const { setData } = props;
   const index = React.useRef(0);
   const jobs = React.useRef<Job[]>(props.jobs);
   //  const results = React.useRef([]);
 
   React.useEffect(() => {
+    const injectCode = getCodeToInject(jobs.current[0].pageURL, jobs.current[0].isLoggedIn);
+    setRunnable({ injectCode, pageURL: jobs.current[0].pageURL });
+     //console.debug(injectCode);
+    // console.debug(getCodeToInject(pageURL,isLoggedInFunc));
+
     //Load the first job
-    setPageURL(jobs.current[0].pageURL);
+    // setPageURL(jobs.current[0].pageURL);
+    // setLoggedInFunc(jobs.current[0].isLoggedIn);
   }, []);
 
   //Load next job
@@ -98,7 +108,11 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
       index.current = index.current + 1;
       const currentTask = jobs.current[index.current];
       // console.log(currentTask.pageURL)
-      setPageURL(currentTask.pageURL);
+      const injectCode = getCodeToInject(currentTask.pageURL, currentTask.isLoggedIn);
+      setRunnable({ injectCode, pageURL: currentTask.pageURL });
+
+      // setPageURL(currentTask.pageURL);
+      // setLoggedInFunc(currentTask.isLoggedIn);
     } else {
       console.log('finished ', jobs.current[0].tasks[0].name);
       //Finished
@@ -134,7 +148,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
       console.error(e);
     }
 
-    // console.log(msg.type);
+    console.log(msg.type);
 
     if (msg.type === 'HTML' && msg.content) {
       setIsVisible(false);
@@ -181,13 +195,13 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
         autoManageStatusBarEnabled={true}
         //    contentInset={{ top: 5, left: 5, bottom: 5, right: 5 }}
         source={{
-          uri: pageURL,
+          uri: runnable.pageURL,
         }}
         onMessage={onMessage}
         // incognito={true}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
-        injectedJavaScript={getCodeToInject(pageURL)}
+        injectedJavaScript={runnable.injectCode}
         // renderLoading={<ActivityIndicator />}
         // injectedJavaScriptBeforeContentLoaded={runFirst}
       />

@@ -16,39 +16,35 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-
-
-import React from 'react';
-
 import cio from 'cheerio-without-node-native';
-import {isLoggedIn} from "./CheckLoggedInFunc";
+import React from "react";
 
-
-const extractConnectedDevices =  (htmlContent: string) => {
+export default function checkLoggedIn(htmlContent: string) {
+  return new Promise((resolve, reject) => {
+    if (!htmlContent) {
+      reject('HTML content empty');
+    }
 
     const $ = cio.load(htmlContent);
 
-    const selected = $("div[role=listitem] > div > div > div:nth-child(3) > div ");
+    const selected = $('button[name="login"]');
 
-    selected.each(function (i, el) {
-      const elem = $(el);
-      const text = elem.html();
-      //   console.log(elem.html())
-
-
-};
-
-
-export default {
-  name: 'Security ',
-  pageURL: 'https://myaccount.google.com/security-checkup',
-  isLoggedIn:isLoggedIn,
-  tasks: [
-    {
-      extractFunc: extractConnectedDevices,
-      name: 'Security Checkup Status',
-      expectedValue: 'No issues found',
-      fixURL: 'https://myaccount.google.com/security-checkup',
-    },
-  ],
-};
+    if (selected.length===0) {
+      resolve(true);
+    } else {
+      resolve(false);
+    }
+  });
+}
+// export default {
+//   name: 'Login Ckeck',
+//   pageURL: 'https://m.facebook.com/',
+//   tasks: [
+//     {
+//       extractFunc: checkLoggedIn,
+//       name: 'Login Check',
+//       expectedValue: 'TRUE',
+//       fixURL: 'https://m.facebook.com/',
+//     },
+//   ],
+// };

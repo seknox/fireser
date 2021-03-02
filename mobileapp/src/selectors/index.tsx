@@ -22,19 +22,17 @@ import FacebookSelectors from './facebook';
 import GoogleSelectors from './google';
 import MicrosoftSelectors from './microsoft';
 import codePush from 'react-native-code-push';
-import { useEffect } from 'react';
 
-const Selectors = {
+const AccountConfigs = {
   LinkedIn: LinkedInSelectors,
   Facebook: FacebookSelectors,
   Google: GoogleSelectors,
   Microsoft: MicrosoftSelectors,
 };
 
-
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
   updateDialog: { appendReleaseDescription: true },
 };
 
-export default codePush(codePushOptions)(Selectors);
+export default codePush(codePushOptions)(AccountConfigs);

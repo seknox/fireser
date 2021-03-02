@@ -21,8 +21,6 @@ import cio from 'cheerio-without-node-native';
 import { clickChecked } from './ExtractChecked';
 
 const extractDataSharing = (htmlContent: string) => {
-  //:nth-child(2
-
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -32,9 +30,9 @@ const extractDataSharing = (htmlContent: string) => {
 
     const selected = $(':checked');
 
-    if (selected.length == 0) {
+    if (selected.length === 0) {
       resolve('FALSE');
-    } else if (selected.length == 1) {
+    } else if (selected.length === 1) {
       resolve('TRUE');
     } else {
       reject('invalid ');

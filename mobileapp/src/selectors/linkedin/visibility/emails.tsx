@@ -37,28 +37,28 @@ export default {
 
 export const DiscoverUsingEmail = {
   name: 'Email Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/visibility/email',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/discover-me-by-email-address',
   tasks: [
     {
       extractFunc: extractVisibility,
       name: 'Who can discover your profile with your email address',
       expectedValue: 'JUST_ME',
       fixFunc: "document.querySelector('input[id=first]').click()",
-      fixURL: 'https://www.linkedin.com/psettings/visibility/email',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/discover-me-by-email-address',
     },
   ],
 };
 
 export const DiscoverUsingPhone = {
-  name: 'Email Visibility',
-  pageURL: 'https://www.linkedin.com/psettings/visibility/phone',
+  name: 'Phone Visibility',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/discover-me-by-phone-number',
   tasks: [
     {
       extractFunc: extractVisibility,
       name: 'Who can discover your profile with your phone',
       expectedValue: 'JUST_ME',
       fixFunc: "document.querySelector('input[id=first]').click()",
-      fixURL: 'https://www.linkedin.com/psettings/visibility/phone',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/discover-me-by-phone-number',
     },
   ],
 };
