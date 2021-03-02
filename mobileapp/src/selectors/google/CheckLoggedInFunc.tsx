@@ -17,5 +17,5 @@
  *
  */
 
-export const isLoggedIn=`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`;
-
+export const isLoggedIn =
+  'var isLoggedIn=document.querySelectorAll(\'a[href^="https://accounts.google.com/ServiceLogin"]\').length===0;';

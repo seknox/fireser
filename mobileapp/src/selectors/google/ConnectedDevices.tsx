@@ -17,30 +17,18 @@
  *
  */
 
-import {
-  BottomNavigation,
-  BottomNavigationTab,
-  Button,
-  Layout,
-  Text,
-} from '@ui-kitten/components';
+
 import React from 'react';
 
-import {WebView} from 'react-native-webview';
-import {Dimensions} from 'react-native';
 import cio from 'cheerio-without-node-native';
 import {isLoggedIn} from "./CheckLoggedInFunc";
 
 
-const extractConnectedDevices =  (htmlContent) => {
+const extractConnectedDevices =  (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
     const selected = $("div[role=listitem] > div > div > div:nth-child(3) > div ");
-
-    //  console.log( selected.html())
-    //return
-    //console.log('____________________________________');
 
     selected.each(function (i, el) {
       const elem = $(el);
@@ -51,16 +39,16 @@ const extractConnectedDevices =  (htmlContent) => {
 };
 
 
-  export default {
-    name: 'Security ',
-    pageURL: 'https://myaccount.google.com/security-checkup',
-    isLoggedIn:isLoggedIn,
-    tasks: [
-      {
-        extractFunc: extractConnectedDevices,
-        name: 'Security Checkup Status',
-        expectedValue: 'No issues found',
-        fixURL: 'https://myaccount.google.com/security-checkup',
-      },
-    ],
-  };
+export default {
+  name: 'Security ',
+  pageURL: 'https://myaccount.google.com/security-checkup',
+  isLoggedIn:isLoggedIn,
+  tasks: [
+    {
+      extractFunc: extractConnectedDevices,
+      name: 'Security Checkup Status',
+      expectedValue: 'No issues found',
+      fixURL: 'https://myaccount.google.com/security-checkup',
+    },
+  ],
+};

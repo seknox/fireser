@@ -20,7 +20,6 @@
 //https://account.microsoft.com/privacy/cortana
 
 function extractCortanaData(htmlContent: string) {
-    //console.log("&&&&&&&&777777")
   return new Promise((resolve, reject) => {
     resolve('');
   });

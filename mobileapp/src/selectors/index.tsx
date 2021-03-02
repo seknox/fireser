@@ -22,7 +22,6 @@ import FacebookSelectors from './facebook';
 import GoogleSelectors from './google';
 import MicrosoftSelectors from './microsoft';
 import codePush from 'react-native-code-push';
-import { useEffect } from 'react';
 
 const AccountConfigs = {
   LinkedIn: LinkedInSelectors,
@@ -30,7 +29,6 @@ const AccountConfigs = {
   Google: GoogleSelectors,
   Microsoft: MicrosoftSelectors,
 };
-
 
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,

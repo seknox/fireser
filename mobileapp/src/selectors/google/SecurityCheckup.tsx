@@ -30,7 +30,6 @@ const extractSecurityCheckupStatus = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    //const selected = $.root();
     const selected = $(
       'c-wiz > div > c-wiz > div > div > div > div > div:nth-child(1) > div > div.eqiJQ > div',
     );

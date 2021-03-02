@@ -20,16 +20,12 @@
 import cio from 'cheerio-without-node-native';
 import { isLoggedIn } from './CheckLoggedInFunc';
 
-//    a.jslcw:nth-child(1)
 const extractWebAppActivityHistory = (htmlContent: string) => {
-  // console.log("HTML content ",htmlContent)
-
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
     }
 
-    // console.log(htmlContent);
     const $ = cio.load(htmlContent);
     const selected = $("a[href^='activitycontrols?settings=search'] > div:nth-child(2) > div ");
 
@@ -45,7 +41,7 @@ const extractWebAppActivityHistory = (htmlContent: string) => {
   });
 };
 
-const extractYotubeHistory = (htmlContent) => {
+const extractYotubeHistory = (htmlContent: string) => {
   // console.log("HTML content ",htmlContent)
 
   return new Promise((resolve, reject) => {
@@ -68,9 +64,7 @@ const extractYotubeHistory = (htmlContent) => {
   });
 };
 
-const extractLocationHistory = (htmlContent) => {
-  // console.log("HTML content ",htmlContent)
-
+const extractLocationHistory = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -124,7 +118,6 @@ export default {
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=search',
       fixFunc: fixFunc,
     },
-    //document.querySelector("body > div.llhEMd.iWO5td > div > div.g3VIld.HbiE4d.Up8vH.Whe8ub.hFEqNb.J9Nfi.iWO5td > span > div.Df8Did > div > c-wiz > div > div.F3FQK > div > div > div:nth-child(2) > button")
     {
       extractFunc: extractLocationHistory,
       name: 'Location History',

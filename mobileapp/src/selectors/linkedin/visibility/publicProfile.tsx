@@ -20,11 +20,9 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
-import {clickChecked} from "../ExtractChecked";
+import { clickChecked } from '../ExtractChecked';
 
 const extractProfileVisibility = (htmlContent: string) => {
-  //:nth-child(2
-
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');

@@ -17,10 +17,10 @@
  *
  */
 
-import {clickChecked, extractChecked} from '../ExtractChecked';
+import { clickChecked, extractChecked } from '../ExtractChecked';
 
 export const AdsBasedOnIntrestCategories = {
-  name: 'Personalised ads',
+  name: 'Interest Categories',
   pageURL: 'https://www.linkedin.com/psettings/advertising/li-enterprise-product',
   tasks: [
     {
@@ -34,7 +34,7 @@ export const AdsBasedOnIntrestCategories = {
 };
 
 export const AdsBasedOnProfileData = {
-  name: 'Personalised ads',
+  name: 'Use your profile data',
   pageURL: 'https://www.linkedin.com/mypreferences/m/settings/ads-personalization',
   tasks: [
     {
@@ -48,7 +48,7 @@ export const AdsBasedOnProfileData = {
 };
 
 export const AdsBasedOnConnections = {
-  name: 'Personalised ads',
+  name: 'Ads based on connections',
   pageURL: 'https://www.linkedin.com/mypreferences/m/settings/ads-connections',
   tasks: [
     {
@@ -62,7 +62,7 @@ export const AdsBasedOnConnections = {
 };
 
 export const AdsBasedOnLocation = {
-  name: 'Personalised ads',
+  name: 'Ads based on locations',
   pageURL: 'https://www.linkedin.com/mypreferences/m/settings/ads-location',
   tasks: [
     {
@@ -171,4 +171,3 @@ export const AdsBasedOnActionsYouTookInResponseToAds = {
     },
   ],
 };
-

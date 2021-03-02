@@ -20,9 +20,6 @@
 import cio from 'cheerio-without-node-native';
 
 const extractMyActivity = (htmlContent: string) => {
-  //:nth-child(2
-  //console.log('mu-activity');
-
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');

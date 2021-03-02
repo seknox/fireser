@@ -20,9 +20,9 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
-import {isLoggedIn} from "../CheckLoggedInFunc";
+import { isLoggedIn } from '../CheckLoggedInFunc';
 
-const extracAutoDelete = (htmlContent) => {
+const extracAutoDelete = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -30,8 +30,6 @@ const extracAutoDelete = (htmlContent) => {
 
     const $ = cio.load(htmlContent);
 
-    // console.warn(htmlContent.length)
-    // const selected = $('body');
     const selected = $(
       'body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(4) > div > div > :nth-child(2)',
     );
@@ -40,10 +38,10 @@ const extracAutoDelete = (htmlContent) => {
     //console.log(text)
     const splotted = text.split('older than');
 
-    if (splotted.length == 2) {
+    if (splotted.length === 2) {
       resolve(splotted[1]);
     } else {
-      resolve("off");
+      resolve('off');
       // reject('Could not find auto delete duration');
     }
     // console.info(selected.html(), 'prop');
@@ -77,15 +75,14 @@ confirmBtn.click();
 export default {
   name: 'Auto delete ',
   pageURL: 'https://myactivity.google.com/activitycontrols?settings=youtube',
-  isLoggedIn:isLoggedIn,
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extracAutoDelete,
       name: 'Auto delete youtube history',
       expectedValue: '3 months',
-      fixFunc:fixFunc,
+      fixFunc: fixFunc,
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=youtube',
     },
   ],
 };
-

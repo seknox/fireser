@@ -22,7 +22,7 @@ import React from 'react';
 import cio from 'cheerio-without-node-native';
 import { isLoggedIn } from './CheckLoggedInFunc';
 
-const extractLastPassordChange = (htmlContent) => {
+const extractLastPassordChange = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -36,19 +36,16 @@ const extractLastPassordChange = (htmlContent) => {
 
     arr.forEach((elem, i) => {
       const innerText = $(elem).text();
-      //console.log(111,i,innerText)
       if (innerText.includes('Last changed')) {
-        //console.log('found ', innerText);
         resolve(innerText);
-      } else if (i == arr.length - 1) {
-        ////console.log(i,arr.length)
+      } else if (i === arr.length - 1) {
         reject('Last Changed not found');
       }
     });
   });
 };
 
-const extractTfaStatus = (htmlContent) => {
+const extractTfaStatus = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -78,8 +75,6 @@ const extractTfaStatus = (htmlContent) => {
 };
 
 const extractLessSecureApps = (htmlContent: string) => {
-  //:nth-child(2
-
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');

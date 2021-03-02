@@ -20,9 +20,9 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
-import {isLoggedIn} from "../CheckLoggedInFunc";
+import { isLoggedIn } from '../CheckLoggedInFunc';
 
-const extracAutoDelete = (htmlContent) => {
+const extracAutoDelete = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -30,8 +30,6 @@ const extracAutoDelete = (htmlContent) => {
 
     const $ = cio.load(htmlContent);
 
-    // console.warn(htmlContent.length)
-    // const selected = $('body');
     const selected = $(
       'body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(4) > div > div > :nth-child(2)',
     );
@@ -40,19 +38,16 @@ const extracAutoDelete = (htmlContent) => {
     //console.log(text)
     const splotted = text.split('older than');
 
-    if (splotted.length == 2) {
+    if (splotted.length === 2) {
       resolve(splotted[1]);
     } else {
-      resolve("off");
+      resolve('off');
       // reject('Could not find auto delete duration');
     }
     // console.info(selected.html(), 'prop');
     // resolve(selected.prop('aria-checked'));
   });
 };
-
-
-///    /html/body/div[8]/div/div[2]/span/div[2]/div/c-wiz/div/div[3]/c-wiz/div[2]/div/div[1]/div[1]/div/input
 
 const fixFunc = `
 document.querySelector('body > c-wiz > div > div:nth-child(3) > div:nth-child(2) > c-wiz > div:nth-child(4) > div').click();
@@ -80,7 +75,7 @@ confirmBtn.click();
 export default {
   name: 'Auto delete ',
   pageURL: 'https://myactivity.google.com/activitycontrols?settings=search',
-  isLoggedIn:isLoggedIn,
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extracAutoDelete,
@@ -91,5 +86,3 @@ export default {
     },
   ],
 };
-
-//   /html/body/c-wiz/div/div[2]/div[2]/c-wiz/div[4]/div/div/div[2]
