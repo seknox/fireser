@@ -36,7 +36,7 @@ export type Task = {
   name: string;
   description: string;
   expectedValue: string;
-  gotValue: string;
+  gotValue: string | boolean;
   fixURL: string; // url to fix the setting if expectedValue!=gotvalue
   fixFunc: string; // function to automatically fix the setting
   onFixed: () => {};
