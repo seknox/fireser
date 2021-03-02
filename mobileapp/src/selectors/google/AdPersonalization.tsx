@@ -17,9 +17,7 @@
  *
  */
 
-import React from 'react';
-
-import cio from 'cheerio-without-node-native';
+import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
 
 const extracAdPersonalization = (htmlContent: string) => {

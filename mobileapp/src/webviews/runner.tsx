@@ -17,18 +17,18 @@
  *
  */
 
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 
-import { WebView } from 'react-native-webview';
-import { ActivityIndicator, Dimensions, View } from 'react-native';
+import { WebView, WebViewMessageEvent } from 'react-native-webview';
+import { Dimensions, View } from 'react-native';
 
-import { Job, Task } from '../types/types';
+import { Job } from '../types/types';
 
 //This piece of js code will be injected into webview.
 //It will check if the page is redirected. If the page is redirected, it means login is needed. It sends "LOGIN" type message.
 // If page does not gets redirected, it will send "HTML" type message with whole html content.
 
-const getCodeToInject = (pageURL, isLoggedIn: string) => {
+const getCodeToInject = (pageURL: string, isLoggedIn: string) => {
   if (!isLoggedIn) {
     isLoggedIn = `var isLoggedIn=window.location.href.startsWith("${pageURL}");`;
   }
@@ -76,13 +76,10 @@ extractFunc:
 
 type runnerProps = {
   jobs: Job[];
-  setData: () => {};
-  loginURL: string;
-  checkLoginFunc: string;
-  jobList: Job[];
+  setData: Dispatch<SetStateAction<Job[]>>;
 };
 
-export const Runner = (props: { jobs: Job[]; setData: any }) => {
+export const Runner = (props: runnerProps) => {
   // const webViewref = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(true);
   const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
@@ -92,14 +89,9 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
   //  const results = React.useRef([]);
 
   React.useEffect(() => {
-    const injectCode = getCodeToInject(jobs.current[0].pageURL, jobs.current[0].isLoggedIn);
-    setRunnable({ injectCode, pageURL: jobs.current[0].pageURL });
-     //console.debug(injectCode);
-    // console.debug(getCodeToInject(pageURL,isLoggedInFunc));
-
     //Load the first job
-    // setPageURL(jobs.current[0].pageURL);
-    // setLoggedInFunc(jobs.current[0].isLoggedIn);
+    const injectCode = getCodeToInject(jobs.current[0].pageURL, jobs.current[0].isLoggedInFunc);
+    setRunnable({ injectCode, pageURL: jobs.current[0].pageURL });
   }, []);
 
   //Load next job
@@ -108,7 +100,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
       index.current = index.current + 1;
       const currentTask = jobs.current[index.current];
       // console.log(currentTask.pageURL)
-      const injectCode = getCodeToInject(currentTask.pageURL, currentTask.isLoggedIn);
+      const injectCode = getCodeToInject(currentTask.pageURL, currentTask.isLoggedInFunc);
       setRunnable({ injectCode, pageURL: currentTask.pageURL });
 
       // setPageURL(currentTask.pageURL);
@@ -121,11 +113,10 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
   };
 
   //Extract different data from a single web page
-  const runTasks = async (job: Job, htmlContent: string) => {
+  const runTasks = async (job: Job, htmlContent: string): Promise<Job> => {
     for (let i = 0; i < job.tasks.length; i++) {
       // console.log('TASK NAME:', job.tasks[i].name);
-      const gotValue = await job.tasks[i].extractFunc(htmlContent);
-      job.tasks[i].gotValue = gotValue;
+      job.tasks[i].gotValue = await job.tasks[i].extractFunc(htmlContent);
       // console.log('GOT VALUE:', job.tasks[i].name, ':-', gotValue);
     }
 
@@ -140,7 +131,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
   "DEBUG": debug messages.
 
   */
-  const onMessage = async (event) => {
+  const onMessage = async (event: WebViewMessageEvent) => {
     var msg;
     try {
       msg = JSON.parse(event.nativeEvent.data);
@@ -156,6 +147,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
       try {
         res = await runTasks(jobs.current[index.current], msg.content);
       } catch (e) {
+        res = jobs.current[index.current];
         console.error(e);
         console.info('error in ', jobs.current[index.current].name);
       }

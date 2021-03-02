@@ -36,13 +36,10 @@ const AccountsSelect = (): React.ReactElement => {
 
 export default AccountsSelect;
 
-const Accounts = (props): React.ReactElement => {
+const Accounts = (props: any): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
   const { navigation } = props;
 
-  function getIcon(name: string) {
-    return name;
-  }
   return (
     <View style={styles.brandgroup}>
       <View style={styles.iconButton}>

@@ -17,7 +17,6 @@
  *
  */
 
-import React from 'react';
 import AdPreferences from './AdPreference';
 import { BrowserHistory, SearchHistory } from './MyActivity';
 import { CortanaData } from './cortona/CortonasNotebook';

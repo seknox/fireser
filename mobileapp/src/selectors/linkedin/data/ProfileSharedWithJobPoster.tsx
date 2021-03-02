@@ -17,8 +17,6 @@
  *
  */
 
-import React from 'react';
-
 import { clickChecked, extractChecked } from '../ExtractChecked';
 
 export default {
