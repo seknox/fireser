@@ -28,15 +28,23 @@ import { Job, Task } from '../types/types';
 //It will check if the page is redirected. If the page is redirected, it means login is needed. It sends "LOGIN" type message.
 // If page does not gets redirected, it will send "HTML" type message with whole html content.
 
-const getCodeToInject = (pageURL, isLoggedIn: string) =>
-  isLoggedIn +
-  `
+const getCodeToInject = (pageURL, isLoggedIn: string) => {
+  if (!isLoggedIn) {
+    isLoggedIn = `var isLoggedIn=window.location.href.startsWith("${pageURL}");`;
+  }
+
+  console.log(isLoggedIn);
+
+  return (
+    isLoggedIn +
+    `
    
    
    
     var refreshId = setInterval(function(){
+    console.log(document.URL)
     
-    const msgDebug = {"type":"DEBUG","content":document.URL };
+    const msgDebug = {"type":"DEBUG","content":document.URL+"${pageURL}" };
    window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
     
     if(!isLoggedIn){
@@ -55,8 +63,9 @@ const getCodeToInject = (pageURL, isLoggedIn: string) =>
     
     
     true;
-    `;
-
+    `
+  );
+};
 /*
 {
 url:
@@ -76,16 +85,16 @@ type runnerProps = {
 export const Runner = (props: { jobs: Job[]; setData: any }) => {
   // const webViewref = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(true);
-  const [runnable, setRunnable] = React.useState({pageURL:"",injectCode:""});
+  const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
   const { setData } = props;
   const index = React.useRef(0);
   const jobs = React.useRef<Job[]>(props.jobs);
   //  const results = React.useRef([]);
 
   React.useEffect(() => {
-    const injectCode=getCodeToInject(jobs.current[0].pageURL,jobs.current[0].isLoggedIn)
-    setRunnable({injectCode,pageURL:jobs.current[0].pageURL});
-   // console.debug(injectCode);
+    const injectCode = getCodeToInject(jobs.current[0].pageURL, jobs.current[0].isLoggedIn);
+    setRunnable({ injectCode, pageURL: jobs.current[0].pageURL });
+     console.debug(injectCode);
     // console.debug(getCodeToInject(pageURL,isLoggedInFunc));
 
     //Load the first job
@@ -99,8 +108,8 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
       index.current = index.current + 1;
       const currentTask = jobs.current[index.current];
       // console.log(currentTask.pageURL)
-      const injectCode=getCodeToInject(currentTask.pageURL,currentTask.isLoggedIn)
-      setRunnable({injectCode,pageURL:currentTask.pageURL});
+      const injectCode = getCodeToInject(currentTask.pageURL, currentTask.isLoggedIn);
+      setRunnable({ injectCode, pageURL: currentTask.pageURL });
 
       // setPageURL(currentTask.pageURL);
       // setLoggedInFunc(currentTask.isLoggedIn);
@@ -139,7 +148,7 @@ export const Runner = (props: { jobs: Job[]; setData: any }) => {
       console.error(e);
     }
 
-     console.log(msg.type);
+    console.log(msg.type);
 
     if (msg.type === 'HTML' && msg.content) {
       setIsVisible(false);

@@ -84,7 +84,7 @@ export const ScanAndProtect = (props: any) => {
       <View>
         {data.map((job: Job, index: number) => (
           <Card key={index}>
-            <Text category="h1">{job.name}</Text>
+            <Text category="h1">{job?.name}</Text>
             {job?.tasks?.map((task: Task) => (
               <View key={task.name}>
                 <Text category="h5">

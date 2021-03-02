@@ -60,7 +60,7 @@ const Accounts = (props): React.ReactElement => {
           onPress={() => navigation.navigate('ScanAndProtect', { name: 'LinkedIn' })}
           style={styles.touch}
         >
-          <Text style={styles.text}>Linkdin</Text>
+          <Text style={styles.text}>LinkedIn</Text>
           <LinkedinIcon style={styles.icon} />
         </Pressable>
       </View>
@@ -80,7 +80,7 @@ const Accounts = (props): React.ReactElement => {
           onPress={() => navigation.navigate('ScanAndProtect', { name: 'Microsoft' })}
           style={styles.touch}
         >
-          <Text style={styles.text}>Google</Text>
+          <Text style={styles.text}>Microsoft</Text>
           <GoogleIcon style={styles.icon} />
         </Pressable>
       </View>

@@ -25,14 +25,14 @@ import {clickChecked, extractChecked} from "../ExtractChecked";
 
 export default {
   name: 'Profile info on other content shown on LinkedIn',
-  pageURL: 'https://www.linkedin.com/psettings/meet-the-team',
+  pageURL: 'https://www.linkedin.com/mypreferences/m/settings/organization-and-interests',
   tasks: [
     {
       extractFunc: extractChecked,
       name: 'profile info on other content shown on LinkedIn',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
-      fixURL: 'https://www.linkedin.com/psettings/meet-the-team',
+      fixURL: 'https://www.linkedin.com/mypreferences/m/settings/organization-and-interests',
     },
   ],
 };
