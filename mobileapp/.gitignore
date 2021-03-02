@@ -21,6 +21,9 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+# pod file
+Podfile.lock
+
 # Android/IntelliJ
 #
 build/
