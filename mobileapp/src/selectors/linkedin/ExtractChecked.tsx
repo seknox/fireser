@@ -17,9 +17,7 @@
  *
  */
 
-import React from 'react';
-
-import cio from 'cheerio-without-node-native';
+import cio from 'cheerio';
 
 export const extractChecked = (htmlContent: string) => {
   //:nth-child(2

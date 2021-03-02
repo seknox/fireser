@@ -20,24 +20,24 @@ import React from 'react';
 import { View } from 'react-native';
 import Layout from '../../components/Layout';
 import Selectors from '../../selectors';
-import { Job, Task } from '../../types/types';
+import { Fixable, Job, Task } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import { Runner } from '../../webviews/runner';
 
-const supportedAccounts = [
-  'google',
-  'gmail',
-  'youtube',
-  'maps',
-  'chrome',
-  'hotmail',
-  'linkdin',
-  'twitter',
-  'facebook',
-  'messenger',
-  'instagram',
-  'suggest',
-];
+// const supportedAccounts = [
+//   'google',
+//   'gmail',
+//   'youtube',
+//   'maps',
+//   'chrome',
+//   'hotmail',
+//   'linkdin',
+//   'twitter',
+//   'facebook',
+//   'messenger',
+//   'instagram',
+//   'suggest',
+// ];
 
 type accountProps = {
   navigation: any;
@@ -46,12 +46,10 @@ type accountProps = {
 export const ScanAndProtect = (props: any) => {
   const [data, setData] = React.useState<Job[]>([]);
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
-  const [fixable, setFixable] = React.useState<{} | null>({ fixUrl: '', fixFunc: '', name: '' });
+  const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
 
   const account = props.route.params.name;
   const jobs = Selectors[account] || [];
-  const isLoggedIn = Selectors[account].isLoggedIn;
-  const loginURL = Selectors[account].loginURL;
 
   const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
     setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
@@ -73,12 +71,9 @@ export const ScanAndProtect = (props: any) => {
   };
 
   return (
-    <Layout
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-      navigation={props.navigation}
-    >
+    <Layout navigation={props.navigation}>
       <View>
-        {data.map((job: Job, index: number) =>
+        {data.map((job: Job) =>
           job?.tasks?.map((task: Task) => (
             <View key={task.name}>
               <Text category="h5">
@@ -102,7 +97,7 @@ export const ScanAndProtect = (props: any) => {
         )}
       </View>
 
-      <Runner jobs={jobs} setData={setData} isLoggedIn={isLoggedIn} />
+      <Runner jobs={jobs} setData={setData} />
 
       <Fixer
         pageURL={fixable.fixUrl}

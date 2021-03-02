@@ -17,7 +17,7 @@
  *
  */
 
-import cio from 'cheerio-without-node-native';
+import cio from 'cheerio';
 
 const extractLastPassChange = (htmlContent: string) => {
   //:nth-child(2

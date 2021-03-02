@@ -17,11 +17,7 @@
  *
  */
 
-import React from 'react';
-
-import cio from 'cheerio-without-node-native';
-import {clickChecked, extractChecked} from "../ExtractChecked";
-
+import { clickChecked, extractChecked } from '../ExtractChecked';
 
 export default {
   name: 'Profile info on other content shown on LinkedIn',

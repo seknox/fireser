@@ -27,11 +27,12 @@ export type AccountType = {
 export type Job = {
   name: string;
   pageURL: string;
+  isLoggedInFunc: string;
   tasks: Task[];
 };
 
 export type Task = {
-  extractFunc: (htmlContent: string) => Promise; // function to extract certain data from a html content
+  extractFunc: (htmlContent: string) => Promise<string | boolean>; // function to extract certain data from a html content
   name: string;
   description: string;
   expectedValue: string;
@@ -39,4 +40,10 @@ export type Task = {
   fixURL: string; // url to fix the setting if expectedValue!=gotvalue
   fixFunc: string; // function to automatically fix the setting
   onFixed: () => {};
+};
+
+export type Fixable = {
+  fixUrl: string;
+  fixFunc: string;
+  name: string;
 };

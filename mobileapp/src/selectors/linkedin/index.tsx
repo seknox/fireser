@@ -17,8 +17,6 @@
  *
  */
 
-import React from 'react';
-
 import ProfileVisibility from './visibility/profile';
 import PublicProfileVisibility from './visibility/publicProfile';
 import StoryVisibility from './visibility/StoryVisibility';

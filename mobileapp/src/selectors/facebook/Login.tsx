@@ -16,8 +16,7 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-import cio from 'cheerio-without-node-native';
-import React from "react";
+import cio from 'cheerio';
 
 export default function checkLoggedIn(htmlContent: string) {
   return new Promise((resolve, reject) => {
@@ -29,22 +28,10 @@ export default function checkLoggedIn(htmlContent: string) {
 
     const selected = $('button[name="login"]');
 
-    if (selected.length===0) {
+    if (selected.length === 0) {
       resolve(true);
     } else {
       resolve(false);
     }
   });
 }
-// export default {
-//   name: 'Login Ckeck',
-//   pageURL: 'https://m.facebook.com/',
-//   tasks: [
-//     {
-//       extractFunc: checkLoggedIn,
-//       name: 'Login Check',
-//       expectedValue: 'TRUE',
-//       fixURL: 'https://m.facebook.com/',
-//     },
-//   ],
-// };

@@ -17,8 +17,7 @@
  *
  */
 
-
-import cio from 'cheerio-without-node-native';
+import cio from 'cheerio';
 
 const extractAdsBasedonRelationshipStatus = (htmlContent: string) => {
   //:nth-child(2

@@ -19,6 +19,7 @@
     "appcenter": "3.1.2",
     "appcenter-analytics": "3.1.2",
     "appcenter-crashes": "3.1.2",
+    "cheerio": "^1.0.0-rc.5",
     "cheerio-without-node-native": "^0.20.2",
     "react": "16.13.1",
     "react-native": "0.63.2",

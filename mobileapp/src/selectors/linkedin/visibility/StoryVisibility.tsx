@@ -17,9 +17,7 @@
  *
  */
 
-import React from 'react';
-
-import cio from 'cheerio-without-node-native';
+import cio from 'cheerio';
 import { clickChecked } from '../ExtractChecked';
 
 const extractStoryVisibility = (htmlContent: string) => {

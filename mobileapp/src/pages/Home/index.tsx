@@ -20,20 +20,15 @@ import React from 'react';
 import { SafeAreaView, View } from 'react-native';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
-import HomeMenu from './OldMenu';
 import Accounts from '../Accounts';
 
-export default ({ navigation }): React.ReactElement => {
+export default (props: { navigation: any }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
-
-  const navigateToAccounts = () => {
-    navigation.navigate('AccountsPage');
-  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* <Divider /> */}
-      <Layout navigation={navigation}>
+      <Layout navigation={props.navigation}>
         <View style={styles.margin}>
           <SummaryCard
             title="Hi Sakshyam,"

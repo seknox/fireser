@@ -21,7 +21,7 @@ import { View } from 'react-native';
 import Footer from './Footer';
 import Header from './Header';
 
-export default (props): React.ReactElement => {
+export default (props: { navigation: any; children: any }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   // const { navigation } = props;
@@ -29,11 +29,11 @@ export default (props): React.ReactElement => {
   return (
     <Layout style={styles.container}>
       {/* <ScrollView style={styles.scrollView}> */}
-      <Header style={styles.header} />
+      <Header />
       <View style={styles.content}>{props.children}</View>
       {/* </ScrollView> */}
 
-      <Footer style={styles.footer} navigation={props.navigation} />
+      <Footer navigation={props.navigation} />
     </Layout>
   );
 };

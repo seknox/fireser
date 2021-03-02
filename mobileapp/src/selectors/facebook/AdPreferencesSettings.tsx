@@ -17,13 +17,9 @@
  *
  */
 
-import React from 'react';
-
-import cio from 'cheerio-without-node-native';
+import cio from 'cheerio';
 
 const extractAdsBasedonPartners = (htmlContent: string) => {
-  //:nth-child(2
-
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -48,9 +44,7 @@ const extractAdsBasedonFBproducts = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $(
-      'a[href^="/ads/settings/fpd"] > div > div > div:nth-child(3)',
-    );
+    const selected = $('a[href^="/ads/settings/fpd"] > div > div > div:nth-child(3)');
 
     resolve(selected.text());
   });

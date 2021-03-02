@@ -17,7 +17,6 @@
  *
  */
 
-import React from 'react';
 import GoogleActivityHistory from './GoogleActivityHistory';
 import GoogleSecurityStatus from './GoogleSecurityStatus';
 import SecurityCheckup from './SecurityCheckup';

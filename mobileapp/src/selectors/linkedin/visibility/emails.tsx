@@ -17,8 +17,6 @@
  *
  */
 
-import React from 'react';
-
 import { extractVisibility } from '../ExtractChecked';
 
 export default {

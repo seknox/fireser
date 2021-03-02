@@ -50,7 +50,7 @@ const iconstyles = StyleSheet.create({
   },
 });
 
-export default (props): React.ReactElement => {
+export default (props: { navigation: any }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   const navigateHome = () => {
@@ -59,13 +59,11 @@ export default (props): React.ReactElement => {
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.touch} >
-        <View styles={styles.nav}>
-          <SettingIcon style={styles.settingIcon} />
+      <Pressable style={styles.touch}>
+        <View>
+          <SettingIcon />
 
-          <Text styles={styles.navText} status="basic">
-            Setting
-          </Text>
+          <Text status="basic">Setting</Text>
         </View>
       </Pressable>
 
@@ -79,29 +77,23 @@ export default (props): React.ReactElement => {
       </Pressable> */}
 
       <Pressable style={styles.touch}>
-        <View styles={styles.nav}>
+        <View>
           <LockIcon />
-          <Text styles={styles.navText} status="basic">
-            Vault
-          </Text>
+          <Text status="basic">Vault</Text>
         </View>
       </Pressable>
 
       <Pressable style={styles.touch}>
-        <View styles={styles.nav}>
+        <View>
           <StatusIcon />
-          <Text styles={styles.navText} status="basic">
-            Alerts
-          </Text>
+          <Text status="basic">Alerts</Text>
         </View>
       </Pressable>
 
       <Pressable style={styles.touch} onPress={navigateHome}>
-        <View styles={styles.nav}>
+        <View>
           <HomeIcon />
-          <Text styles={styles.navText} status="basic">
-            Home
-          </Text>
+          <Text status="basic">Home</Text>
         </View>
       </Pressable>
     </View>

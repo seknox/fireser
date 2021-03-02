@@ -17,9 +17,7 @@
  *
  */
 
-import React from 'react';
-
-import {clickChecked, extractChecked} from "../ExtractChecked";
+import { clickChecked, extractChecked } from '../ExtractChecked';
 
 export default {
   name: 'Data sharing with 3rd party ',

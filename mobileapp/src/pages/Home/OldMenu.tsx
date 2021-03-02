@@ -19,12 +19,11 @@ import { StyleService, Text, useStyleSheet, Button, Icon } from '@ui-kitten/comp
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import AccountSec from '../../assets/icons/account-security';
-import DeviceSec from '../../assets/icons/device-security';
 import MsgSec from '../../assets/icons/messaging-security';
 
-const RightIcon = (props) => <Icon {...props} name="arrow-forward-outline" />;
+const RightIcon = (props: any) => <Icon {...props} name="arrow-forward-outline" />;
 
-export default (props: any): React.ReactElement => {
+export default (props: { navigateToAccounts: () => {} }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (

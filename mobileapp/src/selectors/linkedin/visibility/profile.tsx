@@ -17,9 +17,7 @@
  *
  */
 
-import React from 'react';
-
-import {clickChecked, extractVisibility} from "../ExtractChecked";
+import { clickChecked, extractVisibility } from '../ExtractChecked';
 
 export default {
   name: 'LinkedIn Visibility',

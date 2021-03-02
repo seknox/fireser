@@ -17,24 +17,17 @@
  *
  */
 
-import React, {useEffect} from 'react';
+import React from 'react';
 
-import {WebView} from 'react-native-webview';
-import {Dimensions, View} from 'react-native';
-import {
-  extractFunc as googleExtractFunc,
-  pageURL as googlePageURL,
-} from '../pages/google/GoogleActivityHistory';
-import {err} from 'react-native-svg/lib/typescript/xml';
-import {Text} from '@ui-kitten/components';
-import {Job, Task} from '../utils/types';
+import { WebView, WebViewMessageEvent } from 'react-native-webview';
+import { Dimensions, View } from 'react-native';
 
 //TODO find a better way of injecting fix function
 const getCodeToInject = (pageURL: string, fixFunc: string) => {
   if (fixFunc) {
     //console.log(111);
 
-    const injectCode = (
+    const injectCode =
       `
     function sendDebugLog(m){
       const msgDebug = {"type":"DEBUG","content":m};
@@ -78,9 +71,8 @@ const getCodeToInject = (pageURL: string, fixFunc: string) => {
     
     
     true;
-    `
-    );
-   // console.log(injectCode);
+    `;
+    // console.log(injectCode);
     return injectCode;
   } else {
     return 'true;';
@@ -102,7 +94,7 @@ export const Fixer = (props: {
 }) => {
   // const webViewref = React.useRef(null);
 
-  const onMessage = async (event) => {
+  const onMessage = async (event: WebViewMessageEvent) => {
     var msg;
     try {
       msg = JSON.parse(event.nativeEvent.data);
@@ -120,12 +112,14 @@ export const Fixer = (props: {
   };
 
   return (
-    <View style={{
-      display: props.isVisible ? 'flex' : 'none',
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    }}>
+    <View
+      style={{
+        display: props.isVisible ? 'flex' : 'none',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      }}
+    >
       {/*<Text category={"h1"}>{pageURL}</Text>*/}
       <WebView
         // accessibilityTraits={'adjustable'}
@@ -137,12 +131,11 @@ export const Fixer = (props: {
           flex: 1,
         }}
         autoManageStatusBarEnabled={true}
-        contentInset={{top: 5, left: 5, bottom: 5, right: 5}}
+        contentInset={{ top: 5, left: 5, bottom: 5, right: 5 }}
         source={{
           uri: props.pageURL,
         }}
         // originWhitelist={['*']}
-        // source={{html: '<h1>This is a static HTML source!</h1>'}}
         onMessage={onMessage}
         // domStorageEnabled={false}
         // incognito={true}

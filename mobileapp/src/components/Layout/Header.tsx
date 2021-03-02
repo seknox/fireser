@@ -19,7 +19,7 @@ import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
 
-export default (props): React.ReactElement => {
+export default (): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return <View style={styles.headerContainer} />;
