@@ -29,26 +29,8 @@ import React from 'react';
 import {WebView} from 'react-native-webview';
 import {Dimensions} from 'react-native';
 import cio from 'cheerio-without-node-native';
+import {isLoggedIn} from "./CheckLoggedInFunc";
 
-const runFirst = `
-    window.ReactNativeWebView.postMessage("URL: "+document.URL);
-    setInterval(function(){
-        if(document.URL.startsWith('https://myactivity.google.com/myactivity'))
-            window.ReactNativeWebView.postMessage(document.body.innerHTML);
-          
-    },1000)
-    true;
-    `;
-
-const BottomTabBar = () => (
-  <BottomNavigation
-  //   selectedIndex={state.index}
-  //    onSelect={(index) => navigation.navigate(state.routeNames[index])}
-  >
-    <BottomNavigationTab title="My Activity" />
-    <BottomNavigationTab title="Login" />
-  </BottomNavigation>
-);
 
 const extractConnectedDevices =  (htmlContent) => {
 
@@ -72,7 +54,7 @@ const extractConnectedDevices =  (htmlContent) => {
   export default {
     name: 'Security ',
     pageURL: 'https://myaccount.google.com/security-checkup',
-    isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
+    isLoggedIn:isLoggedIn,
     tasks: [
       {
         extractFunc: extractConnectedDevices,

@@ -20,6 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import { isLoggedIn } from './CheckLoggedInFunc';
 
 const extractLastPassordChange = (htmlContent) => {
   return new Promise((resolve, reject) => {
@@ -97,7 +98,7 @@ const extractLessSecureApps = (htmlContent: string) => {
 export default {
   name: 'Security',
   pageURL: 'https://myaccount.google.com/security',
-  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extractLastPassordChange,
@@ -109,8 +110,7 @@ export default {
       extractFunc: extractTfaStatus,
       name: 'Two factor authentication',
       expectedValue: 'On',
-      fixURL:
-        'https://myaccount.google.com/security/signinoptions/two-step-verification',
+      fixURL: 'https://myaccount.google.com/security/signinoptions/two-step-verification',
     },
     {
       extractFunc: extractLessSecureApps,

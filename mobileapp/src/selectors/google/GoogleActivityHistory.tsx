@@ -18,6 +18,7 @@
  */
 
 import cio from 'cheerio-without-node-native';
+import { isLoggedIn } from './CheckLoggedInFunc';
 
 //    a.jslcw:nth-child(1)
 const extractWebAppActivityHistory = (htmlContent: string) => {
@@ -41,7 +42,6 @@ const extractWebAppActivityHistory = (htmlContent: string) => {
     } else {
       reject('Web Activity history status not found');
     }
-
   });
 };
 
@@ -65,8 +65,7 @@ const extractYotubeHistory = (htmlContent) => {
     } else {
       reject('Youtube Activity history status not found');
     }
-    });
-
+  });
 };
 
 const extractLocationHistory = (htmlContent) => {
@@ -79,7 +78,6 @@ const extractLocationHistory = (htmlContent) => {
 
     const $ = cio.load(htmlContent);
     const selected = $("a[href^='activitycontrols?settings=location'] > div:nth-child(2) > div ");
-
 
     const innerText = selected.text();
 
@@ -117,7 +115,7 @@ const fixFunc = `
 export default {
   name: 'Privacy',
   pageURL: 'https://myactivity.google.com/myactivity',
-  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extractWebAppActivityHistory,

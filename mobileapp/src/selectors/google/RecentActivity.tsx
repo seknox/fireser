@@ -18,6 +18,7 @@
  */
 
 import cio from 'cheerio-without-node-native';
+import { isLoggedIn } from './CheckLoggedInFunc';
 
 const extractRecentActivity = (htmlContent) => {
   // console.log("HTML content ",htmlContent)
@@ -43,7 +44,7 @@ const extractRecentActivity = (htmlContent) => {
 export default {
   name: 'Security',
   pageURL: 'https://myaccount.google.com/notifications',
-  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extractRecentActivity,

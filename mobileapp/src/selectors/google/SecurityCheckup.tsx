@@ -20,8 +20,9 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import { isLoggedIn } from './CheckLoggedInFunc';
 
-const extractSecurityCheckupStatus = (htmlContent) => {
+const extractSecurityCheckupStatus = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -34,15 +35,14 @@ const extractSecurityCheckupStatus = (htmlContent) => {
       'c-wiz > div > c-wiz > div > div > div > div > div:nth-child(1) > div > div.eqiJQ > div',
     );
 
-
-    resolve(selected.text())
+    resolve(selected.text());
   });
 };
 
 export default {
   name: 'Security Checkup',
   pageURL: 'https://myaccount.google.com/security-checkup',
-  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extractSecurityCheckupStatus,

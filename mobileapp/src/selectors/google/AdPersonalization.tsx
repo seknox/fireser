@@ -20,6 +20,7 @@
 import React from 'react';
 
 import cio from 'cheerio-without-node-native';
+import { isLoggedIn } from './CheckLoggedInFunc';
 
 const extracAdPersonalization = (htmlContent) => {
   return new Promise((resolve, reject) => {
@@ -41,7 +42,7 @@ const extracAdPersonalization = (htmlContent) => {
 export default {
   name: 'Personalised Ads',
   pageURL: 'https://adssettings.google.com/authenticated',
-  isLoggedIn:`var isLoggedIn=document.querySelectorAll('a[href^="https://accounts.google.com/ServiceLogin"]').length===0;`,
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extracAdPersonalization,
