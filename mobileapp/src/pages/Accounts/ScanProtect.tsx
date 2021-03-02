@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Card, Divider, Text } from '@ui-kitten/components';
+import { Button, Divider, Text } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
 import Layout from '../../components/Layout';
@@ -46,51 +46,67 @@ type accountProps = {
 export const ScanAndProtect = (props: any) => {
   const [data, setData] = React.useState<Job[]>([]);
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
-  const [fixURL, setFixURL] = React.useState<string | null>(null);
-  const [fixFunc, setFixFunc] = React.useState<string | null>(null);
-  const account = props.route.params.name;
-  const jobs = Selectors[account];
+  const [fixable, setFixable] = React.useState<{} | null>({ fixUrl: '', fixFunc: '', name: '' });
 
-  const fixIssue = (pageURL: string, fixFunc: string) => {
-    setFixURL(pageURL);
-    setFixFunc(fixFunc);
+  const account = props.route.params.name;
+  const jobs = Selectors[account] || [];
+  const isLoggedIn = Selectors[account].isLoggedIn;
+  const loginURL = Selectors[account].loginURL;
+
+  const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
+    setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
     setFixerVisible(true);
+  };
+
+  const onFixed = () => {
+    const jobtemp = data.map((a) => {
+      a.tasks = a.tasks.map((b) => {
+        if (b.name === fixable?.name) {
+          b.gotValue = b.expectedValue;
+        }
+        return b;
+      });
+      return a;
+    });
+    setData(jobtemp);
+    setFixerVisible(false);
   };
 
   return (
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <View>
-        {data.map((job: Job, index: number) => (
-          <Card key={index}>
-            <Text category="h1">{job.name}</Text>
-            {job?.tasks?.map((task: Task) => (
-              <View key={task.name}>
-                <Text category="h5">
-                  {task.name}:{task.gotValue}
-                </Text>
-                <Text>Expected:{task.expectedValue}</Text>
-                <Button
-                  disabled={task.expectedValue === task.gotValue}
-                  onPress={() => {
-                    fixIssue(task.fixURL, task.fixFunc);
-                  }}
-                >
-                  Fix
-                </Button>
-                <Divider />
-                <Divider />
-                <Divider />
-                <Divider />
-              </View>
-            ))}
-          </Card>
-        ))}
+        {data.map((job: Job, index: number) =>
+          job?.tasks?.map((task: Task) => (
+            <View key={task.name}>
+              <Text category="h5">
+                {task.name}:{task.gotValue}
+              </Text>
+              <Text>Expected:{task.expectedValue}</Text>
+              <Button
+                disabled={task.expectedValue === task.gotValue}
+                onPress={() => {
+                  fixIssue(task.fixURL, task.fixFunc, task.name);
+                }}
+              >
+                Fix
+              </Button>
+              <Divider />
+              <Divider />
+              <Divider />
+              <Divider />
+            </View>
+          )),
+        )}
       </View>
 
-      {/*<View>*/}
-      <Runner jobs={jobs} setData={setData} />
+      <Runner jobs={jobs} setData={setData} isLoggedIn={isLoggedIn} />
 
-      <Fixer pageURL={fixURL} fixFunc={fixFunc} isVisible={isFixerVisible} onDone={console.info} />
+      <Fixer
+        pageURL={fixable.fixUrl}
+        fixFunc={fixable.fixFunc}
+        isVisible={isFixerVisible}
+        onDone={onFixed}
+      />
     </Layout>
   );
 };

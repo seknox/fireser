@@ -22,8 +22,6 @@ import React from 'react';
 import cio from 'cheerio-without-node-native';
 
 const extractPersonalisedAds = (htmlContent: string) => {
-  //:nth-child(2
-
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -33,14 +31,11 @@ const extractPersonalisedAds = (htmlContent: string) => {
 
     const selected = $('#MsaAds-toggle-button-state-label');
 
-    //console.log(selected.text());
-
     resolve(selected.text());
   });
 };
 
 const extractPersonalisedAdsOnBrowser = (htmlContent: string) => {
-  //:nth-child(2
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -49,8 +44,6 @@ const extractPersonalisedAdsOnBrowser = (htmlContent: string) => {
     const $ = cio.load(htmlContent);
 
     const selected = $('#BrowserAds-toggle-button-state-label');
-
-    //console.log('brse ads->',selected.text());
 
     resolve(selected.text());
   });

@@ -33,7 +33,7 @@ export const extractChecked = (htmlContent: string) => {
 
     const selected = $(':checked');
 
-    if (selected.length == 0) {
+    if (selected.length === 0) {
       resolve('FALSE');
     } else {
       resolve('TRUE');
@@ -54,12 +54,8 @@ export const extractVisibility = (htmlContent: string) => {
 
     const selected = $(':checked');
 
-    //console.log(selected.prop('value'));
-
-    // resolve('ok');
     resolve(selected.prop('value'));
   });
 };
-
 
 export const clickChecked = 'document.querySelector(":checked").click()';

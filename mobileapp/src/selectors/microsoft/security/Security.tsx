@@ -21,7 +21,7 @@ import cio from 'cheerio-without-node-native';
 
 const extractLastPassChange = (htmlContent: string) => {
   //:nth-child(2
-  console.log('selected.text()');
+  //console.log('selected.text()');
 
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
@@ -34,10 +34,10 @@ const extractLastPassChange = (htmlContent: string) => {
       '#banner > div > div > div > div > div:nth-child(1) > div:nth-child(2) > div:nth-child(2)',
     );
 
-    console.log(selected.text());
+    //console.log(selected.text());
 
     const splitted = selected.text().split(':');
-    if (splitted.length == 2) {
+    if (splitted.length === 2) {
       resolve(splitted[1].trim());
       return;
     }
@@ -47,9 +47,6 @@ const extractLastPassChange = (htmlContent: string) => {
 };
 
 const extractTFAStatus = (htmlContent: string) => {
-  //:nth-child(2
-  console.log('selected.text()');
-
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -61,10 +58,8 @@ const extractTFAStatus = (htmlContent: string) => {
       '#banner > div > div > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)',
     );
 
-    console.log(selected.text());
-
     const splitted = selected.text().split(':');
-    if (splitted.length == 2) {
+    if (splitted.length === 2) {
       resolve(splitted[1].trim());
       return;
     }
