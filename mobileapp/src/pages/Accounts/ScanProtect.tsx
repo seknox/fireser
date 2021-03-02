@@ -73,7 +73,10 @@ export const ScanAndProtect = (props: any) => {
   };
 
   return (
-    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Layout
+      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+      navigation={props.navigation}
+    >
       <View>
         {data.map((job: Job, index: number) =>
           job?.tasks?.map((task: Task) => (
