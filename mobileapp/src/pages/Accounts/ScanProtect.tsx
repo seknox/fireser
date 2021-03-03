@@ -17,7 +17,7 @@
 
 import { Button, Divider, Text } from '@ui-kitten/components';
 import React from 'react';
-import { View } from 'react-native';
+import {SafeAreaView,  View } from 'react-native';
 import Layout from '../../components/Layout';
 import Selectors from '../../selectors';
 import { Fixable, Job, Task } from '../../types/types';
@@ -71,6 +71,7 @@ export const ScanAndProtect = (props: any) => {
   };
 
   return (
+    <SafeAreaView style={{ flex: 1 }}>
     <Layout navigation={props.navigation}>
       <View>
         {data.map((job: Job) =>
@@ -106,5 +107,6 @@ export const ScanAndProtect = (props: any) => {
         onDone={onFixed}
       />
     </Layout>
+    </SafeAreaView>
   );
 };
