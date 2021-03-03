@@ -58,6 +58,7 @@ export default (props: { navigation: any }): React.ReactElement => {
   };
 
   return (
+    <View style={styles.root}>
     <View style={styles.container}>
       <Pressable style={styles.touch}>
         <View>
@@ -97,12 +98,17 @@ export default (props: { navigation: any }): React.ReactElement => {
         </View>
       </Pressable>
     </View>
+    </View>
   );
 };
 
 const themedStyles = StyleService.create({
+  root: {
+    backgroundColor: 'white',
+  },
   container: {
     // flex: 1,
+    
     flexDirection: 'row',
     // marginVertical: -10,
     marginHorizontal: 10,
