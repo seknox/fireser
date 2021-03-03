@@ -190,7 +190,7 @@ export const Runner = (props: runnerProps) => {
           uri: runnable.pageURL,
         }}
         onMessage={onMessage}
-        // incognito={true}
+        incognito={true}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
         injectedJavaScript={runnable.injectCode}
