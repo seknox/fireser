@@ -181,7 +181,7 @@ export const Runner = (props: runnerProps) => {
           width: Dimensions.get('window').width - 20,
           height: Dimensions.get('window').height - 20,
           marginTop: 20,
-          maxHeight: 200,
+          // maxHeight: 200,
           flex: 1,
         }}
         autoManageStatusBarEnabled={true}

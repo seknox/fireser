@@ -22,7 +22,7 @@ import Layout from '../../components/Layout';
 import Selectors from '../../selectors';
 import { Fixable, Job, Task } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
-import { Runner } from '../../webviews/runner';
+import { Runner } from '../../webviews/scanner';
 
 // const supportedAccounts = [
 //   'google',
