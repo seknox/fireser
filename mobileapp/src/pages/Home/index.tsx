@@ -33,6 +33,9 @@ export default (props: { navigation: any }): React.ReactElement => {
           <SummaryCard
             title="Hi Sakshyam,"
             subtitle="Enhance security and privacy of your account and devices. "
+            showFirebot={true}
+            showLogo={true}
+            logoName='Fireser'
           />
           <Accounts />
         </View>

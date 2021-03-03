@@ -16,28 +16,25 @@
  */
 
 import { Button, Divider, Text } from '@ui-kitten/components';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {SafeAreaView,  View } from 'react-native';
 import Layout from '../../components/Layout';
 import Selectors from '../../selectors';
 import { Fixable, Job, Task } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import { Runner } from '../../webviews/scanner';
+import { StyleService, useStyleSheet } from '@ui-kitten/components';
+import SummaryCard from '../../components/SummaryCard'
 
-// const supportedAccounts = [
-//   'google',
-//   'gmail',
-//   'youtube',
-//   'maps',
-//   'chrome',
-//   'hotmail',
-//   'linkdin',
-//   'twitter',
-//   'facebook',
-//   'messenger',
-//   'instagram',
-//   'suggest',
-// ];
+
+const themedStyles = StyleService.create({
+  container: {
+    flex: 1,
+  },
+  margin: {
+    marginVertical: -100,
+  },
+});
 
 type accountProps = {
   navigation: any;
@@ -70,11 +67,19 @@ export const ScanAndProtect = (props: any) => {
     setFixerVisible(false);
   };
 
+  const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={{ flex: 1 }}>
     <Layout navigation={props.navigation}>
-      <View>
-        {data.map((job: Job) =>
+      
+      <View style={styles.margin}>
+      <SummaryCard  title="Hi Sakshyam,"
+            subtitle="Enhance security and privacy of your account and devices. "
+            showFirebot={true}
+            showLogo={true}
+            logoName='GOOGLE'
+            />
+        {/* {data.map((job: Job) =>
           job?.tasks?.map((task: Task) => (
             <View key={task.name}>
               <Text category="h5">
@@ -95,7 +100,7 @@ export const ScanAndProtect = (props: any) => {
               <Divider />
             </View>
           )),
-        )}
+        )} */}
       </View>
 
       <Runner jobs={jobs} setData={setData} />
