@@ -25,7 +25,7 @@ import { Fixer } from '../../webviews/fixer';
 import { Runner } from '../../webviews/scanner';
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import SummaryCard from '../../components/SummaryCard'
-
+import ProgressBar from 'react-native-progress/Bar';
 
 const themedStyles = StyleService.create({
   container: {
@@ -34,6 +34,10 @@ const themedStyles = StyleService.create({
   margin: {
     marginVertical: -100,
   },
+  progress: {
+    margin: 10,
+    alignSelf: 'center'
+  }
 });
 
 type accountProps = {
@@ -79,6 +83,7 @@ export const ScanAndProtect = (props: any) => {
             showLogo={true}
             logoName='GOOGLE'
             />
+        <ProgressBar style={styles.progress} progress={1} width={200} indeterminate={data? false:true} />
         {/* {data.map((job: Job) =>
           job?.tasks?.map((task: Task) => (
             <View key={task.name}>
