@@ -17,7 +17,7 @@
 
 import { Layout, StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -28,10 +28,10 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
 
   return (
     <Layout style={styles.container}>
-      {/* <ScrollView style={styles.scrollView}> */}
+      <ScrollView style={styles.scrollView}>
       <Header />
       <View style={styles.content}>{props.children}</View>
-      {/* </ScrollView> */}
+      </ScrollView>
 
       <Footer navigation={props.navigation} />
     </Layout>
