@@ -24,6 +24,8 @@ import AdPersonalization from './AdPersonalization';
 import AutoDeleteActivityHistory from './autodelete/ActivityHistory';
 import AutoDeleteLocationHistory from './autodelete/Location';
 import AutoDeleteYoutubeHistory from './autodelete/YoutubeHistory';
+import PhotoLocationData from './photos/PhotoLocationData';
+import PeopleAndSharing from './PeopleAndSharing';
 const GoogleSelectors = [
   GoogleActivityHistory,
   AutoDeleteActivityHistory,
@@ -32,5 +34,7 @@ const GoogleSelectors = [
   GoogleSecurityStatus,
   SecurityCheckup,
   AdPersonalization,
+  PhotoLocationData,
+  PeopleAndSharing,
 ];
 export default GoogleSelectors;
