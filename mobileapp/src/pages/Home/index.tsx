@@ -31,11 +31,12 @@ export default (props: { navigation: any }): React.ReactElement => {
       <Layout navigation={props.navigation}>
         <View style={styles.margin}>
           <SummaryCard
-            title="Hi Sakshyam,"
+            title="Hi John,"
             subtitle="Enhance security and privacy of your account and devices. "
             showFirebot={true}
             showLogo={true}
             logoName='Fireser'
+            primaryColor={true}
           />
           <Accounts />
         </View>

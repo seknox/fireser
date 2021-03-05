@@ -79,7 +79,7 @@ type runnerProps = {
   setData: Dispatch<SetStateAction<Job[]>>;
 };
 
-export const Runner = (props: runnerProps) => {
+export const Scanner = (props: runnerProps) => {
   // const webViewref = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(true);
   const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
@@ -142,7 +142,7 @@ export const Runner = (props: runnerProps) => {
     console.log(msg.type);
 
     if (msg.type === 'HTML' && msg.content) {
-      setIsVisible(true);
+      setIsVisible(false);
       let res;
       try {
         res = await runTasks(jobs.current[index.current], msg.content);

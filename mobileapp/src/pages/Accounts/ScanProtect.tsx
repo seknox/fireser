@@ -22,10 +22,11 @@ import Layout from '../../components/Layout';
 import Selectors from '../../selectors';
 import { Fixable, Job, Task } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
-import { Runner } from '../../webviews/scanner';
+import { Scanner } from '../../webviews/scanner';
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import SummaryCard from '../../components/SummaryCard'
 import ProgressBar from 'react-native-progress/Bar';
+import ScanResult from './ScanResult'
 
 const themedStyles = StyleService.create({
   container: {
@@ -77,14 +78,16 @@ export const ScanAndProtect = (props: any) => {
     <Layout navigation={props.navigation}>
       
       <View style={styles.margin}>
-      <SummaryCard  title="Hi Sakshyam,"
-            subtitle="Enhance security and privacy of your account and devices. "
-            showFirebot={true}
+      <SummaryCard  title="John Doe"
+            subtitle="john.doe@earth.com "
+            showFirebot={false}
             showLogo={true}
             logoName='GOOGLE'
+            primaryColor={true}
             />
-        <ProgressBar style={styles.progress} progress={1} width={200} indeterminate={data? false:true} />
-        {/* {data.map((job: Job) =>
+        {/* <ProgressBar style={styles.progress} progress={1} width={200} indeterminate={data? false:true} /> */}
+        <ScanResult data={data} />
+        {data.map((job: Job) =>
           job?.tasks?.map((task: Task) => (
             <View key={task.name}>
               <Text category="h5">
@@ -105,10 +108,10 @@ export const ScanAndProtect = (props: any) => {
               <Divider />
             </View>
           )),
-        )} */}
+        )}
       </View>
 
-      <Runner jobs={jobs} setData={setData} />
+      <Scanner jobs={jobs} setData={setData} />
 
       <Fixer
         pageURL={fixable.fixUrl}
