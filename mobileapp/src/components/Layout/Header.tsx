@@ -30,6 +30,6 @@ const themedStyles = StyleService.create({
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: 120,
-    backgroundColor: 'color-primary-600',
+    // backgroundColor: 'color-primary-600',
   },
 });

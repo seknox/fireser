@@ -21,7 +21,7 @@ import React, {Dispatch, SetStateAction} from 'react';
 
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { Dimensions, View } from 'react-native';
-
+import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
 import { Job } from '../types/types';
 
 //This piece of js code will be injected into webview.
@@ -79,7 +79,7 @@ type runnerProps = {
   setData: Dispatch<SetStateAction<Job[]>>;
 };
 
-export const Runner = (props: runnerProps) => {
+export const Scanner = (props: runnerProps) => {
   // const webViewref = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(true);
   const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
@@ -166,31 +166,36 @@ export const Runner = (props: runnerProps) => {
     }
   };
 
-  return (
-    <View
-      style={{
-        display: isVisible ? 'flex' : 'none',
+  const themedStyles = StyleService.create({
+    root: {
+      display: isVisible ? 'flex' : 'none',
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-      }}
-    >
+        paddingTop: 100,
+    },
+    container: {
+      width: Dimensions.get('window').width - 20,
+      height: Dimensions.get('window').height - 20,
+      marginTop: 20,
+    },
+  
+  });
+
+  const styles = useStyleSheet(themedStyles);
+
+  return (
+    <View style={styles.root}>
       <WebView
         // accessibilityTraits={'adjustable'}
-        style={{
-          width: Dimensions.get('window').width - 20,
-          height: Dimensions.get('window').height - 20,
-          marginTop: 20,
-          // maxHeight: 200,
-          flex: 1,
-        }}
+        style={styles.container}
         autoManageStatusBarEnabled={true}
         //    contentInset={{ top: 5, left: 5, bottom: 5, right: 5 }}
         source={{
           uri: runnable.pageURL,
         }}
         onMessage={onMessage}
-        incognito={true}
+        incognito={false}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
         injectedJavaScript={runnable.injectCode}
@@ -200,3 +205,7 @@ export const Runner = (props: runnerProps) => {
     </View>
   );
 };
+
+
+
+
