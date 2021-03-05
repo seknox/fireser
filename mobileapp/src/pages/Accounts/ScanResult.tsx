@@ -23,44 +23,41 @@ import Layout from '../../components/Layout';
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
 
 const themedStyles = StyleService.create({
-  root: {
-    flex: 1,
-    marginVertical: 50,
-    marginHorizontal: 30,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-  },
   card: {
     flex: 1,
     minHeight: 130,
     marginVertical: 10,
     marginHorizontal: 20,
     flexDirection: 'row',
-    // backgroundColor: 'white',
-    // borderRadius: 8,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.22,
-    // shadowRadius: 2.22,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   },
-
+  root: {
+    flex: 1,
+    // marginVertical: 50,
+    marginHorizontal: 14,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+  },
   iconButton: {
-    flex: 2,
-    padding: 1,
+    flex: 1,
     minHeight: 120,
     minWidth: 100,
     maxHeight: 120,
-    maxWidth: 100,
-    marginHorizontal: 5,
+    // maxWidth: 100,
+    marginHorizontal: 7,
     marginVertical: 10,
     backgroundColor: 'white',
     borderRadius: 8,
-
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -79,13 +76,29 @@ const themedStyles = StyleService.create({
   },
   touch: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
+    padding: 10,
+    flexWrap: 'wrap',
+  },
+  issueBold: {
+    color: 'red',
+    flex: 2,
+    fontSize: 80,
+    alignSelf: 'flex-start',
   },
   text: {
-    alignSelf: 'center',
-    marginVertical: 10,
-    marginBottom: 15,
+    flex: 2,
+    fontSize: 19,
+    flexWrap: 'wrap',
+    marginVertical: 15,
   },
+  button: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    padding: 0,
+    alignSelf: 'flex-start',
+  },
+
   desc: {
     flex: 4,
     padding: 24,
@@ -102,17 +115,22 @@ const themedStyles = StyleService.create({
     width: '100%',
     // resizeMode: 'contain',
   },
-  button: {
-    // margin: 2,
-    justifyContent: 'flex-start',
-    padding: 0,
-    alignSelf: 'flex-start',
-  },
-  scrollView: {
-    // height: '80%',
-    // width: '100%',
-    padding: 10,
-    alignSelf: 'center',
+
+  card2: {
+    flex: 1,
+    minHeight: 130,
+    marginVertical: 5,
+    marginHorizontal: 20,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   },
 });
 
@@ -130,8 +148,13 @@ export default function ScanResults(props: any) {
             // onPress={() => navigation.navigate('ScanAndProtect', { name: 'Google' })}
             style={styles.touch}
           >
-            <Text style={styles.text}>Search Data</Text>
-            {/* <GoogleIcon style={styles.icon} /> */}
+            <Text style={styles.issueBold} category="h1">
+              4
+            </Text>
+
+            <Text category="s1" style={styles.text}>
+              Security issues found.
+            </Text>
           </Pressable>
         </View>
         <View style={styles.iconButton}>
@@ -139,55 +162,23 @@ export default function ScanResults(props: any) {
             // onPress={() => navigation.navigate('ScanAndProtect', { name: 'Google' })}
             style={styles.touch}
           >
-            <Text style={styles.text}>Location Data</Text>
-            {/* <GoogleIcon style={styles.icon} /> */}
-          </Pressable>
-        </View>
-        <View style={styles.iconButton}>
-          <Pressable
-            // onPress={() => navigation.navigate('ScanAndProtect', { name: 'Google' })}
-            style={styles.touch}
-          >
-            <Text style={styles.text}>Activity</Text>
-            {/* <GoogleIcon style={styles.icon} /> */}
-          </Pressable>
-        </View>
-        {/*  */}
-        <View style={styles.iconButton}>
-          <Pressable
-            // onPress={() => navigation.navigate('ScanAndProtect', { name: 'Google' })}
-            style={styles.touch}
-          >
-            <Text style={styles.text}>Signin</Text>
-            {/* <GoogleIcon style={styles.icon} /> */}
-          </Pressable>
-        </View>
-        <View style={styles.iconButton}>
-          <Pressable
-            // onPress={() => navigation.navigate('ScanAndProtect', { name: 'Google' })}
-            style={styles.touch}
-          >
-            <Text style={styles.text}>Authorized Devices</Text>
-            {/* <GoogleIcon style={styles.icon} /> */}
-          </Pressable>
-        </View>
-        <View style={styles.iconButton}>
-          <Pressable
-            // onPress={() => navigation.navigate('ScanAndProtect', { name: 'Google' })}
-            style={styles.touch}
-          >
-            <Text style={styles.text}>Authorized Apps</Text>
-            {/* <GoogleIcon style={styles.icon} /> */}
+            <Text style={styles.issueBold} category="h1">
+              3
+            </Text>
+
+            <Text category="s1" style={styles.text}>
+              Privacy issues found.
+            </Text>
           </Pressable>
         </View>
       </View>
 
-      <View style={styles.scrollView}>
-      <Text category="h5">Your Devices</Text>
+      <View style={styles.card2}>
+        <Text category="h5">Your Devices</Text>
       </View>
 
-      <View style={styles.scrollView}>
-      <Text category="h5">Connected Apps</Text>
+      <View style={styles.card2}>
+        <Text category="h5">Connected Apps</Text>
       </View>
 
       <View style={styles.card}>
