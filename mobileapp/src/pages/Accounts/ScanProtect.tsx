@@ -17,16 +17,16 @@
 
 import { Button, Divider, Text } from '@ui-kitten/components';
 import React, { useEffect } from 'react';
-import {SafeAreaView,  View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import Layout from '../../components/Layout';
 import Selectors from '../../selectors';
-import { Fixable, Job, Task } from '../../types/types';
+import { Fixable, Job, Result, Task } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import { Scanner } from '../../webviews/scanner';
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
-import SummaryCard from '../../components/SummaryCard'
+import SummaryCard from '../../components/SummaryCard';
 import ProgressBar from 'react-native-progress/Bar';
-import ScanResult from './ScanResult'
+import ScanResult from './ScanResult';
 
 const themedStyles = StyleService.create({
   container: {
@@ -37,8 +37,8 @@ const themedStyles = StyleService.create({
   },
   progress: {
     margin: 10,
-    alignSelf: 'center'
-  }
+    alignSelf: 'center',
+  },
 });
 
 type accountProps = {
@@ -46,7 +46,7 @@ type accountProps = {
 };
 
 export const ScanAndProtect = (props: any) => {
-  const [data, setData] = React.useState<Job[]>([]);
+  const [result, setResult] = React.useState<Result>([]);
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
   const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
 
@@ -58,68 +58,68 @@ export const ScanAndProtect = (props: any) => {
     setFixerVisible(true);
   };
 
-  const onFixed = () => {
-    const jobtemp = data.map((a) => {
-      a.tasks = a.tasks.map((b) => {
-        if (b.name === fixable?.name) {
-          b.gotValue = b.expectedValue;
-        }
-        return b;
-      });
-      return a;
-    });
-    setData(jobtemp);
-    setFixerVisible(false);
-  };
+  // const onFixed = () => {
+  //   const jobtemp = data.map((a) => {
+  //     a.tasks = a.tasks.map((b) => {
+  //       if (b.name === fixable?.name) {
+  //         b.gotValue = b.expectedValue;
+  //       }
+  //       return b;
+  //     });
+  //     return a;
+  //   });
+  //   setData(jobtemp);
+  //   setFixerVisible(false);
+  // };
 
   const styles = useStyleSheet(themedStyles);
   return (
     <SafeAreaView style={{ flex: 1 }}>
-    <Layout navigation={props.navigation}>
-      
-      <View style={styles.margin}>
-      <SummaryCard  title="John Doe"
+      <Layout navigation={props.navigation}>
+        <View style={styles.margin}>
+          <SummaryCard
+            title="John Doe"
             subtitle="john.doe@earth.com "
             showFirebot={false}
             showLogo={true}
-            logoName='GOOGLE'
+            logoName="GOOGLE"
             primaryColor={true}
-            />
-        {/* <ProgressBar style={styles.progress} progress={1} width={200} indeterminate={data? false:true} /> */}
-        <ScanResult data={data} />
-        {data.map((job: Job) =>
-          job?.tasks?.map((task: Task) => (
-            <View key={task.name}>
-              <Text category="h5">
-                {task.name}:{task.gotValue}
-              </Text>
-              <Text>Expected:{task.expectedValue}</Text>
-              <Button
-                disabled={task.expectedValue === task.gotValue}
-                onPress={() => {
-                  fixIssue(task.fixURL, task.fixFunc, task.name);
-                }}
-              >
-                Fix
-              </Button>
-              <Divider />
-              <Divider />
-              <Divider />
-              <Divider />
-            </View>
-          )),
-        )}
-      </View>
+          />
+          {/* <ProgressBar style={styles.progress} progress={1} width={200} indeterminate={data? false:true} /> */}
+          <ScanResult />
+          {/*{data.map((job: Job) =>*/}
+          {/*  job?.tasks?.map((task: Task) => (*/}
+          {/*    <View key={task.name}>*/}
+          {/*      <Text category="h5">*/}
+          {/*        {task.name}:{task.gotValue}*/}
+          {/*      </Text>*/}
+          {/*      <Text>Expected:{task.expectedValue}</Text>*/}
+          {/*      <Button*/}
+          {/*        disabled={task.expectedValue === task.gotValue}*/}
+          {/*        onPress={() => {*/}
+          {/*          fixIssue(task.fixURL, task.fixFunc, task.name);*/}
+          {/*        }}*/}
+          {/*      >*/}
+          {/*        Fix*/}
+          {/*      </Button>*/}
+          {/*      <Divider />*/}
+          {/*      <Divider />*/}
+          {/*      <Divider />*/}
+          {/*      <Divider />*/}
+          {/*    </View>*/}
+          {/*  )),*/}
+          {/*)}*/}
+        </View>
 
-      <Scanner jobs={jobs} setData={setData} />
+        <Scanner jobs={jobs} onDone={console.log} />
 
-      <Fixer
-        pageURL={fixable.fixUrl}
-        fixFunc={fixable.fixFunc}
-        isVisible={isFixerVisible}
-        onDone={onFixed}
-      />
-    </Layout>
+        <Fixer
+          pageURL={fixable.fixUrl}
+          fixFunc={fixable.fixFunc}
+          isVisible={isFixerVisible}
+          onDone={console.log}
+        />
+      </Layout>
     </SafeAreaView>
   );
 };

@@ -17,12 +17,13 @@
  *
  */
 
-import React, {Dispatch, SetStateAction} from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { Dimensions, View } from 'react-native';
 import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
-import { Job } from '../types/types';
+import {Job, Result} from '../types/types';
+import { aggregateResult } from './AggregrateResult';
 
 //This piece of js code will be injected into webview.
 //It will check if the page is redirected. If the page is redirected, it means login is needed. It sends "LOGIN" type message.
@@ -76,14 +77,14 @@ extractFunc:
 
 type runnerProps = {
   jobs: Job[];
-  setData: Dispatch<SetStateAction<Job[]>>;
+  onDone: Dispatch<SetStateAction<Result>>;
 };
 
 export const Scanner = (props: runnerProps) => {
   // const webViewref = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(true);
   const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
-  const { setData } = props;
+  const { onDone } = props;
   const index = React.useRef(0);
   const jobs = React.useRef<Job[]>(props.jobs);
   //  const results = React.useRef([]);
@@ -108,7 +109,8 @@ export const Scanner = (props: runnerProps) => {
     } else {
       console.log('finished ', jobs.current[0].tasks[0].name);
       //Finished
-      setData(jobs.current);
+      const res = aggregateResult(jobs.current);
+      onDone(res);
     }
   };
 
@@ -169,17 +171,16 @@ export const Scanner = (props: runnerProps) => {
   const themedStyles = StyleService.create({
     root: {
       display: isVisible ? 'flex' : 'none',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingTop: 100,
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingTop: 100,
     },
     container: {
       width: Dimensions.get('window').width - 20,
       height: Dimensions.get('window').height - 20,
       marginTop: 20,
     },
-  
   });
 
   const styles = useStyleSheet(themedStyles);
@@ -205,7 +206,3 @@ export const Scanner = (props: runnerProps) => {
     </View>
   );
 };
-
-
-
-
