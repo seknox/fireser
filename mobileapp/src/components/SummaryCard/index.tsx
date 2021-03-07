@@ -18,7 +18,7 @@
 import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
-import FireserLogo from '../../assets/icons/fireser'
+import FireserLogo from '../../assets/icons/fireser';
 import FirebotSpider from '../../assets/icons/firebot-spider';
 import GoogleIcon from '../../assets/brands/google';
 
@@ -32,7 +32,6 @@ type cardProps = {
 };
 
 export default (props: cardProps): React.ReactElement => {
-
   const themedStyles = StyleService.create({
     root: {
       // marginVertical: -150,
@@ -40,7 +39,7 @@ export default (props: cardProps): React.ReactElement => {
       height: 160,
       padding: 24,
       borderRadius: 24,
-      backgroundColor: props.primaryColor? 'color-primary-default' : 'white',
+      backgroundColor: props.primaryColor ? 'color-primary-default' : 'white',
       boxShadow: '0 4px 20px 0 rgba(0,0,0,0.12)',
     },
     container: {
@@ -54,10 +53,10 @@ export default (props: cardProps): React.ReactElement => {
       marginVertical: 10,
     },
     title: {
-      color: props.primaryColor? 'white': 'color-primary-default',
+      color: props.primaryColor ? 'white' : 'color-primary-default',
     },
     subtitle: {
-      color: props.primaryColor? 'white': 'color-primary-default',
+      color: props.primaryColor ? 'white' : 'color-primary-default',
     },
 
     fireser: {
@@ -108,34 +107,28 @@ export default (props: cardProps): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   function returnIcon(icon: any) {
-    switch(icon){
+    switch (icon) {
       case 'GOOGLE':
         return <GoogleIcon style={styles.icon} />;
-      default: 
-       return  <FireserLogo style={styles.fireser} />
+      default:
+        return <FireserLogo style={styles.fireser} />;
     }
   }
   return (
     <View style={styles.root}>
       <View style={styles.container}>
-      <View style={styles.iconWrapper}>
-         {returnIcon(props.logoName)}
-      </View>
-      
-      <View style={styles.description}>
-      <Text style={styles.title} category="h4">
-        {props.title}
-      </Text>
-      <Text style={styles.subtitle} category="s1">
-        {props.subtitle}
-      </Text>
-      </View>
-     
-      
+        <View style={styles.iconWrapper}>{returnIcon(props.logoName)}</View>
+
+        <View style={styles.description}>
+          <Text style={styles.title} category="h4">
+            {props.title}
+          </Text>
+          <Text style={styles.subtitle} category="s1">
+            {props.subtitle}
+          </Text>
+        </View>
       </View>
       <FirebotSpider style={styles.firebot} />
     </View>
   );
 };
-
-
