@@ -44,6 +44,7 @@ export default {
       extractFunc: extractStoryVisibility,
       name: 'Story visibility',
       expectedValue: 'HIDE',
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/story-visibility',
     },

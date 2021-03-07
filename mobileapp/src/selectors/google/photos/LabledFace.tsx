@@ -49,6 +49,7 @@ export default {
     {
       extractFunc: extractPhotoLocationSetting,
       name: 'Hide Location in Photos',
+      type: 'PRIVACY',
       expectedValue: 'true',
       fixFunc:
         'document.querySelector("#geoloccheckbox").parentNode.children[1].children[0].children[0].children[1].children[1].click();' +

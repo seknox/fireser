@@ -26,6 +26,7 @@ export default {
     {
       extractFunc: extractVisibility,
       name: 'Who can see your connections',
+      type: 'PRIVACY',
       expectedValue: 'ONLY_ME',
       fixFunc: "document.querySelector('input[value=false]').click();",
       fixURL: 'https://www.linkedin.com/psettings/connections-visibility',

@@ -75,12 +75,14 @@ export const Security = {
     {
       extractFunc: extractLastPassChange,
       name: 'Password last changed',
+      type: 'SECURITY',
       expectedValue: '',
       fixURL: 'https://account.live.com/proofs/Manage/additional',
     },
     {
       extractFunc: extractTFAStatus,
       name: 'TFA Status',
+      type: 'SECURITY',
       expectedValue: '',
       fixURL: 'https://account.live.com/proofs/EnableTfa',
     },

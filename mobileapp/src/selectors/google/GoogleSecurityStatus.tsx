@@ -96,18 +96,21 @@ export default {
     {
       extractFunc: extractLastPassordChange,
       name: 'Password Last Changed',
+      type: 'SECURITY',
       expectedValue: '',
       fixURL: 'https://myaccount.google.com/security/signinoptions/password',
     },
     {
       extractFunc: extractTfaStatus,
       name: 'Two factor authentication',
+      type: 'SECURITY',
       expectedValue: 'On',
       fixURL: 'https://myaccount.google.com/security/signinoptions/two-step-verification',
     },
     {
       extractFunc: extractLessSecureApps,
       name: 'Less secure app access',
+      type: 'SECURITY',
       expectedValue: 'Off',
       fixURL: 'https://myaccount.google.com/lesssecureapps',
     },

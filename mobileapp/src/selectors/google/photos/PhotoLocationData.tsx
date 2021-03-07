@@ -90,7 +90,8 @@ export default {
     },
     {
       extractFunc: extractLabledFaceSetting,
-      name: 'Labled face',
+      name: 'Labeled face',
+      type: 'PRIVACY',
       expectedValue: 'FALSE',
       fixFunc:
         'document.querySelector("#geoloccheckbox").parentNode.children[1].children[0].children[0].children[1].children[1].click();' +

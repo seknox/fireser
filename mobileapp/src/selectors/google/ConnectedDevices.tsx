@@ -45,6 +45,7 @@ export default {
     {
       extractFunc: extractConnectedDevices,
       name: 'Security Checkup Status',
+      type: 'PRIVACY',
       expectedValue: 'No issues found',
       fixURL: 'https://myaccount.google.com/security-checkup',
     },

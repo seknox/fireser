@@ -27,14 +27,14 @@ import AutoDeleteYoutubeHistory from './autodelete/YoutubeHistory';
 import PhotoLocationData from './photos/PhotoLocationData';
 import PeopleAndSharing from './PeopleAndSharing';
 const GoogleSelectors = [
-  GoogleActivityHistory,
-  AutoDeleteActivityHistory,
-  AutoDeleteLocationHistory,
-  AutoDeleteYoutubeHistory,
-  GoogleSecurityStatus,
-  SecurityCheckup,
-  AdPersonalization,
-  PhotoLocationData,
+  // GoogleActivityHistory,
+  // AutoDeleteActivityHistory,
+  // AutoDeleteLocationHistory,
+  // AutoDeleteYoutubeHistory,
+  // GoogleSecurityStatus,
+  // SecurityCheckup,
+  // AdPersonalization,
+  // PhotoLocationData,
   PeopleAndSharing,
 ];
 export default GoogleSelectors;

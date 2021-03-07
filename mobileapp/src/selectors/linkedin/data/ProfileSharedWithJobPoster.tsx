@@ -26,6 +26,7 @@ export default {
     {
       extractFunc: extractChecked,
       name: 'Profile shared with job poster',
+      type: 'PRIVACY',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/jobs/profile-shared-with-job-poster',

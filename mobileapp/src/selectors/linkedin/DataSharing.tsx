@@ -47,6 +47,7 @@ export default {
     {
       extractFunc: extractDataSharing,
       name: 'Data sharing',
+      type: 'PRIVACY',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/data-sharing',

@@ -81,6 +81,7 @@ export default {
     {
       extractFunc: extractSharedEndorsements,
       name: 'Shared Endorsements',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: 'document.querySelector(\'div[role="checkbox"]\').click();',
       fixURL: 'https://myaccount.google.com/shared-endorsements',
@@ -89,6 +90,7 @@ export default {
     {
       extractFunc: extractSaveContactFromInteractions,
       name: 'Save contact info when you interact with people',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: 'document.querySelector(\'div[role="checkbox"]\').click();',
       fixURL: 'https://myaccount.google.com/contacts',
@@ -96,6 +98,7 @@ export default {
     {
       extractFunc: extractSaveContactFromDevices,
       name: 'Save contacts from your signed-in devices',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: 'document.querySelector(\'div[role="checkbox"]\').click();',
       fixURL: 'https://myaccount.google.com/devicecontacts',

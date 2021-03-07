@@ -26,6 +26,7 @@ export default {
     {
       extractFunc: extractChecked,
       name: 'Data sharing with 3rd party',
+      type: 'PRIVACY',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/mypreferences/m/settings/policy-and-academic-research',

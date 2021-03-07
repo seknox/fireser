@@ -26,6 +26,7 @@ export default {
     {
       extractFunc: extractChecked,
       name: 'Second Factor Authentication',
+      type: 'SECURITY',
       expectedValue: 'TRUE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/two-step-verification',

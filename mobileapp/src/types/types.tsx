@@ -40,10 +40,26 @@ export type Task = {
   fixURL: string; // url to fix the setting if expectedValue!=gotvalue
   fixFunc: string; // function to automatically fix the setting
   onFixed: () => {};
+  type: 'SECURITY' | 'PRIVACY' | 'CONNECTED_DEVICES' | 'THIRD_PARTY_APPS';
 };
 
 export type Fixable = {
   fixUrl: string;
   fixFunc: string;
   name: string;
+};
+
+export type Device = {
+  name: string;
+};
+
+export type ThirdPartyApps = {
+  name: string;
+};
+
+export type Result = {
+  privacyIssues: Task[];
+  securityIssues: Task[];
+  connectedDevices: Device[];
+  thirdPartyApps: ThirdPartyApps[];
 };
