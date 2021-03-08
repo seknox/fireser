@@ -174,7 +174,18 @@ export default function ScanResults(props: any) {
       </View>
 
       <View style={styles.card2}>
-        <Text category="h5">Your Devices</Text>
+        <Text category="h5">Your Devices </Text>
+        <Text>{JSON.stringify(props.result.connectedDevices)}</Text>
+        {/*{props.result.connectedDevices.map((d, i) => (*/}
+        {/*  <View key={i}>*/}
+        {/*    <Text>{d.title}</Text>*/}
+        {/*    <br />*/}
+        {/*    <Text>{d.name}</Text>*/}
+        {/*    <br />*/}
+        {/*    <Text>{d.os}</Text>*/}
+        {/*    <br />*/}
+        {/*  </View>*/}
+        {/*))}*/}
       </View>
 
       <View style={styles.card2}>

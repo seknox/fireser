@@ -107,7 +107,7 @@ export const Scanner = (props: runnerProps) => {
       // setPageURL(currentTask.pageURL);
       // setLoggedInFunc(currentTask.isLoggedIn);
     } else {
-      console.log('finished ', jobs.current[0].tasks[0].name);
+      // console.log('finished ', jobs.current[0].tasks[0].name);
       //Finished
       const res = aggregateResult(jobs.current);
       onDone(res);
@@ -196,7 +196,7 @@ export const Scanner = (props: runnerProps) => {
           uri: runnable.pageURL,
         }}
         onMessage={onMessage}
-        incognito={false}
+        // incognito={true}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
         injectedJavaScript={runnable.injectCode}

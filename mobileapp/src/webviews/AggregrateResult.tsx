@@ -47,10 +47,10 @@ export function aggregateResult(jobs: Job[]): Result {
           res.securityIssues.push(task);
           continue;
         case 'CONNECTED_DEVICES':
-          res.connectedDevices.push(task);
+          res.connectedDevices=task.gotValue;
           continue;
         case 'THIRD_PARTY_APPS':
-          res.thirdPartyApps.push(task);
+          res.thirdPartyApps=task.gotValue;
           continue;
         default:
           console.error('Invalid type',task.name);
