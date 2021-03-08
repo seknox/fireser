@@ -54,12 +54,14 @@ export default {
     {
       extractFunc: extractPersonalisedAds,
       name: 'Personalised Ads',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixURL: 'https://account.microsoft.com/privacy/ad-settings',
     },
     {
       extractFunc: extractPersonalisedAdsOnBrowser,
       name: 'Personalised Ads on browser',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixURL: 'https://account.microsoft.com/privacy/ad-settings',
     },

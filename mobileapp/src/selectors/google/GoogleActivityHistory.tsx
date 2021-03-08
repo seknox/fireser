@@ -114,6 +114,7 @@ export default {
     {
       extractFunc: extractWebAppActivityHistory,
       name: 'Web Activity History',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=search',
       fixFunc: fixFunc,
@@ -121,6 +122,7 @@ export default {
     {
       extractFunc: extractLocationHistory,
       name: 'Location History',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: fixFunc,
       fixURL:
@@ -130,6 +132,7 @@ export default {
     {
       extractFunc: extractYotubeHistory,
       name: 'YouTube Activity History',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: fixFunc,
       fixURL:

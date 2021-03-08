@@ -26,6 +26,7 @@ export default {
     {
       extractFunc: extractChecked,
       name: 'profile info on other content shown on LinkedIn',
+      type: 'PRIVACY',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/mypreferences/m/settings/organization-and-interests',

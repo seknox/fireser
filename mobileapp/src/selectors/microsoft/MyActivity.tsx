@@ -45,6 +45,7 @@ export const ActivityHistory = {
     {
       extractFunc: extractMyActivity,
       name: 'My Activity',
+      type: 'PRIVACY',
       expectedValue: ' ',
       fixFunc: "document.querySelectorAll('button.delete-button').forEach(b=>b.click());",
       fixURL: 'https://account.microsoft.com/privacy/activity-history',
@@ -59,6 +60,7 @@ export const SearchHistory = {
     {
       extractFunc: extractMyActivity,
       name: 'Search History',
+      type: 'PRIVACY',
       expectedValue: ' ',
       fixFunc: "document.querySelectorAll('button.delete-button').forEach(b=>b.click());",
       fixURL: 'https://account.microsoft.com/privacy/activity-history?view=search',
@@ -73,6 +75,7 @@ export const BrowserHistory = {
     {
       extractFunc: extractMyActivity,
       name: 'Browser History',
+      type: 'PRIVACY',
       expectedValue: ' ',
       fixFunc:
         "setTimeout(function(document.querySelectorAll('button.delete-button').forEach(b=>b.click());){},500);",

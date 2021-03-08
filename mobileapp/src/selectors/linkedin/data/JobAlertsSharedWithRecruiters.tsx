@@ -25,7 +25,8 @@ export default {
   tasks: [
     {
       extractFunc: extractChecked,
-      name: 'Job Alerts Shared with recruters',
+      name: 'Job Alerts Shared with recruiters',
+      type: 'PRIVACY',
       description:
         'Signal your interest to recruiters at companies you have created job alerts for',
       expectedValue: 'FALSE',

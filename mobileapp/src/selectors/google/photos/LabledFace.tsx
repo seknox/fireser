@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -18,36 +18,43 @@
  */
 
 import cio from 'cheerio';
-import { isLoggedIn } from './CheckLoggedInFunc';
+import { isLoggedIn } from '../CheckLoggedInFunc';
 
-const extractAdPersonalization = (htmlContent: string) => {
+const extractPhotoLocationSetting = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
     }
 
     const $ = cio.load(htmlContent);
+    const selected = $('#geoloccheckbox');
 
-    const selected = $(
-      'body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(4) > div:nth-child(2) > span > div ',
-    );
+    const inputElement = selected
+      .parent('div')
+      .children('div:nth-child(2)')
+      .children('div:nth-child(1)')
+      .children('div')
+      .children('div:nth-child(2)')
+      .children('input:nth-child(2)');
 
-    // console.info(selected.html(), 'prop');
-    resolve(selected.prop('aria-checked'));
+    resolve(inputElement.prop('aria-checked'));
   });
 };
 
 export default {
-  name: 'Personalised Ads',
-  pageURL: 'https://adssettings.google.com/authenticated',
+  name: 'Hide Location in Photos',
+  pageURL: 'https://photos.google.com/settings',
   isLoggedIn: isLoggedIn,
   tasks: [
     {
-      extractFunc: extractAdPersonalization,
-      name: 'Personalised Ads',
+      extractFunc: extractPhotoLocationSetting,
+      name: 'Hide Location in Photos',
       type: 'PRIVACY',
-      expectedValue: 'false',
-      fixURL: 'https://adssettings.google.com/authenticated',
+      expectedValue: 'true',
+      fixFunc:
+        'document.querySelector("#geoloccheckbox").parentNode.children[1].children[0].children[0].children[1].children[1].click();' +
+        'setTimeout(function(){document.querySelectorAll("[autofocus]")[1].click();},1000)',
+      fixURL: 'https://photos.google.com/settings',
     },
   ],
 };

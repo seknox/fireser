@@ -44,6 +44,7 @@ export default {
     {
       extractFunc: extractSecurityCheckupStatus,
       name: 'Security Checkup Status',
+      type: 'SECURITY',
       expectedValue: 'No issues found',
       fixURL: 'https://myaccount.google.com/security-checkup',
     },

@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -17,36 +17,73 @@
  *
  */
 
-
 import cio from 'cheerio';
-import {isLoggedIn} from "./CheckLoggedInFunc";
+import { isLoggedIn } from './CheckLoggedInFunc';
 
-
-const extractConnectedDevices =  (htmlContent: string) => {
+const extractConnectedDevices = (htmlContent: string) => {
+  return new Promise((resolve, reject) => {
+    if (!htmlContent) {
+      reject('HTML content empty');
+    }
 
     const $ = cio.load(htmlContent);
 
-    const selected = $("div[role=listitem] > div > div > div:nth-child(3) > div ");
+    const selected = $('div[role="listitem"]');
+    var devices = [];
+    selected.each(function (i, elem) {
+      const ele = $(this);
+      // console.log(ele.html())
+      const deviceID = ele.children('div').attr('data-device-id');
+      const title = ele.find($("div[role='heading']"));
 
-    selected.each(function (i, el) {
-      const elem = $(el);
-      const text = elem.html();
-      //   console.log(elem.html())
+      const deviceTypeElement = ele.find($(`div[data-device-id="${deviceID}"] > div > div > div`));
+      const dataOS = deviceTypeElement.attr('data-os');
+      const imgURL = ele.find($(`div[data-device-id="${deviceID}"] > div > div > img`)).attr('src');
+      const dataFormFactor = deviceTypeElement.attr('data-form-factor');
+      const name = title.siblings('div');
 
+      let os;
 
+      // console.debug("dataos: ",dataos)
+      // console.debug("data form factor: ",dataformfactor)
+      switch (dataOS + ':' + dataFormFactor) {
+        case '5:2':
+          os = 'IPHONE';
+          break;
+        case '5:5':
+          os = 'IPAD';
+          break;
+        case '2:1':
+          os = 'Macbook';
+        default:
+          os = 'GENERIC';
+      }
+      // console.log('imgurl:',imgURL)
+      if (imgURL) {
+        os = 'ANDROID';
+      }
+
+      // const text = elem.html();
+      //console.log(title);
+      // console.debug();
+      devices.push({ title: title.text(), name: name.text(), deviceID: deviceID, os, imgURL });
+    });
+    // console.log(devices);
+    resolve(devices);
+  });
 };
-
 
 export default {
   name: 'Security ',
-  pageURL: 'https://myaccount.google.com/security-checkup',
-  isLoggedIn:isLoggedIn,
+  pageURL: 'https://myaccount.google.com/device-activity',
+  isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extractConnectedDevices,
       name: 'Security Checkup Status',
+      type: 'CONNECTED_DEVICES',
       expectedValue: 'No issues found',
-      fixURL: 'https://myaccount.google.com/security-checkup',
+      fixURL: 'https://myaccount.google.com/device-activity',
     },
   ],
 };

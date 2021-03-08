@@ -26,6 +26,7 @@ export const AdsBasedOnIntrestCategories = {
     {
       extractFunc: extractChecked,
       fixFunc: clickChecked,
+      type: 'PRIVACY',
       name: 'Interest Categories',
       expectedValue: 'No',
       fixURL: 'https://www.linkedin.com/psettings/advertising/li-enterprise-product',
@@ -39,6 +40,7 @@ export const AdsBasedOnProfileData = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Use your profile data',
       expectedValue: 'FALSE',
@@ -53,6 +55,7 @@ export const AdsBasedOnConnections = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads based on connections',
       expectedValue: 'FALSE',
@@ -67,6 +70,7 @@ export const AdsBasedOnLocation = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads based on locations',
       expectedValue: 'FALSE',
@@ -80,6 +84,7 @@ export const AdsBasedOnDemographics = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads based on demographics',
       expectedValue: 'FALSE',
@@ -94,6 +99,7 @@ export const AdsBasedOnCompanies = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads based on companies you follow',
       expectedValue: 'FALSE',
@@ -108,6 +114,7 @@ export const AdsBasedOnGroups = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads based on groups you joined',
       expectedValue: 'FALSE',
@@ -122,6 +129,7 @@ export const InfoAboutVisitsToOtherWebsites = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads based on info about your visit to other sites',
       expectedValue: 'FALSE',
@@ -136,6 +144,7 @@ export const AdsBeyondLinkedIn = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads beyond LinkedIn',
       expectedValue: 'FALSE',
@@ -150,6 +159,7 @@ export const AdsBasedOnInformationYouSharedWithBusinesses = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads Based On Information You Shared With Businesses',
       expectedValue: 'FALSE',
@@ -164,6 +174,7 @@ export const AdsBasedOnActionsYouTookInResponseToAds = {
   tasks: [
     {
       extractFunc: extractChecked,
+      type: 'PRIVACY',
       fixFunc: clickChecked,
       name: 'Ads Based On Actions You Took In Response To Ads',
       expectedValue: 'FALSE',
