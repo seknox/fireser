@@ -78,6 +78,7 @@ export default {
     {
       extractFunc: extracAutoDelete,
       name: 'Auto delete location history',
+      type: 'PRIVACY',
       expectedValue: '3 months',
       fixFunc: fixFunc,
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=location',

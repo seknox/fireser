@@ -47,6 +47,7 @@ export const CortanaData = {
   tasks: [
     {
       extractFunc: extractCortanaData,
+      type: 'PRIVACY',
       name: 'Cortana Data',
       expectedValue: ' ',
       fixFunc: fixFunc,

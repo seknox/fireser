@@ -24,13 +24,22 @@ import AdPersonalization from './AdPersonalization';
 import AutoDeleteActivityHistory from './autodelete/ActivityHistory';
 import AutoDeleteLocationHistory from './autodelete/Location';
 import AutoDeleteYoutubeHistory from './autodelete/YoutubeHistory';
+import PhotoLocationData from './photos/PhotoLocationData';
+import PeopleAndSharing from './PeopleAndSharing';
+import ConnectedDevices from  './ConnectedDevices';
+import ConnectedApps from  './ConnectedApps';
+
 const GoogleSelectors = [
-  GoogleActivityHistory,
-  AutoDeleteActivityHistory,
-  AutoDeleteLocationHistory,
-  AutoDeleteYoutubeHistory,
-  GoogleSecurityStatus,
-  SecurityCheckup,
-  AdPersonalization,
+  // GoogleActivityHistory,
+  // AutoDeleteActivityHistory,
+  // AutoDeleteLocationHistory,
+  // AutoDeleteYoutubeHistory,
+  // GoogleSecurityStatus,
+  // SecurityCheckup,
+  // AdPersonalization,
+  // PhotoLocationData,
+  // PeopleAndSharing,
+    ConnectedDevices,
+    ConnectedApps,
 ];
 export default GoogleSelectors;

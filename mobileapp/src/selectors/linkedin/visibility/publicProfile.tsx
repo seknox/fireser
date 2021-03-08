@@ -41,6 +41,7 @@ export default {
     {
       extractFunc: extractProfileVisibility,
       name: 'Public Profile visibility',
+      type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/public-profile/settings',

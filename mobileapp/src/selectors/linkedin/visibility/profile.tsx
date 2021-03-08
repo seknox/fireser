@@ -26,6 +26,7 @@ export default {
     {
       extractFunc: extractVisibility,
       name: 'Profile visibility',
+      type: 'PRIVACY',
       expectedValue: 'HIDE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/psettings/profile-visibility',

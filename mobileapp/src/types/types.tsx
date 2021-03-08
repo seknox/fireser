@@ -39,11 +39,36 @@ export type Task = {
   gotValue: string | boolean;
   fixURL: string; // url to fix the setting if expectedValue!=gotvalue
   fixFunc: string; // function to automatically fix the setting
-  onFixed: () => {};
+  //onFixed: () => {};
+  type: 'SECURITY' | 'PRIVACY' | 'CONNECTED_DEVICES' | 'CONNECTED_APPS';
 };
 
 export type Fixable = {
   fixUrl: string;
   fixFunc: string;
   name: string;
+};
+
+export type Device = {
+  name: string;
+  os: string;
+  imageURL: string;
+};
+
+export type Apps = {
+  name: string;
+  imgURL: string;
+  permissions: string;
+};
+
+export type Result = {
+  privacyIssuesCount: number;
+  securityIssuesCount: number;
+  privacyIssues: Task[];
+  securityIssues: Task[];
+  connectedDevices: Device[];
+  connectedApps: {
+    thirdPartyApps: Apps[];
+    signInApps: Apps[];
+  };
 };

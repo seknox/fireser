@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -20,7 +20,7 @@
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
 
-const extractAdPersonalization = (htmlContent: string) => {
+const extractConnectedApps = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -28,26 +28,31 @@ const extractAdPersonalization = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $(
-      'body > div:nth-child(5) > c-wiz > c-wiz > div > div > div > c-wiz > div > span > div > div:nth-child(4) > div:nth-child(2) > span > div ',
-    );
-
-    // console.info(selected.html(), 'prop');
-    resolve(selected.prop('aria-checked'));
+    const selected = $('#third-party').parent().siblings();
+    var apps = [];
+    selected.each(function (i, elem) {
+      const ele = $(this);
+      const imgNode = ele.find($('img[data-atf="true"]'));
+      const imgURL = imgNode.attr('src');
+      const name = imgNode.parent().next().text();
+      const permissions = imgNode.parent().next().next().text();
+      apps.push({ name, imgURL, permissions });
+    });
+    resolve(apps);
   });
 };
 
 export default {
-  name: 'Personalised Ads',
-  pageURL: 'https://adssettings.google.com/authenticated',
+  name: 'Security ',
+  pageURL: 'https://myaccount.google.com/permissions',
   isLoggedIn: isLoggedIn,
   tasks: [
     {
-      extractFunc: extractAdPersonalization,
-      name: 'Personalised Ads',
-      type: 'PRIVACY',
-      expectedValue: 'false',
-      fixURL: 'https://adssettings.google.com/authenticated',
+      extractFunc: extractConnectedApps,
+      name: 'Connected third party apps',
+      type: 'CONNECTED_APPS',
+      expectedValue: 'No issues found',
+      fixURL: 'https://myaccount.google.com/permissions',
     },
   ],
 };

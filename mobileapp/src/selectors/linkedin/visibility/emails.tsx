@@ -26,6 +26,7 @@ export default {
     {
       extractFunc: extractVisibility,
       name: 'Who can see or download your email address',
+      type: 'PRIVACY',
       expectedValue: 'JUST_ME',
       fixFunc: "document.querySelector('input[id=just-me]').click();",
       fixURL: 'https://www.linkedin.com/psettings/privacy/email',
@@ -40,6 +41,7 @@ export const DiscoverUsingEmail = {
     {
       extractFunc: extractVisibility,
       name: 'Who can discover your profile with your email address',
+      type: 'PRIVACY',
       expectedValue: 'JUST_ME',
       fixFunc: "document.querySelector('input[id=first]').click()",
       fixURL: 'https://www.linkedin.com/mypreferences/m/settings/discover-me-by-email-address',
@@ -53,6 +55,7 @@ export const DiscoverUsingPhone = {
   tasks: [
     {
       extractFunc: extractVisibility,
+      type: 'PRIVACY',
       name: 'Who can discover your profile with your phone',
       expectedValue: 'JUST_ME',
       fixFunc: "document.querySelector('input[id=first]').click()",

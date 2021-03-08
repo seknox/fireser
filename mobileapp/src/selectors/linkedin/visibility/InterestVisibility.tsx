@@ -26,6 +26,7 @@ export default {
     {
       extractFunc: extractChecked,
       name: 'Interest visibility',
+      type: 'PRIVACY',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/mypreferences/m/settings/organization-and-interests',

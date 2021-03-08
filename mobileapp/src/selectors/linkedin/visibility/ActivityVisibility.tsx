@@ -26,6 +26,7 @@ export const ActiveStatusVisibility = {
     {
       extractFunc: extractVisibility,
       name: 'Active Status Visibility',
+      type: 'PRIVACY',
       expectedValue: 'HIDDEN',
       fixFunc: "document.querySelectorAll('input#option-hidden').click();",
       fixURL: 'https://www.linkedin.com/mypreferences/m/settings/manage-my-active-status',
@@ -40,6 +41,7 @@ export const WorkAnniversariesVisibility = {
     {
       extractFunc: extractChecked,
       name: 'Work Anniversaries Visibility',
+      type: 'PRIVACY',
       expectedValue: 'FALSE',
       fixFunc: clickChecked,
       fixURL: 'https://www.linkedin.com/mypreferences/m/settings/notify-network-for-updates',
@@ -54,6 +56,7 @@ export const NewsMentionsVisibility = {
     {
       extractFunc: extractChecked,
       name: 'News Mentions Visibility',
+      type: 'PRIVACY',
       description:
         'whether linkedin notify people in your network that you’ve been mentioned in an article or blog post',
       expectedValue: 'FALSE',
@@ -70,6 +73,7 @@ export const MentionsVisibility = {
     {
       extractFunc: extractChecked,
       name: 'Mentions Visibility',
+      type: 'PRIVACY',
       description:
         'Allow others to mention or tag you in content? e.g. mentions in posts and comments, tags in photos, etc.',
       expectedValue: 'FALSE',

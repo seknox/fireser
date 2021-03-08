@@ -46,6 +46,7 @@ export default {
   tasks: [
     {
       extractFunc: extractDisabled,
+      type: 'PRIVACY',
       name: 'Clean search history',
       expectedValue: 'TRUE',
       fixFunc: fixFunction,
