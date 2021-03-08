@@ -49,7 +49,7 @@ export function aggregateResult(jobs: Job[]): Result {
         case 'CONNECTED_DEVICES':
           res.connectedDevices=task.gotValue;
           continue;
-        case 'THIRD_PARTY_APPS':
+        case 'CONNECTED_APPS':
           res.thirdPartyApps=task.gotValue;
           continue;
         default:

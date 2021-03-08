@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -58,7 +58,7 @@ const extractConnectedDevices = (htmlContent: string) => {
         default:
           os = 'GENERIC';
       }
-      console.log('imgurl:',imgURL)
+      // console.log('imgurl:',imgURL)
       if (imgURL) {
         os = 'ANDROID';
       }

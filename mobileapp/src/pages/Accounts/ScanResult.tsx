@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Divider, Text } from '@ui-kitten/components';
+import {Button, Divider, List, ListItem, Text} from '@ui-kitten/components';
 import React, { useEffect } from 'react';
 import { Pressable, View, ScrollView } from 'react-native';
 import Layout from '../../components/Layout';
@@ -175,21 +175,19 @@ export default function ScanResults(props: any) {
 
       <View style={styles.card2}>
         <Text category="h5">Your Devices </Text>
-        <Text>{JSON.stringify(props.result.connectedDevices)}</Text>
         {/*{props.result.connectedDevices.map((d, i) => (*/}
-        {/*  <View key={i}>*/}
-        {/*    <Text>{d.title}</Text>*/}
-        {/*    <br />*/}
-        {/*    <Text>{d.name}</Text>*/}
-        {/*    <br />*/}
-        {/*    <Text>{d.os}</Text>*/}
-        {/*    <br />*/}
-        {/*  </View>*/}
+        {/*    //TODO @sshahcodes create list from props.result.connectedDevices*/}
+        {/*  // <List key={i}>*/}
+        {/*  //   <ListItem>{d.title}</ListItem>*/}
+        {/*  //   <ListItem>{d.name}</ListItem>*/}
+        {/*  //   <ListItem>{d.os}</ListItem>*/}
+        {/*  // </List>*/}
         {/*))}*/}
       </View>
 
       <View style={styles.card2}>
         <Text category="h5">Connected Apps</Text>
+        {/*TODO @sshahcodes create list from props.result.connectedApps */}
       </View>
 
       <View style={styles.card}>
