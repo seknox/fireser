@@ -29,8 +29,8 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
   return (
     <Layout style={styles.container}>
       <ScrollView style={styles.scrollView}>
-      <Header />
-      <View style={styles.content}>{props.children}</View>
+        <Header />
+        <View style={styles.content}>{props.children}</View>
       </ScrollView>
 
       <Footer navigation={props.navigation} />

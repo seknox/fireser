@@ -20,7 +20,7 @@ import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import React, { useEffect } from 'react';
 import 'react-native-gesture-handler';
-import {AppNavigator} from './Navigator';
+import { AppNavigator } from './src/Navigator';
 import { default as theme } from './src/assets/custom-theme.json';
 import codePush from 'react-native-code-push';
 

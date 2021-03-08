@@ -17,7 +17,8 @@
 
 import { Icon, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, Button } from 'react-native';
+import Modal from 'react-native-modal';
 
 // const SettingIcon = (style: ImageStyle): IconElement => (
 //   <Icon {...style} name="settings-2-outline" />
@@ -57,18 +58,32 @@ export default (props: { navigation: any }): React.ReactElement => {
     props.navigation.navigate('Home');
   };
 
+  const [isModalVisible, setModalVisible] = React.useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   return (
     <View style={styles.root}>
-    <View style={styles.container}>
-      <Pressable style={styles.touch}>
-        <View>
-          <SettingIcon />
-
-          <Text status="basic">Setting</Text>
+      <Modal isVisible={isModalVisible} hasBackdrop={true} onBackdropPress={toggleModal}>
+        <View style={styles.content}>
+          <View style={styles.contentTitle}>
+            <Text>SETTING menu will go here</Text>
+          </View>
         </View>
-      </Pressable>
+      </Modal>
 
-      {/* <Pressable style={styles.touch}>
+      <View style={styles.container}>
+        <Pressable style={styles.touch} onPress={toggleModal}>
+          <View>
+            <SettingIcon />
+
+            <Text status="basic">Setting</Text>
+          </View>
+        </Pressable>
+
+        {/* <Pressable style={styles.touch}>
         <View styles={styles.nav}>
           <Utilities />
           <Text styles={styles.navText} status="basic">
@@ -77,27 +92,27 @@ export default (props: { navigation: any }): React.ReactElement => {
         </View>
       </Pressable> */}
 
-      <Pressable style={styles.touch}>
-        <View>
-          <LockIcon />
-          <Text status="basic">Vault</Text>
-        </View>
-      </Pressable>
+        <Pressable style={styles.touch}>
+          <View>
+            <LockIcon />
+            <Text status="basic">Vault</Text>
+          </View>
+        </Pressable>
 
-      <Pressable style={styles.touch}>
-        <View>
-          <StatusIcon />
-          <Text status="basic">Alerts</Text>
-        </View>
-      </Pressable>
+        <Pressable style={styles.touch}>
+          <View>
+            <StatusIcon />
+            <Text status="basic">Alerts</Text>
+          </View>
+        </Pressable>
 
-      <Pressable style={styles.touch} onPress={navigateHome}>
-        <View>
-          <HomeIcon />
-          <Text status="basic">Home</Text>
-        </View>
-      </Pressable>
-    </View>
+        <Pressable style={styles.touch} onPress={navigateHome}>
+          <View>
+            <HomeIcon />
+            <Text status="basic">Home</Text>
+          </View>
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -108,7 +123,7 @@ const themedStyles = StyleService.create({
   },
   container: {
     // flex: 1,
-    
+
     flexDirection: 'row',
     // marginVertical: -10,
     marginHorizontal: 10,
@@ -141,5 +156,18 @@ const themedStyles = StyleService.create({
     backgroundColor: 'background-basic-color-1',
     alignSelf: 'flex-end',
     bottom: 0,
+  },
+
+  content: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  contentTitle: {
+    fontSize: 20,
+    marginBottom: 12,
   },
 });
