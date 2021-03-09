@@ -66,7 +66,7 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-/ios/Pods/
+mobileapp/ios/Pods/
 
 
 #MS App Center

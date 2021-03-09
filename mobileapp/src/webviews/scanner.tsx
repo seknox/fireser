@@ -79,6 +79,7 @@ type runnerProps = {
   jobs: Job[];
   onDone: Dispatch<SetStateAction<Result>>;
   onProgress: (progress: number) => void;
+  changeShowProgress: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Scanner = (props: runnerProps, ref: any) => {
@@ -113,6 +114,7 @@ const Scanner = (props: runnerProps, ref: any) => {
       const res = aggregateResult(jobs.current);
       // console.debug(JSON.stringify(res));
       onDone(res);
+      props.changeShowProgress(false);
       props.onProgress(1);
     }
   };
@@ -148,6 +150,7 @@ const Scanner = (props: runnerProps, ref: any) => {
 
     if (msg.type === 'HTML' && msg.content) {
       setIsVisible(false);
+      props.changeShowProgress(true);
       const progress = index.current / jobs.current.length;
       props.onProgress(progress);
       let res;
@@ -166,6 +169,7 @@ const Scanner = (props: runnerProps, ref: any) => {
     } else if (msg.type === 'LOGIN') {
       console.info('login needed');
       //make the login page visible if it requires login.
+      props.changeShowProgress(false);
       setIsVisible(true);
     } else {
       //DEBUG
@@ -179,7 +183,7 @@ const Scanner = (props: runnerProps, ref: any) => {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingTop: 100,
+      // paddingTop: 100,
     },
     container: {
       width: Dimensions.get('window').width - 20,

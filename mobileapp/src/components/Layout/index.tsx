@@ -17,7 +17,7 @@
 
 import { Layout, StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, SafeAreaView } from 'react-native';
 import Footer from './Footer';
 import Header from './Header';
 
@@ -27,20 +27,25 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
   // const { navigation } = props;
 
   return (
-    <Layout style={styles.container}>
-      <ScrollView style={styles.scrollView}>
-        <Header />
-        <View style={styles.content}>{props.children}</View>
-      </ScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <Layout style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <Header />
+          <View style={styles.content}>{props.children}</View>
+        </ScrollView>
 
-      <Footer navigation={props.navigation} />
-    </Layout>
+        <Footer navigation={props.navigation} />
+      </Layout>
+    </SafeAreaView>
   );
 };
 
 const themedStyles = StyleService.create({
+  safeArea: {
+    flex: 1,
+  },
   scrollView: {
-    height: '80%',
+    height: '100%',
     width: '100%',
     alignSelf: 'center',
   },
@@ -53,6 +58,7 @@ const themedStyles = StyleService.create({
   },
   content: {
     flex: 5,
+    flexGrow: 1,
     // paddingTop: 32,
     // paddingHorizontal: 16,
   },
