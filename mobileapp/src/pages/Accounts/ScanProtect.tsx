@@ -90,7 +90,7 @@ export const ScanAndProtect = (props: any) => {
           <Button
             onPress={() => {
               scannerRef.current?.injectJavaScript(
-                'alert(123);document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
+                'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
               );
             }}
           >
