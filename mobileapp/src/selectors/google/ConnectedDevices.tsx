@@ -42,31 +42,53 @@ const extractConnectedDevices = (htmlContent: string) => {
       const dataFormFactor = deviceTypeElement.attr('data-form-factor');
       const name = title.siblings('div');
 
-      let os;
+      let os: string;
+      let deviceType: string;
 
-      // console.debug("dataos: ",dataos)
-      // console.debug("data form factor: ",dataformfactor)
       switch (dataOS + ':' + dataFormFactor) {
         case '5:2':
           os = 'IPHONE';
+          deviceType = 'MOBILE';
           break;
         case '5:5':
           os = 'IPAD';
+          deviceType = 'TABLET';
           break;
         case '2:1':
-          os = 'Macbook';
+          os = 'MAC';
+          deviceType = 'WORKSTATION';
+          break;
+        case '1:1':
+          os = 'WINDOWS';
+          deviceType = 'WORKSTATION';
+          break;
+        case '3:1':
+          os = 'LINUX';
+          deviceType = 'WORKSTATION';
+          break;
+        case '6:':
+          os = 'CHROME_OS';
+          deviceType = 'WORKSTATION';
+          break;
+
         default:
           os = 'GENERIC';
+          deviceType = 'GENERIC';
       }
       // console.log('imgurl:',imgURL)
       if (imgURL) {
         os = 'ANDROID';
+        deviceType = 'MOBILE';
       }
 
-      // const text = elem.html();
-      //console.log(title);
-      // console.debug();
-      devices.push({ title: title.text(), name: name.text(), deviceID: deviceID, os, imgURL });
+      devices.push({
+        title: title.text(),
+        name: name.text(),
+        deviceID: deviceID,
+        os,
+        deviceType,
+        imgURL,
+      });
     });
     // console.log(devices);
     resolve(devices);
