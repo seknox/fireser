@@ -34,6 +34,7 @@ const themedStyles = StyleService.create({
 
   progress: {
     margin: 10,
+    marginVertical: 100,
     alignSelf: 'center',
   },
 });
@@ -46,6 +47,7 @@ export const ScanAndProtect = (props: any) => {
   const [result, setResult] = React.useState<Result>({ connectedDevices: [] });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
   const [progress, setProgress] = React.useState<number | null>(null);
+  const [showProgress, changeShowProgress] = React.useState(false);
   const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
   const scannerRef = React.useRef(null);
   const account = props.route.params.name;
@@ -74,38 +76,46 @@ export const ScanAndProtect = (props: any) => {
   return (
     <Layout navigation={props.navigation}>
       <View style={styles.container}>
-        <SummaryCard
-          title="John Doe"
-          subtitle="john.doe@earth.com "
-          showFirebot={false}
-          showLogo={true}
-          logoName="GOOGLE"
-          primaryColor={true}
-        />
-        <ProgressBar
-          style={styles.progress}
-          progress={progress}
-          width={300}
-          indeterminate={progress === null}
-        />
-        <View>
-          <ScanResult result={result} />
-        </View>
+        {showProgress ? (
+          <ProgressBar
+            style={styles.progress}
+            progress={progress}
+            width={300}
+            indeterminate={progress === null}
+          />
+        ) : null}
 
-        <View>
-          <Button
-            onPress={() => {
-              scannerRef.current?.injectJavaScript(
-                'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
-              );
-            }}
-          >
-            Sign out from this account
-          </Button>
-        </View>
+        {result.connectedDevices.length === 0 ? null : (
+          <View>
+            <SummaryCard
+              title="John Doe"
+              subtitle="john.doe@earth.com "
+              showFirebot={false}
+              showLogo={true}
+              logoName="GOOGLE"
+              primaryColor={true}
+            />
+            <ScanResult result={result} />
+            <Button
+              onPress={() => {
+                scannerRef.current?.injectJavaScript(
+                  'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
+                );
+              }}
+            >
+              Sign out from this account
+            </Button>
+          </View>
+        )}
       </View>
 
-      <Scanner jobs={jobs} onDone={setResult} ref={scannerRef} onProgress={setProgress} />
+      <Scanner
+        jobs={jobs}
+        onDone={setResult}
+        ref={scannerRef}
+        onProgress={setProgress}
+        changeShowProgress={changeShowProgress}
+      />
 
       <Fixer
         pageURL={fixable.fixUrl}
