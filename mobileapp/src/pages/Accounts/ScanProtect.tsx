@@ -15,28 +15,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Divider, Text } from '@ui-kitten/components';
-import React, { useEffect } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { Button, StyleService, useStyleSheet } from '@ui-kitten/components';
+import React from 'react';
+import { View } from 'react-native';
+import ProgressBar from 'react-native-progress/Bar';
 import Layout from '../../components/Layout';
+import SummaryCard from '../../components/SummaryCard';
 import Selectors from '../../selectors';
-import { Fixable, Job, Result, Task } from '../../types/types';
+import { Fixable, Result } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
-import { StyleService, useStyleSheet } from '@ui-kitten/components';
-import SummaryCard from '../../components/SummaryCard';
-import ProgressBar from 'react-native-progress/Bar';
 import ScanResult from './ScanResult';
 
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-  margin: {
-    marginVertical: -100,
-  },
+
   progress: {
     margin: 10,
+    marginVertical: 100,
+    alignSelf: 'center',
+  },
+  button: {
+    width: 300,
+    marginVertical: 20,
     alignSelf: 'center',
   },
 });
@@ -49,6 +52,7 @@ export const ScanAndProtect = (props: any) => {
   const [result, setResult] = React.useState<Result>({ connectedDevices: [] });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
   const [progress, setProgress] = React.useState<number | null>(null);
+  const [showProgress, changeShowProgress] = React.useState(false);
   const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
   const scannerRef = React.useRef(null);
   const account = props.route.params.name;
@@ -75,66 +79,58 @@ export const ScanAndProtect = (props: any) => {
 
   const styles = useStyleSheet(themedStyles);
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Layout navigation={props.navigation}>
-        <View style={styles.margin}>
-          <SummaryCard
-            title="John Doe"
-            subtitle="john.doe@earth.com "
-            showFirebot={false}
-            showLogo={true}
-            logoName="GOOGLE"
-            primaryColor={true}
-          />
+    <Layout navigation={props.navigation}>
+      <View style={styles.container}>
+        {showProgress ? (
           <ProgressBar
             style={styles.progress}
             progress={progress}
             width={300}
             indeterminate={progress === null}
           />
-          <ScanResult result={result} />
-          <Button
-            onPress={() => {
-              scannerRef.current?.injectJavaScript(
-                'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
-              );
-            }}
-          >
-            Sign out from this account
-          </Button>
-          {/*{data.map((job: Job) =>*/}
-          {/*  job?.tasks?.map((task: Task) => (*/}
-          {/*    <View key={task.name}>*/}
-          {/*      <Text category="h5">*/}
-          {/*        {task.name}:{task.gotValue}*/}
-          {/*      </Text>*/}
-          {/*      <Text>Expected:{task.expectedValue}</Text>*/}
-          {/*      <Button*/}
-          {/*        disabled={task.expectedValue === task.gotValue}*/}
-          {/*        onPress={() => {*/}
-          {/*          fixIssue(task.fixURL, task.fixFunc, task.name);*/}
-          {/*        }}*/}
-          {/*      >*/}
-          {/*        Fix*/}
-          {/*      </Button>*/}
-          {/*      <Divider />*/}
-          {/*      <Divider />*/}
-          {/*      <Divider />*/}
-          {/*      <Divider />*/}
-          {/*    </View>*/}
-          {/*  )),*/}
-          {/*)}*/}
-        </View>
+        ) : null}
 
-        <Scanner jobs={jobs} onDone={setResult} ref={scannerRef} onProgress={setProgress} />
+        {result.connectedDevices.length === 0 ? null : (
+          <View>
+            <SummaryCard
+              title="John Doe"
+              subtitle="john.doe@earth.com "
+              showFirebot={false}
+              showLogo={true}
+              logoName="GOOGLE"
+              primaryColor={true}
+            />
+            <ScanResult result={result} />
+            <Button
+              appearance="outline"
+              status="basic"
+              style={styles.button}
+              onPress={() => {
+                scannerRef.current?.injectJavaScript(
+                  'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
+                );
+              }}
+            >
+              Sign out from this account
+            </Button>
+          </View>
+        )}
+      </View>
 
-        <Fixer
-          pageURL={fixable.fixUrl}
-          fixFunc={fixable.fixFunc}
-          isVisible={isFixerVisible}
-          onDone={console.log}
-        />
-      </Layout>
-    </SafeAreaView>
+      <Scanner
+        jobs={jobs}
+        onDone={setResult}
+        ref={scannerRef}
+        onProgress={setProgress}
+        changeShowProgress={changeShowProgress}
+      />
+
+      <Fixer
+        pageURL={fixable.fixUrl}
+        fixFunc={fixable.fixFunc}
+        isVisible={isFixerVisible}
+        onDone={console.log}
+      />
+    </Layout>
   );
 };

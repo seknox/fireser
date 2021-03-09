@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Layout, StyleService, useStyleSheet, Text } from '@ui-kitten/components';
+import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { Pressable, View, SafeAreaView } from 'react-native';
+import { View } from 'react-native';
 import SecurityThreat from '../../assets/icons/securityThreat';
 
 const themedStyles = StyleService.create({

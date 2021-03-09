@@ -15,16 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { Layout, StyleService, Text, useStyleSheet, ViewPager } from '@ui-kitten/components';
 import React from 'react';
-
-import { Layout, StyleService, useStyleSheet, Text, ViewPager } from '@ui-kitten/components';
-
-import { Pressable, View, SafeAreaView } from 'react-native';
-import FireserLogo from '../../assets/icons/fireser';
-
-import Welcome from './Welcome';
+import { Pressable, View } from 'react-native';
 import Privacy from './Privacy';
 import Security from './Security';
+import Welcome from './Welcome';
 
 const themedStyles = StyleService.create({
   root: {
@@ -68,55 +64,53 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
   // const { navigation } = props;
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Layout style={styles.root}>
-        <ViewPager
-          //   style={styles.content}
-          selectedIndex={selectedIndex}
-          onSelect={(index) => setSelectedIndex(index)}
-        >
-          <Layout style={styles.tab} level="2">
-            <Text category="h5">Welcome</Text>
-            <View style={styles.content}>
-              <Welcome />
-            </View>
-          </Layout>
-          <Layout style={styles.tab} level="2">
-            <Text category="h5">Security</Text>
-            <View style={styles.content}>
-              <Security />
-            </View>
-          </Layout>
-          <Layout style={styles.tab} level="2">
-            <Text category="h5">Privacy</Text>
-            <View style={styles.content}>
-              <Privacy />
-            </View>
-          </Layout>
-        </ViewPager>
-
-        <View style={styles.footerRoot}>
-          <View style={styles.footerContainer}>
-            <Pressable style={styles.touch}>
-              <View>
-                <Text status="basic">Previous</Text>
-              </View>
-            </Pressable>
-
-            <Pressable style={styles.touch}>
-              <View>
-                <Text status="basic">Step</Text>
-              </View>
-            </Pressable>
-
-            <Pressable style={styles.touch}>
-              <View>
-                <Text status="basic">Next</Text>
-              </View>
-            </Pressable>
+    <Layout style={styles.root}>
+      <ViewPager
+        //   style={styles.content}
+        selectedIndex={selectedIndex}
+        onSelect={(index) => setSelectedIndex(index)}
+      >
+        <Layout style={styles.tab} level="2">
+          <Text category="h5">Welcome</Text>
+          <View style={styles.content}>
+            <Welcome />
           </View>
+        </Layout>
+        <Layout style={styles.tab} level="2">
+          <Text category="h5">Security</Text>
+          <View style={styles.content}>
+            <Security />
+          </View>
+        </Layout>
+        <Layout style={styles.tab} level="2">
+          <Text category="h5">Privacy</Text>
+          <View style={styles.content}>
+            <Privacy />
+          </View>
+        </Layout>
+      </ViewPager>
+
+      <View style={styles.footerRoot}>
+        <View style={styles.footerContainer}>
+          <Pressable style={styles.touch}>
+            <View>
+              <Text status="basic">Previous</Text>
+            </View>
+          </Pressable>
+
+          <Pressable style={styles.touch}>
+            <View>
+              <Text status="basic">Step</Text>
+            </View>
+          </Pressable>
+
+          <Pressable style={styles.touch}>
+            <View>
+              <Text status="basic">Next</Text>
+            </View>
+          </Pressable>
         </View>
-      </Layout>
-    </SafeAreaView>
+      </View>
+    </Layout>
   );
 };

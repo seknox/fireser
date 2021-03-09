@@ -29,7 +29,6 @@ const themedStyles = StyleService.create({
   headerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 120,
-    // backgroundColor: 'color-primary-600',
+    minHeight: 10,
   },
 });
