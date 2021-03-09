@@ -30,15 +30,15 @@ import ConnectedDevices from  './ConnectedDevices';
 import ConnectedApps from  './ConnectedApps';
 
 const GoogleSelectors = [
-  // GoogleActivityHistory,
-  // AutoDeleteActivityHistory,
-  // AutoDeleteLocationHistory,
-  // AutoDeleteYoutubeHistory,
-  // GoogleSecurityStatus,
-  // SecurityCheckup,
-  // AdPersonalization,
-  // PhotoLocationData,
-  // PeopleAndSharing,
+  GoogleActivityHistory,
+  AutoDeleteActivityHistory,
+  AutoDeleteLocationHistory,
+  AutoDeleteYoutubeHistory,
+  GoogleSecurityStatus,
+  SecurityCheckup,
+  AdPersonalization,
+  PhotoLocationData,
+  PeopleAndSharing,
     ConnectedDevices,
     ConnectedApps,
 ];

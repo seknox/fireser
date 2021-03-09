@@ -46,8 +46,9 @@ type accountProps = {
 };
 
 export const ScanAndProtect = (props: any) => {
-  const [result, setResult] = React.useState<Result>({connectedDevices:[]});
+  const [result, setResult] = React.useState<Result>({ connectedDevices: [] });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
+  const [progress, setProgress] = React.useState<number | null>(null);
   const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
 
   const account = props.route.params.name;
@@ -85,8 +86,13 @@ export const ScanAndProtect = (props: any) => {
             logoName="GOOGLE"
             primaryColor={true}
           />
-          {/* <ProgressBar style={styles.progress} progress={1} width={200} indeterminate={data? false:true} /> */}
-          <ScanResult result={result}/>
+          <ProgressBar
+            style={styles.progress}
+            progress={progress}
+            width={300}
+            indeterminate={progress === null}
+          />
+          <ScanResult result={result} />
           {/*{data.map((job: Job) =>*/}
           {/*  job?.tasks?.map((task: Task) => (*/}
           {/*    <View key={task.name}>*/}
@@ -111,7 +117,7 @@ export const ScanAndProtect = (props: any) => {
           {/*)}*/}
         </View>
 
-        <Scanner jobs={jobs} onDone={setResult} />
+        <Scanner jobs={jobs} onDone={setResult} onProgress={setProgress} />
 
         <Fixer
           pageURL={fixable.fixUrl}
