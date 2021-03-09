@@ -78,6 +78,7 @@ extractFunc:
 type runnerProps = {
   jobs: Job[];
   onDone: Dispatch<SetStateAction<Result>>;
+  onProgress: ( progress: number) => void;
 };
 
 const Scanner = (props: runnerProps, ref: any) => {
@@ -111,6 +112,7 @@ const Scanner = (props: runnerProps, ref: any) => {
       //Finished
       const res = aggregateResult(jobs.current);
       onDone(res);
+      props.onProgress(1);
     }
   };
 
@@ -145,6 +147,8 @@ const Scanner = (props: runnerProps, ref: any) => {
 
     if (msg.type === 'HTML' && msg.content) {
       setIsVisible(false);
+      const progress = index.current / jobs.current.length;
+      props.onProgress(progress);
       let res;
       try {
         res = await runTasks(jobs.current[index.current], msg.content);

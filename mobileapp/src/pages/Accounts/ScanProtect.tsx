@@ -48,6 +48,7 @@ type accountProps = {
 export const ScanAndProtect = (props: any) => {
   const [result, setResult] = React.useState<Result>({ connectedDevices: [] });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
+  const [progress, setProgress] = React.useState<number | null>(null);
   const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
   const scannerRef = React.useRef(null);
   const account = props.route.params.name;
@@ -85,7 +86,12 @@ export const ScanAndProtect = (props: any) => {
             logoName="GOOGLE"
             primaryColor={true}
           />
-          {/* <ProgressBar style={styles.progress} progress={1} width={200} indeterminate={data? false:true} /> */}
+          <ProgressBar
+            style={styles.progress}
+            progress={progress}
+            width={300}
+            indeterminate={progress === null}
+          />
           <ScanResult result={result} />
           <Button
             onPress={() => {
@@ -120,7 +126,7 @@ export const ScanAndProtect = (props: any) => {
           {/*)}*/}
         </View>
 
-        <Scanner jobs={jobs} onDone={setResult} ref={scannerRef} />
+        <Scanner jobs={jobs} onDone={setResult} ref={scannerRef} onProgress={setProgress} />
 
         <Fixer
           pageURL={fixable.fixUrl}
