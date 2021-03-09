@@ -15,23 +15,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { useNavigation } from '@react-navigation/native';
 import { StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { Pressable, SafeAreaView, View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import FacebookIcon from '../../assets/brands/facebook';
 import GmailIcon from '../../assets/brands/gmail';
 import GoogleIcon from '../../assets/brands/google';
 import LinkedinIcon from '../../assets/brands/linkdin';
 import YoutubeIcon from '../../assets/brands/youtube';
-import { useNavigation } from '@react-navigation/native';
 
 const AccountsSelect = (): React.ReactElement => {
   const navigation = useNavigation();
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Accounts navigation={navigation} />
-    </SafeAreaView>
-  );
+  return <Accounts navigation={navigation} />;
 };
 
 export default AccountsSelect;

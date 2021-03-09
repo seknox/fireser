@@ -17,7 +17,7 @@
 
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { View } from 'react-native';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
 import Accounts from '../Accounts';
@@ -26,22 +26,19 @@ export default (props: { navigation: any }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      {/* <Divider /> */}
-      <Layout navigation={props.navigation}>
-        <View style={styles.margin}>
-          <SummaryCard
-            title="Hi John,"
-            subtitle="Enhance security and privacy of your account and devices. "
-            showFirebot={true}
-            showLogo={true}
-            logoName='Fireser'
-            primaryColor={true}
-          />
-          <Accounts />
-        </View>
-      </Layout>
-    </SafeAreaView>
+    <Layout navigation={props.navigation}>
+      <View style={styles.margin}>
+        <SummaryCard
+          title="Hi John,"
+          subtitle="Enhance security and privacy of your account and devices. "
+          showFirebot={true}
+          showLogo={true}
+          logoName="Fireser"
+          primaryColor={true}
+        />
+        <Accounts />
+      </View>
+    </Layout>
   );
 };
 

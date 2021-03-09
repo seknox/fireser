@@ -15,17 +15,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, Divider, Text } from '@ui-kitten/components';
-import React, { useEffect } from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { Button, StyleService, useStyleSheet } from '@ui-kitten/components';
+import React from 'react';
+import { View } from 'react-native';
+import ProgressBar from 'react-native-progress/Bar';
 import Layout from '../../components/Layout';
+import SummaryCard from '../../components/SummaryCard';
 import Selectors from '../../selectors';
-import { Fixable, Job, Result, Task } from '../../types/types';
+import { Fixable, Result } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
-import { StyleService, useStyleSheet } from '@ui-kitten/components';
-import SummaryCard from '../../components/SummaryCard';
-import ProgressBar from 'react-native-progress/Bar';
 import ScanResult from './ScanResult';
 
 const themedStyles = StyleService.create({
@@ -75,66 +74,42 @@ export const ScanAndProtect = (props: any) => {
 
   const styles = useStyleSheet(themedStyles);
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Layout navigation={props.navigation}>
-        <View style={styles.margin}>
-          <SummaryCard
-            title="John Doe"
-            subtitle="john.doe@earth.com "
-            showFirebot={false}
-            showLogo={true}
-            logoName="GOOGLE"
-            primaryColor={true}
-          />
-          <ProgressBar
-            style={styles.progress}
-            progress={progress}
-            width={300}
-            indeterminate={progress === null}
-          />
-          <ScanResult result={result} />
-          <Button
-            onPress={() => {
-              scannerRef.current?.injectJavaScript(
-                'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
-              );
-            }}
-          >
-            Sign out from this account
-          </Button>
-          {/*{data.map((job: Job) =>*/}
-          {/*  job?.tasks?.map((task: Task) => (*/}
-          {/*    <View key={task.name}>*/}
-          {/*      <Text category="h5">*/}
-          {/*        {task.name}:{task.gotValue}*/}
-          {/*      </Text>*/}
-          {/*      <Text>Expected:{task.expectedValue}</Text>*/}
-          {/*      <Button*/}
-          {/*        disabled={task.expectedValue === task.gotValue}*/}
-          {/*        onPress={() => {*/}
-          {/*          fixIssue(task.fixURL, task.fixFunc, task.name);*/}
-          {/*        }}*/}
-          {/*      >*/}
-          {/*        Fix*/}
-          {/*      </Button>*/}
-          {/*      <Divider />*/}
-          {/*      <Divider />*/}
-          {/*      <Divider />*/}
-          {/*      <Divider />*/}
-          {/*    </View>*/}
-          {/*  )),*/}
-          {/*)}*/}
-        </View>
-
-        <Scanner jobs={jobs} onDone={setResult} ref={scannerRef} onProgress={setProgress} />
-
-        <Fixer
-          pageURL={fixable.fixUrl}
-          fixFunc={fixable.fixFunc}
-          isVisible={isFixerVisible}
-          onDone={console.log}
+    <Layout navigation={props.navigation}>
+      <View style={styles.margin}>
+        <SummaryCard
+          title="John Doe"
+          subtitle="john.doe@earth.com "
+          showFirebot={false}
+          showLogo={true}
+          logoName="GOOGLE"
+          primaryColor={true}
         />
-      </Layout>
-    </SafeAreaView>
+        <ProgressBar
+          style={styles.progress}
+          progress={progress}
+          width={300}
+          indeterminate={progress === null}
+        />
+        <ScanResult result={result} />
+        <Button
+          onPress={() => {
+            scannerRef.current?.injectJavaScript(
+              'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
+            );
+          }}
+        >
+          Sign out from this account
+        </Button>
+      </View>
+
+      <Scanner jobs={jobs} onDone={setResult} ref={scannerRef} onProgress={setProgress} />
+
+      <Fixer
+        pageURL={fixable.fixUrl}
+        fixFunc={fixable.fixFunc}
+        isVisible={isFixerVisible}
+        onDone={console.log}
+      />
+    </Layout>
   );
 };
