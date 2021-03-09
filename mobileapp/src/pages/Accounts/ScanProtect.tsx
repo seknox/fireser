@@ -22,7 +22,7 @@ import Layout from '../../components/Layout';
 import Selectors from '../../selectors';
 import { Fixable, Job, Result, Task } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
-import { Scanner } from '../../webviews/scanner';
+import Scanner from '../../webviews/scanner';
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
 import SummaryCard from '../../components/SummaryCard';
 import ProgressBar from 'react-native-progress/Bar';
@@ -46,10 +46,10 @@ type accountProps = {
 };
 
 export const ScanAndProtect = (props: any) => {
-  const [result, setResult] = React.useState<Result>({connectedDevices:[]});
+  const [result, setResult] = React.useState<Result>({ connectedDevices: [] });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
   const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
-
+  const scannerRef = React.useRef(null);
   const account = props.route.params.name;
   const jobs = Selectors[account] || [];
 
@@ -86,7 +86,16 @@ export const ScanAndProtect = (props: any) => {
             primaryColor={true}
           />
           {/* <ProgressBar style={styles.progress} progress={1} width={200} indeterminate={data? false:true} /> */}
-          <ScanResult result={result}/>
+          <ScanResult result={result} />
+          <Button
+            onPress={() => {
+              scannerRef.current?.injectJavaScript(
+                'alert(123);document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
+              );
+            }}
+          >
+            LOGOUT!!!!
+          </Button>
           {/*{data.map((job: Job) =>*/}
           {/*  job?.tasks?.map((task: Task) => (*/}
           {/*    <View key={task.name}>*/}
@@ -111,7 +120,7 @@ export const ScanAndProtect = (props: any) => {
           {/*)}*/}
         </View>
 
-        <Scanner jobs={jobs} onDone={setResult} />
+        <Scanner jobs={jobs} onDone={setResult} ref={scannerRef} />
 
         <Fixer
           pageURL={fixable.fixUrl}
