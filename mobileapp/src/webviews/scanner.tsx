@@ -17,7 +17,7 @@
  *
  */
 
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, MutableRefObject, SetStateAction } from 'react';
 
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { Dimensions, View } from 'react-native';
@@ -81,7 +81,7 @@ type runnerProps = {
   onProgress: ( progress: number) => void;
 };
 
-export const Scanner = (props: runnerProps) => {
+const Scanner = (props: runnerProps, ref: any) => {
   // const webViewref = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(true);
   const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
@@ -192,6 +192,7 @@ export const Scanner = (props: runnerProps) => {
   return (
     <View style={styles.root}>
       <WebView
+        ref={ref}
         // accessibilityTraits={'adjustable'}
         style={styles.container}
         autoManageStatusBarEnabled={true}
@@ -210,3 +211,5 @@ export const Scanner = (props: runnerProps) => {
     </View>
   );
 };
+
+export default React.forwardRef(Scanner);
