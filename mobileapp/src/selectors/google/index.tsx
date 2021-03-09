@@ -26,8 +26,8 @@ import AutoDeleteLocationHistory from './autodelete/Location';
 import AutoDeleteYoutubeHistory from './autodelete/YoutubeHistory';
 import PhotoLocationData from './photos/PhotoLocationData';
 import PeopleAndSharing from './PeopleAndSharing';
-import ConnectedDevices from  './ConnectedDevices';
-import ConnectedApps from  './ConnectedApps';
+import ConnectedDevices from './ConnectedDevices';
+import ConnectedApps from './ConnectedApps';
 
 const GoogleSelectors = [
   GoogleActivityHistory,
@@ -39,7 +39,7 @@ const GoogleSelectors = [
   AdPersonalization,
   PhotoLocationData,
   PeopleAndSharing,
-    ConnectedDevices,
-    ConnectedApps,
+  ConnectedDevices,
+  ConnectedApps,
 ];
 export default GoogleSelectors;
