@@ -94,7 +94,7 @@ export const ScanAndProtect = (props: any) => {
               );
             }}
           >
-            LOGOUT!!!!
+            Sign out from this account
           </Button>
           {/*{data.map((job: Job) =>*/}
           {/*  job?.tasks?.map((task: Task) => (*/}
