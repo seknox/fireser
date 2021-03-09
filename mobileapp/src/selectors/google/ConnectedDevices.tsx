@@ -70,6 +70,28 @@ const extractConnectedDevices = (htmlContent: string) => {
           os = 'CHROME_OS';
           deviceType = 'WORKSTATION';
           break;
+        case '4:3':
+          os = 'ANDROID';
+          deviceType = 'TABLET';
+          break;
+
+        case ':3':
+          os = 'ANDROID';
+          deviceType = 'TABLET';
+          break;
+
+        case ':6':
+          os = 'TV';
+          deviceType = 'TV';
+          break;
+        case ':8':
+          os = 'TV';
+          deviceType = 'TV';
+          break;
+        case ':7':
+          os = 'CAR';
+          deviceType = 'CAR';
+          break;
 
         default:
           os = 'GENERIC';
