@@ -36,11 +36,11 @@ export type Task = {
   name: string;
   description: string;
   expectedValue: string;
-  gotValue: string | boolean;
+  gotValue: any;
   fixURL: string; // url to fix the setting if expectedValue!=gotvalue
   fixFunc: string; // function to automatically fix the setting
   //onFixed: () => {};
-  type: 'SECURITY' | 'PRIVACY' | 'CONNECTED_DEVICES' | 'CONNECTED_APPS';
+  type: 'SECURITY' | 'PRIVACY' | 'CONNECTED_DEVICES' | 'THIRD_PARTY_APPS' | 'SIGNED_IN_APPS';
 };
 
 export type Fixable = {
