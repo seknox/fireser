@@ -21,6 +21,7 @@ import { Pressable, View, ScrollView, Image } from 'react-native';
 import Layout from '../../components/Layout';
 
 import { StyleService, useStyleSheet } from '@ui-kitten/components';
+import ConnectedApps from '../../selectors/google/ConnectedApps';
 
 const themedStyles = StyleService.create({
   card: {
@@ -252,12 +253,9 @@ export default function ScanResults(props: any) {
           {thirdPartyApps?.length} 3rd party apps have access to your data{' '}
         </Text>
         <ScrollView horizontal={true}>
-          {thirdPartyApps.map((d: any, i: number) => (
+          {thirdPartyApps?.map((d: any, i: number) => (
             <View style={styles.tinyBox} key={i}>
-              <Pressable
-              // onPress={() => navigation.navigate('ScanAndProtect', { name: 'Google' })}
-              // style={styles.touch}
-              >
+              <Pressable>
                 <Image
                   style={styles.appLogo}
                   source={{
@@ -275,23 +273,23 @@ export default function ScanResults(props: any) {
       </View>
 
       {/* <View style={styles.card}>
-        <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
-          <View style={styles.desc}>
-            <Text category="h5">Your Public Profile</Text>
-            <Text category="s1">See how your private data represents you</Text>
-            <Button
-              style={styles.button}
-              appearance="ghost"
-              status="primary"
-              onPress={props.navigateToAccounts}
-            >
-              Check it now
-            </Button>
-          </View>
-
-          <View style={styles.imageContainer}><AccountSec style={styles.image} /></View>
-        </Pressable>
-      </View> */}
+         <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
+           <View style={styles.desc}>
+             <Text category="h5">Your Public Profile</Text>
+             <Text category="s1">See how your private data represents you</Text>
+             <Button
+               style={styles.button}
+               appearance="ghost"
+               status="primary"
+               onPress={props.navigateToAccounts}
+             >
+               Check it now
+             </Button>
+           </View>
+ 
+           <View style={styles.imageContainer}><AccountSec style={styles.image} /></View>
+         </Pressable>
+       </View> */}
     </View>
   );
 }
