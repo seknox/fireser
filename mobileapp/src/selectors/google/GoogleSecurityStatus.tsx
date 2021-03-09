@@ -20,7 +20,7 @@
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
 
-const extractLastPassordChange = (htmlContent: string) => {
+const extractLastPasswordChange = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -94,7 +94,7 @@ export default {
   isLoggedIn: isLoggedIn,
   tasks: [
     {
-      extractFunc: extractLastPassordChange,
+      extractFunc: extractLastPasswordChange,
       name: 'Password Last Changed',
       type: 'SECURITY',
       expectedValue: '',
