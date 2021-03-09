@@ -96,16 +96,11 @@ type accountProps = {
 export default function ScanResultSummary(props: any) {
   const styles = useStyleSheet(themedStyles);
 
-  const {
-    connectedDevices,
-    thirdPartyApps,
-    privacyIssuesCount,
-    securityIssuesCount,
-  } = props.result;
+  const { connectedDevices, connectedApps, privacyIssuesCount, securityIssuesCount } = props.result;
 
   // formatNumber adds 0 to single digit number
   function formatNumber(num: number) {
-    if (num.toString().length === 1) {
+    if (num?.toString().length === 1) {
       return '0' + num.toString();
     } else {
       return num;
@@ -157,7 +152,7 @@ export default function ScanResultSummary(props: any) {
 
       <View style={styles.connectedAccCard}>
         <Text style={styles.connectedAccBoldText} category="h1">
-          {formatNumber(thirdPartyApps?.length)}
+          {formatNumber(connectedApps?.thirdPartyApps?.length)}
         </Text>
         <Text category="s1" style={styles.text}>
           Third party apps have access to your data{' '}
