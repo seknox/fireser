@@ -37,6 +37,11 @@ const themedStyles = StyleService.create({
     marginVertical: 100,
     alignSelf: 'center',
   },
+  button: {
+    width: 300,
+    marginVertical: 20,
+    alignSelf: 'center',
+  },
 });
 
 type accountProps = {
@@ -97,6 +102,9 @@ export const ScanAndProtect = (props: any) => {
             />
             <ScanResult result={result} />
             <Button
+              appearance="outline"
+              status="basic"
+              style={styles.button}
               onPress={() => {
                 scannerRef.current?.injectJavaScript(
                   'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
