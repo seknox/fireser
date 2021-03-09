@@ -75,7 +75,7 @@ const extractLabledFaceSetting = (htmlContent: string) => {
 };
 
 export default {
-  name: 'Hide Location in Photos',
+  name: 'Google Photos',
   pageURL: 'https://photos.google.com/settings',
   isLoggedIn: isLoggedIn,
   tasks: [
