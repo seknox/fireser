@@ -22,7 +22,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { Dimensions, View } from 'react-native';
 import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
-import {Job, Result} from '../types/types';
+import { Job, Result } from '../types/types';
 import { aggregateResult } from './AggregrateResult';
 
 //This piece of js code will be injected into webview.
@@ -78,6 +78,7 @@ extractFunc:
 type runnerProps = {
   jobs: Job[];
   onDone: Dispatch<SetStateAction<Result>>;
+  onProgress: ( progress: number) => void;
 };
 
 export const Scanner = (props: runnerProps) => {
@@ -111,6 +112,7 @@ export const Scanner = (props: runnerProps) => {
       //Finished
       const res = aggregateResult(jobs.current);
       onDone(res);
+      props.onProgress(1);
     }
   };
 
@@ -145,6 +147,8 @@ export const Scanner = (props: runnerProps) => {
 
     if (msg.type === 'HTML' && msg.content) {
       setIsVisible(false);
+      const progress = index.current / jobs.current.length;
+      props.onProgress(progress);
       let res;
       try {
         res = await runTasks(jobs.current[index.current], msg.content);
@@ -196,7 +200,7 @@ export const Scanner = (props: runnerProps) => {
           uri: runnable.pageURL,
         }}
         onMessage={onMessage}
-         // incognito={true}
+        // incognito={true}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
         injectedJavaScript={runnable.injectCode}
