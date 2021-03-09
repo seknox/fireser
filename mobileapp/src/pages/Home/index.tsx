@@ -27,7 +27,7 @@ export default (props: { navigation: any }): React.ReactElement => {
 
   return (
     <Layout navigation={props.navigation}>
-      <View style={styles.margin}>
+      <View style={styles.container}>
         <SummaryCard
           title="Hi John,"
           subtitle="Enhance security and privacy of your account and devices. "
@@ -45,8 +45,5 @@ export default (props: { navigation: any }): React.ReactElement => {
 const themedStyles = StyleService.create({
   container: {
     flex: 1,
-  },
-  margin: {
-    marginVertical: -100,
   },
 });

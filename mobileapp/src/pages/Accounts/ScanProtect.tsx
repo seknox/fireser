@@ -31,9 +31,7 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-  margin: {
-    marginVertical: -100,
-  },
+
   progress: {
     margin: 10,
     alignSelf: 'center',
@@ -75,7 +73,7 @@ export const ScanAndProtect = (props: any) => {
   const styles = useStyleSheet(themedStyles);
   return (
     <Layout navigation={props.navigation}>
-      <View style={styles.margin}>
+      <View style={styles.container}>
         <SummaryCard
           title="John Doe"
           subtitle="john.doe@earth.com "
@@ -90,16 +88,21 @@ export const ScanAndProtect = (props: any) => {
           width={300}
           indeterminate={progress === null}
         />
-        <ScanResult result={result} />
-        <Button
-          onPress={() => {
-            scannerRef.current?.injectJavaScript(
-              'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
-            );
-          }}
-        >
-          Sign out from this account
-        </Button>
+        <View>
+          <ScanResult result={result} />
+        </View>
+
+        <View>
+          <Button
+            onPress={() => {
+              scannerRef.current?.injectJavaScript(
+                'document.querySelector(\'a[href^="https://accounts.google.com/Logout"]\').click();true',
+              );
+            }}
+          >
+            Sign out from this account
+          </Button>
+        </View>
       </View>
 
       <Scanner jobs={jobs} onDone={setResult} ref={scannerRef} onProgress={setProgress} />
