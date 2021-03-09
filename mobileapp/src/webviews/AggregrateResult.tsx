@@ -24,7 +24,10 @@ export function aggregateResult(jobs: Job[]): Result {
     privacyIssuesCount: 0,
     securityIssuesCount: 0,
     connectedDevices: [],
-    thirdPartyApps: [],
+    connectedApps: {
+      thirdPartyApps: [],
+      signInApps: [],
+    },
     securityIssues: [],
     privacyIssues: [],
   };
@@ -47,13 +50,17 @@ export function aggregateResult(jobs: Job[]): Result {
           res.securityIssues.push(task);
           continue;
         case 'CONNECTED_DEVICES':
-          res.connectedDevices=task.gotValue;
+          res.connectedDevices = task.gotValue;
           continue;
-        case 'CONNECTED_APPS':
-          res.thirdPartyApps=task.gotValue;
+        case 'THIRD_PARTY_APPS':
+          res.connectedApps.thirdPartyApps = task.gotValue;
           continue;
+        case 'SIGNED_IN_APPS':
+          res.connectedApps.signInApps = task.gotValue;
+          continue;
+
         default:
-          console.error('Invalid type',task.name);
+          console.error('Invalid type', task.name);
       }
     }
   }

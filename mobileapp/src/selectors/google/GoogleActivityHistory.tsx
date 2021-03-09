@@ -107,7 +107,7 @@ const fixFunc = `
       `;
 
 export default {
-  name: 'Privacy',
+  name: 'Activity Controls',
   pageURL: 'https://myactivity.google.com/myactivity',
   isLoggedIn: isLoggedIn,
   tasks: [

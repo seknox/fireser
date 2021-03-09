@@ -112,6 +112,7 @@ const Scanner = (props: runnerProps, ref: any) => {
       // console.log('finished ', jobs.current[0].tasks[0].name);
       //Finished
       const res = aggregateResult(jobs.current);
+      // console.debug(JSON.stringify(res));
       onDone(res);
       props.changeShowProgress(false);
       props.onProgress(1);

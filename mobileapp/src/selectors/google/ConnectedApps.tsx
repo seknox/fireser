@@ -20,7 +20,7 @@
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
 
-const extractConnectedApps = (htmlContent: string) => {
+const extractThirdParyApps = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -41,17 +41,59 @@ const extractConnectedApps = (htmlContent: string) => {
     resolve(apps);
   });
 };
+const extractSignedInApps = (htmlContent: string) => {
+  return new Promise((resolve, reject) => {
+    if (!htmlContent) {
+      reject('HTML content empty');
+    }
+
+    const $ = cio.load(htmlContent);
+
+    const selected = $('#sign-in').parent().next().nextAll();
+    var apps = [];
+    selected.each(function (i, elem) {
+      const ele = $(this);
+
+      const nameNode = ele.find($('h2'));
+      const imgURL = nameNode.parent().parent().prev().children('img').attr('src');
+      const detailsNodes = nameNode
+        .parent()
+        .parent()
+        .parent()
+        .parent()
+        .parent()
+        .children()
+        .first()
+        .next()
+        .find('div[role="row"]');
+
+      const name = nameNode.text();
+      const permissions = detailsNodes.first().find('div[role="gridcell"]').text();
+      const homepage = detailsNodes.first().next().find('div[role="gridcell"]').text();
+      const accessGivenTo = detailsNodes.first().next().next().find('div[role="gridcell"]').text();
+      const accessGivenIn = detailsNodes.first().next().next().next().find('div[role="gridcell"]').text();
+
+      apps.push({ name, imgURL, permissions, homepage, accessGivenTo, accessGivenIn });
+    });
+    resolve(apps);
+  });
+};
 
 export default {
-  name: 'Security ',
+  name: 'Connected Apps ',
   pageURL: 'https://myaccount.google.com/permissions',
   isLoggedIn: isLoggedIn,
   tasks: [
     {
-      extractFunc: extractConnectedApps,
+      extractFunc: extractThirdParyApps,
       name: 'Connected third party apps',
-      type: 'CONNECTED_APPS',
-      expectedValue: 'No issues found',
+      type: 'THIRD_PARTY_APPS',
+      fixURL: 'https://myaccount.google.com/permissions',
+    },
+    {
+      extractFunc: extractSignedInApps,
+      name: 'Connected signed in apps',
+      type: 'SIGNED_IN_APPS',
       fixURL: 'https://myaccount.google.com/permissions',
     },
   ],

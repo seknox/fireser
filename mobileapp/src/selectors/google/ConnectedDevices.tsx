@@ -74,15 +74,14 @@ const extractConnectedDevices = (htmlContent: string) => {
 };
 
 export default {
-  name: 'Security ',
+  name: 'Connected Devices',
   pageURL: 'https://myaccount.google.com/device-activity',
   isLoggedIn: isLoggedIn,
   tasks: [
     {
       extractFunc: extractConnectedDevices,
-      name: 'Security Checkup Status',
+      name: 'Connected Devices',
       type: 'CONNECTED_DEVICES',
-      expectedValue: 'No issues found',
       fixURL: 'https://myaccount.google.com/device-activity',
     },
   ],

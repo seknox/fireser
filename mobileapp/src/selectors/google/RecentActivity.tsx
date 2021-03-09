@@ -48,7 +48,6 @@ export default {
       extractFunc: extractRecentActivity,
       name: 'Recent Activity',
       type: 'PRIVACY',
-      expectedValue: '',
       fixURL: 'https://myaccount.google.com/notifications',
     },
   ],
