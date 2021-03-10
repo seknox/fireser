@@ -77,7 +77,7 @@ extractFunc:
 
 type runnerProps = {
   jobs: Job[];
-  onDone: Dispatch<SetStateAction<Result>>;
+  setScanResult: Dispatch<SetStateAction<Result>>;
   onProgress: (progress: number) => void;
   changeShowProgress: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -86,7 +86,6 @@ const Scanner = (props: runnerProps, ref: any) => {
   // const webViewref = React.useRef(null);
   const [isVisible, setIsVisible] = React.useState(true);
   const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
-  const { onDone } = props;
   const index = React.useRef(0);
   const jobs = React.useRef<Job[]>(props.jobs);
   //  const results = React.useRef([]);
@@ -113,7 +112,7 @@ const Scanner = (props: runnerProps, ref: any) => {
       //Finished
       const res = aggregateResult(jobs.current);
       // console.debug(JSON.stringify(res));
-      onDone(res);
+      props.setScanResult(res);
       props.changeShowProgress(false);
       props.onProgress(1);
     }
