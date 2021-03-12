@@ -25,7 +25,7 @@ import Selectors from '../../selectors';
 import { Fixable, Result } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
-import ScanResult from './ScanResult';
+import ScanResultComponent from './ScanResult';
 
 const themedStyles = StyleService.create({
   container: {
@@ -49,7 +49,7 @@ type accountProps = {
 };
 
 export const ScanAndProtect = (props: any) => {
-  const [result, setResult] = React.useState<Result>({ connectedDevices: [] });
+  const [scanResult, setScanResult] = React.useState<Result>({ connectedDevices: [] });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
   const [progress, setProgress] = React.useState<number | null>(null);
   const [showProgress, changeShowProgress] = React.useState(false);
@@ -90,7 +90,7 @@ export const ScanAndProtect = (props: any) => {
           />
         ) : null}
 
-        {result.connectedDevices.length === 0 ? null : (
+        {scanResult.connectedDevices.length === 0 ? null : (
           <View>
             <SummaryCard
               title="John Doe"
@@ -100,7 +100,7 @@ export const ScanAndProtect = (props: any) => {
               logoName="GOOGLE"
               primaryColor={true}
             />
-            <ScanResult result={result} />
+            <ScanResultComponent result={scanResult} />
             <Button
               appearance="outline"
               status="basic"
@@ -119,7 +119,7 @@ export const ScanAndProtect = (props: any) => {
 
       <Scanner
         jobs={jobs}
-        onDone={setResult}
+        setScanResult={setScanResult}
         ref={scannerRef}
         onProgress={setProgress}
         changeShowProgress={changeShowProgress}
