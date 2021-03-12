@@ -95,7 +95,7 @@ export const ScanAndProtect = (props: any) => {
             <SummaryCard
               title="John Doe"
               subtitle="john.doe@earth.com "
-              showFirebot={false}
+              showProAcc={false}
               showLogo={true}
               logoName="GOOGLE"
               primaryColor={true}

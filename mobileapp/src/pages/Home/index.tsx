@@ -31,10 +31,10 @@ export default (props: { navigation: any }): React.ReactElement => {
         <SummaryCard
           title="Hi John,"
           subtitle="Enhance security and privacy of your account and devices. "
-          showFirebot={true}
+          showProAcc={true}
           showLogo={true}
           logoName="Fireser"
-          primaryColor={true}
+          primaryColor={false}
         />
         <Accounts />
       </View>

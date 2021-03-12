@@ -15,17 +15,29 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
+import { Icon, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { View } from 'react-native';
-import FireserLogo from '../../assets/icons/fireser';
-import FirebotSpider from '../../assets/icons/firebot-spider';
+import { StyleSheet, View } from 'react-native';
 import GoogleIcon from '../../assets/brands/google';
+import FireserLogo from '../../assets/icons/fireser';
+
+const iconColor = '#0000FF';
+
+export const ProIcon = () => <Icon style={iconstyles.icon} fill={iconColor} name="award" />;
+
+const iconstyles = StyleSheet.create({
+  icon: {
+    width: 32,
+    height: 32,
+    color: 'white',
+    alignSelf: 'center',
+  },
+});
 
 type cardProps = {
   title: string;
   subtitle: string;
-  showFirebot: boolean;
+  showProAcc: boolean;
   showLogo: boolean;
   logoName: string;
   primaryColor: boolean;
@@ -40,7 +52,16 @@ export default (props: cardProps): React.ReactElement => {
       padding: 24,
       borderRadius: 24,
       backgroundColor: props.primaryColor ? 'color-primary-default' : 'white',
-      boxShadow: '0 4px 20px 0 rgba(0,0,0,0.12)',
+      // boxShadow: '0 4px 20px 0 rgba(0,0,0,0.12)',
+
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+      elevation: 3,
     },
     container: {
       flex: 1,
@@ -64,15 +85,33 @@ export default (props: cardProps): React.ReactElement => {
       width: 70,
       alignSelf: 'flex-start',
     },
-    firebot: {
-      display: props.showFirebot ? 'flex' : 'none',
-      height: 70,
-      width: 70,
+    proAccount: {
+      display: props.showProAcc ? 'flex' : 'none',
+      height: 37,
+      width: 90,
       marginVertical: -12,
-      //  marginHorizontal: -100,
+      flexDirection: 'row',
+      bottom: 0,
       position: 'absolute',
       alignSelf: 'flex-end',
-      bottom: 0,
+
+      // backgroundColor: 'color-primary-default',
+      backgroundColor: 'white',
+      // padding: 10,
+      paddingTop: 1,
+      paddingLeft: 10,
+      // paddingBottom: 5,
+      borderRadius: 15,
+      bordorColor: 'white',
+
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+      elevation: 5,
     },
     iconWrapper: {
       flex: 1,
@@ -102,6 +141,12 @@ export default (props: cardProps): React.ReactElement => {
       height: 55,
       width: 55,
     },
+    proText: {
+      color: 'blue',
+      marginTop: 10,
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
   });
 
   const styles = useStyleSheet(themedStyles);
@@ -128,7 +173,11 @@ export default (props: cardProps): React.ReactElement => {
           </Text>
         </View>
       </View>
-      <FirebotSpider style={styles.firebot} />
+      <View style={styles.proAccount}>
+        <Text style={styles.proText}>PRO</Text>
+        <ProIcon />
+      </View>
+      {/* <FirebotSpider style={styles.firebot} /> */}
     </View>
   );
 };
