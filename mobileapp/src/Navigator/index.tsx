@@ -18,10 +18,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import Accounts from '../pages/Accounts';
+import Accounts from '../pages/ScanAndProtect';
 import Home from '../pages/Home';
 import Onboarding from '../pages/Onboarding';
-import { ScanAndProtect } from '../pages/Accounts/ScanProtect';
+import { ScanAndProtect } from '../pages/ScanAndProtect/ScanProtect';
 import Setting from './KittenDrawer';
 
 const { Navigator, Screen } = createStackNavigator();

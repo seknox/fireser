@@ -20,7 +20,7 @@ import React from 'react';
 import { StyleSheet, Pressable, View } from 'react-native';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
-import Accounts from '../Accounts';
+import Accounts from '../ScanAndProtect';
 import ProtectedAcc from '../../components/Accounts/ProtectedAccounts';
 
 const iconColor = '#0000FF';
