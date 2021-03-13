@@ -31,16 +31,33 @@ export default (props: { navigateToAccounts: () => {} }): React.ReactElement => 
       <View style={styles.card}>
         <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
           <View style={styles.desc}>
-            <Text category="h5">Account Protection</Text>
-            <Text category="s1">Enhance security and privacy</Text>
+            <Text category="h5">Primary Accounts</Text>
+            <Text category="s1">Google or Microsoft account.</Text>
+            <Text category="s1">Security Focused</Text>
             <Button
               style={styles.button}
               appearance="ghost"
               status="primary"
               accessoryRight={RightIcon}
-              onPress={props.navigateToAccounts}
             >
-              Start now
+              Protect now
+            </Button>
+          </View>
+
+          <View style={styles.imageContainer}>
+            <MsgSec style={styles.image} />
+          </View>
+        </Pressable>
+      </View>
+
+      <View style={styles.card}>
+        <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
+          <View style={styles.desc}>
+            <Text category="h5">Social Accounts</Text>
+            <Text category="s1">Facebook, Instagram, Twitter.</Text>
+            <Text category="s1">Privacy Focused</Text>
+            <Button style={styles.button} appearance="ghost" status="primary">
+              (Coming Soon)
             </Button>
           </View>
 
@@ -48,26 +65,6 @@ export default (props: { navigateToAccounts: () => {} }): React.ReactElement => 
             <AccountSec style={styles.image} />
           </View>
         </Pressable>
-      </View>
-
-      <View style={styles.card}>
-        <View style={styles.desc}>
-          <Text category="h5">Data Protection</Text>
-          <Text category="s1">Check who owns your data</Text>
-          <Text category="s1">FInd out who have exposed your data</Text>
-          <Button
-            style={styles.button}
-            appearance="ghost"
-            status="primary"
-            accessoryRight={RightIcon}
-          >
-            Start now
-          </Button>
-        </View>
-
-        <View style={styles.imageContainer}>
-          <MsgSec style={styles.image} />
-        </View>
       </View>
     </View>
   );
