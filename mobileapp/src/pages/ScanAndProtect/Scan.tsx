@@ -48,7 +48,7 @@ type accountProps = {
   navigation: any;
 };
 
-export const ScanAndProtect = (props: any) => {
+export const Scan = (props: any) => {
   const [scanResult, setScanResult] = React.useState<Result>({ connectedDevices: [] });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
   const [progress, setProgress] = React.useState<number | null>(null);
@@ -95,7 +95,7 @@ export const ScanAndProtect = (props: any) => {
             <SummaryCard
               title="John Doe"
               subtitle="john.doe@earth.com "
-              showFirebot={false}
+              showProAcc={false}
               showLogo={true}
               logoName="GOOGLE"
               primaryColor={true}

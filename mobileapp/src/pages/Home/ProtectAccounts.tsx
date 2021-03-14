@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2020 Seknox Pte Ltd.
+ * Copyright (C) 2021 Seknox Pte Ltd.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -20,27 +20,51 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import AccountSec from '../../assets/icons/account-security';
 import MsgSec from '../../assets/icons/messaging-security';
+import { useNavigation } from '@react-navigation/native';
 
 const RightIcon = (props: any) => <Icon {...props} name="arrow-forward-outline" />;
 
 export default (props: { navigateToAccounts: () => {} }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
+        <Pressable onPress={() => navigation.navigate('PrimaryAccount')} style={styles.touch}>
           <View style={styles.desc}>
-            <Text category="h5">Account Protection</Text>
-            <Text category="s1">Enhance security and privacy</Text>
+            <Text category="h5">Primary Accounts</Text>
+            <Text category="s1">Google or Microsoft account.</Text>
+            <Text category="s1">Security Focused</Text>
             <Button
               style={styles.button}
               appearance="ghost"
               status="primary"
               accessoryRight={RightIcon}
-              onPress={props.navigateToAccounts}
+              onPress={() => navigation.navigate('PrimaryAccount')}
             >
-              Start now
+              Protect now
+            </Button>
+          </View>
+
+          <View style={styles.imageContainer}>
+            <MsgSec style={styles.image} />
+          </View>
+        </Pressable>
+      </View>
+
+      <View style={styles.card}>
+        <Pressable onPress={() => navigation.navigate('SocialAccount')} style={styles.touch}>
+          <View style={styles.desc}>
+            <Text category="h5">Social Accounts</Text>
+            <Text category="s1">Facebook, Instagram, Twitter.</Text>
+            <Text category="s1">Privacy Focused</Text>
+            <Button
+              style={styles.button}
+              appearance="ghost"
+              status="primary"
+              onPress={() => navigation.navigate('SocialAccount')}
+            >
+              (Coming Soon)
             </Button>
           </View>
 
@@ -48,26 +72,6 @@ export default (props: { navigateToAccounts: () => {} }): React.ReactElement => 
             <AccountSec style={styles.image} />
           </View>
         </Pressable>
-      </View>
-
-      <View style={styles.card}>
-        <View style={styles.desc}>
-          <Text category="h5">Data Protection</Text>
-          <Text category="s1">Check who owns your data</Text>
-          <Text category="s1">FInd out who have exposed your data</Text>
-          <Button
-            style={styles.button}
-            appearance="ghost"
-            status="primary"
-            accessoryRight={RightIcon}
-          >
-            Start now
-          </Button>
-        </View>
-
-        <View style={styles.imageContainer}>
-          <MsgSec style={styles.image} />
-        </View>
       </View>
     </View>
   );
