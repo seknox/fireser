@@ -22,9 +22,9 @@ import React, { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { Dimensions, View } from 'react-native';
 import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
-import { Job, Result } from '../types/types';
+import { Job, Result, Account } from '../types/types';
 import { aggregateResult } from './AggregrateResult';
-
+import passwordInjection from './passwordInjection';
 //This piece of js code will be injected into webview.
 //It will check if the page is redirected. If the page is redirected, it means login is needed. It sends "LOGIN" type message.
 // If page does not gets redirected, it will send "HTML" type message with whole html content.
@@ -49,7 +49,7 @@ const getCodeToInject = (pageURL: string, isLoggedIn: string) => {
    window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
     
     if(!isLoggedIn){
-     const msg = {"type":"LOGIN","content":""}
+     const msg = {"type":"LOGIN_NEEDED","content":""}
         window.ReactNativeWebView.postMessage(JSON.stringify(msg));
        return
     }
@@ -76,7 +76,7 @@ extractFunc:
 */
 
 type runnerProps = {
-  jobs: Job[];
+  accountDetail: Account;
   onDone: Dispatch<SetStateAction<Result>>;
   onProgress: (progress: number) => void;
   changeShowProgress: React.Dispatch<React.SetStateAction<boolean>>;
@@ -88,14 +88,18 @@ const Scanner = (props: runnerProps, ref: any) => {
   const [runnable, setRunnable] = React.useState({ pageURL: '', injectCode: '' });
   const { onDone } = props;
   const index = React.useRef(0);
-  const jobs = React.useRef<Job[]>(props.jobs);
+  const jobs = React.useRef<Job[]>(props.accountDetail.jobList);
   //  const results = React.useRef([]);
 
   React.useEffect(() => {
     //Load the first job
+    loadFirstJob();
+  }, []);
+
+  const loadFirstJob = () => {
     const injectCode = getCodeToInject(jobs.current[0].pageURL, jobs.current[0].isLoggedInFunc);
     setRunnable({ injectCode, pageURL: jobs.current[0].pageURL });
-  }, []);
+  };
 
   //Load next job
   const loadNext = () => {
@@ -133,7 +137,8 @@ const Scanner = (props: runnerProps, ref: any) => {
   /*
   On message from webview.
   Message types:
-  "LOGIN": login is required. In this case, web view should be displayed. (It is hidden by default)
+  "LOGIN_NEEDED": login is required. In this case, web view should be displayed. (It is hidden by default)
+  "LOGIN_SUCCESS": login is successful. Jobs can be loaded into webview now
   "HTML": If the page is loaded as normal, "HTML" type message contains whole htmlContent of the page.
   "DEBUG": debug messages.
 
@@ -166,11 +171,20 @@ const Scanner = (props: runnerProps, ref: any) => {
 
       // results.current = results.current.concat({res});
       loadNext();
-    } else if (msg.type === 'LOGIN') {
+    } else if (msg.type === 'LOGIN_NEEDED') {
       console.info('login needed');
+      setRunnable({
+        pageURL: props.accountDetail.loginURL,
+        // injectCode: props.accountDetail.loginFunc,
+        injectCode: props.accountDetail.loginFunc,
+      });
+      // console.log(props.accountDetail.loginFunc);
       //make the login page visible if it requires login.
       props.changeShowProgress(false);
       setIsVisible(true);
+    } else if (msg.type === 'LOGIN_SUCCESS') {
+      console.debug('creds: ', msg.content);
+      loadFirstJob();
     } else {
       //DEBUG
       console.log('debug', msg.content);

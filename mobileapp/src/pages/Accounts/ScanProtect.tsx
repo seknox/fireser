@@ -49,14 +49,21 @@ type accountProps = {
 };
 
 export const ScanAndProtect = (props: any) => {
-  const [result, setResult] = React.useState<Result>({ connectedDevices: [] });
+  const [result, setResult] = React.useState<Result>({
+    connectedApps: { signInApps: [], thirdPartyApps: [] },
+    privacyIssues: [],
+    privacyIssuesCount: 0,
+    securityIssues: [],
+    securityIssuesCount: 0,
+    connectedDevices: [],
+  });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
   const [progress, setProgress] = React.useState<number | null>(null);
   const [showProgress, changeShowProgress] = React.useState(false);
   const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
   const scannerRef = React.useRef(null);
   const account = props.route.params.name;
-  const jobs = Selectors[account] || [];
+  const accountDetail = Selectors[account] || [];
 
   const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
     setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
@@ -118,7 +125,7 @@ export const ScanAndProtect = (props: any) => {
       </View>
 
       <Scanner
-        jobs={jobs}
+        accountDetail={accountDetail}
         onDone={setResult}
         ref={scannerRef}
         onProgress={setProgress}

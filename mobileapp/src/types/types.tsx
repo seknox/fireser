@@ -18,9 +18,12 @@
  */
 
 //
-export type AccountType = {
+export type Account = {
   loginURL: string;
   checkLogin: string;
+  loginFunc: string;
+  // unameSelector: string;
+  // passwordSelector: string;
   jobList: Job[];
 };
 

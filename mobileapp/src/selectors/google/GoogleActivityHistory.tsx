@@ -109,7 +109,7 @@ const fixFunc = `
 export default {
   name: 'Activity Controls',
   pageURL: 'https://myactivity.google.com/myactivity',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractWebAppActivityHistory,

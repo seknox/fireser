@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2020-2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -28,18 +28,28 @@ import PhotoLocationData from './photos/PhotoLocationData';
 import PeopleAndSharing from './PeopleAndSharing';
 import ConnectedDevices from './ConnectedDevices';
 import ConnectedApps from './ConnectedApps';
+import { Account, Job } from '../../types/types';
+import passwordInjection from "../../webviews/passwordInjection";
+import PWExtract from "./pwExtract";
 
-const GoogleSelectors = [
+const GoogleSelectors: Job[] = [
   GoogleActivityHistory,
-  AutoDeleteActivityHistory,
-  AutoDeleteLocationHistory,
-  AutoDeleteYoutubeHistory,
-  GoogleSecurityStatus,
-  SecurityCheckup,
-  AdPersonalization,
-  PhotoLocationData,
-  PeopleAndSharing,
+  // AutoDeleteActivityHistory,
+  // AutoDeleteLocationHistory,
+  // AutoDeleteYoutubeHistory,
+  // GoogleSecurityStatus,
+  // SecurityCheckup,
+  // AdPersonalization,
+  // PhotoLocationData,
+  // PeopleAndSharing,
   ConnectedDevices,
   ConnectedApps,
 ];
-export default GoogleSelectors;
+const GoogleAccount: Account = {
+  loginURL: 'https://accounts.google.com/signin/v2/identifier',
+  loginFunc: PWExtract,
+
+  jobList: GoogleSelectors,
+};
+
+export default GoogleAccount;
