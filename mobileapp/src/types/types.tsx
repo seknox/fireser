@@ -64,7 +64,7 @@ export type Apps = {
   permissions: string;
 };
 
-export type Result = {
+export type ScanResult = {
   privacyIssuesCount: number;
   securityIssuesCount: number;
   privacyIssues: Task[];
@@ -74,4 +74,15 @@ export type Result = {
     thirdPartyApps: Apps[];
     signInApps: Apps[];
   };
+};
+
+// ScanObject represents data type related to scan event
+export type ScanObject = {
+  id: string; // Unique of scan object. This is requied because e.g. there might be two or more google accounts.
+  accountName: string; // Google, Facebook
+  email: string;
+  username: string; // Username or firstname
+  scanResult: ScanResult;
+  firstScanned: string;
+  lastScanned: string;
 };

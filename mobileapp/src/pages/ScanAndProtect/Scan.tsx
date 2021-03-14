@@ -22,7 +22,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
 import Selectors from '../../selectors';
-import { Fixable, Result } from '../../types/types';
+import { Fixable, ScanResult } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
 import ScanResultComponent from './ScanResult';
@@ -49,7 +49,7 @@ type accountProps = {
 };
 
 export const Scan = (props: any) => {
-  const [scanResult, setScanResult] = React.useState<Result>({
+  const [scanResult, setScanResult] = React.useState<ScanResult>({
     connectedApps: { signInApps: [], thirdPartyApps: [] },
     privacyIssues: [],
     privacyIssuesCount: 0,

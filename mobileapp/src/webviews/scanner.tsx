@@ -22,9 +22,9 @@ import React, { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
 import { Dimensions, View } from 'react-native';
 import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
-import { Job, Result, Account } from '../types/types';
+import { Job, ScanResult, Account } from '../types/types';
 import { aggregateResult } from './AggregrateResult';
-import { StoreAccountPassword } from '../utils/keychain'
+import { StoreAccountPassword } from '../utils/keychain';
 
 //This piece of js code will be injected into webview.
 //It will check if the page is redirected. If the page is redirected, it means login is needed. It sends "LOGIN" type message.
@@ -77,7 +77,7 @@ extractFunc:
 */
 
 type runnerProps = {
-  setScanResult: Dispatch<SetStateAction<Result>>;
+  setScanResult: Dispatch<SetStateAction<ScanResult>>;
   accountDetail: Account;
   onProgress: (progress: number) => void;
   changeShowProgress: React.Dispatch<React.SetStateAction<boolean>>;
@@ -109,10 +109,7 @@ const Scanner = (props: runnerProps, ref: any) => {
 
       const injectCode = getCodeToInject(currentTask.pageURL, currentTask.isLoggedInFunc);
       setRunnable({ injectCode, pageURL: currentTask.pageURL });
-
-
     } else {
-
       //Finished
       const res = aggregateResult(jobs.current);
       props.setScanResult(res);
@@ -183,8 +180,7 @@ const Scanner = (props: runnerProps, ref: any) => {
     } else if (msg.type === 'CREDENTIALS') {
       // store credential in keychain
       // TODO @bhrg3se replace hardcoded name 'Google' with account type.
-      StoreAccountPassword('Google', msg.content?.email, msg.content?.password)
-
+      StoreAccountPassword('Google', msg.content?.email, msg.content?.password);
     } else if (msg.type === 'LOGIN_SUCCESS') {
       loadFirstJob();
     } else {
