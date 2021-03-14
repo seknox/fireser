@@ -24,7 +24,8 @@ import { Dimensions, View } from 'react-native';
 import { StyleService, useStyleSheet, Text } from '@ui-kitten/components';
 import { Job, Result, Account } from '../types/types';
 import { aggregateResult } from './AggregrateResult';
-import passwordInjection from './passwordInjection';
+import { StoreAccountPassword } from '../utils/keychain'
+
 //This piece of js code will be injected into webview.
 //It will check if the page is redirected. If the page is redirected, it means login is needed. It sends "LOGIN" type message.
 // If page does not gets redirected, it will send "HTML" type message with whole html content.
@@ -105,17 +106,15 @@ const Scanner = (props: runnerProps, ref: any) => {
     if (index.current + 1 < jobs.current.length) {
       index.current = index.current + 1;
       const currentTask = jobs.current[index.current];
-      // console.log(currentTask.pageURL)
+
       const injectCode = getCodeToInject(currentTask.pageURL, currentTask.isLoggedInFunc);
       setRunnable({ injectCode, pageURL: currentTask.pageURL });
 
-      // setPageURL(currentTask.pageURL);
-      // setLoggedInFunc(currentTask.isLoggedIn);
+
     } else {
-      // console.log('finished ', jobs.current[0].tasks[0].name);
+
       //Finished
       const res = aggregateResult(jobs.current);
-      // console.debug(JSON.stringify(res));
       props.setScanResult(res);
       props.changeShowProgress(false);
       props.onProgress(1);
@@ -182,8 +181,9 @@ const Scanner = (props: runnerProps, ref: any) => {
       props.changeShowProgress(false);
       setIsVisible(true);
     } else if (msg.type === 'CREDENTIALS') {
-      console.debug('creds: ', msg.content);
-      //TODO @sshahcodes save these credentials
+      // store credential in keychain
+      // TODO @bhrg3se replace hardcoded name 'Google' with account type.
+      StoreAccountPassword('Google', msg.content?.email, msg.content?.password)
 
     } else if (msg.type === 'LOGIN_SUCCESS') {
       loadFirstJob();
