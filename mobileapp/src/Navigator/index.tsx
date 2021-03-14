@@ -18,10 +18,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import Accounts from '../pages/ScanAndProtect';
+import PrimaryAccount from '../pages/ScanAndProtect/PrimaryAccounts';
+import SocialAccount from '../pages/ScanAndProtect/SocialAccounts';
 import Home from '../pages/Home';
 import Onboarding from '../pages/Onboarding';
-import { ScanAndProtect } from '../pages/ScanAndProtect/ScanProtect';
+import { Scan } from '../pages/ScanAndProtect/Scan';
 import Setting from './KittenDrawer';
 
 const { Navigator, Screen } = createStackNavigator();
@@ -31,8 +32,9 @@ const HomeNavigator = () => {
     <Navigator headerMode="none" initialRouteName={'Home'}>
       <Screen name="Home" component={Home} />
       <Screen name="Onboarding" component={Onboarding} />
-      <Screen name="AccountsPage" component={Accounts} />
-      <Screen name="ScanAndProtect" component={ScanAndProtect} />
+      <Screen name="PrimaryAccount" component={PrimaryAccount} />
+      <Screen name="SocialAccount" component={SocialAccount} />
+      <Screen name="Scan" component={Scan} />
       {/* <Screen name="Setting" component={Setting} /> */}
     </Navigator>
   );

@@ -20,16 +20,17 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import AccountSec from '../../assets/icons/account-security';
 import MsgSec from '../../assets/icons/messaging-security';
+import { useNavigation } from '@react-navigation/native';
 
 const RightIcon = (props: any) => <Icon {...props} name="arrow-forward-outline" />;
 
 export default (props: { navigateToAccounts: () => {} }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
+        <Pressable onPress={() => navigation.navigate('PrimaryAccount')} style={styles.touch}>
           <View style={styles.desc}>
             <Text category="h5">Primary Accounts</Text>
             <Text category="s1">Google or Microsoft account.</Text>
@@ -39,6 +40,7 @@ export default (props: { navigateToAccounts: () => {} }): React.ReactElement => 
               appearance="ghost"
               status="primary"
               accessoryRight={RightIcon}
+              onPress={() => navigation.navigate('PrimaryAccount')}
             >
               Protect now
             </Button>
@@ -51,12 +53,17 @@ export default (props: { navigateToAccounts: () => {} }): React.ReactElement => 
       </View>
 
       <View style={styles.card}>
-        <Pressable onPress={props.navigateToAccounts} style={styles.touch}>
+        <Pressable onPress={() => navigation.navigate('SocialAccount')} style={styles.touch}>
           <View style={styles.desc}>
             <Text category="h5">Social Accounts</Text>
             <Text category="s1">Facebook, Instagram, Twitter.</Text>
             <Text category="s1">Privacy Focused</Text>
-            <Button style={styles.button} appearance="ghost" status="primary">
+            <Button
+              style={styles.button}
+              appearance="ghost"
+              status="primary"
+              onPress={() => navigation.navigate('SocialAccount')}
+            >
               (Coming Soon)
             </Button>
           </View>

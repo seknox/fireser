@@ -15,13 +15,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Icon, StyleService, useStyleSheet, Text, Button } from '@ui-kitten/components';
+import { Icon, StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
-import { StyleSheet, Pressable, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import ProtectedAcc from './ProtectAccounts';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
-import Accounts from '../ScanAndProtect';
-import ProtectedAcc from '../../components/Accounts/ProtectedAccounts';
 
 const iconColor = '#0000FF';
 
