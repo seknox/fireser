@@ -31,7 +31,6 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-
   progress: {
     margin: 10,
     marginVertical: 100,

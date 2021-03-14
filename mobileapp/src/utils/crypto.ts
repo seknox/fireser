@@ -33,14 +33,27 @@ export function GenKey() {
 
 // AESEncrypt encrypts plaintext pt with given key and returns ciphertext
 export function AESEncrypt(key: string, pt: string) {
-    let ct = AES.encrypt(pt, key).toString()
-    return ct
+
+    try {
+        let ct = AES.encrypt(pt, key).toString()
+        return ct
+    } catch (e) {
+        console.error(e)
+    }
+  
+    
 }
 
 // AESDecrypt decrypts ciphertext ct with given key and returns plaintext
 export function AESDecrypt(key: string, ct: string) {
-    let pt = AES.decrypt(ct, key)
-    return Enc.stringify(pt)
+
+    try {
+        let pt = AES.decrypt(ct, key)
+        return Enc.stringify(pt)
+    } catch(e) {
+        console.error(e)
+    }
+    
 }
 
 

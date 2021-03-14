@@ -18,13 +18,43 @@
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import 'react-native-gesture-handler';
 import { AppNavigator } from './src/Navigator';
 import { default as theme } from './src/assets/custom-theme.json';
 import codePush from 'react-native-code-push';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AppState } from 'react-native';
+import { SetupAsyncStorage } from './src/utils/storage';
 
 export default () => {
+  const appState = useRef(AppState.currentState);
+  const [appStateVisible, setAppStateVisible] = useState(appState.current);
+
+  useEffect(() => {
+    if (AppState.currentState === 'active') {
+      console.debug('Time to decrypt data!');
+      (async () => {
+        await SetupAsyncStorage('DEC');
+      })();
+    }
+
+    AppState.addEventListener('change', encryptAsyncStorage);
+
+    return () => {
+      AppState.removeEventListener('change', encryptAsyncStorage);
+    };
+  }, []);
+
+  const encryptAsyncStorage = (appState) => {
+    if (AppState.currentState !== 'active') {
+      console.debug('Time to encrypt data!');
+      (async () => {
+        await SetupAsyncStorage('ENC');
+      })();
+    }
+  };
+
   useEffect(() => {
     codePush.sync(
       { updateDialog: true },

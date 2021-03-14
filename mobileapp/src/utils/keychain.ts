@@ -16,45 +16,52 @@
  */
 
 import * as Keychain from 'react-native-keychain';
+import { GenKey } from './crypto';
 
 // StoreEncryptionKey stores global encryption key in keychain
 export async function StoreEncryptionKey(key: string, value: string) {
-    await Keychain.setGenericPassword(key, value);
+  await Keychain.setGenericPassword(key, value);
 }
 
 // GetEncryptionKey retrieves global encryption key
 export async function GetEncryptionKey() {
-    try {
-        const credentials = await Keychain.getGenericPassword();
-        if (credentials) {
-          return credentials
-        } else {
-            return 'NO_KEY'
-        } 
-    } catch (error) {
-        // error report here
-        return 'NO_KEY'
+  try {
+    // get from keychain
+    const credentials = await Keychain.getGenericPassword();
+    if (credentials) {
+      // return key
+      return credentials.password;
+    } else {
+      console.log('cannot find key generating new one.');
+      // this might be first time app usage so we generate and store new global key
+      let key = GenKey();
+      // store this key in keychain
+      await StoreEncryptionKey('GLOBAL_ENC_KEY', key);
+      return key;
+    }
+  } catch (error) {
+    console.error(error);
+    // error report here
+    return 'ERROR';
   }
-
 }
 
 // StoreAccountPassword stores account password in keychain
 export async function StoreAccountPassword(server: string, key: string, value: string) {
-    await Keychain.setInternetCredentials(server, key, value);
+  await Keychain.setInternetCredentials(server, key, value);
 }
 
 // GetAccountPassword retrieves account password form keychain
 export async function GetAccountPassword(server: string) {
-    try {
-        const credentials = await Keychain.getInternetCredentials(server);
-        if (credentials) {
-          return credentials
-        } else {
-            return 'NO_KEY'
-        } 
-    } catch (error) {
-        // error report here
-        return 'NO_KEY'
+  try {
+    const credentials = await Keychain.getInternetCredentials(server);
+    if (credentials) {
+      return credentials;
+    } else {
+      return 'NO_KEY';
+    }
+  } catch (error) {
+    // error report here
+    return 'NO_KEY';
   }
-
 }
