@@ -34,21 +34,20 @@ import PWExtract from "./pwExtract";
 
 const GoogleSelectors: Job[] = [
   GoogleActivityHistory,
-  // AutoDeleteActivityHistory,
-  // AutoDeleteLocationHistory,
-  // AutoDeleteYoutubeHistory,
-  // GoogleSecurityStatus,
-  // SecurityCheckup,
-  // AdPersonalization,
-  // PhotoLocationData,
-  // PeopleAndSharing,
+  AutoDeleteActivityHistory,
+  AutoDeleteLocationHistory,
+  AutoDeleteYoutubeHistory,
+  GoogleSecurityStatus,
+  SecurityCheckup,
+  AdPersonalization,
+  PhotoLocationData,
+  PeopleAndSharing,
   ConnectedDevices,
   ConnectedApps,
 ];
 const GoogleAccount: Account = {
   loginURL: 'https://accounts.google.com/signin/v2/identifier',
   loginFunc: PWExtract,
-
   jobList: GoogleSelectors,
 };
 

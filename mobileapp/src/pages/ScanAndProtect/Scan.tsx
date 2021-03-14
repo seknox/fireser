@@ -127,7 +127,6 @@ export const Scan = (props: any) => {
       <Scanner
         setScanResult={setScanResult}
         accountDetail={accountDetail}
-        onDone={setResult}
         ref={scannerRef}
         onProgress={setProgress}
         changeShowProgress={changeShowProgress}

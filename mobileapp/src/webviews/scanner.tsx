@@ -78,7 +78,6 @@ extractFunc:
 type runnerProps = {
   setScanResult: Dispatch<SetStateAction<Result>>;
   accountDetail: Account;
-  onDone: Dispatch<SetStateAction<Result>>;
   onProgress: (progress: number) => void;
   changeShowProgress: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -182,8 +181,11 @@ const Scanner = (props: runnerProps, ref: any) => {
       //make the login page visible if it requires login.
       props.changeShowProgress(false);
       setIsVisible(true);
-    } else if (msg.type === 'LOGIN_SUCCESS') {
+    } else if (msg.type === 'CREDENTIALS') {
       console.debug('creds: ', msg.content);
+      //TODO @sshahcodes save these credentials
+
+    } else if (msg.type === 'LOGIN_SUCCESS') {
       loadFirstJob();
     } else {
       //DEBUG
@@ -220,7 +222,7 @@ const Scanner = (props: runnerProps, ref: any) => {
           uri: runnable.pageURL,
         }}
         onMessage={onMessage}
-        // incognito={true}
+        incognito={true}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
         injectedJavaScript={runnable.injectCode}
