@@ -25,7 +25,7 @@ import Selectors from '../../selectors';
 import { Fixable, Result } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
-import ScanResult from './ScanResult';
+import ScanResultComponent from './ScanResult';
 
 const themedStyles = StyleService.create({
   container: {
@@ -48,8 +48,8 @@ type accountProps = {
   navigation: any;
 };
 
-export const ScanAndProtect = (props: any) => {
-  const [result, setResult] = React.useState<Result>({
+export const Scan = (props: any) => {
+  const [scanResult, setScanResult] = React.useState<Result>({
     connectedApps: { signInApps: [], thirdPartyApps: [] },
     privacyIssues: [],
     privacyIssuesCount: 0,
@@ -97,17 +97,17 @@ export const ScanAndProtect = (props: any) => {
           />
         ) : null}
 
-        {result.connectedDevices.length === 0 ? null : (
+        {scanResult.connectedDevices.length === 0 ? null : (
           <View>
             <SummaryCard
               title="John Doe"
               subtitle="john.doe@earth.com "
-              showFirebot={false}
+              showProAcc={false}
               showLogo={true}
               logoName="GOOGLE"
               primaryColor={true}
             />
-            <ScanResult result={result} />
+            <ScanResultComponent result={scanResult} />
             <Button
               appearance="outline"
               status="basic"
@@ -125,6 +125,7 @@ export const ScanAndProtect = (props: any) => {
       </View>
 
       <Scanner
+        setScanResult={setScanResult}
         accountDetail={accountDetail}
         onDone={setResult}
         ref={scannerRef}
