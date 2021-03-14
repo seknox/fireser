@@ -17,10 +17,10 @@
  *
  */
 
-import { Job, Result } from '../types/types';
+import { Job, ScanResult } from '../types/types';
 
-export function aggregateResult(jobs: Job[]): Result {
-  var res: Result = {
+export function aggregateResult(jobs: Job[]): ScanResult {
+  var res: ScanResult = {
     privacyIssuesCount: 0,
     securityIssuesCount: 0,
     connectedDevices: [],

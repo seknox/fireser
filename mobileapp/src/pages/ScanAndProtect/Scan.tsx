@@ -22,7 +22,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
 import Selectors from '../../selectors';
-import { Fixable, Result } from '../../types/types';
+import { Fixable, ScanResult } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
 import ScanResultComponent from './ScanResult';
@@ -31,7 +31,6 @@ const themedStyles = StyleService.create({
   container: {
     flex: 1,
   },
-
   progress: {
     margin: 10,
     marginVertical: 100,
@@ -49,14 +48,21 @@ type accountProps = {
 };
 
 export const Scan = (props: any) => {
-  const [scanResult, setScanResult] = React.useState<Result>({ connectedDevices: [] });
+  const [scanResult, setScanResult] = React.useState<ScanResult>({
+    connectedApps: { signInApps: [], thirdPartyApps: [] },
+    privacyIssues: [],
+    privacyIssuesCount: 0,
+    securityIssues: [],
+    securityIssuesCount: 0,
+    connectedDevices: [],
+  });
   const [isFixerVisible, setFixerVisible] = React.useState<boolean>(false);
   const [progress, setProgress] = React.useState<number | null>(null);
   const [showProgress, changeShowProgress] = React.useState(false);
   const [fixable, setFixable] = React.useState<Fixable>({ fixUrl: '', fixFunc: '', name: '' });
   const scannerRef = React.useRef(null);
   const account = props.route.params.name;
-  const jobs = Selectors[account] || [];
+  const accountDetail = Selectors[account] || [];
 
   const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
     setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
@@ -118,8 +124,8 @@ export const Scan = (props: any) => {
       </View>
 
       <Scanner
-        jobs={jobs}
         setScanResult={setScanResult}
+        accountDetail={accountDetail}
         ref={scannerRef}
         onProgress={setProgress}
         changeShowProgress={changeShowProgress}
