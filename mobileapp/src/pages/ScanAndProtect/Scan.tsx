@@ -26,6 +26,7 @@ import { Fixable, ScanResult } from '../../types/types';
 import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
 import ScanResultComponent from './ScanResult';
+import DetailedScanResult from './ScanResult/DetailedResult';
 
 const themedStyles = StyleService.create({
   container: {
@@ -105,7 +106,7 @@ export const Scan = (props: any) => {
               logoName="GOOGLE"
               primaryColor={true}
             />
-            <ScanResultComponent result={scanResult} fixIssue={fixIssue}/>
+            <DetailedScanResult result={scanResult} fixIssue={fixIssue}/>
             <Button
               appearance="outline"
               status="basic"
