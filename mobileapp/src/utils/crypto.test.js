@@ -1,12 +1,13 @@
 
 import { GenKey, AESEncrypt, AESDecrypt } from './crypto'
 
-
+import CryptoJS from 'crypto-js';
 
 describe('crypto tests', () => {
     test('GenKey generates 32 length key', () => {
         const key = GenKey()
-        expect(key).toHaveLength(32)
+        let wordArKey = CryptoJS.enc.Base64.parse(key)
+        expect(wordArKey.sigBytes).toEqual(32)
     });
 
     test('Correct encryption and decryption', ()=> {
