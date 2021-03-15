@@ -65,8 +65,7 @@ export const Scan = (props: any) => {
   const accountDetail = Selectors[account] || [];
 
   const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
-    setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
-    setFixerVisible(true);
+    scannerRef.current?.injectJavaScript(fixFunc);
   };
 
   // const onFixed = () => {
@@ -106,7 +105,7 @@ export const Scan = (props: any) => {
               logoName="GOOGLE"
               primaryColor={true}
             />
-            <ScanResultComponent result={scanResult} />
+            <ScanResultComponent result={scanResult} fixIssue={fixIssue}/>
             <Button
               appearance="outline"
               status="basic"
@@ -129,13 +128,6 @@ export const Scan = (props: any) => {
         ref={scannerRef}
         onProgress={setProgress}
         changeShowProgress={changeShowProgress}
-      />
-
-      <Fixer
-        pageURL={fixable.fixUrl}
-        fixFunc={fixable.fixFunc}
-        isVisible={isFixerVisible}
-        onDone={console.log}
       />
     </Layout>
   );

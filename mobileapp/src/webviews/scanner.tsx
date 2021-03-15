@@ -218,7 +218,7 @@ const Scanner = (props: runnerProps, ref: any) => {
           uri: runnable.pageURL,
         }}
         onMessage={onMessage}
-        incognito={true}
+       // incognito={true}
         allowsBackForwardNavigationGestures={false}
         sharedCookiesEnabled={true}
         injectedJavaScript={runnable.injectCode}
