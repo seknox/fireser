@@ -18,9 +18,10 @@
 import { Icon, StyleService, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import ProtectedAcc from './ProtectAccounts';
+import ProtectNewAcc from './ProtectNewAccount';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
+import { ProtectedAcSummary } from '../ProtectedAcc';
 
 const iconColor = '#0000FF';
 
@@ -53,7 +54,8 @@ export default (props: { navigation: any }): React.ReactElement => {
         />
       </View>
       <View style={styles.protectAcc}>
-        <ProtectedAcc navigateToAccounts={props.navigation} />
+        <ProtectedAcSummary navigateToAccounts={props.navigation} />
+        <ProtectNewAcc navigateToAccounts={props.navigation} />
       </View>
     </Layout>
   );

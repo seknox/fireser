@@ -58,6 +58,10 @@ export default (props: { navigation: any }): React.ReactElement => {
     props.navigation.navigate('Home');
   };
 
+  const navigateScannedPage = () => {
+    props.navigation.navigate('ProtectedAccounts');
+  };
+
   const [isModalVisible, setModalVisible] = React.useState(false);
 
   const toggleModal = () => {
@@ -99,7 +103,7 @@ export default (props: { navigation: any }): React.ReactElement => {
           </View>
         </Pressable>
 
-        <Pressable style={styles.touch}>
+        <Pressable style={styles.touch} onPress={navigateScannedPage}>
           <View>
             <StatusIcon />
             <Text status="basic">Alerts</Text>
