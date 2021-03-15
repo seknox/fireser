@@ -23,7 +23,7 @@ import SocialAccount from '../pages/ScanAndProtect/SocialAccounts';
 import Home from '../pages/Home';
 import Onboarding from '../pages/Onboarding';
 import { Scan } from '../pages/ScanAndProtect/Scan';
-import Setting from './KittenDrawer';
+import ProtectedAccounts from '../pages/ProtectedAcc';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -34,6 +34,7 @@ const HomeNavigator = () => {
       <Screen name="Onboarding" component={Onboarding} />
       <Screen name="PrimaryAccount" component={PrimaryAccount} />
       <Screen name="SocialAccount" component={SocialAccount} />
+      <Screen name="ProtectedAccounts" component={ProtectedAccounts} />
       <Screen name="Scan" component={Scan} />
       {/* <Screen name="Setting" component={Setting} /> */}
     </Navigator>
