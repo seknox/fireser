@@ -36,7 +36,6 @@ const extractLastPasswordChange = (htmlContent: string) => {
     arr.forEach((elem, i) => {
       const innerText = $(elem).text();
       if (innerText.includes('Last changed')) {
-        console.debug(innerText);
         resolve(innerText.split('Last changed')[1]);
       } else if (i === arr.length - 1) {
         reject('Last Changed not found');

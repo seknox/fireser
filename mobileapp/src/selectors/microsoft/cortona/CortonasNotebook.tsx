@@ -30,7 +30,6 @@ const fixFunc = `
   setTimeout(function(){
       document.querySelectorAll("button[mee-button=flex]").forEach(function(btn){
     if(btn.innerText==="Clear"){
-        //console.info(btn);
 
         btn.click();
         }

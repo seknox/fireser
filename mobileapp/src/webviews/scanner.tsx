@@ -147,7 +147,6 @@ const Scanner = (props: runnerProps, ref: any) => {
       console.error(e);
     }
 
-    console.log(msg.type);
 
     if (msg.type === 'HTML' && msg.content) {
       setIsVisible(false);

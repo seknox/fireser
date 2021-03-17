@@ -38,7 +38,6 @@ const extractAutoDelete = (htmlContent: string) => {
       resolve('not applicable');
       return;
     }
-    console.log(text)
     const splotted = text.split('older than');
 
     if (splotted.length === 2) {

@@ -90,18 +90,11 @@ const fixFunc = `
 
 
         document.querySelector("input[role=switch]").click();
-               console.log( 1);
-
         setTimeout(function(){
-       console.log( 2);
-
        var allButtons=document.querySelectorAll("button");
        var confirmBtn = allButtons[allButtons.length-1];
-       console.log( 3);
-
        confirmBtn.disabled = false;
        confirmBtn.click();
-       console.log("fixed");
         
         }, 1000);
             
