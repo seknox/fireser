@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, StyleService, useStyleSheet } from '@ui-kitten/components';
+import { Button, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
 import ProgressBar from 'react-native-progress/Bar';
@@ -27,6 +27,7 @@ import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
 import ScanResultComponent from './ScanResult';
 import DetailedScanResult from './ScanResult/DetailedResult';
+import Modal from 'react-native-modal';
 
 const themedStyles = StyleService.create({
   container: {
@@ -67,7 +68,9 @@ export const Scan = (props: any) => {
 
   const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
     setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
-    setFixerVisible(true);
+    if (!fixFunc) {
+      setFixerVisible(true);
+    }
     //scannerRef.current?.injectJavaScript(fixFunc);
   };
 
@@ -141,12 +144,20 @@ export const Scan = (props: any) => {
         changeShowProgress={changeShowProgress}
       />
 
-      <Fixer
-        pageURL={fixable.fixUrl}
-        fixFunc={fixable.fixFunc}
+      <Modal
         isVisible={isFixerVisible}
-        onFixed={onFixed}
-      />
+        hasBackdrop={true}
+        onBackdropPress={() => {
+          setFixerVisible(false);
+        }}
+      >
+        <Fixer
+          pageURL={fixable.fixUrl}
+          fixFunc={fixable.fixFunc}
+          isVisible={true}
+          onFixed={onFixed}
+        />
+      </Modal>
     </Layout>
   );
 };

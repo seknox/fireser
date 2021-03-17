@@ -20,6 +20,7 @@
 import cio from 'cheerio';
 
 import { isLoggedIn } from '../CheckLoggedInFunc';
+import { Job } from '../../../types/types';
 
 const extractAutoDelete = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -35,15 +36,14 @@ const extractAutoDelete = (htmlContent: string) => {
 
     const text = selected.text();
 
-    if (text.includes('not applicable')) {
+    if (text.includes('no activity to delete')) {
       resolve('not applicable');
       return;
     }
-    //console.log(text)
     const splotted = text.split('older than');
 
     if (splotted.length === 2) {
-      resolve(splotted[1]);
+      resolve(splotted[1].trim());
     } else {
       resolve('off');
       // reject('Could not find auto delete duration');
@@ -76,18 +76,23 @@ confirmBtn.click();
 
 `;
 
-export default {
+const job: Job = {
   name: 'Auto delete ',
   pageURL: 'https://myactivity.google.com/activitycontrols?settings=search',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractAutoDelete,
-      name: 'Auto delete activity history',
+      name: 'Auto delete search history',
+      description: 'Set auto deletion of google search history',
       type: 'PRIVACY',
       expectedValue: '3 months',
+      checkFunc: (expectedValue, gotValue) =>
+        gotValue === expectedValue || gotValue === 'not applicable',
       fixFunc: fixFunc,
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=search',
     },
   ],
 };
+
+export default job;
