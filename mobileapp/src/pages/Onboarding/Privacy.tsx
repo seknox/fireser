@@ -24,43 +24,27 @@ const themedStyles = StyleService.create({
   root: {
     flex: 1,
     flexDirection: 'column',
-  },
-  header: {
-    flex: 1,
-  },
-
-  footerRoot: {
-    flex: 1,
-    marginHorizontal: 16,
-    backgroundColor: 'white',
-  },
-
-  footerContainer: {
-    flexDirection: 'row',
-    marginHorizontal: 10,
-    padding: 4,
-  },
-  touch: {
-    flexDirection: 'row',
-    flex: 1,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
   },
   icon: {
-    // marginHorizontal: 4,
-    // marginVertical: 4,
+    height: 400,
+    width: 400,
     alignSelf: 'center',
-    maxWidth: '100%',
+    // maxWidth: '100%',
   },
 });
 
-export default (props: { navigation: any; children: any }): React.ReactElement => {
+export default (): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
 
   // const { navigation } = props;
 
   return (
     <View style={styles.root}>
+      <Text category="h5">Privacy</Text>
       <Privacy style={styles.icon} />
       <Text>
         Welcome to the Fireser app. Since you choose to use this app, we can tell that you care

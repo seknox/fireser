@@ -24,7 +24,7 @@ import {
   Button,
 } from '@ui-kitten/components';
 import React from 'react';
-import { Pressable, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Privacy from './Privacy';
 import Security from './Security';
 import Welcome from './Welcome';
@@ -40,11 +40,12 @@ const themedStyles = StyleService.create({
     width: '100%',
     alignSelf: 'center',
     padding: 10,
+    backgroundColor: 'white',
   },
   footerRoot: {
     flex: 1,
     flexDirection: 'column',
-    marginVertical: 5,
+    marginVertical: 15,
     marginHorizontal: 16,
     backgroundColor: 'white',
   },
@@ -69,19 +70,18 @@ const themedStyles = StyleService.create({
   },
   tab: {
     // height: 192,
+    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
+    width: '100%',
+    padding: 10,
   },
 });
 
 export default (props: { navigation: any; children: any }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  // const { navigation } = props;
-
-  React.useEffect(() => {
-    console.log('state change: ', selectedIndex);
-  });
 
   const handleChange = (pos: string) => {
     if (pos === 'next') {
@@ -97,30 +97,23 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
 
   return (
     <Layout style={styles.root}>
-      <ViewPager
-        //   style={styles.content}
-        selectedIndex={selectedIndex}
-        onSelect={(index) => setSelectedIndex(index)}
-      >
-        <Layout style={styles.tab} level="2">
-          <Text category="h5">Welcome</Text>
-          <View style={styles.content}>
+      <ScrollView style={styles.content}>
+        <ViewPager
+          //   style={styles.content}
+          selectedIndex={selectedIndex}
+          onSelect={(index) => setSelectedIndex(index)}
+        >
+          <Layout style={styles.tab} level="2">
             <Welcome />
-          </View>
-        </Layout>
-        <Layout style={styles.tab} level="2">
-          <Text category="h5">Security</Text>
-          <View style={styles.content}>
+          </Layout>
+          <Layout style={styles.tab} level="2">
             <Security />
-          </View>
-        </Layout>
-        <Layout style={styles.tab} level="2">
-          <Text category="h5">Privacy</Text>
-          <View style={styles.content}>
+          </Layout>
+          <Layout style={styles.tab} level="2">
             <Privacy />
-          </View>
-        </Layout>
-      </ViewPager>
+          </Layout>
+        </ViewPager>
+      </ScrollView>
 
       <View style={styles.footerRoot}>
         <View style={styles.footerContainer}>
