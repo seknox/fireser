@@ -28,6 +28,7 @@ import { ScrollView, View } from 'react-native';
 import Privacy from './Privacy';
 import Security from './Security';
 import Welcome from './Welcome';
+import StartProtection from './Protect';
 
 const themedStyles = StyleService.create({
   root: {
@@ -83,15 +84,27 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
   const styles = useStyleSheet(themedStyles);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
-  const handleChange = (pos: string) => {
+  const handleChange = (pos: 'next' | 'prev') => {
     if (pos === 'next') {
-      if (selectedIndex !== 2) {
+      if (selectedIndex !== 3) {
         setSelectedIndex(selectedIndex + 1);
       }
     } else {
       if (selectedIndex !== 0) {
         setSelectedIndex(selectedIndex - 1);
       }
+    }
+  };
+
+  const disableNext = () => {
+    if (selectedIndex === 3) {
+      return true;
+    }
+  };
+
+  const disablePrev = () => {
+    if (selectedIndex === 0) {
+      return true;
     }
   };
 
@@ -112,12 +125,20 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
           <Layout style={styles.tab} level="2">
             <Privacy />
           </Layout>
+          <Layout style={styles.tab} level="2">
+            <StartProtection />
+          </Layout>
         </ViewPager>
       </ScrollView>
 
       <View style={styles.footerRoot}>
         <View style={styles.footerContainer}>
-          <Button style={styles.touch} status="basic" onPress={() => handleChange('prev')}>
+          <Button
+            style={styles.touch}
+            status="basic"
+            disabled={disablePrev()}
+            onPress={() => handleChange('prev')}
+          >
             Previous
           </Button>
 
@@ -125,10 +146,15 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
             <Button appearance="ghost" size="medium">
               Skip
             </Button>
-            <Text>Step {selectedIndex + 1} of 3</Text>
+            <Text>Step {selectedIndex + 1} of 4</Text>
           </View>
 
-          <Button style={styles.touch} status="primary" onPress={() => handleChange('next')}>
+          <Button
+            style={styles.touch}
+            status="primary"
+            disabled={disableNext()}
+            onPress={() => handleChange('next')}
+          >
             Next
           </Button>
         </View>

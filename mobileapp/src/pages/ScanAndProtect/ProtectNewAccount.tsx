@@ -38,6 +38,7 @@ const themedStyles = StyleService.create({
   card: {
     flex: 1,
     minHeight: 130,
+    minWidth: 320,
     marginVertical: 10,
     marginHorizontal: 20,
     flexDirection: 'column',
@@ -87,63 +88,9 @@ export default (props: { navigation: any }): React.ReactElement => {
   return (
     <Layout navigation={props.navigation}>
       <View style={styles.container}>
-        <View style={styles.card}>
-          <View style={styles.title}>
-            <Text category="h5">Protect Google Accounts</Text>
-          </View>
+        <ProtectGoogleAcc />
 
-          <Pressable
-            onPress={() => navigation.navigate('Scan', { name: 'Google' })}
-            style={styles.touch}
-          >
-            <View style={styles.desc}>
-              <Text category="s1">Gmail, Youtube, Search, Chrome, Android.</Text>
-              <Text category="s1">Security Focused</Text>
-              <Button
-                style={styles.button}
-                appearance="ghost"
-                status="primary"
-                accessoryRight={RightIcon}
-                onPress={() => navigation.navigate('Scan', { name: 'Google' })}
-              >
-                Protect now
-              </Button>
-            </View>
-
-            <View style={styles.imageContainer}>
-              <GoogleIcon style={styles.image} />
-            </View>
-          </Pressable>
-        </View>
-
-        <View style={styles.card}>
-          <View style={styles.title}>
-            <Text category="h5">Protect Microsoft Account</Text>
-          </View>
-
-          <Pressable
-            onPress={() => navigation.navigate('Scan', { name: 'Microsoft' })}
-            style={styles.touch}
-          >
-            <View style={styles.desc}>
-              <Text category="s1">Hotmail, Windows, Cortana, Bing.</Text>
-              <Text category="s1">Security Focused</Text>
-              <Button
-                style={styles.button}
-                appearance="ghost"
-                status="primary"
-                accessoryRight={RightIcon}
-                onPress={() => navigation.navigate('Scan', { name: 'Microsoft' })}
-              >
-                Protect now
-              </Button>
-            </View>
-
-            <View style={styles.imageContainer}>
-              <MicrosoftIcon style={styles.image} />
-            </View>
-          </Pressable>
-        </View>
+        <ProtectMicrosoftAcc />
 
         <View style={styles.card}>
           <View style={styles.title}>
@@ -206,3 +153,73 @@ export default (props: { navigation: any }): React.ReactElement => {
     </Layout>
   );
 };
+
+export function ProtectGoogleAcc() {
+  const styles = useStyleSheet(themedStyles);
+  const navigation = useNavigation();
+  return (
+    <View style={styles.card}>
+      <View style={styles.title}>
+        <Text category="h5">Protect Google Account</Text>
+      </View>
+
+      <Pressable
+        onPress={() => navigation.navigate('Scan', { name: 'Google' })}
+        style={styles.touch}
+      >
+        <View style={styles.desc}>
+          <Text category="s1">Gmail, Youtube, Search, Chrome, Android.</Text>
+          <Text category="s1">Security Focused</Text>
+          <Button
+            style={styles.button}
+            appearance="ghost"
+            status="primary"
+            accessoryRight={RightIcon}
+            onPress={() => navigation.navigate('Scan', { name: 'Google' })}
+          >
+            Protect now
+          </Button>
+        </View>
+
+        <View style={styles.imageContainer}>
+          <GoogleIcon style={styles.image} />
+        </View>
+      </Pressable>
+    </View>
+  );
+}
+
+export function ProtectMicrosoftAcc() {
+  const navigation = useNavigation();
+  const styles = useStyleSheet(themedStyles);
+  return (
+    <View style={styles.card}>
+      <View style={styles.title}>
+        <Text category="h5">Protect Microsoft Account</Text>
+      </View>
+
+      <Pressable
+        onPress={() => navigation.navigate('Scan', { name: 'Google' })}
+        style={styles.touch}
+      >
+        <View style={styles.desc}>
+          <Text category="s1">Gmail, Youtube, Search, Chrome, Android.</Text>
+          <Text category="s1">Security Focused</Text>
+          <Button
+            style={styles.button}
+            appearance="ghost"
+            status="primary"
+            accessoryRight={RightIcon}
+            onPress={() => navigation.navigate('Scan', { name: 'Google' })}
+          >
+            Protect now
+          </Button>
+        </View>
+
+        <View style={styles.imageContainer}>
+          <MicrosoftIcon style={styles.image} />
+        </View>
+      </Pressable>
+    </View>
+  );
+}
