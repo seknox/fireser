@@ -19,6 +19,7 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from '../CheckLoggedInFunc';
+import { Job } from '../../../types/types';
 
 const extractPhotoLocationSetting = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -41,7 +42,7 @@ const extractPhotoLocationSetting = (htmlContent: string) => {
   });
 };
 
-const extractLabledFaceSetting = (htmlContent: string) => {
+const extractLabeledFaceSetting = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -51,37 +52,29 @@ const extractLabledFaceSetting = (htmlContent: string) => {
     const selected = $('div[role="button"] > div');
 
     selected.each(function (i, elem) {
-      const txt = $(this).text();
+      const txt = $(elem).text();
       if (txt.includes('labeled as "Me"')) {
         if (txt.includes('No face labeled as "Me"')) {
           resolve('FALSE');
         } else {
           resolve('TRUE');
         }
+      } else {
+        resolve('FALSE');
       }
-      //console.debug($(this).html());
     });
-
-    // const inputElement = selected
-    //   .parent('div')
-    //   .children('div:nth-child(2)')
-    //   .children('div:nth-child(1)')
-    //   .children('div')
-    //   .children('div:nth-child(2)')
-    //   .children('input:nth-child(2)');
-
-    resolve("inputElement.prop('aria-checked')");
   });
 };
 
-export default {
+const job: Job = {
   name: 'Google Photos',
   pageURL: 'https://photos.google.com/settings',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractPhotoLocationSetting,
       name: 'Hide Location in Photos',
+      description: 'Whether to let other people see where the photos were taken.',
       type: 'PRIVACY',
       expectedValue: 'true',
       fixFunc:
@@ -90,8 +83,9 @@ export default {
       fixURL: 'https://photos.google.com/settings',
     },
     {
-      extractFunc: extractLabledFaceSetting,
+      extractFunc: extractLabeledFaceSetting,
       name: 'Labeled face',
+      description: 'Whether to label your face as you.',
       type: 'PRIVACY',
       expectedValue: 'FALSE',
       fixFunc:
@@ -101,3 +95,5 @@ export default {
     },
   ],
 };
+
+export default job;

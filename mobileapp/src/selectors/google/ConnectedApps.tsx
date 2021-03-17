@@ -19,8 +19,9 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
+import { Job, Apps } from '../../types/types';
 
-const extractThirdParyApps = (htmlContent: string) => {
+const extractThirdPartyApps = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -29,9 +30,9 @@ const extractThirdParyApps = (htmlContent: string) => {
     const $ = cio.load(htmlContent);
 
     const selected = $('#third-party').parent().siblings();
-    var apps = [];
+    let apps: Apps[] = [];
     selected.each(function (i, elem) {
-      const ele = $(this);
+      const ele = $(elem);
       const imgNode = ele.find($('img[data-atf="true"]'));
       const imgURL = imgNode.attr('src');
       const name = imgNode.parent().next().text();
@@ -50,9 +51,9 @@ const extractSignedInApps = (htmlContent: string) => {
     const $ = cio.load(htmlContent);
 
     const selected = $('#sign-in').parent().next().nextAll();
-    var apps = [];
+    let apps: Apps[] = [];
     selected.each(function (i, elem) {
-      const ele = $(this);
+      const ele = $(elem);
 
       const nameNode = ele.find($('h2'));
       const imgURL = nameNode.parent().parent().prev().children('img').attr('src');
@@ -71,7 +72,13 @@ const extractSignedInApps = (htmlContent: string) => {
       const permissions = detailsNodes.first().find('div[role="gridcell"]').text();
       const homepage = detailsNodes.first().next().find('div[role="gridcell"]').text();
       const accessGivenTo = detailsNodes.first().next().next().find('div[role="gridcell"]').text();
-      const accessGivenIn = detailsNodes.first().next().next().next().find('div[role="gridcell"]').text();
+      const accessGivenIn = detailsNodes
+        .first()
+        .next()
+        .next()
+        .next()
+        .find('div[role="gridcell"]')
+        .text();
 
       apps.push({ name, imgURL, permissions, homepage, accessGivenTo, accessGivenIn });
     });
@@ -79,22 +86,28 @@ const extractSignedInApps = (htmlContent: string) => {
   });
 };
 
-export default {
+const job: Job = {
   name: 'Connected Apps ',
   pageURL: 'https://myaccount.google.com/permissions',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
-      extractFunc: extractThirdParyApps,
+      extractFunc: extractThirdPartyApps,
       name: 'Connected third party apps',
+      description:
+        'Sites and apps that have access to some of your Google Account data, including info that may be sensitive. Remove access for those you no longer trust or use',
       type: 'THIRD_PARTY_APPS',
       fixURL: 'https://myaccount.google.com/permissions',
     },
     {
       extractFunc: extractSignedInApps,
       name: 'Connected signed in apps',
+      description:
+        'You use your Google Account to sign in to these sites and apps. They can view your name, email address, and profile picture',
       type: 'SIGNED_IN_APPS',
       fixURL: 'https://myaccount.google.com/permissions',
     },
   ],
 };
+
+export default job;

@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2020-2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -20,6 +20,7 @@
 import cio from 'cheerio';
 
 import { isLoggedIn } from '../CheckLoggedInFunc';
+import { Job } from '../../../types/types';
 
 const extracAutoDelete = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -34,6 +35,11 @@ const extracAutoDelete = (htmlContent: string) => {
     );
 
     const text = selected.text();
+    if (text.includes('no activity to delete')) {
+      resolve('not applicable');
+      return;
+    }
+
     const splotted = text.split('older than');
 
     if (splotted.length === 2) {
@@ -70,18 +76,23 @@ confirmBtn.click();
 
 `;
 
-export default {
+const job: Job = {
   name: 'Auto delete ',
   pageURL: 'https://myactivity.google.com/activitycontrols?settings=location',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extracAutoDelete,
       name: 'Auto delete location history',
+      description: '', //TODO
       type: 'PRIVACY',
       expectedValue: '3 months',
+      checkFunc: (expectedValue, gotValue) =>
+        gotValue === expectedValue || gotValue === 'not applicable',
       fixFunc: fixFunc,
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=location',
     },
   ],
 };
+
+export default job;
