@@ -18,8 +18,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import PrimaryAccount from '../pages/ScanAndProtect/PrimaryAccounts';
-import SocialAccount from '../pages/ScanAndProtect/SocialAccounts';
+import ProtectNewAccount from '../pages/ScanAndProtect/ProtectNewAccount';
 import Home from '../pages/Home';
 import Onboarding from '../pages/Onboarding';
 import { Scan } from '../pages/ScanAndProtect/Scan';
@@ -32,8 +31,7 @@ const HomeNavigator = () => {
     <Navigator headerMode="none" initialRouteName={'Home'}>
       <Screen name="Home" component={Home} />
       <Screen name="Onboarding" component={Onboarding} />
-      <Screen name="PrimaryAccount" component={PrimaryAccount} />
-      <Screen name="SocialAccount" component={SocialAccount} />
+      <Screen name="ProtectNewAccount" component={ProtectNewAccount} />
       <Screen name="ProtectedAccounts" component={ProtectedAccounts} />
       <Screen name="Scan" component={Scan} />
       {/* <Screen name="Setting" component={Setting} /> */}
