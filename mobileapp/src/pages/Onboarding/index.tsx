@@ -15,7 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Layout, StyleService, Text, useStyleSheet, ViewPager } from '@ui-kitten/components';
+import {
+  Layout,
+  StyleService,
+  Text,
+  useStyleSheet,
+  ViewPager,
+  Button,
+} from '@ui-kitten/components';
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import Privacy from './Privacy';
@@ -29,25 +36,34 @@ const themedStyles = StyleService.create({
     height: '100%',
   },
   content: {
-    height: '90%',
+    height: '85%',
     width: '100%',
     alignSelf: 'center',
     padding: 10,
   },
   footerRoot: {
     flex: 1,
-    // marginHorizontal: 16,
+    flexDirection: 'column',
+    marginVertical: 5,
+    marginHorizontal: 16,
     backgroundColor: 'white',
   },
 
   footerContainer: {
+    flex: 1,
     flexDirection: 'row',
     // marginHorizontal: 10,
     padding: 4,
   },
   touch: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  skip: {
+    flexDirection: 'column',
+    flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -108,23 +124,20 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
 
       <View style={styles.footerRoot}>
         <View style={styles.footerContainer}>
-          <Pressable style={styles.touch} onPress={() => handleChange('prev')}>
-            <View>
-              <Text status="basic">Previous</Text>
-            </View>
-          </Pressable>
+          <Button style={styles.touch} status="basic" onPress={() => handleChange('prev')}>
+            Previous
+          </Button>
 
-          <Pressable style={styles.touch}>
-            <View>
-              <Text status="basic">{selectedIndex + 1} of 3</Text>
-            </View>
-          </Pressable>
+          <View style={styles.skip}>
+            <Button appearance="ghost" size="medium">
+              Skip
+            </Button>
+            <Text>Step {selectedIndex + 1} of 3</Text>
+          </View>
 
-          <Pressable style={styles.touch} onPress={() => handleChange('next')}>
-            <View>
-              <Text status="basic">Next</Text>
-            </View>
-          </Pressable>
+          <Button style={styles.touch} status="primary" onPress={() => handleChange('next')}>
+            Next
+          </Button>
         </View>
       </View>
     </Layout>
