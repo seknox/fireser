@@ -29,6 +29,8 @@ import Privacy from './Privacy';
 import Security from './Security';
 import Welcome from './Welcome';
 import StartProtection from './Protect';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const themedStyles = StyleService.create({
   root: {
@@ -80,8 +82,10 @@ const themedStyles = StyleService.create({
   },
 });
 
-export default (props: { navigation: any; children: any }): React.ReactElement => {
+export default (): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
+  const navigation = useNavigation();
+
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleChange = (pos: 'next' | 'prev') => {
@@ -107,6 +111,27 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
       return true;
     }
   };
+
+  const updateOnboardingState = async () => {
+    try {
+      await AsyncStorage.setItem('ONBOARDING', 'false');
+      console.debug('setting state false');
+    } catch (e) {
+      // saving error
+      console.error(e);
+    }
+  };
+
+  const updateAndNavigate = () => {
+    updateOnboardingState();
+    navigation.navigate('Home');
+  };
+
+  React.useEffect(() => {
+    if (selectedIndex === 3) {
+      updateOnboardingState();
+    }
+  }, [selectedIndex]);
 
   return (
     <Layout style={styles.root}>
@@ -143,7 +168,7 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
           </Button>
 
           <View style={styles.skip}>
-            <Button appearance="ghost" size="medium">
+            <Button appearance="ghost" size="medium" onPress={() => updateAndNavigate()}>
               Skip
             </Button>
             <Text>Step {selectedIndex + 1} of 4</Text>

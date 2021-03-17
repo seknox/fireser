@@ -15,32 +15,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import ProtectNewAccount from '../pages/ScanAndProtect/ProtectNewAccount';
 import Home from '../pages/Home';
 import Onboarding from '../pages/Onboarding';
-import { Scan } from '../pages/ScanAndProtect/Scan';
 import ProtectedAccounts from '../pages/ProtectedAcc';
+import ProtectNewAccount from '../pages/ScanAndProtect/ProtectNewAccount';
+import { Scan } from '../pages/ScanAndProtect/Scan';
 
 const { Navigator, Screen } = createStackNavigator();
 
-const HomeNavigator = () => {
+export default () => {
   return (
-    <Navigator headerMode="none" initialRouteName={'Onboarding'}>
-      <Screen name="Home" component={Home} />
-      <Screen name="Onboarding" component={Onboarding} />
-      <Screen name="ProtectNewAccount" component={ProtectNewAccount} />
-      <Screen name="ProtectedAccounts" component={ProtectedAccounts} />
-      <Screen name="Scan" component={Scan} />
-      {/* <Screen name="Setting" component={Setting} /> */}
-    </Navigator>
+    <NavigationContainer>
+      <Navigator headerMode="none" initialRouteName="Home">
+        <Screen name="Home" component={Home} />
+        <Screen name="Onboarding" component={Onboarding} />
+        <Screen name="ProtectNewAccount" component={ProtectNewAccount} />
+        <Screen name="ProtectedAccounts" component={ProtectedAccounts} />
+        <Screen name="Scan" component={Scan} />
+      </Navigator>
+    </NavigationContainer>
   );
 };
-
-export const AppNavigator = () => (
-  <NavigationContainer>
-    <HomeNavigator />
-  </NavigationContainer>
-);

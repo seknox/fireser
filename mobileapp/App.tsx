@@ -19,12 +19,11 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import React, { useEffect, useRef, useState } from 'react';
-import 'react-native-gesture-handler';
-import { AppNavigator } from './src/Navigator';
-import { default as theme } from './src/assets/custom-theme.json';
-import codePush from 'react-native-code-push';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppState } from 'react-native';
+import codePush from 'react-native-code-push';
+import 'react-native-gesture-handler';
+import { default as theme } from './src/assets/custom-theme.json';
+import Navigation from './src/Navigator';
 import { SetupAsyncStorage } from './src/utils/storage';
 
 export default () => {
@@ -80,7 +79,7 @@ export default () => {
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-        <AppNavigator />
+        <Navigation />
       </ApplicationProvider>
     </>
   );

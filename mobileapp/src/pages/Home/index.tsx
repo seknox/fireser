@@ -22,6 +22,7 @@ import ProtectNewAcc from './ProtectNewAccount';
 import Layout from '../../components/Layout';
 import SummaryCard from '../../components/SummaryCard';
 import { ProtectedAcSummary } from '../ProtectedAcc';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const iconColor = '#0000FF';
 
@@ -40,6 +41,23 @@ const iconstyles = StyleSheet.create({
 
 export default (props: { navigation: any }): React.ReactElement => {
   const styles = useStyleSheet(themedStyles);
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const data = await AsyncStorage.getItem('ONBOARDING');
+        if (data && data === 'false') {
+          return;
+        } else {
+          props.navigation.navigate('Onboarding');
+        }
+      } catch (e) {
+        // error reading value
+        console.error(e);
+        props.navigation.navigate('Onboarding');
+      }
+    })();
+  });
 
   return (
     <Layout navigation={props.navigation}>
