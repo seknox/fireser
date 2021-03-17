@@ -63,6 +63,22 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   // const { navigation } = props;
 
+  React.useEffect(() => {
+    console.log('state change: ', selectedIndex);
+  });
+
+  const handleChange = (pos: string) => {
+    if (pos === 'next') {
+      if (selectedIndex !== 2) {
+        setSelectedIndex(selectedIndex + 1);
+      }
+    } else {
+      if (selectedIndex !== 0) {
+        setSelectedIndex(selectedIndex - 1);
+      }
+    }
+  };
+
   return (
     <Layout style={styles.root}>
       <ViewPager
@@ -92,7 +108,7 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
 
       <View style={styles.footerRoot}>
         <View style={styles.footerContainer}>
-          <Pressable style={styles.touch}>
+          <Pressable style={styles.touch} onPress={() => handleChange('prev')}>
             <View>
               <Text status="basic">Previous</Text>
             </View>
@@ -100,11 +116,11 @@ export default (props: { navigation: any; children: any }): React.ReactElement =
 
           <Pressable style={styles.touch}>
             <View>
-              <Text status="basic">Step</Text>
+              <Text status="basic">{selectedIndex + 1} of 3</Text>
             </View>
           </Pressable>
 
-          <Pressable style={styles.touch}>
+          <Pressable style={styles.touch} onPress={() => handleChange('next')}>
             <View>
               <Text status="basic">Next</Text>
             </View>

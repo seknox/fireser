@@ -28,7 +28,7 @@ const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => {
   return (
-    <Navigator headerMode="none" initialRouteName={'Home'}>
+    <Navigator headerMode="none" initialRouteName={'Onboarding'}>
       <Screen name="Home" component={Home} />
       <Screen name="Onboarding" component={Onboarding} />
       <Screen name="ProtectNewAccount" component={ProtectNewAccount} />
