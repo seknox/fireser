@@ -58,6 +58,8 @@ const extractLabledFaceSetting = (htmlContent: string) => {
         } else {
           resolve('TRUE');
         }
+      }else {
+        resolve('FALSE');
       }
       //console.debug($(this).html());
     });
@@ -70,7 +72,7 @@ const extractLabledFaceSetting = (htmlContent: string) => {
     //   .children('div:nth-child(2)')
     //   .children('input:nth-child(2)');
 
-    resolve("inputElement.prop('aria-checked')");
+    //resolve(inputElement.prop('aria-checked'));
   });
 };
 

@@ -19,9 +19,9 @@
 
 //
 export type Account = {
-  loginURL: string;
-  checkLogin: string;
-  loginFunc: string;
+  loginURL?: string;
+  checkLogin?: string;
+  loginFunc?: string;
   // unameSelector: string;
   // passwordSelector: string;
   jobList: Job[];
@@ -30,30 +30,32 @@ export type Account = {
 export type Job = {
   name: string;
   pageURL: string;
-  isLoggedInFunc: string;
+  isLoggedInFunc?: string;
   tasks: Task[];
 };
 
 export type Task = {
-  extractFunc: (htmlContent: string) => Promise<string | boolean>; // function to extract certain data from a html content
+  extractFunc: (htmlContent: string) => Promise<any>; // function to extract certain data from a html content
   name: string;
   description: string;
   expectedValue: string;
-  gotValue: any;
+  gotValue?: any;
+  checkFunc?: (expectedValue: any, gotValue: any) => boolean;
   fixURL: string; // url to fix the setting if expectedValue!=gotvalue
-  fixFunc: string; // function to automatically fix the setting
+  fixFunc?: string; // function to automatically fix the setting
   //onFixed: () => {};
   type: 'SECURITY' | 'PRIVACY' | 'CONNECTED_DEVICES' | 'THIRD_PARTY_APPS' | 'SIGNED_IN_APPS';
 };
 
 export type Fixable = {
   fixUrl: string;
-  fixFunc: string;
+  fixFunc?: string;
   name: string;
 };
 
 export type Device = {
   name: string;
+  detail: string;
   os: string;
   imageURL: string;
 };

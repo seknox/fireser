@@ -87,20 +87,20 @@ const extractLocationHistory = (htmlContent: string) => {
 
 const fixFunc = `
 
-      sendDebugLog("fix btn->>>>>"+document.querySelector("input[role=switch]"));
 
         document.querySelector("input[role=switch]").click();
                console.log( 1);
-        
+
         setTimeout(function(){
+       console.log( 2);
 
        var allButtons=document.querySelectorAll("button");
        var confirmBtn = allButtons[allButtons.length-1];
+       console.log( 3);
+
        confirmBtn.disabled = false;
        confirmBtn.click();
-      sendDebugLog("confirm btn->>>>>"+ allButtons[allButtons.length-1].innerText);
-
-      content="OKKKKKK";
+       console.log("fixed");
         
         }, 1000);
             
@@ -126,7 +126,7 @@ export default {
       expectedValue: 'Off',
       fixFunc: fixFunc,
       fixURL:
-        'https://myactivity.google.com/activitycontrols?settings=location&utm_source=my-activity',
+        'https://myactivity.google.com/activitycontrols?settings=location',
     },
 
     {

@@ -19,6 +19,7 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
+import {Device} from "../../types/types";
 
 const extractConnectedDevices = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -29,7 +30,7 @@ const extractConnectedDevices = (htmlContent: string) => {
     const $ = cio.load(htmlContent);
 
     const selected = $('div[role="listitem"]');
-    var devices = [];
+    let devices: Device[] = [];
     selected.each(function (i, elem) {
       const ele = $(this);
       // console.log(ele.html())
@@ -40,7 +41,7 @@ const extractConnectedDevices = (htmlContent: string) => {
       const dataOS = deviceTypeElement.attr('data-os');
       const imgURL = ele.find($(`div[data-device-id="${deviceID}"] > div > div > img`)).attr('src');
       const dataFormFactor = deviceTypeElement.attr('data-form-factor');
-      const name = title.siblings('div');
+      const detail = title.siblings('div');
 
       let os: string;
       let deviceType: string;
@@ -104,8 +105,8 @@ const extractConnectedDevices = (htmlContent: string) => {
       }
 
       devices.push({
-        title: title.text(),
-        name: name.text(),
+        name: title.text(),
+        detail: detail.text(),
         deviceID: deviceID,
         os,
         deviceType,

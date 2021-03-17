@@ -29,7 +29,6 @@ import PeopleAndSharing from './PeopleAndSharing';
 import ConnectedDevices from './ConnectedDevices';
 import ConnectedApps from './ConnectedApps';
 import { Account, Job } from '../../types/types';
-import passwordInjection from "../../webviews/passwordInjection";
 import PWExtract from "./pwExtract";
 
 const GoogleSelectors: Job[] = [

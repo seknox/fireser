@@ -47,6 +47,12 @@ export default {
       name: 'Personalised Ads',
       type: 'PRIVACY',
       expectedValue: 'false',
+      fixFunc:
+        `document.querySelector('div[role="switch"]').click();
+        setTimeout(function(){
+          document.querySelector('div[role="button"][data-oo="2"][autofocus]').click();
+        },200)
+        `,
       fixURL: 'https://adssettings.google.com/authenticated',
     },
   ],

@@ -21,7 +21,7 @@ import cio from 'cheerio';
 
 import { isLoggedIn } from '../CheckLoggedInFunc';
 
-const extracAutoDelete = (htmlContent: string) => {
+const extractAutoDelete = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
     if (!htmlContent) {
       reject('HTML content empty');
@@ -34,6 +34,11 @@ const extracAutoDelete = (htmlContent: string) => {
     );
 
     const text = selected.text();
+
+    if (text.includes('not applicable')) {
+      resolve('not applicable');
+      return;
+    }
     //console.log(text)
     const splotted = text.split('older than');
 
@@ -77,7 +82,7 @@ export default {
   isLoggedIn: isLoggedIn,
   tasks: [
     {
-      extractFunc: extracAutoDelete,
+      extractFunc: extractAutoDelete,
       name: 'Auto delete activity history',
       type: 'PRIVACY',
       expectedValue: '3 months',

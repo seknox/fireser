@@ -66,22 +66,32 @@ export const Scan = (props: any) => {
   const accountDetail = Selectors[account] || [];
 
   const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
-    scannerRef.current?.injectJavaScript(fixFunc);
+    setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
+    setFixerVisible(true);
+    //scannerRef.current?.injectJavaScript(fixFunc);
   };
 
-  // const onFixed = () => {
-  //   const jobtemp = data.map((a) => {
-  //     a.tasks = a.tasks.map((b) => {
-  //       if (b.name === fixable?.name) {
-  //         b.gotValue = b.expectedValue;
-  //       }
-  //       return b;
-  //     });
-  //     return a;
-  //   });
-  //   setData(jobtemp);
-  //   setFixerVisible(false);
-  // };
+  const onFixed = () => {
+    const updatedSecurityIssues = scanResult.securityIssues.map((a) => {
+      if (a.name === fixable?.name) {
+        a.gotValue = a.expectedValue;
+      }
+      return a;
+    });
+    const updatedPrivacyIssues = scanResult.privacyIssues.map((a) => {
+      if (a.name === fixable?.name) {
+        a.gotValue = a.expectedValue;
+      }
+      return a;
+    });
+
+    let updatedScanResult = Object.assign({}, scanResult);
+    updatedScanResult.privacyIssues = updatedPrivacyIssues;
+    updatedScanResult.securityIssues = updatedSecurityIssues;
+
+    setScanResult(updatedScanResult);
+    setFixerVisible(false);
+  };
 
   const styles = useStyleSheet(themedStyles);
   return (
@@ -106,7 +116,7 @@ export const Scan = (props: any) => {
               logoName="GOOGLE"
               primaryColor={true}
             />
-            <DetailedScanResult result={scanResult} fixIssue={fixIssue}/>
+            <DetailedScanResult result={scanResult} fixIssue={fixIssue} />
             <Button
               appearance="outline"
               status="basic"
@@ -129,6 +139,13 @@ export const Scan = (props: any) => {
         ref={scannerRef}
         onProgress={setProgress}
         changeShowProgress={changeShowProgress}
+      />
+
+      <Fixer
+        pageURL={fixable.fixUrl}
+        fixFunc={fixable.fixFunc}
+        isVisible={isFixerVisible}
+        onFixed={onFixed}
       />
     </Layout>
   );

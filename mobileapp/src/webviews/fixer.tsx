@@ -35,13 +35,9 @@ const getCodeToInject = (pageURL: string, fixFunc: string) => {
 
     };
     
-     // const msgDebug = {"type":"DEBUG","content":"Yooooooooooo"};
-     //    window.ReactNativeWebView.postMessage(JSON.stringify(msgDebug));
-     //
    
     var refreshId = setInterval(function(){
     
-    // sendDebugLog("document.URL");
    
     
     
@@ -90,7 +86,7 @@ export const Fixer = (props: {
   pageURL: string;
   fixFunc: string;
   isVisible: boolean;
-  onDone: any;
+  onFixed: any;
 }) => {
   // const webViewref = React.useRef(null);
 
@@ -102,7 +98,7 @@ export const Fixer = (props: {
       if (msg.type === 'DEBUG') {
         console.log('debug', msg.content);
       } else if (msg.type === 'DONE') {
-        props.onDone(msg.content);
+        props.onFixed(msg.content);
       }
     } catch (e) {
       console.error(e);

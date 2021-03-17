@@ -18,6 +18,7 @@
  */
 
 import cio from 'cheerio';
+import { Job } from '../../types/types';
 import { isLoggedIn } from './CheckLoggedInFunc';
 
 const extractLastPasswordChange = (htmlContent: string) => {
@@ -28,14 +29,15 @@ const extractLastPasswordChange = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $("a[href^='signinoptions/password']");
+    const selected = $("a[href^='signinoptions/password'] > div> div> div> div> div> div");
 
     let arr = selected.toArray();
 
     arr.forEach((elem, i) => {
       const innerText = $(elem).text();
       if (innerText.includes('Last changed')) {
-        resolve(innerText);
+        console.debug(innerText);
+        resolve(innerText.split('Last changed')[1]);
       } else if (i === arr.length - 1) {
         reject('Last Changed not found');
       }
@@ -88,16 +90,23 @@ const extractLessSecureApps = (htmlContent: string) => {
   });
 };
 
-export default {
+const job: Job = {
   name: 'Security',
   pageURL: 'https://myaccount.google.com/security',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractLastPasswordChange,
       name: 'Password Last Changed',
+      description: 'Last time you changed your password',
       type: 'SECURITY',
       expectedValue: '',
+      checkFunc: (expectedValue, gotValue) => {
+        const lastChanged = new Date(gotValue);
+        const now = new Date();
+        const needToChange = (now - lastChanged) > 12 * 30 * 24 * 60 * 60 * 1000;
+        return !needToChange;
+      },
       fixURL: 'https://myaccount.google.com/security/signinoptions/password',
     },
     {
@@ -116,3 +125,5 @@ export default {
     },
   ],
 };
+
+export default job;
