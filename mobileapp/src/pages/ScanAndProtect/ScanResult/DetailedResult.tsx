@@ -18,6 +18,7 @@
 import { Divider, StyleService, Text, useStyleSheet, Icon, Button } from '@ui-kitten/components';
 import React from 'react';
 import { Pressable, View, StyleSheet, Image } from 'react-native';
+import { Apps, Device, ScanResult, Task } from '../../../types/types';
 
 const themedStyles = StyleService.create({
   root: {
@@ -126,11 +127,26 @@ const iconstyles = StyleSheet.create({
 
 const iconColor = 'red';
 
-const IssueIcon = (props: any) => (
-  <Icon {...props} style={iconstyles.icon} fill={iconColor} name="alert-circle-outline" />
-);
+const IssueIcon = (props: { isOkay: boolean }) =>
+  !props.isOkay ? (
+    <Icon style={iconstyles.icon} fill={'red'} name={'alert-circle-outline'} />
+  ) : (
+    <Icon style={iconstyles.icon} fill={'green'} name={'checkmark-circle-2-outline'} />
+  );
 
-export default function ScanResultSummary(props: any) {
+const checkResult = (t: Task) => {
+  if (t.checkFunc) {
+    return t.checkFunc(t.expectedValue, t.gotValue);
+  } else {
+    return t.expectedValue == t.gotValue;
+  }
+};
+
+type ScanResultSummaryProp = {
+  result: ScanResult;
+  fixIssue: (pageURL: string, fixFunc: string, name: string) => void;
+};
+export default function ScanResultSummary(props: ScanResultSummaryProp) {
   const styles = useStyleSheet(themedStyles);
 
   const {
@@ -182,19 +198,7 @@ export default function ScanResultSummary(props: any) {
           </View>
         </View>
 
-        <View style={styles.issueListContainer}>
-          {securityIssues.map((i: any, k: number) => (
-            <View style={styles.issueList}>
-              <IssueIcon />
-              <Text category="s1" style={styles.text}>
-                {i.name}
-              </Text>
-              <Button size="small" appearance="outline">
-                View
-              </Button>
-            </View>
-          ))}
-        </View>
+        <IssueItem issues={securityIssues} fixIssue={props.fixIssue} />
       </View>
 
       <View style={styles.issueCard}>
@@ -209,19 +213,7 @@ export default function ScanResultSummary(props: any) {
           </View>
         </View>
 
-        <View style={styles.issueListContainer}>
-          {privacyIssues.map((i: any, k: number) => (
-            <View style={styles.issueList}>
-              <IssueIcon />
-              <Text category="s1" style={styles.text}>
-                {i.name}
-              </Text>
-              <Button size="small" appearance="outline">
-                View
-              </Button>
-            </View>
-          ))}
-        </View>
+        <IssueItem issues={privacyIssues} fixIssue={props.fixIssue} />
       </View>
 
       <View style={styles.issueCard}>
@@ -237,19 +229,19 @@ export default function ScanResultSummary(props: any) {
         </View>
 
         <View style={styles.issueListContainer}>
-          {connectedDevices.map((i: any, k: number) => (
-            <View style={styles.issueList}>
+          {connectedDevices.map((i: Device, k: number) => (
+            <View style={styles.issueList} key={k}>
               <Image
                 style={styles.deviceLogo}
                 source={{
-                  uri: i.imgURL ? i.imgURL : getDevices(i.title, i.imgURL),
+                  uri: i.imageURL ? i.imageURL : getDevices(i.name, i.imageURL),
                 }}
                 // height={20}
                 // width={20}
               />
 
               <Text category="s1" style={styles.text}>
-                {i.title}
+                {i.name}
               </Text>
               <Button size="small" appearance="outline">
                 View
@@ -272,8 +264,8 @@ export default function ScanResultSummary(props: any) {
         </View>
 
         <View style={styles.issueListContainer}>
-          {connectedApps?.thirdPartyApps?.map((i: any, k: number) => (
-            <View style={styles.issueList}>
+          {connectedApps?.thirdPartyApps?.map((i: Apps, k: number) => (
+            <View style={styles.issueList} key={k}>
               <Image
                 style={styles.deviceLogo}
                 source={{
@@ -285,7 +277,7 @@ export default function ScanResultSummary(props: any) {
               <Text category="s1" style={styles.text}>
                 {i.name}
               </Text>
-              <Button size="small" appearance="outline">
+              <Button size="small" appearance="outline" onPress={props.fixIssue}>
                 View
               </Button>
             </View>
@@ -306,8 +298,8 @@ export default function ScanResultSummary(props: any) {
         </View>
 
         <View style={styles.issueListContainer}>
-          {connectedApps?.signInApps?.map((i: any, k: number) => (
-            <View style={styles.issueList}>
+          {connectedApps?.signInApps?.map((i: Apps, k: number) => (
+            <View style={styles.issueList} key={k}>
               <Image
                 style={styles.deviceLogo}
                 source={{
@@ -329,3 +321,36 @@ export default function ScanResultSummary(props: any) {
     </View>
   );
 }
+
+const IssueItem = (props: {
+  issues: Task[];
+  fixIssue: (pageURL: string, fixFunc: string, name: string) => void;
+}) => {
+  const styles = useStyleSheet(themedStyles);
+
+  return (
+    <View style={styles.issueListContainer}>
+      {props.issues.map((task: Task, k: number) => {
+        const isOk = checkResult(task);
+        return (
+          <View style={styles.issueList} key={k}>
+            <IssueIcon isOkay={isOk} />
+            <Text category="s1" style={styles.text}>
+              {task.name} - {task.gotValue}
+            </Text>
+            <Button
+              size="small"
+              disabled={isOk}
+              appearance="outline"
+              onPress={() => {
+                props.fixIssue(task.fixURL, task.fixFunc, task.name);
+              }}
+            >
+              Fix
+            </Button>
+          </View>
+        );
+      })}
+    </View>
+  );
+};

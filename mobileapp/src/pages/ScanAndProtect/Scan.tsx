@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Button, StyleService, useStyleSheet } from '@ui-kitten/components';
+import { Button, StyleService, Text, useStyleSheet } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
 import ProgressBar from 'react-native-progress/Bar';
@@ -27,6 +27,7 @@ import { Fixer } from '../../webviews/fixer';
 import Scanner from '../../webviews/scanner';
 import ScanResultComponent from './ScanResult';
 import DetailedScanResult from './ScanResult/DetailedResult';
+import Modal from 'react-native-modal';
 
 const themedStyles = StyleService.create({
   container: {
@@ -67,22 +68,33 @@ export const Scan = (props: any) => {
 
   const fixIssue = (pageURL: string, fixFunc: string, name: string) => {
     setFixable({ fixUrl: pageURL, fixFunc: fixFunc, name: name });
-    setFixerVisible(true);
+    if (!fixFunc) {
+      setFixerVisible(true);
+    }
+    //scannerRef.current?.injectJavaScript(fixFunc);
   };
 
-  // const onFixed = () => {
-  //   const jobtemp = data.map((a) => {
-  //     a.tasks = a.tasks.map((b) => {
-  //       if (b.name === fixable?.name) {
-  //         b.gotValue = b.expectedValue;
-  //       }
-  //       return b;
-  //     });
-  //     return a;
-  //   });
-  //   setData(jobtemp);
-  //   setFixerVisible(false);
-  // };
+  const onFixed = () => {
+    const updatedSecurityIssues = scanResult.securityIssues.map((a) => {
+      if (a.name === fixable?.name) {
+        a.gotValue = a.expectedValue;
+      }
+      return a;
+    });
+    const updatedPrivacyIssues = scanResult.privacyIssues.map((a) => {
+      if (a.name === fixable?.name) {
+        a.gotValue = a.expectedValue;
+      }
+      return a;
+    });
+
+    let updatedScanResult = Object.assign({}, scanResult);
+    updatedScanResult.privacyIssues = updatedPrivacyIssues;
+    updatedScanResult.securityIssues = updatedSecurityIssues;
+
+    setScanResult(updatedScanResult);
+    setFixerVisible(false);
+  };
 
   const styles = useStyleSheet(themedStyles);
   return (
@@ -107,7 +119,7 @@ export const Scan = (props: any) => {
               logoName="GOOGLE"
               primaryColor={true}
             />
-            <DetailedScanResult result={scanResult} />
+            <DetailedScanResult result={scanResult} fixIssue={fixIssue} />
             <Button
               appearance="outline"
               status="basic"
@@ -132,12 +144,20 @@ export const Scan = (props: any) => {
         changeShowProgress={changeShowProgress}
       />
 
-      <Fixer
-        pageURL={fixable.fixUrl}
-        fixFunc={fixable.fixFunc}
+      <Modal
         isVisible={isFixerVisible}
-        onDone={console.log}
-      />
+        hasBackdrop={true}
+        onBackdropPress={() => {
+          setFixerVisible(false);
+        }}
+      >
+        <Fixer
+          pageURL={fixable.fixUrl}
+          fixFunc={fixable.fixFunc}
+          isVisible={true}
+          onFixed={onFixed}
+        />
+      </Modal>
     </Layout>
   );
 };

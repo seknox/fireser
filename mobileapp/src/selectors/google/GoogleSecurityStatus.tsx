@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2020-2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -18,6 +18,7 @@
  */
 
 import cio from 'cheerio';
+import { Job } from '../../types/types';
 import { isLoggedIn } from './CheckLoggedInFunc';
 
 const extractLastPasswordChange = (htmlContent: string) => {
@@ -28,14 +29,14 @@ const extractLastPasswordChange = (htmlContent: string) => {
 
     const $ = cio.load(htmlContent);
 
-    const selected = $("a[href^='signinoptions/password']");
+    const selected = $("a[href^='signinoptions/password'] > div> div> div> div> div> div");
 
     let arr = selected.toArray();
 
     arr.forEach((elem, i) => {
       const innerText = $(elem).text();
       if (innerText.includes('Last changed')) {
-        resolve(innerText);
+        resolve(innerText.split('Last changed')[1]);
       } else if (i === arr.length - 1) {
         reject('Last Changed not found');
       }
@@ -55,7 +56,7 @@ const extractTfaStatus = (htmlContent: string) => {
 
     let arr = selected.toArray();
 
-    arr.forEach((elem, i) => {
+    arr.forEach((elem) => {
       const innerText = $(elem).text();
       if (innerText.includes('2-Step Verification')) {
         if (innerText.includes('On')) {
@@ -88,21 +89,29 @@ const extractLessSecureApps = (htmlContent: string) => {
   });
 };
 
-export default {
+const job: Job = {
   name: 'Security',
   pageURL: 'https://myaccount.google.com/security',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractLastPasswordChange,
       name: 'Password Last Changed',
+      description: 'Last time you changed your password',
       type: 'SECURITY',
       expectedValue: '',
+      checkFunc: (expectedValue, gotValue) => {
+        const lastChanged = new Date(gotValue);
+        const now = new Date();
+        const needToChange = now.getTime() - lastChanged.getTime() > 12 * 30 * 24 * 60 * 60 * 1000;
+        return !needToChange;
+      },
       fixURL: 'https://myaccount.google.com/security/signinoptions/password',
     },
     {
       extractFunc: extractTfaStatus,
       name: 'Two factor authentication',
+      description: 'Whether second factor authentication is enabled or not',
       type: 'SECURITY',
       expectedValue: 'On',
       fixURL: 'https://myaccount.google.com/security/signinoptions/two-step-verification',
@@ -110,9 +119,13 @@ export default {
     {
       extractFunc: extractLessSecureApps,
       name: 'Less secure app access',
+      description:
+        'Some apps and devices use less secure sign-in technology, which makes your account vulnerable.',
       type: 'SECURITY',
       expectedValue: 'Off',
       fixURL: 'https://myaccount.google.com/lesssecureapps',
     },
   ],
 };
+
+export default job;

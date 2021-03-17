@@ -112,6 +112,7 @@ const Scanner = (props: runnerProps, ref: any) => {
     } else {
       //Finished
       const res = aggregateResult(jobs.current);
+      // console.debug(res);
       props.setScanResult(res);
       props.changeShowProgress(false);
       props.onProgress(1);
@@ -146,7 +147,6 @@ const Scanner = (props: runnerProps, ref: any) => {
       console.error(e);
     }
 
-    console.log(msg.type);
 
     if (msg.type === 'HTML' && msg.content) {
       setIsVisible(false);
