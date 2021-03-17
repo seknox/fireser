@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2020-2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,7 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
+import { Job } from '../../types/types';
 
 const extractWebAppActivityHistory = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -41,7 +42,7 @@ const extractWebAppActivityHistory = (htmlContent: string) => {
   });
 };
 
-const extractYotubeHistory = (htmlContent: string) => {
+const extractYouTubeHistory = (htmlContent: string) => {
   // console.log("HTML content ",htmlContent)
 
   return new Promise((resolve, reject) => {
@@ -106,7 +107,7 @@ const fixFunc = `
             
       `;
 
-export default {
+const job: Job = {
   name: 'Activity Controls',
   pageURL: 'https://myactivity.google.com/myactivity',
   isLoggedInFunc: isLoggedIn,
@@ -114,6 +115,8 @@ export default {
     {
       extractFunc: extractWebAppActivityHistory,
       name: 'Web Activity History',
+      description:
+        'Your activity on Google sites and apps, including associated information like location',
       type: 'PRIVACY',
       expectedValue: 'Off',
       fixURL: 'https://myactivity.google.com/activitycontrols?settings=search',
@@ -122,16 +125,18 @@ export default {
     {
       extractFunc: extractLocationHistory,
       name: 'Location History',
+      description:
+        "Data about where you go with your devices, even when you aren't using a specific Google service.",
       type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: fixFunc,
-      fixURL:
-        'https://myactivity.google.com/activitycontrols?settings=location',
+      fixURL: 'https://myactivity.google.com/activitycontrols?settings=location',
     },
 
     {
-      extractFunc: extractYotubeHistory,
+      extractFunc: extractYouTubeHistory,
       name: 'YouTube Activity History',
+      description: 'YouTube videos that you watch and the things that you search',
       type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: fixFunc,
@@ -140,3 +145,5 @@ export default {
     },
   ],
 };
+
+export default job;

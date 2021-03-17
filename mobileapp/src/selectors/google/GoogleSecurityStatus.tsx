@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2020-2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -57,7 +57,7 @@ const extractTfaStatus = (htmlContent: string) => {
 
     let arr = selected.toArray();
 
-    arr.forEach((elem, i) => {
+    arr.forEach((elem) => {
       const innerText = $(elem).text();
       if (innerText.includes('2-Step Verification')) {
         if (innerText.includes('On')) {
@@ -104,7 +104,7 @@ const job: Job = {
       checkFunc: (expectedValue, gotValue) => {
         const lastChanged = new Date(gotValue);
         const now = new Date();
-        const needToChange = (now - lastChanged) > 12 * 30 * 24 * 60 * 60 * 1000;
+        const needToChange = now.getTime() - lastChanged.getTime() > 12 * 30 * 24 * 60 * 60 * 1000;
         return !needToChange;
       },
       fixURL: 'https://myaccount.google.com/security/signinoptions/password',
@@ -112,6 +112,7 @@ const job: Job = {
     {
       extractFunc: extractTfaStatus,
       name: 'Two factor authentication',
+      description: 'Whether second factor authentication is enabled or not',
       type: 'SECURITY',
       expectedValue: 'On',
       fixURL: 'https://myaccount.google.com/security/signinoptions/two-step-verification',
@@ -119,6 +120,8 @@ const job: Job = {
     {
       extractFunc: extractLessSecureApps,
       name: 'Less secure app access',
+      description:
+        'Some apps and devices use less secure sign-in technology, which makes your account vulnerable.',
       type: 'SECURITY',
       expectedValue: 'Off',
       fixURL: 'https://myaccount.google.com/lesssecureapps',

@@ -19,6 +19,7 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
+import { Job } from '../../types/types';
 
 const extractSharedEndorsements = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -73,14 +74,16 @@ const extractSaveContactFromDevices = (htmlContent: string) => {
   });
 };
 
-export default {
+const job: Job = {
   name: 'People and sharing',
   pageURL: 'https://myaccount.google.com/people-and-sharing',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractSharedEndorsements,
       name: 'Shared Endorsements',
+      description:
+        'Based upon my activity, Google may show my profile name, profile photo, and activity in shared endorsements in ads.',
       type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: 'document.querySelector(\'div[role="checkbox"]\').click();',
@@ -90,6 +93,8 @@ export default {
     {
       extractFunc: extractSaveContactFromInteractions,
       name: 'Save contact info when you interact with people',
+      description:
+        'You can decide whether Google automatically saves contact info, like names and email addresses, of people you interact with in Google products',
       type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: 'document.querySelector(\'div[role="checkbox"]\').click();',
@@ -98,6 +103,8 @@ export default {
     {
       extractFunc: extractSaveContactFromDevices,
       name: 'Save contacts from your signed-in devices',
+      description:
+        'You can choose to save information about your contacts from your signed-in devices in your Google Account, including whether you contact them often',
       type: 'PRIVACY',
       expectedValue: 'Off',
       fixFunc: 'document.querySelector(\'div[role="checkbox"]\').click();',
@@ -105,3 +112,5 @@ export default {
     },
   ],
 };
+
+export default job;

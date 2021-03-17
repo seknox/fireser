@@ -1,6 +1,6 @@
 /*
  *
- *   Copyright (C) 2020 Seknox Pte Ltd.
+ *   Copyright (C) 2020-2021 Seknox Pte Ltd.
  *
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU Affero General Public License as
@@ -19,6 +19,7 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
+import { Job } from '../../types/types';
 
 const extractSecurityCheckupStatus = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -36,17 +37,20 @@ const extractSecurityCheckupStatus = (htmlContent: string) => {
   });
 };
 
-export default {
+const job: Job = {
   name: 'Security Checkup',
   pageURL: 'https://myaccount.google.com/security-checkup',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractSecurityCheckupStatus,
       name: 'Security Checkup Status',
+      description: 'Result from Google Security Check-up',
       type: 'SECURITY',
       expectedValue: 'No issues found',
       fixURL: 'https://myaccount.google.com/security-checkup',
     },
   ],
 };
+
+export default job;

@@ -19,6 +19,7 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
+import { Job } from '../../types/types';
 
 const extractRecentActivity = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -30,7 +31,7 @@ const extractRecentActivity = (htmlContent: string) => {
     const selected = $("a[href^='notifications/eid']");
 
     let activity: string[] = [];
-    selected.toArray().forEach((elem, i) => {
+    selected.toArray().forEach((elem) => {
       const innerText = $(elem).text();
       activity = activity.concat(innerText);
     });
@@ -39,16 +40,19 @@ const extractRecentActivity = (htmlContent: string) => {
   });
 };
 
-export default {
+const job: Job = {
   name: 'Security',
   pageURL: 'https://myaccount.google.com/notifications',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractRecentActivity,
+      description: 'Security activity and alerts from the last 28 days',
       name: 'Recent Activity',
       type: 'PRIVACY',
       fixURL: 'https://myaccount.google.com/notifications',
     },
   ],
 };
+
+export default job;

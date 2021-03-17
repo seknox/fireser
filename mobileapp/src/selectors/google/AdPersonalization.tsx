@@ -19,6 +19,7 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
+import { Job } from '../../types/types';
 
 const extractAdPersonalization = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -37,18 +38,21 @@ const extractAdPersonalization = (htmlContent: string) => {
   });
 };
 
-export default {
+const job: Job = {
   name: 'Personalised Ads',
   pageURL: 'https://adssettings.google.com/authenticated',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractAdPersonalization,
       name: 'Personalised Ads',
+      description:
+        'When you turn on ad personalisation, you give Google permission to show you ads based on your activity on:\n' +
+        '1. Google services (such as Search or YouTube)\n' +
+        '2. Websites and apps that partner with Google to show ads\n',
       type: 'PRIVACY',
       expectedValue: 'false',
-      fixFunc:
-        `document.querySelector('div[role="switch"]').click();
+      fixFunc: `document.querySelector('div[role="switch"]').click();
         setTimeout(function(){
           document.querySelector('div[role="button"][data-oo="2"][autofocus]').click();
         },200)
@@ -57,3 +61,5 @@ export default {
     },
   ],
 };
+
+export default job;

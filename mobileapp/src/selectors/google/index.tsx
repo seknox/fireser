@@ -29,18 +29,18 @@ import PeopleAndSharing from './PeopleAndSharing';
 import ConnectedDevices from './ConnectedDevices';
 import ConnectedApps from './ConnectedApps';
 import { Account, Job } from '../../types/types';
-import PWExtract from "./pwExtract";
+import PWExtract from './pwExtract';
 
 const GoogleSelectors: Job[] = [
-  // GoogleActivityHistory,
+  GoogleActivityHistory,
   AutoDeleteActivityHistory,
   AutoDeleteLocationHistory,
   AutoDeleteYoutubeHistory,
-  // GoogleSecurityStatus,
-  // SecurityCheckup,
-  // AdPersonalization,
-  // PhotoLocationData,
-  // PeopleAndSharing,
+  GoogleSecurityStatus,
+  SecurityCheckup,
+  AdPersonalization,
+  PhotoLocationData,
+  PeopleAndSharing,
   ConnectedDevices,
   ConnectedApps,
 ];

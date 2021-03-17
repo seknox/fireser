@@ -19,7 +19,7 @@
 
 import cio from 'cheerio';
 import { isLoggedIn } from './CheckLoggedInFunc';
-import {Device} from "../../types/types";
+import { Device, Job } from '../../types/types';
 
 const extractConnectedDevices = (htmlContent: string) => {
   return new Promise((resolve, reject) => {
@@ -32,14 +32,16 @@ const extractConnectedDevices = (htmlContent: string) => {
     const selected = $('div[role="listitem"]');
     let devices: Device[] = [];
     selected.each(function (i, elem) {
-      const ele = $(this);
+      const ele = $(elem);
       // console.log(ele.html())
       const deviceID = ele.children('div').attr('data-device-id');
       const title = ele.find($("div[role='heading']"));
 
       const deviceTypeElement = ele.find($(`div[data-device-id="${deviceID}"] > div > div > div`));
       const dataOS = deviceTypeElement.attr('data-os');
-      const imgURL = ele.find($(`div[data-device-id="${deviceID}"] > div > div > img`)).attr('src');
+      const imageURL = ele
+        .find($(`div[data-device-id="${deviceID}"] > div > div > img`))
+        .attr('src');
       const dataFormFactor = deviceTypeElement.attr('data-form-factor');
       const detail = title.siblings('div');
 
@@ -98,8 +100,7 @@ const extractConnectedDevices = (htmlContent: string) => {
           os = 'GENERIC';
           deviceType = 'GENERIC';
       }
-      // console.log('imgurl:',imgURL)
-      if (imgURL) {
+      if (imageURL) {
         os = 'ANDROID';
         deviceType = 'MOBILE';
       }
@@ -110,7 +111,7 @@ const extractConnectedDevices = (htmlContent: string) => {
         deviceID: deviceID,
         os,
         deviceType,
-        imgURL,
+        imageURL,
       });
     });
     // console.log(devices);
@@ -118,16 +119,19 @@ const extractConnectedDevices = (htmlContent: string) => {
   });
 };
 
-export default {
+const job: Job = {
   name: 'Connected Devices',
   pageURL: 'https://myaccount.google.com/device-activity',
-  isLoggedIn: isLoggedIn,
+  isLoggedInFunc: isLoggedIn,
   tasks: [
     {
       extractFunc: extractConnectedDevices,
+      description: 'You’re currently signed in to your Google Account on these devices.',
       name: 'Connected Devices',
       type: 'CONNECTED_DEVICES',
       fixURL: 'https://myaccount.google.com/device-activity',
     },
   ],
 };
+
+export default job;
