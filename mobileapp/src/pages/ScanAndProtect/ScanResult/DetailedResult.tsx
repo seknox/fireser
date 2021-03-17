@@ -16,9 +16,11 @@
  */
 
 import { Divider, StyleService, Text, useStyleSheet, Icon, Button } from '@ui-kitten/components';
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, View, StyleSheet, Image } from 'react-native';
 import { Apps, Device, ScanResult, Task } from '../../../types/types';
+import Modal from 'react-native-modal';
+import { WebView } from 'react-native-webview';
 
 const themedStyles = StyleService.create({
   root: {
@@ -125,8 +127,6 @@ const iconstyles = StyleSheet.create({
   },
 });
 
-const iconColor = 'red';
-
 const IssueIcon = (props: { isOkay: boolean }) =>
   !props.isOkay ? (
     <Icon style={iconstyles.icon} fill={'red'} name={'alert-circle-outline'} />
@@ -148,6 +148,8 @@ type ScanResultSummaryProp = {
 };
 export default function ScanResultSummary(props: ScanResultSummaryProp) {
   const styles = useStyleSheet(themedStyles);
+  const [isDeviceDetailVisible, setIsDeviceDetailVisible] = useState(false);
+  const [deviceURL, setDeviceURL] = useState(false);
 
   const {
     connectedDevices,
@@ -183,6 +185,11 @@ export default function ScanResultSummary(props: ScanResultSummaryProp) {
         return 'https://www.gstatic.com/identity/boq/accountsettingssecuritycommon/images/sprites/devices_realistic_72-ef7d73f742f5343ba1bd3c1e6b13ffba.png';
     }
   }
+
+  const showDeviceDetail = (deviceID: string) => {
+    setDeviceURL(`https://myaccount.google.com/device-activity/id/${deviceID}`);
+    setIsDeviceDetailVisible(true);
+  };
 
   return (
     <View>
@@ -243,7 +250,13 @@ export default function ScanResultSummary(props: ScanResultSummaryProp) {
               <Text category="s1" style={styles.text}>
                 {i.name}
               </Text>
-              <Button size="small" appearance="outline">
+              <Button
+                size="small"
+                appearance="outline"
+                onPress={() => {
+                  showDeviceDetail(i.deviceID);
+                }}
+              >
                 View
               </Button>
             </View>
@@ -318,6 +331,19 @@ export default function ScanResultSummary(props: ScanResultSummaryProp) {
           ))}
         </View>
       </View>
+      <Modal isVisible={isDeviceDetailVisible} style={{ flex: 1 }}>
+        <WebView
+          source={{ uri: deviceURL }}
+          onMessage={(event) => {}}
+          injectedJavaScript={
+            "document.body.innerHTML=document.querySelector('c-wiz > div > div[data-device-id]').parentElement.innerHTML;\ntrue;"
+          }
+          hasBackdrop={true}
+          onBackdropPress={() => {
+            setIsDeviceDetailVisible(!isDeviceDetailVisible);
+          }}
+        />
+      </Modal>
     </View>
   );
 }
