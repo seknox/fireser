@@ -18,64 +18,10 @@
 import { StyleService, Text, useStyleSheet, Button, Icon } from '@ui-kitten/components';
 import React from 'react';
 import { Pressable, View } from 'react-native';
-import AccountSec from '../../assets/icons/account-security';
 import MsgSec from '../../assets/icons/messaging-security';
 import { useNavigation } from '@react-navigation/native';
 
 const RightIcon = (props: any) => <Icon {...props} name="arrow-forward-outline" />;
-
-export default (props: { navigateToAccounts: () => {} }): React.ReactElement => {
-  const styles = useStyleSheet(themedStyles);
-  const navigation = useNavigation();
-  return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        <Pressable onPress={() => navigation.navigate('PrimaryAccount')} style={styles.touch}>
-          <View style={styles.desc}>
-            <Text category="h5">Primary Accounts</Text>
-            <Text category="s1">Google or Microsoft account.</Text>
-            <Text category="s1">Security Focused</Text>
-            <Button
-              style={styles.button}
-              appearance="ghost"
-              status="primary"
-              accessoryRight={RightIcon}
-              onPress={() => navigation.navigate('PrimaryAccount')}
-            >
-              Protect now
-            </Button>
-          </View>
-
-          <View style={styles.imageContainer}>
-            <MsgSec style={styles.image} />
-          </View>
-        </Pressable>
-      </View>
-
-      <View style={styles.card}>
-        <Pressable onPress={() => navigation.navigate('SocialAccount')} style={styles.touch}>
-          <View style={styles.desc}>
-            <Text category="h5">Social Accounts</Text>
-            <Text category="s1">Facebook, Instagram, Twitter.</Text>
-            <Text category="s1">Privacy Focused</Text>
-            <Button
-              style={styles.button}
-              appearance="ghost"
-              status="primary"
-              onPress={() => navigation.navigate('SocialAccount')}
-            >
-              (Coming Soon)
-            </Button>
-          </View>
-
-          <View style={styles.imageContainer}>
-            <AccountSec style={styles.image} />
-          </View>
-        </Pressable>
-      </View>
-    </View>
-  );
-};
 
 const themedStyles = StyleService.create({
   container: {
@@ -90,7 +36,7 @@ const themedStyles = StyleService.create({
     minHeight: 130,
     marginVertical: 10,
     marginHorizontal: 20,
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: 'white',
     borderRadius: 8,
 
@@ -104,10 +50,13 @@ const themedStyles = StyleService.create({
 
     elevation: 3,
   },
-
+  title: {
+    padding: 10,
+    flex: 1,
+  },
   desc: {
-    flex: 4,
-    padding: 24,
+    flex: 5,
+    padding: 10,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },
@@ -116,9 +65,9 @@ const themedStyles = StyleService.create({
     flex: 2,
   },
   image: {
-    flex: 1,
-    height: '100%',
-    width: '100%',
+    // flex: 1,
+    height: '80%',
+    width: '80%',
     // resizeMode: 'contain',
   },
   button: {
@@ -127,3 +76,37 @@ const themedStyles = StyleService.create({
     alignSelf: 'flex-start',
   },
 });
+
+export default (props: { navigateToAccounts: () => {} }): React.ReactElement => {
+  const styles = useStyleSheet(themedStyles);
+  const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.title}>
+          <Text category="h5">Protect New Account</Text>
+        </View>
+
+        <Pressable onPress={() => navigation.navigate('ProtectNewAccount')} style={styles.touch}>
+          <View style={styles.desc}>
+            <Text category="s1">Google, Microsoft, Linkedin...</Text>
+            <Text category="s1">Start by clicking this card</Text>
+            <Button
+              style={styles.button}
+              appearance="ghost"
+              status="primary"
+              accessoryRight={RightIcon}
+              onPress={() => navigation.navigate('ProtectNewAccount')}
+            >
+              Protect now
+            </Button>
+          </View>
+
+          <View style={styles.imageContainer}>
+            <MsgSec style={styles.image} />
+          </View>
+        </Pressable>
+      </View>
+    </View>
+  );
+};
